@@ -654,6 +654,14 @@
                 {%- assign formatted_price = price | money -%}
                 {%- assign formatted_compare_at_price = compare_at_price | money -%}
               {%- endif -%}
+              {%- assign badge_prefix = block.settings.badge_prefix -%}
+              {%- assign badge_suffix = block.settings.badge_suffix -%}
+              {%- if badge_prefix == blank -%}
+                {%- assign badge_prefix = 'SPARE ' -%}
+              {%- endif -%}
+              {%- if badge_suffix == blank -%}
+                {%- assign badge_suffix = '%' -%}
+              {%- endif -%}
               <section
                 id="ai-product-price-highlight-{{ section.id }}-{{ block.id }}"
                 class="ai-product-price-highlight-section ai-product-price-highlight-section--product-info"

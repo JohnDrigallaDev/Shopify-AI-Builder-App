@@ -67,6 +67,14 @@
   assign show_badge = section.settings.show_badge
   assign badge_prefix = section.settings.badge_prefix
   assign badge_suffix = section.settings.badge_suffix
+
+  if badge_prefix == blank
+    assign badge_prefix = 'SPARE '
+  endif
+
+  if badge_suffix == blank
+    assign badge_suffix = '%'
+  endif
 %}
 
 <section
@@ -136,7 +144,8 @@
             </svg>
           </span>
           <span class="ai-product-price-highlight__badge-text">
-            {{ badge_prefix }}{{ discount_percent }}{{ badge_suffix }}
+            <span class="ai-product-price-highlight__badge-prefix">{{ badge_prefix }}</span>
+            <span class="ai-product-price-highlight__badge-value">{{ discount_percent }}{{ badge_suffix }}</span>
           </span>
         </div>
       {% endif %}
