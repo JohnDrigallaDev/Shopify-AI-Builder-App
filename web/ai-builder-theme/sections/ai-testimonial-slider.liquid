@@ -1,0 +1,1222 @@
+{% liquid
+  assign sid = section.id
+
+  assign section_width = section.settings.section_width
+  assign custom_width = section.settings.custom_width
+
+  assign bg_mode = section.settings.bg_mode
+  assign bg_color = section.settings.bg_color
+  assign bg_gradient = section.settings.bg_gradient
+
+  assign margin_top = section.settings.margin_top
+  assign margin_bottom = section.settings.margin_bottom
+  assign padding_top = section.settings.padding_top
+  assign padding_bottom = section.settings.padding_bottom
+  assign padding_side = section.settings.padding_side
+
+  assign header_align = section.settings.header_align
+  assign heading = section.settings.heading
+  assign subheading = section.settings.subheading
+  assign heading_color = section.settings.heading_color
+  assign subheading_color = section.settings.subheading_color
+  assign heading_size = section.settings.heading_size
+  assign heading_size_mobile = section.settings.heading_size_mobile
+  assign subheading_size = section.settings.subheading_size
+  assign subheading_size_mobile = section.settings.subheading_size_mobile
+
+  assign slides_desktop = section.settings.slides_desktop
+  assign slides_mobile = section.settings.slides_mobile
+  assign card_gap_desktop = section.settings.card_gap_desktop
+  assign card_gap_mobile = section.settings.card_gap_mobile
+
+  assign card_bg = section.settings.card_bg
+  assign card_border_color = section.settings.card_border_color
+  assign card_border_width = section.settings.card_border_width
+  assign card_radius = section.settings.card_radius
+  assign card_shadow_strength = section.settings.card_shadow_strength
+  assign card_padding_x = section.settings.card_padding_x
+  assign card_padding_y = section.settings.card_padding_y
+
+  assign content_align = section.settings.content_align
+  assign avatar_size = section.settings.avatar_size
+  assign avatar_size_mobile = section.settings.avatar_size_mobile
+  assign avatar_radius = section.settings.avatar_radius
+  assign stars_color = section.settings.stars_color
+  assign show_stars_global = section.settings.show_stars_global
+
+  assign title_color = section.settings.title_color
+  assign text_color = section.settings.text_color
+  assign author_color = section.settings.author_color
+
+  assign title_size = section.settings.title_size
+  assign title_size_mobile = section.settings.title_size_mobile
+  assign text_size = section.settings.text_size
+  assign text_size_mobile = section.settings.text_size_mobile
+  assign author_size = section.settings.author_size
+  assign author_size_mobile = section.settings.author_size_mobile
+
+  assign show_arrows = section.settings.show_arrows
+  assign show_dots = section.settings.show_dots
+  assign autoplay = section.settings.autoplay
+  assign autoplay_seconds = section.settings.autoplay_seconds
+
+  assign nav_bg = section.settings.nav_bg
+  assign nav_color = section.settings.nav_color
+  assign nav_border_color = section.settings.nav_border_color
+  assign nav_border_width = section.settings.nav_border_width
+  assign nav_radius = section.settings.nav_radius
+  assign nav_size = section.settings.nav_size
+
+  assign dot_color = section.settings.dot_color
+  assign dot_active_color = section.settings.dot_active_color
+%}
+
+<section
+  id="ai-testimonial-slider-{{ sid }}"
+  class="ai-testimonial-slider-section"
+  style="
+    --ats-bg: {{ bg_color }};
+    --ats-heading-color: {{ heading_color }};
+    --ats-subheading-color: {{ subheading_color }};
+    --ats-heading-size: {{ heading_size }}px;
+    --ats-heading-size-mobile: {{ heading_size_mobile }}px;
+    --ats-subheading-size: {{ subheading_size }}px;
+    --ats-subheading-size-mobile: {{ subheading_size_mobile }}px;
+
+    --ats-card-bg: {{ card_bg }};
+    --ats-card-border-color: {{ card_border_color }};
+    --ats-card-border-width: {{ card_border_width }}px;
+    --ats-card-radius: {{ card_radius }}px;
+    --ats-card-shadow: 0 {{ card_shadow_strength | divided_by: 2.0 }}px {{ card_shadow_strength | times: 2 }}px rgba(0,0,0,0.10);
+    --ats-card-padding-x: {{ card_padding_x }}px;
+    --ats-card-padding-y: {{ card_padding_y }}px;
+
+    --ats-title-color: {{ title_color }};
+    --ats-text-color: {{ text_color }};
+    --ats-author-color: {{ author_color }};
+    --ats-title-size: {{ title_size }}px;
+    --ats-title-size-mobile: {{ title_size_mobile }}px;
+    --ats-text-size: {{ text_size }}px;
+    --ats-text-size-mobile: {{ text_size_mobile }}px;
+    --ats-author-size: {{ author_size }}px;
+    --ats-author-size-mobile: {{ author_size_mobile }}px;
+
+    --ats-avatar-size: {{ avatar_size }}px;
+    --ats-avatar-size-mobile: {{ avatar_size_mobile }}px;
+    --ats-avatar-radius: {{ avatar_radius }}px;
+    --ats-stars-color: {{ stars_color }};
+
+    --ats-gap-desktop: {{ card_gap_desktop }}px;
+    --ats-gap-mobile: {{ card_gap_mobile }}px;
+    --ats-slides-desktop: {{ slides_desktop }};
+    --ats-slides-mobile: {{ slides_mobile }};
+
+    --ats-nav-bg: {{ nav_bg }};
+    --ats-nav-color: {{ nav_color }};
+    --ats-nav-border-color: {{ nav_border_color }};
+    --ats-nav-border-width: {{ nav_border_width }}px;
+    --ats-nav-radius: {{ nav_radius }}px;
+    --ats-nav-size: {{ nav_size }}px;
+
+    --ats-dot-color: {{ dot_color }};
+    --ats-dot-active-color: {{ dot_active_color }};
+
+    margin-top: {{ margin_top }}px;
+    margin-bottom: {{ margin_bottom }}px;
+    padding-top: {{ padding_top }}px;
+    padding-bottom: {{ padding_bottom }}px;
+    padding-left: {{ padding_side }}px;
+    padding-right: {{ padding_side }}px;
+    {% if bg_mode == 'gradient' %}
+      background: {{ bg_gradient }};
+    {% else %}
+      background: {{ bg_color }};
+    {% endif %}
+  "
+  data-autoplay="{% if autoplay %}true{% else %}false{% endif %}"
+  data-autoplay-seconds="{{ autoplay_seconds }}"
+>
+  <div
+    class="ai-testimonial-slider__inner{% if section_width == 'custom' %} ai-testimonial-slider__inner--custom{% endif %}{% if section_width == 'full' %} ai-testimonial-slider__inner--full{% endif %}"
+    {% if section_width == 'custom' %}
+      style="max-width: {{ custom_width }}px;"
+    {% endif %}
+  >
+    {% if heading != blank or subheading != blank %}
+      <div class="ai-testimonial-slider__header ai-testimonial-slider__header--{{ header_align }}">
+        {% if heading != blank %}
+          <h2 class="ai-testimonial-slider__heading">{{ heading }}</h2>
+        {% endif %}
+        {% if subheading != blank %}
+          <div class="ai-testimonial-slider__subheading">{{ subheading }}</div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="ai-testimonial-slider__shell">
+      {% if show_arrows %}
+        <button type="button" class="ai-testimonial-slider__nav ai-testimonial-slider__nav--prev" aria-label="Vorherige Testimonials">
+          <span>‹</span>
+        </button>
+      {% endif %}
+
+      <div class="ai-testimonial-slider__viewport" data-viewport>
+        <div class="ai-testimonial-slider__track" data-track>
+          {% for block in section.blocks %}
+            <article class="ai-testimonial-slider__slide" {{ block.shopify_attributes }}>
+              <div class="ai-testimonial-slider__card ai-testimonial-slider__card--{{ content_align }}">
+                {% if block.settings.image != blank %}
+                  <div class="ai-testimonial-slider__avatar-wrap">
+                    {{
+                      block.settings.image
+                      | image_url: width: 240
+                      | image_tag:
+                        class: 'ai-testimonial-slider__avatar',
+                        widths: '80,120,160,240',
+                        loading: 'lazy',
+                        alt: block.settings.author | escape
+                    }}
+                  </div>
+                {% endif %}
+
+                {% if show_stars_global and block.settings.show_stars %}
+                  <div class="ai-testimonial-slider__stars" aria-label="{{ block.settings.stars }} von 5 Sternen">
+                    {% assign full_stars = block.settings.stars | floor %}
+                    {% for i in (1..5) %}
+                      <span class="ai-testimonial-slider__star{% if i <= full_stars %} is-filled{% endif %}">★</span>
+                    {% endfor %}
+                  </div>
+                {% endif %}
+
+                {% if block.settings.title != blank %}
+                  <h3 class="ai-testimonial-slider__card-title">{{ block.settings.title }}</h3>
+                {% endif %}
+
+                {% if block.settings.text != blank %}
+                  <div class="ai-testimonial-slider__text">{{ block.settings.text }}</div>
+                {% endif %}
+
+                {% if block.settings.author != blank %}
+                  <div class="ai-testimonial-slider__author">{{ block.settings.author }}</div>
+                {% endif %}
+              </div>
+            </article>
+          {% endfor %}
+        </div>
+      </div>
+
+      {% if show_arrows %}
+        <button type="button" class="ai-testimonial-slider__nav ai-testimonial-slider__nav--next" aria-label="Nächste Testimonials">
+          <span>›</span>
+        </button>
+      {% endif %}
+    </div>
+
+    {% if show_dots %}
+      <div class="ai-testimonial-slider__dots" data-dots></div>
+    {% endif %}
+  </div>
+</section>
+
+<style>
+  #ai-testimonial-slider-{{ sid }} .ai-testimonial-slider__inner {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  #ai-testimonial-slider-{{ sid }} .ai-testimonial-slider__inner--full {
+    max-width: 100%;
+  }
+
+  #ai-testimonial-slider-{{ sid }} .ai-testimonial-slider__header {
+    margin-bottom: 22px;
+  }
+
+  #ai-testimonial-slider-{{ sid }} .ai-testimonial-slider__header--left {
+    text-align: left;
+  }
+
+  #ai-testimonial-slider-{{ sid }} .ai-testimonial-slider__header--center {
+    text-align: center;
+  }
+
+  #ai-testimonial-slider-{{ sid }} .ai-testimonial-slider__header--right {
+    text-align: right;
+  }
+
+  #ai-testimonial-slider-{{ sid }} .ai-testimonial-slider__heading {
+    margin: 0;
+    color: var(--ats-heading-color);
+    font-size: var(--ats-heading-size-mobile);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+  }
+
+  #ai-testimonial-slider-{{ sid }} .ai-testimonial-slider__subheading {
+    margin-top: 10px;
+    color: var(--ats-subheading-color);
+    font-size: var(--ats-subheading-size-mobile);
+    line-height: 1.55;
+  }
+
+  #ai-testimonial-slider-{{ sid }} .ai-testimonial-slider__subheading p {
+    margin: 0;
+  }
+
+  #ai-testimonial-slider-{{ sid }} .ai-testimonial-slider__shell {
+    position: relative;
+  }
+
+  #ai-testimonial-slider-{{ sid }} .ai-testimonial-slider__viewport {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  #ai-testimonial-slider-{{ sid }} .ai-testimonial-slider__viewport::-webkit-scrollbar {
+    display: none;
+  }
+
+  #ai-testimonial-slider-{{ sid }} .ai-testimonial-slider__track {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: calc((100% - (var(--ats-gap-mobile) * (var(--ats-slides-mobile) - 1))) / var(--ats-slides-mobile));
+    gap: var(--ats-gap-mobile);
+    align-items: stretch;
+  }
+
+  #ai-testimonial-slider-{{ sid }} .ai-testimonial-slider__slide {
+    scroll-snap-align: start;
+  }
+
+  #ai-testimonial-slider-{{ sid }} .ai-testimonial-slider__card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: var(--ats-card-padding-y) var(--ats-card-padding-x);
+    background: var(--ats-card-bg);
+    border: var(--ats-card-border-width) solid var(--ats-card-border-color);
+    border-radius: var(--ats-card-radius);
+    box-shadow: var(--ats-card-shadow);
+  }
+
+  #ai-testimonial-slider-{{ sid }} .ai-testimonial-slider__card--left {
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  #ai-testimonial-slider-{{ sid }} .ai-testimonial-slider__card--center {
+    text-align: center;
+    align-items: center;
+  }
+
+  #ai-testimonial-slider-{{ sid }} .ai-testimonial-slider__card--right {
+    text-align: right;
+    align-items: flex-end;
+  }
+
+  #ai-testimonial-slider-{{ sid }} .ai-testimonial-slider__avatar-wrap {
+    width: var(--ats-avatar-size-mobile);
+    height: var(--ats-avatar-size-mobile);
+    flex-shrink: 0;
+  }
+
+  #ai-testimonial-slider-{{ sid }} .ai-testimonial-slider__avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--ats-avatar-radius);
+    display: block;
+  }
+
+  #ai-testimonial-slider-{{ sid }} .ai-testimonial-slider__stars {
+    display: flex;
+    gap: 4px;
+    line-height: 1;
+  }
+
+  #ai-testimonial-slider-{{ sid }} .ai-testimonial-slider__star {
+    color: rgba(0,0,0,0.16);
+    font-size: 14px;
+  }
+
+  #ai-testimonial-slider-{{ sid }} .ai-testimonial-slider__star.is-filled {
+    color: var(--ats-stars-color);
+  }
+
+  #ai-testimonial-slider-{{ sid }} .ai-testimonial-slider__card-title {
+    margin: 0;
+    color: var(--ats-title-color);
+    font-size: var(--ats-title-size-mobile);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  #ai-testimonial-slider-{{ sid }} .ai-testimonial-slider__text {
+    color: var(--ats-text-color);
+    font-size: var(--ats-text-size-mobile);
+    line-height: 1.65;
+  }
+
+  #ai-testimonial-slider-{{ sid }} .ai-testimonial-slider__text p {
+    margin: 0;
+  }
+
+  #ai-testimonial-slider-{{ sid }} .ai-testimonial-slider__author {
+    margin-top: auto;
+    color: var(--ats-author-color);
+    font-size: var(--ats-author-size-mobile);
+    line-height: 1.3;
+    font-weight: 600;
+  }
+
+  #ai-testimonial-slider-{{ sid }} .ai-testimonial-slider__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: var(--ats-nav-size);
+    height: var(--ats-nav-size);
+    border-radius: var(--ats-nav-radius);
+    border: var(--ats-nav-border-width) solid var(--ats-nav-border-color);
+    background: var(--ats-nav-bg);
+    color: var(--ats-nav-color);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 3;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+    transition: transform .18s ease, opacity .18s ease;
+  }
+
+  #ai-testimonial-slider-{{ sid }} .ai-testimonial-slider__nav:hover {
+    transform: translateY(-50%) scale(1.04);
+  }
+
+  #ai-testimonial-slider-{{ sid }} .ai-testimonial-slider__nav--prev {
+    left: -16px;
+  }
+
+  #ai-testimonial-slider-{{ sid }} .ai-testimonial-slider__nav--next {
+    right: -16px;
+  }
+
+  #ai-testimonial-slider-{{ sid }} .ai-testimonial-slider__nav span {
+    font-size: 20px;
+    line-height: 1;
+  }
+
+  #ai-testimonial-slider-{{ sid }} .ai-testimonial-slider__dots {
+    margin-top: 18px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  #ai-testimonial-slider-{{ sid }} .ai-testimonial-slider__dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 999px;
+    border: 0;
+    background: var(--ats-dot-color);
+    cursor: pointer;
+    transition: transform .18s ease, background .18s ease, width .18s ease;
+  }
+
+  #ai-testimonial-slider-{{ sid }} .ai-testimonial-slider__dot.is-active {
+    width: 30px;
+    background: var(--ats-dot-active-color);
+  }
+
+  @media screen and (max-width: 749px) {
+    #ai-testimonial-slider-{{ sid }} .ai-testimonial-slider__nav {
+      display: none;
+    }
+  }
+
+  @media screen and (min-width: 750px) {
+    #ai-testimonial-slider-{{ sid }} .ai-testimonial-slider__heading {
+      font-size: var(--ats-heading-size);
+    }
+
+    #ai-testimonial-slider-{{ sid }} .ai-testimonial-slider__subheading {
+      font-size: var(--ats-subheading-size);
+    }
+
+    #ai-testimonial-slider-{{ sid }} .ai-testimonial-slider__track {
+      grid-auto-columns: calc((100% - (var(--ats-gap-desktop) * (var(--ats-slides-desktop) - 1))) / var(--ats-slides-desktop));
+      gap: var(--ats-gap-desktop);
+    }
+
+    #ai-testimonial-slider-{{ sid }} .ai-testimonial-slider__avatar-wrap {
+      width: var(--ats-avatar-size);
+      height: var(--ats-avatar-size);
+    }
+
+    #ai-testimonial-slider-{{ sid }} .ai-testimonial-slider__card-title {
+      font-size: var(--ats-title-size);
+    }
+
+    #ai-testimonial-slider-{{ sid }} .ai-testimonial-slider__text {
+      font-size: var(--ats-text-size);
+    }
+
+    #ai-testimonial-slider-{{ sid }} .ai-testimonial-slider__author {
+      font-size: var(--ats-author-size);
+    }
+  }
+</style>
+
+<script>
+  (function() {
+    const root = document.getElementById('ai-testimonial-slider-{{ sid }}');
+    if (!root) return;
+
+    const viewport = root.querySelector('[data-viewport]');
+    const track = root.querySelector('[data-track]');
+    const prevBtn = root.querySelector('.ai-testimonial-slider__nav--prev');
+    const nextBtn = root.querySelector('.ai-testimonial-slider__nav--next');
+    const dotsWrap = root.querySelector('[data-dots]');
+    const autoplayEnabled = root.dataset.autoplay === 'true';
+    const autoplaySeconds = parseInt(root.dataset.autoplaySeconds || '4', 10);
+
+    if (!viewport || !track) return;
+
+    const slides = Array.from(root.querySelectorAll('.ai-testimonial-slider__slide'));
+    if (!slides.length) return;
+
+    function getStepWidth() {
+      const firstSlide = slides[0];
+      if (!firstSlide) return 0;
+      const trackStyles = window.getComputedStyle(track);
+      const gap = parseFloat(trackStyles.columnGap || trackStyles.gap || 0);
+      return firstSlide.getBoundingClientRect().width + gap;
+    }
+
+    function getSlideCountPerView() {
+      const styles = getComputedStyle(root);
+      const mobile = parseFloat(styles.getPropertyValue('--ats-slides-mobile')) || 1;
+      const desktop = parseFloat(styles.getPropertyValue('--ats-slides-desktop')) || 1;
+      return window.innerWidth >= 750 ? desktop : mobile;
+    }
+
+    function getPageCount() {
+      const perView = Math.max(1, Math.round(getSlideCountPerView()));
+      return Math.max(1, Math.ceil(slides.length / perView));
+    }
+
+    function getCurrentPage() {
+      const step = getStepWidth();
+      if (!step) return 0;
+      const perView = Math.max(1, Math.round(getSlideCountPerView()));
+      const currentSlideIndex = Math.round(viewport.scrollLeft / step);
+      return Math.min(getPageCount() - 1, Math.round(currentSlideIndex / perView));
+    }
+
+    function scrollToPage(pageIndex) {
+      const perView = Math.max(1, Math.round(getSlideCountPerView()));
+      const step = getStepWidth();
+      const targetIndex = pageIndex * perView;
+      viewport.scrollTo({
+        left: targetIndex * step,
+        behavior: 'smooth'
+      });
+    }
+
+    function updateDots() {
+      if (!dotsWrap) return;
+      const pageCount = getPageCount();
+      const current = getCurrentPage();
+
+      if (dotsWrap.children.length !== pageCount) {
+        dotsWrap.innerHTML = '';
+        for (let i = 0; i < pageCount; i++) {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'ai-testimonial-slider__dot';
+          btn.setAttribute('aria-label', 'Gehe zu Slide ' + (i + 1));
+          btn.addEventListener('click', () => scrollToPage(i));
+          dotsWrap.appendChild(btn);
+        }
+      }
+
+      Array.from(dotsWrap.children).forEach((dot, i) => {
+        dot.classList.toggle('is-active', i === current);
+      });
+    }
+
+    function nextPage() {
+      const current = getCurrentPage();
+      const total = getPageCount();
+      const next = current + 1 >= total ? 0 : current + 1;
+      scrollToPage(next);
+    }
+
+    function prevPage() {
+      const current = getCurrentPage();
+      const total = getPageCount();
+      const prev = current - 1 < 0 ? total - 1 : current - 1;
+      scrollToPage(prev);
+    }
+
+    if (nextBtn) nextBtn.addEventListener('click', nextPage);
+    if (prevBtn) prevBtn.addEventListener('click', prevPage);
+
+    viewport.addEventListener('scroll', () => {
+      window.clearTimeout(root.__dotTimer);
+      root.__dotTimer = window.setTimeout(updateDots, 60);
+    });
+
+    window.addEventListener('resize', updateDots);
+    updateDots();
+
+    if (autoplayEnabled) {
+      let autoplayTimer;
+
+      function startAutoplay() {
+        stopAutoplay();
+        autoplayTimer = setInterval(nextPage, autoplaySeconds * 1000);
+      }
+
+      function stopAutoplay() {
+        if (autoplayTimer) clearInterval(autoplayTimer);
+      }
+
+      root.addEventListener('mouseenter', stopAutoplay);
+      root.addEventListener('mouseleave', startAutoplay);
+      root.addEventListener('focusin', stopAutoplay);
+      root.addEventListener('focusout', startAutoplay);
+
+      startAutoplay();
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "AI Testimonial Slider",
+  "tag": "section",
+  "class": "section",
+  "max_blocks": 12,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Überschrift",
+      "default": "What customers say"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Unterüberschrift",
+      "default": "<p>Show real customer feedback in a compact, elegant slider.</p>"
+    },
+    {
+      "type": "select",
+      "id": "header_align",
+      "label": "Header Ausrichtung",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Links" },
+        { "value": "center", "label": "Zentriert" },
+        { "value": "right", "label": "Rechts" }
+      ]
+    },
+
+    {
+      "type": "header",
+      "content": "Breite"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Breite",
+      "default": "page",
+      "options": [
+        { "value": "page", "label": "Page width" },
+        { "value": "full", "label": "Volle Breite" },
+        { "value": "custom", "label": "Custom" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_width",
+      "label": "Custom Breite",
+      "min": 700,
+      "max": 1800,
+      "step": 20,
+      "unit": "px",
+      "default": 1200
+    },
+
+    {
+      "type": "header",
+      "content": "Section Hintergrund"
+    },
+    {
+      "type": "select",
+      "id": "bg_mode",
+      "label": "Hintergrund",
+      "default": "solid",
+      "options": [
+        { "value": "solid", "label": "Einfarbig" },
+        { "value": "gradient", "label": "Gradient" }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Hintergrundfarbe",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color_background",
+      "id": "bg_gradient",
+      "label": "Gradient",
+      "default": "linear-gradient(180deg, #FFFFFF 0%, #F8F8F8 100%)"
+    },
+
+    {
+      "type": "header",
+      "content": "Abstände"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Margin oben",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Margin unten",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding oben",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding unten",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_side",
+      "label": "Padding Seite",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+
+    {
+      "type": "header",
+      "content": "Slider Layout"
+    },
+    {
+      "type": "range",
+      "id": "slides_desktop",
+      "label": "Slides pro Ansicht Desktop",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "slides_mobile",
+      "label": "Slides pro Ansicht Mobile",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "card_gap_desktop",
+      "label": "Abstand Desktop",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "card_gap_mobile",
+      "label": "Abstand Mobile",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "content_align",
+      "label": "Card Inhalt Ausrichtung",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Links" },
+        { "value": "center", "label": "Zentriert" },
+        { "value": "right", "label": "Rechts" }
+      ]
+    },
+
+    {
+      "type": "header",
+      "content": "Card Design"
+    },
+    {
+      "type": "range",
+      "id": "card_padding_x",
+      "label": "Padding links/rechts",
+      "min": 8,
+      "max": 36,
+      "step": 2,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "card_padding_y",
+      "label": "Padding oben/unten",
+      "min": 8,
+      "max": 36,
+      "step": 2,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "label": "Radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "card_border_width",
+      "label": "Border",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "card_shadow_strength",
+      "label": "Shadow Stärke",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 6
+    },
+
+    {
+      "type": "header",
+      "content": "Avatar & Sterne"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_stars_global",
+      "label": "Sterne global anzeigen",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "avatar_size",
+      "label": "Avatar Größe Desktop",
+      "min": 30,
+      "max": 90,
+      "step": 2,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "avatar_size_mobile",
+      "label": "Avatar Größe Mobile",
+      "min": 28,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "avatar_radius",
+      "label": "Avatar Radius",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 100
+    },
+
+    {
+      "type": "header",
+      "content": "Typografie"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading Desktop",
+      "min": 18,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "Heading Mobile",
+      "min": 16,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "subheading_size",
+      "label": "Subheading Desktop",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "subheading_size_mobile",
+      "label": "Subheading Mobile",
+      "min": 12,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Card Titel Desktop",
+      "min": 14,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "title_size_mobile",
+      "label": "Card Titel Mobile",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 17
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "label": "Text Desktop",
+      "min": 12,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "text_size_mobile",
+      "label": "Text Mobile",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "author_size",
+      "label": "Autor Desktop",
+      "min": 11,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "author_size_mobile",
+      "label": "Autor Mobile",
+      "min": 11,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    },
+
+    {
+      "type": "header",
+      "content": "Navigation"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrows",
+      "label": "Pfeile anzeigen",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dots",
+      "label": "Dots anzeigen",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Autoplay",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "autoplay_seconds",
+      "label": "Autoplay Intervall",
+      "min": 2,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "nav_size",
+      "label": "Pfeil Button Größe",
+      "min": 28,
+      "max": 56,
+      "step": 2,
+      "unit": "px",
+      "default": 42
+    },
+    {
+      "type": "range",
+      "id": "nav_radius",
+      "label": "Pfeil Radius",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "nav_border_width",
+      "label": "Pfeil Border",
+      "min": 0,
+      "max": 3,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+
+    {
+      "type": "header",
+      "content": "Farben"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Card Hintergrund",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Card Border",
+      "default": "#e8e8e8"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Card Titel",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Card Text",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "author_color",
+      "label": "Autor",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "stars_color",
+      "label": "Sterne",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "nav_bg",
+      "label": "Pfeil Hintergrund",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "nav_color",
+      "label": "Pfeil Farbe",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "nav_border_color",
+      "label": "Pfeil Border",
+      "default": "#dcdcdc"
+    },
+    {
+      "type": "color",
+      "id": "dot_color",
+      "label": "Dot Farbe",
+      "default": "#d1d1d1"
+    },
+    {
+      "type": "color",
+      "id": "dot_active_color",
+      "label": "Aktiver Dot",
+      "default": "#111111"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Avatar / Bild"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_stars",
+          "label": "Sterne anzeigen",
+          "default": true
+        },
+        {
+          "type": "range",
+          "id": "stars",
+          "label": "Sterne",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Titel",
+          "default": "Easy."
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nibh enim, ornare at consequat sed, placerat quis libero.</p>"
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Autor",
+          "default": "- Buyer Name"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AI Testimonial Slider",
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "title": "Easy.",
+            "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nibh enim, ornare at consequat sed, placerat quis libero.</p>",
+            "author": "- Buyer Name"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "title": "Breezy.",
+            "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nibh enim, ornare at consequat sed, placerat quis libero.</p>",
+            "author": "- Buyer Name"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "title": "Beautiful.",
+            "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nibh enim, ornare at consequat sed, placerat quis libero.</p>",
+            "author": "- Buyer Name"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
