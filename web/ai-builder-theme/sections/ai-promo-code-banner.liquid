@@ -1,0 +1,764 @@
+{% liquid
+  assign sid = section.id
+
+  assign section_width = section.settings.section_width
+  assign custom_width = section.settings.custom_width
+
+  assign margin_top = section.settings.margin_top
+  assign margin_bottom = section.settings.margin_bottom
+  assign padding_top = section.settings.padding_top
+  assign padding_bottom = section.settings.padding_bottom
+  assign padding_side = section.settings.padding_side
+
+  assign bg_mode = section.settings.bg_mode
+  assign bg_color = section.settings.bg_color
+  assign bg_gradient = section.settings.bg_gradient
+
+  assign border_color = section.settings.border_color
+  assign border_width = section.settings.border_width
+  assign radius = section.settings.radius
+  assign shadow_strength = section.settings.shadow_strength
+
+  assign content_padding_y = section.settings.content_padding_y
+  assign content_padding_x = section.settings.content_padding_x
+  assign gap = section.settings.gap
+  assign icon_size = section.settings.icon_size
+  assign icon_color = section.settings.icon_color
+  assign text_color = section.settings.text_color
+  assign accent_text_color = section.settings.accent_text_color
+
+  assign text_size = section.settings.text_size
+  assign text_size_mobile = section.settings.text_size_mobile
+  assign code_size = section.settings.code_size
+  assign code_size_mobile = section.settings.code_size_mobile
+
+  assign button_bg = section.settings.button_bg
+  assign button_text_color = section.settings.button_text_color
+  assign button_border_color = section.settings.button_border_color
+  assign button_border_width = section.settings.button_border_width
+  assign button_radius = section.settings.button_radius
+  assign button_padding_y = section.settings.button_padding_y
+  assign button_padding_x = section.settings.button_padding_x
+
+  assign success_text = section.settings.success_text
+  assign copy_label = section.settings.copy_label
+  assign copied_label = section.settings.copied_label
+  assign promo_code = section.settings.promo_code
+  assign show_icon = section.settings.show_icon
+  assign code_case = section.settings.code_case
+%}
+
+<section
+  id="ai-promo-code-banner-{{ sid }}"
+  class="ai-promo-code-banner-section"
+  style="
+    --apcb-bg: {{ bg_color }};
+    --apcb-border-color: {{ border_color }};
+    --apcb-border-width: {{ border_width }}px;
+    --apcb-radius: {{ radius }}px;
+    --apcb-shadow: 0 {{ shadow_strength | divided_by: 2.0 }}px {{ shadow_strength | times: 2 }}px rgba(0,0,0,0.12);
+    --apcb-content-pad-y: {{ content_padding_y }}px;
+    --apcb-content-pad-x: {{ content_padding_x }}px;
+    --apcb-gap: {{ gap }}px;
+    --apcb-icon-size: {{ icon_size }}px;
+    --apcb-icon-color: {{ icon_color }};
+    --apcb-text-color: {{ text_color }};
+    --apcb-accent-text-color: {{ accent_text_color }};
+    --apcb-text-size: {{ text_size }}px;
+    --apcb-text-size-mobile: {{ text_size_mobile }}px;
+    --apcb-code-size: {{ code_size }}px;
+    --apcb-code-size-mobile: {{ code_size_mobile }}px;
+    --apcb-button-bg: {{ button_bg }};
+    --apcb-button-text: {{ button_text_color }};
+    --apcb-button-border: {{ button_border_color }};
+    --apcb-button-border-width: {{ button_border_width }}px;
+    --apcb-button-radius: {{ button_radius }}px;
+    --apcb-button-pad-y: {{ button_padding_y }}px;
+    --apcb-button-pad-x: {{ button_padding_x }}px;
+    margin-top: {{ margin_top }}px;
+    margin-bottom: {{ margin_bottom }}px;
+    padding-top: {{ padding_top }}px;
+    padding-bottom: {{ padding_bottom }}px;
+    padding-left: {{ padding_side }}px;
+    padding-right: {{ padding_side }}px;
+    background: transparent;
+  "
+>
+  <div
+    class="ai-promo-code-banner__inner{% if section_width == 'custom' %} ai-promo-code-banner__inner--custom{% endif %}{% if section_width == 'full' %} ai-promo-code-banner__inner--full{% endif %}"
+    {% if section_width == 'custom' %}
+      style="max-width: {{ custom_width }}px;"
+    {% endif %}
+  >
+    <div
+      class="ai-promo-code-banner__card"
+      {% if bg_mode == 'gradient' %}
+        style="background: {{ bg_gradient }};"
+      {% else %}
+        style="background: var(--apcb-bg);"
+      {% endif %}
+    >
+      <div class="ai-promo-code-banner__left">
+        {% if show_icon %}
+          <div class="ai-promo-code-banner__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M3.8 5.4h6.8c.5 0 1 .2 1.4.6l8 8c.8.8.8 2 0 2.8l-3.2 3.2c-.8.8-2 .8-2.8 0l-8-8c-.4-.4-.6-.9-.6-1.4V3.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="8.1" cy="8.1" r="1.25" stroke="currentColor" stroke-width="1.8"/>
+            </svg>
+          </div>
+        {% endif %}
+
+        <div class="ai-promo-code-banner__text-wrap">
+          {% if section.settings.text != blank %}
+            <div class="ai-promo-code-banner__text">
+              {{ section.settings.text }}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="ai-promo-code-banner__right">
+        <button
+          type="button"
+          class="ai-promo-code-banner__copy-btn"
+          data-copy-btn
+          data-copy-value="{{ promo_code | escape }}"
+          data-copy-label="{{ copy_label | escape }}"
+          data-copied-label="{{ copied_label | escape }}"
+          data-success-text="{{ success_text | escape }}"
+          aria-label="{{ copy_label | default: promo_code | escape }}"
+        >
+          <span class="ai-promo-code-banner__copy-code{% if code_case == 'uppercase' %} is-uppercase{% elsif code_case == 'lowercase' %} is-lowercase{% endif %}">
+            {{ copy_label | default: promo_code | escape }}
+          </span>
+
+          <span class="ai-promo-code-banner__copy-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M9 9.8V7.6c0-1 .8-1.8 1.8-1.8h6c1 0 1.8.8 1.8 1.8v8.6c0 1-.8 1.8-1.8 1.8h-6c-1 0-1.8-.8-1.8-1.8V9.8Zm-3.8 8.6h6.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M5.2 15.2c-1 0-1.8-.8-1.8-1.8V7.6c0-1 .8-1.8 1.8-1.8H11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </button>
+
+        <div class="ai-promo-code-banner__status" data-copy-status aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  #ai-promo-code-banner-{{ sid }} .ai-promo-code-banner__inner {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  #ai-promo-code-banner-{{ sid }} .ai-promo-code-banner__inner--full {
+    max-width: 100%;
+  }
+
+  #ai-promo-code-banner-{{ sid }} .ai-promo-code-banner__card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--apcb-gap);
+    border: var(--apcb-border-width) solid var(--apcb-border-color);
+    border-radius: var(--apcb-radius);
+    box-shadow: var(--apcb-shadow);
+    padding: var(--apcb-content-pad-y) var(--apcb-content-pad-x);
+    overflow: hidden;
+  }
+
+  #ai-promo-code-banner-{{ sid }} .ai-promo-code-banner__left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+
+  #ai-promo-code-banner-{{ sid }} .ai-promo-code-banner__icon {
+    width: var(--apcb-icon-size);
+    min-width: var(--apcb-icon-size);
+    height: var(--apcb-icon-size);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--apcb-icon-color);
+  }
+
+  #ai-promo-code-banner-{{ sid }} .ai-promo-code-banner__icon svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  #ai-promo-code-banner-{{ sid }} .ai-promo-code-banner__text {
+    color: var(--apcb-text-color);
+    font-size: var(--apcb-text-size-mobile);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  #ai-promo-code-banner-{{ sid }} .ai-promo-code-banner__text p {
+    margin: 0;
+  }
+
+  #ai-promo-code-banner-{{ sid }} .ai-promo-code-banner__text strong,
+  #ai-promo-code-banner-{{ sid }} .ai-promo-code-banner__text b {
+    color: var(--apcb-accent-text-color);
+    font-weight: 800;
+  }
+
+  #ai-promo-code-banner-{{ sid }} .ai-promo-code-banner__right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  #ai-promo-code-banner-{{ sid }} .ai-promo-code-banner__copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: var(--apcb-button-border-width) solid var(--apcb-button-border);
+    border-radius: var(--apcb-button-radius);
+    background: var(--apcb-button-bg);
+    color: var(--apcb-button-text);
+    padding: var(--apcb-button-pad-y) var(--apcb-button-pad-x);
+    cursor: pointer;
+    font: inherit;
+    line-height: 1;
+    transition: transform .18s ease, opacity .18s ease, box-shadow .18s ease;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.10);
+  }
+
+  #ai-promo-code-banner-{{ sid }} .ai-promo-code-banner__copy-btn:hover {
+    transform: translateY(-1px);
+  }
+
+  #ai-promo-code-banner-{{ sid }} .ai-promo-code-banner__copy-btn:active {
+    transform: translateY(0);
+  }
+
+  #ai-promo-code-banner-{{ sid }} .ai-promo-code-banner__copy-code {
+    font-size: var(--apcb-code-size-mobile);
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+  }
+
+  #ai-promo-code-banner-{{ sid }} .ai-promo-code-banner__copy-code.is-uppercase {
+    text-transform: uppercase;
+  }
+
+  #ai-promo-code-banner-{{ sid }} .ai-promo-code-banner__copy-code.is-lowercase {
+    text-transform: lowercase;
+  }
+
+  #ai-promo-code-banner-{{ sid }} .ai-promo-code-banner__copy-icon {
+    width: 16px;
+    height: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #ai-promo-code-banner-{{ sid }} .ai-promo-code-banner__copy-icon svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  #ai-promo-code-banner-{{ sid }} .ai-promo-code-banner__status {
+    min-height: 16px;
+    color: var(--apcb-button-text);
+    opacity: .85;
+    font-size: 12px;
+    line-height: 1.2;
+  }
+
+  @media screen and (max-width: 749px) {
+    #ai-promo-code-banner-{{ sid }} .ai-promo-code-banner__card {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    #ai-promo-code-banner-{{ sid }} .ai-promo-code-banner__right {
+      align-items: stretch;
+      width: 100%;
+    }
+
+    #ai-promo-code-banner-{{ sid }} .ai-promo-code-banner__copy-btn {
+      justify-content: center;
+      width: 100%;
+    }
+  }
+
+  @media screen and (min-width: 750px) {
+    #ai-promo-code-banner-{{ sid }} .ai-promo-code-banner__text {
+      font-size: var(--apcb-text-size);
+    }
+
+    #ai-promo-code-banner-{{ sid }} .ai-promo-code-banner__copy-code {
+      font-size: var(--apcb-code-size);
+    }
+  }
+</style>
+
+<script>
+  (function() {
+    const section = document.getElementById('ai-promo-code-banner-{{ sid }}');
+    if (!section) return;
+
+    const btn = section.querySelector('[data-copy-btn]');
+    const status = section.querySelector('[data-copy-status]');
+    if (!btn) return;
+
+    function fallbackCopyText(value) {
+      return new Promise(function(resolve, reject) {
+        const textarea = document.createElement('textarea');
+        textarea.value = value;
+        textarea.setAttribute('readonly', '');
+        textarea.style.position = 'fixed';
+        textarea.style.top = '0';
+        textarea.style.left = '0';
+        textarea.style.width = '1px';
+        textarea.style.height = '1px';
+        textarea.style.padding = '0';
+        textarea.style.border = '0';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.focus();
+        textarea.select();
+        textarea.setSelectionRange(0, textarea.value.length);
+
+        try {
+          const successful = document.execCommand('copy');
+          successful ? resolve() : reject(new Error('Copy command failed'));
+        } catch (error) {
+          reject(error);
+        } finally {
+          document.body.removeChild(textarea);
+        }
+      });
+    }
+
+    async function copyText(value) {
+      if (navigator.clipboard && window.isSecureContext) {
+        try {
+          await navigator.clipboard.writeText(value);
+          return;
+        } catch (error) {
+          return fallbackCopyText(value);
+        }
+      }
+
+      return fallbackCopyText(value);
+    }
+
+    btn.addEventListener('click', async function() {
+      const value = btn.getAttribute('data-copy-value') || '';
+      const copyLabel = btn.getAttribute('data-copy-label') || value;
+      const copiedLabel = btn.getAttribute('data-copied-label') || 'Copied';
+      const successText = btn.getAttribute('data-success-text') || 'Code copied';
+      const codeEl = btn.querySelector('.ai-promo-code-banner__copy-code');
+
+      try {
+        await copyText(value);
+        if (status) status.textContent = successText;
+        if (codeEl) codeEl.textContent = copiedLabel;
+
+        clearTimeout(btn._copyTimer);
+        btn._copyTimer = setTimeout(() => {
+          if (status) status.textContent = '';
+          if (codeEl) codeEl.textContent = copyLabel;
+        }, 1800);
+      } catch (error) {
+        if (status) status.textContent = 'Copy failed';
+      }
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "AI Promo Code Banner",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Inhalt"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p><strong>Today:</strong> Save <strong>30%</strong> discount with the code</p>"
+    },
+    {
+      "type": "text",
+      "id": "promo_code",
+      "label": "Promo Code",
+      "default": "THANKYOU30"
+    },
+    {
+      "type": "text",
+      "id": "copy_label",
+      "label": "Button Text vor dem Kopieren",
+      "default": "THANKYOU30"
+    },
+    {
+      "type": "text",
+      "id": "copied_label",
+      "label": "Button Text nach dem Kopieren",
+      "default": "COPIED"
+    },
+    {
+      "type": "text",
+      "id": "success_text",
+      "label": "Status Text nach dem Kopieren",
+      "default": "Code copied to clipboard"
+    },
+    {
+      "type": "select",
+      "id": "code_case",
+      "label": "Code Schreibweise",
+      "default": "uppercase",
+      "options": [
+        { "value": "normal", "label": "Normal" },
+        { "value": "uppercase", "label": "Großbuchstaben" },
+        { "value": "lowercase", "label": "Kleinbuchstaben" }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "show_icon",
+      "label": "Icon anzeigen",
+      "default": true
+    },
+
+    {
+      "type": "header",
+      "content": "Breite"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Breite",
+      "default": "full",
+      "options": [
+        { "value": "page", "label": "Page width" },
+        { "value": "full", "label": "Volle Breite" },
+        { "value": "custom", "label": "Custom" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_width",
+      "label": "Custom Breite",
+      "min": 320,
+      "max": 1600,
+      "step": 20,
+      "unit": "px",
+      "default": 900
+    },
+
+    {
+      "type": "header",
+      "content": "Section Abstände"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Margin oben",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Margin unten",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding oben",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding unten",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_side",
+      "label": "Padding Seite",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+
+    {
+      "type": "header",
+      "content": "Banner Layout"
+    },
+    {
+      "type": "range",
+      "id": "content_padding_y",
+      "label": "Banner Padding oben/unten",
+      "min": 8,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "content_padding_x",
+      "label": "Banner Padding links/rechts",
+      "min": 8,
+      "max": 36,
+      "step": 2,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Abstand Inhalt/Button",
+      "min": 8,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "radius",
+      "label": "Radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "label": "Border",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "shadow_strength",
+      "label": "Shadow Stärke",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+
+    {
+      "type": "header",
+      "content": "Icon & Typografie"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon Größe",
+      "min": 12,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "label": "Textgröße Desktop",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 17
+    },
+    {
+      "type": "range",
+      "id": "text_size_mobile",
+      "label": "Textgröße Mobile",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "code_size",
+      "label": "Code Größe Desktop",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "code_size_mobile",
+      "label": "Code Größe Mobile",
+      "min": 12,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    },
+
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "range",
+      "id": "button_padding_y",
+      "label": "Button Padding oben/unten",
+      "min": 8,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "button_padding_x",
+      "label": "Button Padding links/rechts",
+      "min": 10,
+      "max": 26,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_radius",
+      "label": "Button Radius",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "button_border_width",
+      "label": "Button Border",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+
+    {
+      "type": "header",
+      "content": "Farben"
+    },
+    {
+      "type": "select",
+      "id": "bg_mode",
+      "label": "Hintergrund",
+      "default": "solid",
+      "options": [
+        { "value": "solid", "label": "Einfarbig" },
+        { "value": "gradient", "label": "Gradient" }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Banner Hintergrund",
+      "default": "#c992f4"
+    },
+    {
+      "type": "color_background",
+      "id": "bg_gradient",
+      "label": "Gradient",
+      "default": "linear-gradient(90deg, #cb95ff 0%, #b88df3 100%)"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Banner Border",
+      "default": "#c992f4"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon Farbe",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Farbe",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "accent_text_color",
+      "label": "Fetter Text Farbe",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Button Hintergrund",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "button_border_color",
+      "label": "Button Border Farbe",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "AI Promo Code Banner"
+    }
+  ]
+}
+{% endschema %}

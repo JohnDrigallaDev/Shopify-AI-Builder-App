@@ -1,0 +1,264 @@
+{% liquid
+  assign sid = section.id
+
+  assign section_width = section.settings.section_width
+  assign custom_width = section.settings.custom_width
+
+  assign text = section.settings.text
+  assign text_alignment = section.settings.text_alignment
+  assign text_color = section.settings.text_color
+  assign text_size = section.settings.text_size
+  assign text_size_mobile = section.settings.text_size_mobile
+  assign font_weight = section.settings.font_weight
+  assign line_height = section.settings.line_height
+  assign letter_spacing = section.settings.letter_spacing
+  assign uppercase = section.settings.uppercase
+
+  assign margin_top = section.settings.margin_top
+  assign margin_bottom = section.settings.margin_bottom
+  assign padding_side = section.settings.padding_side
+%}
+
+<section
+  id="ai-product-teaser-text-{{ sid }}"
+  class="ai-product-teaser-text-section"
+  style="
+    --aptt-text-color: {{ text_color }};
+    --aptt-text-size: {{ text_size }}px;
+    --aptt-text-size-mobile: {{ text_size_mobile }}px;
+    --aptt-font-weight: {{ font_weight }};
+    --aptt-line-height: {{ line_height }};
+    --aptt-letter-spacing: {{ letter_spacing }}px;
+    margin-top: {{ margin_top }}px;
+    margin-bottom: {{ margin_bottom }}px;
+    padding-left: {{ padding_side }}px;
+    padding-right: {{ padding_side }}px;
+  "
+>
+  <div
+    class="ai-product-teaser-text__inner ai-product-teaser-text__inner--{{ text_alignment }}{% if section_width == 'custom' %} ai-product-teaser-text__inner--custom{% endif %}{% if section_width == 'full' %} ai-product-teaser-text__inner--full{% endif %}"
+    {% if section_width == 'custom' %}
+      style="max-width: {{ custom_width }}px;"
+    {% endif %}
+  >
+    {% if text != blank %}
+      <div class="ai-product-teaser-text__text{% if uppercase %} is-uppercase{% endif %}">
+        {{ text }}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<style>
+  #ai-product-teaser-text-{{ sid }} .ai-product-teaser-text__inner {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  #ai-product-teaser-text-{{ sid }} .ai-product-teaser-text__inner--full {
+    max-width: 100%;
+  }
+
+  #ai-product-teaser-text-{{ sid }} .ai-product-teaser-text__inner--left {
+    text-align: left;
+  }
+
+  #ai-product-teaser-text-{{ sid }} .ai-product-teaser-text__inner--center {
+    text-align: center;
+  }
+
+  #ai-product-teaser-text-{{ sid }} .ai-product-teaser-text__inner--right {
+    text-align: right;
+  }
+
+  #ai-product-teaser-text-{{ sid }} .ai-product-teaser-text__text {
+    color: var(--aptt-text-color);
+    font-size: var(--aptt-text-size-mobile);
+    font-weight: var(--aptt-font-weight);
+    line-height: var(--aptt-line-height);
+    letter-spacing: var(--aptt-letter-spacing);
+    margin: 0;
+  }
+
+  #ai-product-teaser-text-{{ sid }} .ai-product-teaser-text__text p {
+    margin: 0;
+  }
+
+  #ai-product-teaser-text-{{ sid }} .ai-product-teaser-text__text.is-uppercase {
+    text-transform: uppercase;
+  }
+
+  @media screen and (min-width: 750px) {
+    #ai-product-teaser-text-{{ sid }} .ai-product-teaser-text__text {
+      font-size: var(--aptt-text-size);
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "AI Product Teaser Text",
+  "tag": "section",
+  "class": "section",
+  "templates": ["product"],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Inhalt"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Clean, concise teaser text for your product information area.</p>"
+    },
+
+    {
+      "type": "header",
+      "content": "Breite & Ausrichtung"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Container Breite",
+      "default": "full",
+      "options": [
+        { "value": "page", "label": "Page width" },
+        { "value": "full", "label": "Volle Breite" },
+        { "value": "custom", "label": "Custom" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_width",
+      "label": "Custom Breite",
+      "min": 200,
+      "max": 1400,
+      "step": 20,
+      "unit": "px",
+      "default": 700
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Textausrichtung",
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "Links" },
+        { "value": "center", "label": "Zentriert" },
+        { "value": "right", "label": "Rechts" }
+      ]
+    },
+
+    {
+      "type": "header",
+      "content": "Abstände"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Abstand oben",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Abstand unten",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "padding_side",
+      "label": "Seitlicher Innenabstand",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+
+    {
+      "type": "header",
+      "content": "Typografie"
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "label": "Textgröße Desktop",
+      "min": 10,
+      "max": 36,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "text_size_mobile",
+      "label": "Textgröße Mobile",
+      "min": 10,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    },
+    {
+      "type": "select",
+      "id": "font_weight",
+      "label": "Schriftstärke",
+      "default": "500",
+      "options": [
+        { "value": "400", "label": "Normal" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semibold" },
+        { "value": "700", "label": "Bold" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "line_height",
+      "label": "Zeilenhöhe",
+      "min": 0.8,
+      "max": 2,
+      "step": 0.1,
+      "default": 1.4
+    },
+    {
+      "type": "range",
+      "id": "letter_spacing",
+      "label": "Letter Spacing",
+      "min": -1,
+      "max": 5,
+      "step": 0.1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "checkbox",
+      "id": "uppercase",
+      "label": "Großbuchstaben",
+      "default": false
+    },
+
+    {
+      "type": "header",
+      "content": "Farbe"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Textfarbe",
+      "default": "#111111"
+    }
+  ],
+  "presets": []
+}
+{% endschema %}

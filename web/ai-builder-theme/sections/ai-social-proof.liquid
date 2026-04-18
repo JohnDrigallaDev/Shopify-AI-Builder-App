@@ -1,0 +1,81 @@
+{{ 'ai-builder-sections.css' | asset_url | stylesheet_tag }}
+
+{% assign ai_page = product.metafields.ai_builder.page_json.value %}
+{% assign ai_section = blank %}
+
+{% if ai_page and ai_page.sections %}
+  {% for page_section in ai_page.sections %}
+    {% if page_section.type == 'social_proof' %}
+      {% assign ai_section = page_section %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+{% assign eyebrow = section.settings.eyebrow | strip | default: ai_section.kicker %}
+{% assign title = section.settings.title | strip | default: ai_section.title %}
+{% assign body = section.settings.body | strip | default: ai_section.body %}
+{% assign quote = section.settings.quote | strip | default: ai_section.quote %}
+{% assign author = section.settings.author | strip | default: ai_section.author %}
+
+{% if eyebrow != blank or title != blank or body != blank or quote != blank or author != blank %}
+  <section class="ai-builder-section page-width">
+    <div class="ai-builder-section__panel ai-builder-section__panel--quote">
+      {% if eyebrow != blank %}
+        <p class="ai-builder-section__eyebrow">{{ eyebrow }}</p>
+      {% endif %}
+      {% if title != blank %}
+        <h2 class="ai-builder-section__title">{{ title }}</h2>
+      {% endif %}
+      {% if body != blank %}
+        <div class="ai-builder-section__body rte">{{ body | newline_to_br }}</div>
+      {% endif %}
+      {% if quote != blank %}
+        <blockquote class="ai-builder-section__quote">“{{ quote }}”</blockquote>
+      {% endif %}
+      {% if author != blank %}
+        <p class="ai-builder-section__quote-author">{{ author }}</p>
+      {% endif %}
+    </div>
+  </section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "AI Social Proof",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Titel"
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Text"
+    },
+    {
+      "type": "textarea",
+      "id": "quote",
+      "label": "Zitat"
+    },
+    {
+      "type": "text",
+      "id": "author",
+      "label": "Autor"
+    }
+  ],
+  "presets": [
+    {
+      "name": "AI Social Proof"
+    }
+  ]
+}
+{% endschema %}

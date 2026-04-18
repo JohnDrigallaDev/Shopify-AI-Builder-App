@@ -1,0 +1,93 @@
+{{ 'ai-builder-sections.css' | asset_url | stylesheet_tag }}
+
+{% assign ai_page = product.metafields.ai_builder.page_json.value %}
+{% assign ai_section = blank %}
+
+{% if ai_page and ai_page.sections %}
+  {% for page_section in ai_page.sections %}
+    {% if page_section.type == 'faq' %}
+      {% assign ai_section = page_section %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+{% assign eyebrow = section.settings.eyebrow | strip | default: ai_section.kicker %}
+{% assign title = section.settings.title | strip | default: ai_section.title %}
+
+{% if eyebrow != blank or title != blank or ai_section.faqs != blank or section.blocks.size > 0 %}
+  <section class="ai-builder-section page-width">
+    <div class="ai-builder-section__panel">
+      {% if eyebrow != blank %}
+        <p class="ai-builder-section__eyebrow">{{ eyebrow }}</p>
+      {% endif %}
+      {% if title != blank %}
+        <h2 class="ai-builder-section__title">{{ title }}</h2>
+      {% endif %}
+      <div class="ai-builder-section__faq-list">
+        {% if section.blocks.size > 0 %}
+          {% for block in section.blocks %}
+            {% assign question = block.settings.question | strip %}
+            {% assign answer = block.settings.answer | strip %}
+            {% if question != blank or answer != blank %}
+              <details class="ai-builder-section__faq-item" {{ block.shopify_attributes }}>
+                <summary>{{ question | default: 'Frage' }}</summary>
+                <div class="ai-builder-section__body rte">{{ answer | newline_to_br }}</div>
+              </details>
+            {% endif %}
+          {% endfor %}
+        {% elsif ai_section.faqs != blank %}
+          {% for faq in ai_section.faqs %}
+            <details class="ai-builder-section__faq-item">
+              <summary>{{ faq.question | default: 'Frage' }}</summary>
+              <div class="ai-builder-section__body rte">{{ faq.answer | default: 'Antwort folgt.' | newline_to_br }}</div>
+            </details>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "AI FAQ",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Titel"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Frage"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Antwort"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AI FAQ"
+    }
+  ]
+}
+{% endschema %}

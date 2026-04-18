@@ -1,0 +1,67 @@
+{{ 'ai-builder-sections.css' | asset_url | stylesheet_tag }}
+
+{% assign ai_page = product.metafields.ai_builder.page_json.value %}
+{% assign ai_section = blank %}
+
+{% if ai_page and ai_page.sections %}
+  {% for page_section in ai_page.sections %}
+    {% if page_section.type == 'trust_bar' %}
+      {% assign ai_section = page_section %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+{% if ai_section != blank or section.blocks.size > 0 %}
+  <section class="ai-builder-section page-width">
+    <div class="ai-builder-section__trust-bar">
+      {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+          {% assign item_text = block.settings.text | strip %}
+          {% if item_text != blank %}
+            <div class="ai-builder-section__inline-item" {{ block.shopify_attributes }}>
+              <span class="ai-builder-section__dot"></span>
+              <span>{{ item_text }}</span>
+            </div>
+          {% endif %}
+        {% endfor %}
+      {% elsif ai_section.items != blank %}
+        {% for item in ai_section.items %}
+          {% assign item_text = item | strip %}
+          {% if item_text != blank %}
+            <div class="ai-builder-section__inline-item">
+              <span class="ai-builder-section__dot"></span>
+              <span>{{ item_text }}</span>
+            </div>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    </div>
+  </section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "AI Trust Bar",
+  "tag": "section",
+  "class": "section",
+  "blocks": [
+    {
+      "type": "trust_item",
+      "name": "Trust Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AI Trust Bar"
+    }
+  ]
+}
+{% endschema %}

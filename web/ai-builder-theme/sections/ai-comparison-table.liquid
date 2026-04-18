@@ -1,0 +1,130 @@
+{{ 'ai-builder-sections.css' | asset_url | stylesheet_tag }}
+
+{% assign ai_page = product.metafields.ai_builder.page_json.value %}
+{% assign ai_section = blank %}
+
+{% if ai_page and ai_page.sections %}
+  {% for page_section in ai_page.sections %}
+    {% if page_section.type == 'comparison_table' %}
+      {% assign ai_section = page_section %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+{% assign eyebrow = section.settings.eyebrow | strip | default: ai_section.kicker %}
+{% assign title = section.settings.title | strip | default: ai_section.title %}
+{% assign header_feature = section.settings.header_feature | strip | default: ai_section.headers[0] %}
+{% assign header_primary = section.settings.header_primary | strip | default: ai_section.headers[1] %}
+{% assign header_competitor = section.settings.header_competitor | strip | default: ai_section.headers[2] %}
+
+{% if eyebrow != blank or title != blank or ai_section.rows != blank or section.blocks.size > 0 %}
+  <section class="ai-builder-section page-width">
+    <div class="ai-builder-section__comparison">
+      {% if eyebrow != blank %}
+        <p class="ai-builder-section__eyebrow">{{ eyebrow }}</p>
+      {% endif %}
+      {% if title != blank %}
+        <h2 class="ai-builder-section__title">{{ title }}</h2>
+      {% endif %}
+      <div class="ai-builder-section__table-wrap">
+        <table class="ai-builder-section__table">
+          <thead>
+            <tr>
+              <th>{{ header_feature | default: 'Merkmal' }}</th>
+              <th>{{ header_primary | default: 'Unser Produkt' }}</th>
+              <th>{{ header_competitor | default: 'Standardlösung' }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% if section.blocks.size > 0 %}
+              {% for block in section.blocks %}
+                {% assign label = block.settings.label | strip %}
+                {% assign value = block.settings.value | strip %}
+                {% assign comparison = block.settings.comparison | strip %}
+                {% if label != blank or value != blank or comparison != blank %}
+                  <tr {{ block.shopify_attributes }}>
+                    <td>{{ label | default: 'Merkmal' }}</td>
+                    <td>{{ value | default: 'Ja' }}</td>
+                    <td>{{ comparison | default: 'Standard' }}</td>
+                  </tr>
+                {% endif %}
+              {% endfor %}
+            {% elsif ai_section.rows != blank %}
+              {% for row in ai_section.rows %}
+                <tr>
+                  <td>{{ row.label | default: 'Merkmal' }}</td>
+                  <td>{{ row.value | default: 'Ja' }}</td>
+                  <td>{{ row.comparison | default: 'Standard' }}</td>
+                </tr>
+              {% endfor %}
+            {% endif %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "AI Comparison Table",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Titel"
+    },
+    {
+      "type": "text",
+      "id": "header_feature",
+      "label": "Tabellenkopf 1"
+    },
+    {
+      "type": "text",
+      "id": "header_primary",
+      "label": "Tabellenkopf 2"
+    },
+    {
+      "type": "text",
+      "id": "header_competitor",
+      "label": "Tabellenkopf 3"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Vergleichszeile",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Merkmal"
+        },
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Unser Produkt"
+        },
+        {
+          "type": "text",
+          "id": "comparison",
+          "label": "Vergleich"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AI Comparison Table"
+    }
+  ]
+}
+{% endschema %}

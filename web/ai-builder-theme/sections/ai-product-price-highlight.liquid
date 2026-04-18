@@ -1,0 +1,667 @@
+{% liquid
+  assign sid = section.id
+  assign target = product.selected_or_first_available_variant
+
+  assign compare_at_price = target.compare_at_price
+  assign price = target.price
+  assign has_discount = false
+
+  if compare_at_price > price
+    assign has_discount = true
+  endif
+
+  assign discount_percent = 0
+  if has_discount and compare_at_price > 0
+    assign discount_percent = compare_at_price | minus: price | times: 100.0 | divided_by: compare_at_price | round
+  endif
+
+  if settings.currency_code_enabled
+    assign formatted_price = price | money_with_currency
+    assign formatted_compare_at_price = compare_at_price | money_with_currency
+  else
+    assign formatted_price = price | money
+    assign formatted_compare_at_price = compare_at_price | money
+  endif
+
+  assign section_width = section.settings.section_width
+  assign custom_width = section.settings.custom_width
+
+  assign margin_top = section.settings.margin_top
+  assign margin_bottom = section.settings.margin_bottom
+  assign padding_top = section.settings.padding_top
+  assign padding_bottom = section.settings.padding_bottom
+  assign padding_side = section.settings.padding_side
+
+  assign align_desktop = section.settings.align_desktop
+  assign align_mobile = section.settings.align_mobile
+  assign gap = section.settings.gap
+  assign wrap_mobile = section.settings.wrap_mobile
+
+  assign sale_price_color = section.settings.sale_price_color
+  assign compare_price_color = section.settings.compare_price_color
+  assign compare_line_color = section.settings.compare_line_color
+
+  assign sale_price_size = section.settings.sale_price_size
+  assign sale_price_size_mobile = section.settings.sale_price_size_mobile
+  assign compare_price_size = section.settings.compare_price_size
+  assign compare_price_size_mobile = section.settings.compare_price_size_mobile
+
+  assign font_weight_sale = section.settings.font_weight_sale
+  assign font_weight_compare = section.settings.font_weight_compare
+
+  assign badge_bg = section.settings.badge_bg
+  assign badge_text_color = section.settings.badge_text_color
+  assign badge_border_color = section.settings.badge_border_color
+  assign badge_border_width = section.settings.badge_border_width
+  assign badge_radius = section.settings.badge_radius
+  assign badge_padding_y = section.settings.badge_padding_y
+  assign badge_padding_x = section.settings.badge_padding_x
+  assign badge_text_size = section.settings.badge_text_size
+  assign badge_text_size_mobile = section.settings.badge_text_size_mobile
+  assign badge_gap = section.settings.badge_gap
+  assign badge_icon_size = section.settings.badge_icon_size
+
+  assign compare_line_thickness = section.settings.compare_line_thickness
+  assign compare_line_rotation = section.settings.compare_line_rotation
+
+  assign show_badge = section.settings.show_badge
+  assign badge_prefix = section.settings.badge_prefix
+  assign badge_suffix = section.settings.badge_suffix
+%}
+
+<section
+  id="ai-product-price-highlight-{{ sid }}"
+  class="ai-product-price-highlight-section"
+  style="
+    --apph-sale-color: {{ sale_price_color }};
+    --apph-compare-color: {{ compare_price_color }};
+    --apph-compare-line: {{ compare_line_color }};
+    --apph-sale-size: {{ sale_price_size }}px;
+    --apph-sale-size-mobile: {{ sale_price_size_mobile }}px;
+    --apph-compare-size: {{ compare_price_size }}px;
+    --apph-compare-size-mobile: {{ compare_price_size_mobile }}px;
+    --apph-sale-weight: {{ font_weight_sale }};
+    --apph-compare-weight: {{ font_weight_compare }};
+    --apph-gap: {{ gap }}px;
+    --apph-badge-bg: {{ badge_bg }};
+    --apph-badge-text: {{ badge_text_color }};
+    --apph-badge-border: {{ badge_border_color }};
+    --apph-badge-border-width: {{ badge_border_width }}px;
+    --apph-badge-radius: {{ badge_radius }}px;
+    --apph-badge-pad-y: {{ badge_padding_y }}px;
+    --apph-badge-pad-x: {{ badge_padding_x }}px;
+    --apph-badge-text-size: {{ badge_text_size }}px;
+    --apph-badge-text-size-mobile: {{ badge_text_size_mobile }}px;
+    --apph-badge-gap: {{ badge_gap }}px;
+    --apph-badge-icon-size: {{ badge_icon_size }}px;
+    --apph-compare-line-thickness: {{ compare_line_thickness }}px;
+    --apph-compare-line-rotation: {{ compare_line_rotation }}deg;
+    margin-top: {{ margin_top }}px;
+    margin-bottom: {{ margin_bottom }}px;
+    padding-top: {{ padding_top }}px;
+    padding-bottom: {{ padding_bottom }}px;
+    padding-left: {{ padding_side }}px;
+    padding-right: {{ padding_side }}px;
+  "
+>
+  <div
+    class="ai-product-price-highlight__inner ai-product-price-highlight__inner--desktop-{{ align_desktop }} ai-product-price-highlight__inner--mobile-{{ align_mobile }}{% if wrap_mobile %} ai-product-price-highlight__inner--wrap-mobile{% endif %}{% if section_width == 'custom' %} ai-product-price-highlight__inner--custom{% endif %}{% if section_width == 'full' %} ai-product-price-highlight__inner--full{% endif %}"
+    {% if section_width == 'custom' %}
+      style="max-width: {{ custom_width }}px;"
+    {% endif %}
+  >
+    <div class="ai-product-price-highlight__row">
+      {% if has_discount %}
+        <div class="ai-product-price-highlight__compare-wrap">
+          <span class="ai-product-price-highlight__compare-price">
+            {{ formatted_compare_at_price }}
+          </span>
+        </div>
+      {% endif %}
+
+      <div class="ai-product-price-highlight__sale-wrap">
+        <span class="ai-product-price-highlight__sale-price">
+          {{ formatted_price }}
+        </span>
+      </div>
+
+      {% if has_discount and show_badge %}
+        <div class="ai-product-price-highlight__badge">
+          <span class="ai-product-price-highlight__badge-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M12 2.75 21.25 12 12 21.25 2.75 12 12 2.75Z" fill="currentColor"/>
+              <path d="M9.25 8.85h.01M14.75 15.15h.01M15.2 8.8l-6.4 6.4" stroke="{{ badge_bg }}" stroke-width="1.8" stroke-linecap="round"/>
+              <circle cx="9.25" cy="8.85" r="1.25" fill="{{ badge_bg }}"/>
+              <circle cx="14.75" cy="15.15" r="1.25" fill="{{ badge_bg }}"/>
+            </svg>
+          </span>
+          <span class="ai-product-price-highlight__badge-text">
+            {{ badge_prefix }}{{ discount_percent }}{{ badge_suffix }}
+          </span>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<style>
+  #ai-product-price-highlight-{{ sid }} .ai-product-price-highlight__inner {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  #ai-product-price-highlight-{{ sid }} .ai-product-price-highlight__inner--full {
+    max-width: 100%;
+  }
+
+  #ai-product-price-highlight-{{ sid }} .ai-product-price-highlight__inner--mobile-left {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  #ai-product-price-highlight-{{ sid }} .ai-product-price-highlight__inner--mobile-center {
+    display: flex;
+    justify-content: center;
+  }
+
+  #ai-product-price-highlight-{{ sid }} .ai-product-price-highlight__inner--mobile-right {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  #ai-product-price-highlight-{{ sid }} .ai-product-price-highlight__row {
+    display: flex;
+    align-items: center;
+    gap: var(--apph-gap);
+  }
+
+  #ai-product-price-highlight-{{ sid }} .ai-product-price-highlight__inner--wrap-mobile .ai-product-price-highlight__row {
+    flex-wrap: wrap;
+  }
+
+  #ai-product-price-highlight-{{ sid }} .ai-product-price-highlight__compare-wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  #ai-product-price-highlight-{{ sid }} .ai-product-price-highlight__compare-price {
+    position: relative;
+    display: inline-block;
+    color: var(--apph-compare-color);
+    font-size: var(--apph-compare-size-mobile);
+    font-weight: var(--apph-compare-weight);
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  #ai-product-price-highlight-{{ sid }} .ai-product-price-highlight__compare-price::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    border-top: var(--apph-compare-line-thickness) solid var(--apph-compare-line);
+    transform: translateY(-50%) rotate(var(--apph-compare-line-rotation));
+    transform-origin: center;
+    opacity: 0.95;
+    pointer-events: none;
+  }
+
+  #ai-product-price-highlight-{{ sid }} .ai-product-price-highlight__sale-wrap {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  #ai-product-price-highlight-{{ sid }} .ai-product-price-highlight__sale-price {
+    color: var(--apph-sale-color);
+    font-size: var(--apph-sale-size-mobile);
+    font-weight: var(--apph-sale-weight);
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  #ai-product-price-highlight-{{ sid }} .ai-product-price-highlight__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--apph-badge-gap);
+    padding: var(--apph-badge-pad-y) var(--apph-badge-pad-x);
+    border-radius: var(--apph-badge-radius);
+    border: var(--apph-badge-border-width) solid var(--apph-badge-border);
+    background: var(--apph-badge-bg);
+    color: var(--apph-badge-text);
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  #ai-product-price-highlight-{{ sid }} .ai-product-price-highlight__badge-icon {
+    width: var(--apph-badge-icon-size);
+    height: var(--apph-badge-icon-size);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0;
+    flex-shrink: 0;
+  }
+
+  #ai-product-price-highlight-{{ sid }} .ai-product-price-highlight__badge-icon svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  #ai-product-price-highlight-{{ sid }} .ai-product-price-highlight__badge-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--apph-badge-text-size-mobile);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  @media screen and (max-width: 749px) {
+    #ai-product-price-highlight-{{ sid }} .ai-product-price-highlight__row {
+      align-items: center;
+    }
+  }
+
+  @media screen and (min-width: 750px) {
+    #ai-product-price-highlight-{{ sid }} .ai-product-price-highlight__inner--desktop-left {
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    #ai-product-price-highlight-{{ sid }} .ai-product-price-highlight__inner--desktop-center {
+      display: flex;
+      justify-content: center;
+    }
+
+    #ai-product-price-highlight-{{ sid }} .ai-product-price-highlight__inner--desktop-right {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    #ai-product-price-highlight-{{ sid }} .ai-product-price-highlight__compare-price {
+      font-size: var(--apph-compare-size);
+    }
+
+    #ai-product-price-highlight-{{ sid }} .ai-product-price-highlight__sale-price {
+      font-size: var(--apph-sale-size);
+    }
+
+    #ai-product-price-highlight-{{ sid }} .ai-product-price-highlight__badge-text {
+      font-size: var(--apph-badge-text-size);
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "AI Product Price Highlight",
+  "tag": "section",
+  "class": "section",
+  "templates": ["product"],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Breite & Ausrichtung"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Container Breite",
+      "default": "full",
+      "options": [
+        { "value": "page", "label": "Page width" },
+        { "value": "full", "label": "Volle Breite" },
+        { "value": "custom", "label": "Custom" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_width",
+      "label": "Custom Breite",
+      "min": 200,
+      "max": 1400,
+      "step": 20,
+      "unit": "px",
+      "default": 900
+    },
+    {
+      "type": "select",
+      "id": "align_desktop",
+      "label": "Desktop Ausrichtung",
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "Links" },
+        { "value": "center", "label": "Zentriert" },
+        { "value": "right", "label": "Rechts" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "align_mobile",
+      "label": "Mobile Ausrichtung",
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "Links" },
+        { "value": "center", "label": "Zentriert" },
+        { "value": "right", "label": "Rechts" }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "wrap_mobile",
+      "label": "Auf Mobile umbrechen erlauben",
+      "default": false
+    },
+
+    {
+      "type": "header",
+      "content": "Abstände"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Abstand oben",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Abstand unten",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding oben",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding unten",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_side",
+      "label": "Padding Seite",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Abstand zwischen Elementen",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
+
+    {
+      "type": "header",
+      "content": "Preis Typografie"
+    },
+    {
+      "type": "range",
+      "id": "sale_price_size",
+      "label": "Aktueller Preis Desktop",
+      "min": 14,
+      "max": 64,
+      "step": 1,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "sale_price_size_mobile",
+      "label": "Aktueller Preis Mobile",
+      "min": 14,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "select",
+      "id": "font_weight_sale",
+      "label": "Schriftstärke aktueller Preis",
+      "default": "700",
+      "options": [
+        { "value": "400", "label": "Normal" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semibold" },
+        { "value": "700", "label": "Bold" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "compare_price_size",
+      "label": "Vergleichspreis Desktop",
+      "min": 12,
+      "max": 56,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "compare_price_size_mobile",
+      "label": "Vergleichspreis Mobile",
+      "min": 12,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "select",
+      "id": "font_weight_compare",
+      "label": "Schriftstärke Vergleichspreis",
+      "default": "600",
+      "options": [
+        { "value": "400", "label": "Normal" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semibold" },
+        { "value": "700", "label": "Bold" }
+      ]
+    },
+
+    {
+      "type": "header",
+      "content": "Durchstreich-Linie"
+    },
+    {
+      "type": "range",
+      "id": "compare_line_thickness",
+      "label": "Linienstärke",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "unit": "px",
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "compare_line_rotation",
+      "label": "Linien-Winkel",
+      "min": -25,
+      "max": 25,
+      "step": 1,
+      "unit": "deg",
+      "default": -12
+    },
+
+    {
+      "type": "header",
+      "content": "Discount Badge"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badge",
+      "label": "Discount Badge anzeigen",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "badge_prefix",
+      "label": "Badge Text davor",
+      "default": "SPARE "
+    },
+    {
+      "type": "text",
+      "id": "badge_suffix",
+      "label": "Badge Text danach",
+      "default": "%"
+    },
+    {
+      "type": "range",
+      "id": "badge_padding_y",
+      "label": "Badge Padding oben/unten",
+      "min": 4,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "badge_padding_x",
+      "label": "Badge Padding links/rechts",
+      "min": 8,
+      "max": 26,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "badge_radius",
+      "label": "Badge Radius",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "badge_border_width",
+      "label": "Badge Border",
+      "min": 0,
+      "max": 3,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "badge_text_size",
+      "label": "Badge Text Desktop",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 11
+    },
+    {
+      "type": "range",
+      "id": "badge_text_size_mobile",
+      "label": "Badge Text Mobile",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "badge_gap",
+      "label": "Badge Abstand Icon/Text",
+      "min": 4,
+      "max": 12,
+      "step": 1,
+      "unit": "px",
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "badge_icon_size",
+      "label": "Badge Icon Größe",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+
+    {
+      "type": "header",
+      "content": "Farben"
+    },
+    {
+      "type": "color",
+      "id": "sale_price_color",
+      "label": "Aktueller Preis Farbe",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "compare_price_color",
+      "label": "Vergleichspreis Farbe",
+      "default": "#d32f2f"
+    },
+    {
+      "type": "color",
+      "id": "compare_line_color",
+      "label": "Durchstreich-Linie Farbe",
+      "default": "#d32f2f"
+    },
+    {
+      "type": "color",
+      "id": "badge_bg",
+      "label": "Badge Hintergrund",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge Textfarbe",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "badge_border_color",
+      "label": "Badge Border Farbe",
+      "default": "#111111"
+    }
+  ],
+  "presets": []
+}
+{% endschema %}

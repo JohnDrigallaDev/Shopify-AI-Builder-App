@@ -1,0 +1,782 @@
+{% liquid
+  assign sid = section.id
+
+  assign section_bg_mode = section.settings.section_bg_mode
+  assign section_bg = section.settings.section_bg
+  assign section_gradient = section.settings.section_gradient
+
+  assign container_mode = section.settings.container_mode
+  assign custom_container_width = section.settings.custom_container_width
+
+  assign top_space = section.settings.top_space
+  assign bottom_space = section.settings.bottom_space
+  assign side_space = section.settings.side_space
+  assign margin_top = section.settings.margin_top
+  assign margin_bottom = section.settings.margin_bottom
+
+  assign items_gap_desktop = section.settings.items_gap_desktop
+  assign items_gap_mobile = section.settings.items_gap_mobile
+
+  assign card_bg = section.settings.card_bg
+  assign card_border = section.settings.card_border
+  assign card_border_width = section.settings.card_border_width
+  assign card_radius = section.settings.card_radius
+  assign card_shadow_strength = section.settings.card_shadow_strength
+  assign card_padding_x = section.settings.card_padding_x
+  assign card_padding_y = section.settings.card_padding_y
+  assign card_min_height = section.settings.card_min_height
+
+  assign avatar_size = section.settings.avatar_size
+  assign avatar_size_mobile = section.settings.avatar_size_mobile
+  assign avatar_border_width = section.settings.avatar_border_width
+  assign avatar_overlap = section.settings.avatar_overlap
+  assign avatar_ring_color = section.settings.avatar_ring_color
+
+  assign verified_bg = section.settings.verified_bg
+  assign verified_icon_color = section.settings.verified_icon_color
+  assign verified_size = section.settings.verified_size
+  assign verified_size_mobile = section.settings.verified_size_mobile
+
+  assign text_color = section.settings.text_color
+  assign strong_color = section.settings.strong_color
+  assign text_size = section.settings.text_size
+  assign text_size_mobile = section.settings.text_size_mobile
+  assign line_height = section.settings.line_height
+
+  assign show_on_mobile = section.settings.show_on_mobile
+%}
+
+<section
+  id="ai-social-proof-bar-{{ sid }}"
+  class="ai-social-proof-bar-section{% unless show_on_mobile %} ai-social-proof-bar-section--hide-mobile{% endunless %}"
+  style="
+    --asp-section-bg: {{ section_bg }};
+    --asp-card-bg: {{ card_bg }};
+    --asp-card-border: {{ card_border }};
+    --asp-card-border-width: {{ card_border_width }}px;
+    --asp-card-radius: {{ card_radius }}px;
+    --asp-card-shadow: 0 {{ card_shadow_strength | divided_by: 2.0 }}px {{ card_shadow_strength | times: 2 }}px rgba(0,0,0,0.10);
+    --asp-card-padding-x: {{ card_padding_x }}px;
+    --asp-card-padding-y: {{ card_padding_y }}px;
+    --asp-card-min-height: {{ card_min_height }}px;
+    --asp-items-gap-desktop: {{ items_gap_desktop }}px;
+    --asp-items-gap-mobile: {{ items_gap_mobile }}px;
+    --asp-avatar-size: {{ avatar_size }}px;
+    --asp-avatar-size-mobile: {{ avatar_size_mobile }}px;
+    --asp-avatar-border-width: {{ avatar_border_width }}px;
+    --asp-avatar-overlap: {{ avatar_overlap }}px;
+    --asp-avatar-ring-color: {{ avatar_ring_color }};
+    --asp-verified-bg: {{ verified_bg }};
+    --asp-verified-icon: {{ verified_icon_color }};
+    --asp-verified-size: {{ verified_size }}px;
+    --asp-verified-size-mobile: {{ verified_size_mobile }}px;
+    --asp-text-color: {{ text_color }};
+    --asp-strong-color: {{ strong_color }};
+    --asp-text-size: {{ text_size }}px;
+    --asp-text-size-mobile: {{ text_size_mobile }}px;
+    --asp-line-height: {{ line_height }};
+    margin-top: {{ margin_top }}px;
+    margin-bottom: {{ margin_bottom }}px;
+    padding-top: {{ top_space }}px;
+    padding-bottom: {{ bottom_space }}px;
+    padding-left: {{ side_space }}px;
+    padding-right: {{ side_space }}px;
+    {% if section_bg_mode == 'gradient' %}
+      background: {{ section_gradient }};
+    {% else %}
+      background: var(--asp-section-bg);
+    {% endif %}
+  "
+>
+  <div
+    class="ai-social-proof-bar__inner{% if container_mode == 'custom' %} ai-social-proof-bar__inner--custom{% endif %}{% if container_mode == 'full' %} ai-social-proof-bar__inner--full{% endif %}"
+    {% if container_mode == 'custom' %}
+      style="max-width: {{ custom_container_width }}px;"
+    {% endif %}
+  >
+    <div class="ai-social-proof-bar__stack">
+      {% for block in section.blocks %}
+        {% liquid
+          assign layout_mode = block.settings.layout_mode
+          assign has_link = false
+          if block.settings.link != blank
+            assign has_link = true
+          endif
+        %}
+
+        <div class="ai-social-proof-bar__item" {{ block.shopify_attributes }}>
+          {% if has_link %}
+            <a href="{{ block.settings.link }}" class="ai-social-proof-bar__card{% if block.settings.use_card %} is-card{% else %} is-plain{% endif %}">
+          {% else %}
+            <div class="ai-social-proof-bar__card{% if block.settings.use_card %} is-card{% else %} is-plain{% endif %}">
+          {% endif %}
+
+            <div class="ai-social-proof-bar__media ai-social-proof-bar__media--{{ layout_mode }}">
+              {% if layout_mode == 'single' %}
+                <div class="ai-social-proof-bar__avatar-wrap">
+                  <div class="ai-social-proof-bar__avatar">
+                    {% if block.settings.avatar_1 != blank %}
+                      <img
+                        src="{{ block.settings.avatar_1 | image_url: width: 180 }}"
+                        alt="{{ block.settings.name_1 | escape }}"
+                        loading="lazy"
+                      >
+                    {% else %}
+                      <div class="ai-social-proof-bar__avatar-placeholder"></div>
+                    {% endif %}
+                  </div>
+
+                  {% if block.settings.show_verified %}
+                    <div class="ai-social-proof-bar__verified-badge">
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M9.2 12.9l1.8 1.8 3.8-4.1"/>
+                      </svg>
+                    </div>
+                  {% endif %}
+                </div>
+              {% else %}
+                <div class="ai-social-proof-bar__avatar-group">
+                  <div class="ai-social-proof-bar__avatar">
+                    {% if block.settings.avatar_1 != blank %}
+                      <img
+                        src="{{ block.settings.avatar_1 | image_url: width: 180 }}"
+                        alt="{{ block.settings.name_1 | escape }}"
+                        loading="lazy"
+                      >
+                    {% else %}
+                      <div class="ai-social-proof-bar__avatar-placeholder"></div>
+                    {% endif %}
+                  </div>
+
+                  <div class="ai-social-proof-bar__avatar">
+                    {% if block.settings.avatar_2 != blank %}
+                      <img
+                        src="{{ block.settings.avatar_2 | image_url: width: 180 }}"
+                        alt="{{ block.settings.name_2 | escape }}"
+                        loading="lazy"
+                      >
+                    {% else %}
+                      <div class="ai-social-proof-bar__avatar-placeholder"></div>
+                    {% endif %}
+                  </div>
+
+                  {% if block.settings.show_verified %}
+                    <div class="ai-social-proof-bar__verified-badge ai-social-proof-bar__verified-badge--group">
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M9.2 12.9l1.8 1.8 3.8-4.1"/>
+                      </svg>
+                    </div>
+                  {% endif %}
+                </div>
+              {% endif %}
+            </div>
+
+            <div class="ai-social-proof-bar__text">
+              {% if block.settings.content != blank %}
+                {{ block.settings.content }}
+              {% endif %}
+            </div>
+
+          {% if has_link %}
+            </a>
+          {% else %}
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+  #ai-social-proof-bar-{{ sid }} .ai-social-proof-bar__inner {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  #ai-social-proof-bar-{{ sid }} .ai-social-proof-bar__inner--full {
+    max-width: 100%;
+  }
+
+  #ai-social-proof-bar-{{ sid }} .ai-social-proof-bar__stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--asp-items-gap-mobile);
+  }
+
+  #ai-social-proof-bar-{{ sid }} .ai-social-proof-bar__card {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    min-height: var(--asp-card-min-height);
+    text-decoration: none;
+    color: inherit;
+  }
+
+  #ai-social-proof-bar-{{ sid }} .ai-social-proof-bar__card.is-card {
+    background: var(--asp-card-bg);
+    border: var(--asp-card-border-width) solid var(--asp-card-border);
+    border-radius: var(--asp-card-radius);
+    box-shadow: var(--asp-card-shadow);
+    padding: var(--asp-card-padding-y) var(--asp-card-padding-x);
+  }
+
+  #ai-social-proof-bar-{{ sid }} .ai-social-proof-bar__card.is-plain {
+    padding: 0;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+  }
+
+  #ai-social-proof-bar-{{ sid }} .ai-social-proof-bar__media {
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  #ai-social-proof-bar-{{ sid }} .ai-social-proof-bar__avatar-wrap {
+    position: relative;
+    width: var(--asp-avatar-size-mobile);
+    height: var(--asp-avatar-size-mobile);
+  }
+
+  #ai-social-proof-bar-{{ sid }} .ai-social-proof-bar__avatar-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-right: 10px;
+  }
+
+  #ai-social-proof-bar-{{ sid }} .ai-social-proof-bar__avatar-group .ai-social-proof-bar__avatar + .ai-social-proof-bar__avatar {
+    margin-left: calc(var(--asp-avatar-overlap) * -1px);
+  }
+
+  #ai-social-proof-bar-{{ sid }} .ai-social-proof-bar__avatar {
+    width: var(--asp-avatar-size-mobile);
+    height: var(--asp-avatar-size-mobile);
+    border-radius: 999px;
+    overflow: hidden;
+    border: var(--asp-avatar-border-width) solid var(--asp-avatar-ring-color);
+    background: #e8e8e8;
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+  }
+
+  #ai-social-proof-bar-{{ sid }} .ai-social-proof-bar__avatar img,
+  #ai-social-proof-bar-{{ sid }} .ai-social-proof-bar__avatar-placeholder {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  #ai-social-proof-bar-{{ sid }} .ai-social-proof-bar__avatar img {
+    object-fit: cover;
+  }
+
+  #ai-social-proof-bar-{{ sid }} .ai-social-proof-bar__avatar-placeholder {
+    background: linear-gradient(135deg, #d8d8d8, #c8c8c8);
+  }
+
+  #ai-social-proof-bar-{{ sid }} .ai-social-proof-bar__verified-badge {
+    position: absolute;
+    right: -3px;
+    top: -3px;
+    width: var(--asp-verified-size-mobile);
+    height: var(--asp-verified-size-mobile);
+    border-radius: 999px;
+    background: var(--asp-verified-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+  }
+
+  #ai-social-proof-bar-{{ sid }} .ai-social-proof-bar__verified-badge--group {
+    right: -2px;
+    top: -4px;
+  }
+
+  #ai-social-proof-bar-{{ sid }} .ai-social-proof-bar__verified-badge svg {
+    width: 58%;
+    height: 58%;
+    display: block;
+    fill: none;
+    stroke: var(--asp-verified-icon);
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  #ai-social-proof-bar-{{ sid }} .ai-social-proof-bar__text {
+    flex: 1 1 auto;
+    min-width: 0;
+    color: var(--asp-text-color);
+    font-size: var(--asp-text-size-mobile);
+    line-height: var(--asp-line-height);
+    letter-spacing: -0.02em;
+  }
+
+  #ai-social-proof-bar-{{ sid }} .ai-social-proof-bar__text p {
+    margin: 0;
+  }
+
+  #ai-social-proof-bar-{{ sid }} .ai-social-proof-bar__text strong,
+  #ai-social-proof-bar-{{ sid }} .ai-social-proof-bar__text b {
+    color: var(--asp-strong-color);
+    font-weight: 800;
+  }
+
+  #ai-social-proof-bar-{{ sid }} .ai-social-proof-bar__card[href]:hover {
+    transform: translateY(-1px);
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+
+  #ai-social-proof-bar-{{ sid }} .ai-social-proof-bar__card.is-card[href]:hover {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.12);
+  }
+
+  @media screen and (max-width: 767px) {
+    .ai-social-proof-bar-section--hide-mobile {
+      display: none !important;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    #ai-social-proof-bar-{{ sid }} .ai-social-proof-bar__stack {
+      gap: var(--asp-items-gap-desktop);
+    }
+
+    #ai-social-proof-bar-{{ sid }} .ai-social-proof-bar__avatar-wrap {
+      width: var(--asp-avatar-size);
+      height: var(--asp-avatar-size);
+    }
+
+    #ai-social-proof-bar-{{ sid }} .ai-social-proof-bar__avatar {
+      width: var(--asp-avatar-size);
+      height: var(--asp-avatar-size);
+    }
+
+    #ai-social-proof-bar-{{ sid }} .ai-social-proof-bar__verified-badge {
+      width: var(--asp-verified-size);
+      height: var(--asp-verified-size);
+    }
+
+    #ai-social-proof-bar-{{ sid }} .ai-social-proof-bar__text {
+      font-size: var(--asp-text-size);
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "AI Social Proof Bar",
+  "tag": "section",
+  "class": "section",
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Container"
+    },
+    {
+      "type": "select",
+      "id": "container_mode",
+      "label": "Breite",
+      "default": "page",
+      "options": [
+        { "value": "page", "label": "Page width" },
+        { "value": "full", "label": "Volle Breite" },
+        { "value": "custom", "label": "Custom" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_container_width",
+      "label": "Custom Breite",
+      "min": 700,
+      "max": 1800,
+      "step": 20,
+      "unit": "px",
+      "default": 1200
+    },
+    {
+      "type": "header",
+      "content": "Abstände"
+    },
+    {
+      "type": "range",
+      "id": "top_space",
+      "label": "Padding oben",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "bottom_space",
+      "label": "Padding unten",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "side_space",
+      "label": "Padding Seite",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Margin oben",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Margin unten",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "items_gap_desktop",
+      "label": "Abstand Desktop",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "items_gap_mobile",
+      "label": "Abstand Mobile",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Card"
+    },
+    {
+      "type": "range",
+      "id": "card_padding_x",
+      "label": "Padding links/rechts",
+      "min": 8,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "card_padding_y",
+      "label": "Padding oben/unten",
+      "min": 8,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "card_min_height",
+      "label": "Mindesthöhe",
+      "min": 50,
+      "max": 140,
+      "step": 2,
+      "unit": "px",
+      "default": 78
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "label": "Radius",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "card_border_width",
+      "label": "Border Breite",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "card_shadow_strength",
+      "label": "Shadow Stärke",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Avatare"
+    },
+    {
+      "type": "range",
+      "id": "avatar_size",
+      "label": "Avatar Größe Desktop",
+      "min": 28,
+      "max": 90,
+      "step": 2,
+      "unit": "px",
+      "default": 62
+    },
+    {
+      "type": "range",
+      "id": "avatar_size_mobile",
+      "label": "Avatar Größe Mobile",
+      "min": 24,
+      "max": 70,
+      "step": 2,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "avatar_border_width",
+      "label": "Avatar Rand",
+      "min": 0,
+      "max": 6,
+      "step": 1,
+      "unit": "px",
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "avatar_overlap",
+      "label": "Avatar Überlappung",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Verified Badge"
+    },
+    {
+      "type": "range",
+      "id": "verified_size",
+      "label": "Badge Größe Desktop",
+      "min": 14,
+      "max": 34,
+      "step": 1,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "verified_size_mobile",
+      "label": "Badge Größe Mobile",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "header",
+      "content": "Typografie"
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "label": "Textgröße Desktop",
+      "min": 14,
+      "max": 34,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "text_size_mobile",
+      "label": "Textgröße Mobile",
+      "min": 13,
+      "max": 26,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "line_height",
+      "label": "Line height",
+      "min": 1,
+      "max": 2,
+      "step": 0.1,
+      "default": 1.3
+    },
+    {
+      "type": "checkbox",
+      "id": "show_on_mobile",
+      "label": "Auf Mobile anzeigen",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Farben"
+    },
+    {
+      "type": "select",
+      "id": "section_bg_mode",
+      "label": "Section Hintergrund",
+      "default": "solid",
+      "options": [
+        { "value": "solid", "label": "Einfarbig" },
+        { "value": "gradient", "label": "Gradient" }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "section_bg",
+      "label": "Section Farbe",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color_background",
+      "id": "section_gradient",
+      "label": "Gradient",
+      "default": "linear-gradient(180deg, #FFFFFF 0%, #F9F9F9 100%)"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Card Hintergrund",
+      "default": "#f4f1e9"
+    },
+    {
+      "type": "color",
+      "id": "card_border",
+      "label": "Card Border",
+      "default": "#ebe7de"
+    },
+    {
+      "type": "color",
+      "id": "avatar_ring_color",
+      "label": "Avatar Randfarbe",
+      "default": "#4da1ff"
+    },
+    {
+      "type": "color",
+      "id": "verified_bg",
+      "label": "Verified Hintergrund",
+      "default": "#66b5ff"
+    },
+    {
+      "type": "color",
+      "id": "verified_icon_color",
+      "label": "Verified Haken",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Textfarbe",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "strong_color",
+      "label": "Farbe für fetten Text",
+      "default": "#000000"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "proof",
+      "name": "Social Proof",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "use_card",
+          "label": "Als Card anzeigen",
+          "default": true
+        },
+        {
+          "type": "select",
+          "id": "layout_mode",
+          "label": "Avatar Layout",
+          "default": "double",
+          "options": [
+            { "value": "single", "label": "1 Avatar" },
+            { "value": "double", "label": "2 Avatare" }
+          ]
+        },
+        {
+          "type": "image_picker",
+          "id": "avatar_1",
+          "label": "Avatar 1"
+        },
+        {
+          "type": "text",
+          "id": "name_1",
+          "label": "Name 1",
+          "default": "Leon"
+        },
+        {
+          "type": "image_picker",
+          "id": "avatar_2",
+          "label": "Avatar 2"
+        },
+        {
+          "type": "text",
+          "id": "name_2",
+          "label": "Name 2",
+          "default": "Kim"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_verified",
+          "label": "Verified Badge anzeigen",
+          "default": true
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Text",
+          "default": "<p>Leon, Kim and <strong>+320 other clients</strong> love our <strong>products</strong></p>"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Optionaler Link"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

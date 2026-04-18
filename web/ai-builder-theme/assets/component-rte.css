@@ -1,0 +1,32 @@
+.rte {
+  color: rgb(var(--color-foreground));
+}
+
+.rte > :first-child {
+  margin-top: 0;
+}
+
+.rte > :last-child {
+  margin-bottom: 0;
+}
+
+.rte p,
+.rte ul,
+.rte ol {
+  margin: 0 0 1.2rem;
+  line-height: 1.7;
+}
+
+.rte ul,
+.rte ol {
+  padding-left: 1.8rem;
+}
+
+.rte strong {
+  font-weight: 700;
+}
+
+.rte a {
+  color: inherit;
+  text-underline-offset: 0.2rem;
+}

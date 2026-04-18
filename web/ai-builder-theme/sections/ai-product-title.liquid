@@ -1,0 +1,252 @@
+{% liquid
+  assign sid = section.id
+
+  assign section_width = section.settings.section_width
+  assign custom_width = section.settings.custom_width
+
+  assign text_alignment = section.settings.text_alignment
+  assign title_color = section.settings.title_color
+  assign title_size = section.settings.title_size
+  assign title_size_mobile = section.settings.title_size_mobile
+  assign font_weight = section.settings.font_weight
+  assign line_height = section.settings.line_height
+  assign letter_spacing = section.settings.letter_spacing
+  assign text_transform = section.settings.text_transform
+
+  assign margin_top = section.settings.margin_top
+  assign margin_bottom = section.settings.margin_bottom
+  assign padding_side = section.settings.padding_side
+%}
+
+<section
+  id="ai-product-title-{{ sid }}"
+  class="ai-product-title-section"
+  style="
+    --apt-title-color: {{ title_color }};
+    --apt-title-size: {{ title_size }}px;
+    --apt-title-size-mobile: {{ title_size_mobile }}px;
+    --apt-font-weight: {{ font_weight }};
+    --apt-line-height: {{ line_height }};
+    --apt-letter-spacing: {{ letter_spacing }}px;
+    --apt-text-transform: {{ text_transform }};
+    margin-top: {{ margin_top }}px;
+    margin-bottom: {{ margin_bottom }}px;
+    padding-left: {{ padding_side }}px;
+    padding-right: {{ padding_side }}px;
+  "
+>
+  <div
+    class="ai-product-title__inner ai-product-title__inner--{{ text_alignment }}{% if section_width == 'custom' %} ai-product-title__inner--custom{% endif %}{% if section_width == 'full' %} ai-product-title__inner--full{% endif %}"
+    {% if section_width == 'custom' %}
+      style="max-width: {{ custom_width }}px;"
+    {% endif %}
+  >
+    {% if product.title != blank %}
+      <h1 class="ai-product-title__text">
+        {{ product.title }}
+      </h1>
+    {% endif %}
+  </div>
+</section>
+
+<style>
+  #ai-product-title-{{ sid }} .ai-product-title__inner {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  #ai-product-title-{{ sid }} .ai-product-title__inner--full {
+    max-width: 100%;
+  }
+
+  #ai-product-title-{{ sid }} .ai-product-title__inner--left {
+    text-align: left;
+  }
+
+  #ai-product-title-{{ sid }} .ai-product-title__inner--center {
+    text-align: center;
+  }
+
+  #ai-product-title-{{ sid }} .ai-product-title__inner--right {
+    text-align: right;
+  }
+
+  #ai-product-title-{{ sid }} .ai-product-title__text {
+    margin: 0;
+    color: var(--apt-title-color);
+    font-size: var(--apt-title-size-mobile);
+    font-weight: var(--apt-font-weight);
+    line-height: var(--apt-line-height);
+    letter-spacing: var(--apt-letter-spacing);
+    text-transform: var(--apt-text-transform);
+    word-break: break-word;
+  }
+
+  @media screen and (min-width: 750px) {
+    #ai-product-title-{{ sid }} .ai-product-title__text {
+      font-size: var(--apt-title-size);
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "AI Product Title",
+  "tag": "section",
+  "class": "section",
+  "templates": ["product"],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Breite & Ausrichtung"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Container Breite",
+      "default": "full",
+      "options": [
+        { "value": "page", "label": "Page width" },
+        { "value": "full", "label": "Volle Breite" },
+        { "value": "custom", "label": "Custom" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_width",
+      "label": "Custom Breite",
+      "min": 200,
+      "max": 1400,
+      "step": 20,
+      "unit": "px",
+      "default": 800
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Ausrichtung",
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "Links" },
+        { "value": "center", "label": "Zentriert" },
+        { "value": "right", "label": "Rechts" }
+      ]
+    },
+
+    {
+      "type": "header",
+      "content": "Abstände"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Abstand oben",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Abstand unten",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "padding_side",
+      "label": "Seitlicher Innenabstand",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+
+    {
+      "type": "header",
+      "content": "Typografie"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Titelgröße Desktop",
+      "min": 16,
+      "max": 72,
+      "step": 1,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "title_size_mobile",
+      "label": "Titelgröße Mobile",
+      "min": 14,
+      "max": 52,
+      "step": 1,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "select",
+      "id": "font_weight",
+      "label": "Schriftstärke",
+      "default": "700",
+      "options": [
+        { "value": "400", "label": "Normal" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semibold" },
+        { "value": "700", "label": "Bold" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "line_height",
+      "label": "Zeilenhöhe",
+      "min": 0.8,
+      "max": 2,
+      "step": 0.1,
+      "default": 1.1
+    },
+    {
+      "type": "range",
+      "id": "letter_spacing",
+      "label": "Letter Spacing",
+      "min": -2,
+      "max": 8,
+      "step": 0.1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "text_transform",
+      "label": "Text Transform",
+      "default": "none",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "uppercase", "label": "Uppercase" },
+        { "value": "lowercase", "label": "Lowercase" }
+      ]
+    },
+
+    {
+      "type": "header",
+      "content": "Farbe"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Textfarbe",
+      "default": "#111111"
+    }
+  ],
+  "presets": []
+}
+{% endschema %}

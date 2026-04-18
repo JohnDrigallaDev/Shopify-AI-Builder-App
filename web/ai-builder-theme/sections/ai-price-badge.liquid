@@ -1,0 +1,480 @@
+{% liquid
+  assign sid = section.id
+
+  assign section_width = section.settings.section_width
+  assign custom_width = section.settings.custom_width
+
+  assign margin_top = section.settings.margin_top
+  assign margin_bottom = section.settings.margin_bottom
+  assign padding_top = section.settings.padding_top
+  assign padding_bottom = section.settings.padding_bottom
+  assign padding_side = section.settings.padding_side
+
+  assign badge_text = section.settings.badge_text
+  assign text_size = section.settings.text_size
+  assign text_size_mobile = section.settings.text_size_mobile
+  assign font_weight = section.settings.font_weight
+  assign uppercase = section.settings.uppercase
+
+  assign badge_bg = section.settings.badge_bg
+  assign text_color = section.settings.text_color
+  assign border_color = section.settings.border_color
+  assign border_width = section.settings.border_width
+  assign radius = section.settings.radius
+  assign shadow_strength = section.settings.shadow_strength
+
+  assign padding_y = section.settings.padding_y
+  assign padding_x = section.settings.padding_x
+
+  assign arrow_position = section.settings.arrow_position
+  assign arrow_size = section.settings.arrow_size
+  assign arrow_offset = section.settings.arrow_offset
+
+  assign align_desktop = section.settings.align_desktop
+  assign align_mobile = section.settings.align_mobile
+%}
+
+<section
+  id="ai-price-badge-{{ sid }}"
+  class="ai-price-badge-section"
+  style="
+    --aprice-bg: {{ badge_bg }};
+    --aprice-text: {{ text_color }};
+    --aprice-border: {{ border_color }};
+    --aprice-border-width: {{ border_width }}px;
+    --aprice-radius: {{ radius }}px;
+    --aprice-shadow: 0 {{ shadow_strength | divided_by: 2.0 }}px {{ shadow_strength | times: 2 }}px rgba(0,0,0,0.12);
+    --aprice-padding-y: {{ padding_y }}px;
+    --aprice-padding-x: {{ padding_x }}px;
+    --aprice-text-size: {{ text_size }}px;
+    --aprice-text-size-mobile: {{ text_size_mobile }}px;
+    --aprice-font-weight: {{ font_weight }};
+    --aprice-arrow-size: {{ arrow_size }}px;
+    --aprice-arrow-offset: {{ arrow_offset }}px;
+    margin-top: {{ margin_top }}px;
+    margin-bottom: {{ margin_bottom }}px;
+    padding-top: {{ padding_top }}px;
+    padding-bottom: {{ padding_bottom }}px;
+    padding-left: {{ padding_side }}px;
+    padding-right: {{ padding_side }}px;
+  "
+>
+  <div
+    class="ai-price-badge__inner ai-price-badge__inner--desktop-{{ align_desktop }} ai-price-badge__inner--mobile-{{ align_mobile }}{% if section_width == 'custom' %} ai-price-badge__inner--custom{% endif %}{% if section_width == 'full' %} ai-price-badge__inner--full{% endif %}"
+    {% if section_width == 'custom' %}
+      style="max-width: {{ custom_width }}px;"
+    {% endif %}
+  >
+    <div class="ai-price-badge__wrap">
+      <div class="ai-price-badge__badge{% if uppercase %} is-uppercase{% endif %}{% if arrow_position != 'none' %} has-arrow has-arrow--{{ arrow_position }}{% endif %}">
+        <span class="ai-price-badge__text">{{ badge_text }}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  #ai-price-badge-{{ sid }} .ai-price-badge__inner {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  #ai-price-badge-{{ sid }} .ai-price-badge__inner--full {
+    max-width: 100%;
+  }
+
+  #ai-price-badge-{{ sid }} .ai-price-badge__inner--mobile-left {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  #ai-price-badge-{{ sid }} .ai-price-badge__inner--mobile-center {
+    display: flex;
+    justify-content: center;
+  }
+
+  #ai-price-badge-{{ sid }} .ai-price-badge__inner--mobile-right {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  #ai-price-badge-{{ sid }} .ai-price-badge__wrap {
+    position: relative;
+    display: inline-flex;
+  }
+
+  #ai-price-badge-{{ sid }} .ai-price-badge__badge {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 28px;
+    padding: var(--aprice-padding-y) var(--aprice-padding-x);
+    background: var(--aprice-bg);
+    color: var(--aprice-text);
+    border: var(--aprice-border-width) solid var(--aprice-border);
+    border-radius: var(--aprice-radius);
+    box-shadow: var(--aprice-shadow);
+    line-height: 1;
+    text-align: center;
+  }
+
+  #ai-price-badge-{{ sid }} .ai-price-badge__badge.is-uppercase {
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  #ai-price-badge-{{ sid }} .ai-price-badge__text {
+    font-size: var(--aprice-text-size-mobile);
+    font-weight: var(--aprice-font-weight);
+    line-height: 1.1;
+    white-space: nowrap;
+  }
+
+  #ai-price-badge-{{ sid }} .ai-price-badge__badge.has-arrow::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+  }
+
+  #ai-price-badge-{{ sid }} .ai-price-badge__badge.has-arrow--bottom::after {
+    left: var(--aprice-arrow-offset);
+    bottom: calc(var(--aprice-arrow-size) * -1);
+    border-left: var(--aprice-arrow-size) solid transparent;
+    border-right: var(--aprice-arrow-size) solid transparent;
+    border-top: var(--aprice-arrow-size) solid var(--aprice-bg);
+  }
+
+  #ai-price-badge-{{ sid }} .ai-price-badge__badge.has-arrow--top::after {
+    left: var(--aprice-arrow-offset);
+    top: calc(var(--aprice-arrow-size) * -1);
+    border-left: var(--aprice-arrow-size) solid transparent;
+    border-right: var(--aprice-arrow-size) solid transparent;
+    border-bottom: var(--aprice-arrow-size) solid var(--aprice-bg);
+  }
+
+  #ai-price-badge-{{ sid }} .ai-price-badge__badge.has-arrow--left::after {
+    top: 50%;
+    left: calc(var(--aprice-arrow-size) * -1);
+    transform: translateY(-50%);
+    border-top: var(--aprice-arrow-size) solid transparent;
+    border-bottom: var(--aprice-arrow-size) solid transparent;
+    border-right: var(--aprice-arrow-size) solid var(--aprice-bg);
+  }
+
+  #ai-price-badge-{{ sid }} .ai-price-badge__badge.has-arrow--right::after {
+    top: 50%;
+    right: calc(var(--aprice-arrow-size) * -1);
+    transform: translateY(-50%);
+    border-top: var(--aprice-arrow-size) solid transparent;
+    border-bottom: var(--aprice-arrow-size) solid transparent;
+    border-left: var(--aprice-arrow-size) solid var(--aprice-bg);
+  }
+
+  @media screen and (min-width: 750px) {
+    #ai-price-badge-{{ sid }} .ai-price-badge__inner--desktop-left {
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    #ai-price-badge-{{ sid }} .ai-price-badge__inner--desktop-center {
+      display: flex;
+      justify-content: center;
+    }
+
+    #ai-price-badge-{{ sid }} .ai-price-badge__inner--desktop-right {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    #ai-price-badge-{{ sid }} .ai-price-badge__text {
+      font-size: var(--aprice-text-size);
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "AI Price Badge",
+  "tag": "section",
+  "class": "section",
+  "templates": ["product"],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Inhalt"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Text",
+      "default": "Just 0,19$ per use"
+    },
+    {
+      "type": "select",
+      "id": "arrow_position",
+      "label": "Pfeil Position",
+      "default": "bottom",
+      "options": [
+        { "value": "bottom", "label": "Unten" },
+        { "value": "top", "label": "Oben" },
+        { "value": "left", "label": "Links" },
+        { "value": "right", "label": "Rechts" },
+        { "value": "none", "label": "Kein Pfeil" }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "uppercase",
+      "label": "Großbuchstaben",
+      "default": false
+    },
+
+    {
+      "type": "header",
+      "content": "Breite & Ausrichtung"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Breite",
+      "default": "full",
+      "options": [
+        { "value": "page", "label": "Page width" },
+        { "value": "full", "label": "Volle Breite" },
+        { "value": "custom", "label": "Custom" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_width",
+      "label": "Custom Breite",
+      "min": 200,
+      "max": 1200,
+      "step": 20,
+      "unit": "px",
+      "default": 500
+    },
+    {
+      "type": "select",
+      "id": "align_desktop",
+      "label": "Desktop Ausrichtung",
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "Links" },
+        { "value": "center", "label": "Zentriert" },
+        { "value": "right", "label": "Rechts" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "align_mobile",
+      "label": "Mobile Ausrichtung",
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "Links" },
+        { "value": "center", "label": "Zentriert" },
+        { "value": "right", "label": "Rechts" }
+      ]
+    },
+
+    {
+      "type": "header",
+      "content": "Abstände"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Margin oben",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Margin unten",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding oben",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding unten",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_side",
+      "label": "Padding Seite",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+
+    {
+      "type": "header",
+      "content": "Badge Layout"
+    },
+    {
+      "type": "range",
+      "id": "padding_y",
+      "label": "Padding oben/unten",
+      "min": 4,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 7
+    },
+    {
+      "type": "range",
+      "id": "padding_x",
+      "label": "Padding links/rechts",
+      "min": 8,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "radius",
+      "label": "Radius",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "label": "Border",
+      "min": 0,
+      "max": 3,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "shadow_strength",
+      "label": "Shadow Stärke",
+      "min": 0,
+      "max": 12,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+
+    {
+      "type": "header",
+      "content": "Pfeil"
+    },
+    {
+      "type": "range",
+      "id": "arrow_size",
+      "label": "Pfeil Größe",
+      "min": 4,
+      "max": 14,
+      "step": 1,
+      "unit": "px",
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "arrow_offset",
+      "label": "Pfeil Versatz von links",
+      "min": 4,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+
+    {
+      "type": "header",
+      "content": "Typografie"
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "label": "Textgröße Desktop",
+      "min": 10,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "text_size_mobile",
+      "label": "Textgröße Mobile",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "select",
+      "id": "font_weight",
+      "label": "Schriftstärke",
+      "default": "700",
+      "options": [
+        { "value": "400", "label": "Normal" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semibold" },
+        { "value": "700", "label": "Bold" }
+      ]
+    },
+
+    {
+      "type": "header",
+      "content": "Farben"
+    },
+    {
+      "type": "color",
+      "id": "badge_bg",
+      "label": "Hintergrund",
+      "default": "#63d7a6"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Textfarbe",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border Farbe",
+      "default": "#63d7a6"
+    }
+  ],
+  "presets": []
+}
+{% endschema %}

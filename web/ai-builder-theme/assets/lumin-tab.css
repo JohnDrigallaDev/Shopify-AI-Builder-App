@@ -1,0 +1,72 @@
+.lumin-tab-width {
+  border-radius: 2.4rem;
+  padding: 2.4rem;
+}
+
+.custom--tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 0 0 2rem;
+  list-style: none;
+}
+
+.tab__list {
+  margin: 0;
+}
+
+.custom-tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem 1.8rem;
+  border: 0.1rem solid rgba(var(--color-foreground), 0.1);
+  border-radius: 99rem;
+  background: transparent;
+  color: rgb(var(--color-foreground));
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.custom-tab:hover,
+.custom-tab.active {
+  background: rgb(var(--color-foreground));
+  color: rgb(var(--color-background));
+  border-color: rgb(var(--color-foreground));
+  transform: translateY(-1px);
+}
+
+.custom__tab-content {
+  display: none;
+  max-width: 84rem;
+}
+
+.custom__tab-content.active {
+  display: block;
+}
+
+.custom__tab-content .product__description,
+.custom__tab-content .rte {
+  color: rgba(var(--color-foreground), 0.78);
+  line-height: 1.75;
+}
+
+@media screen and (max-width: 749px) {
+  .lumin-tab-width {
+    padding: 1.8rem;
+    border-radius: 1.8rem;
+  }
+
+  .custom--tabs {
+    gap: 0.8rem;
+    margin-bottom: 1.6rem;
+  }
+
+  .custom-tab {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 1rem 1.4rem;
+  }
+}

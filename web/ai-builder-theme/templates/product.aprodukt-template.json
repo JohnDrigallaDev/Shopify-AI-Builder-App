@@ -1,0 +1,275 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "text",
+          "settings": {
+            "text": "{{ product.vendor }}",
+            "text_style": "uppercase"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true
+          }
+        },
+        "ai_positioning": {
+          "type": "ai_positioning",
+          "settings": {
+            "eyebrow": "AI Verkaufskonzept",
+            "heading": "Cellulite-Routine, die endlich in deinen Alltag passt.",
+            "text": "Massiere gezielt zu Hause und setze auf eine einfache Routine für ein glatter wirkendes Hautbild.",
+            "background_color": "#f7f3ea",
+            "border_color": "#eadfcb",
+            "accent_color": "#7a4f2a",
+            "text_color": "#1f1a14",
+            "muted_text_color": "#6e6254",
+            "heading_size": 26,
+            "body_size": 15,
+            "border_radius": 24
+          }
+        },
+        "ai_benefit_list": {
+          "type": "ai_benefit_list",
+          "settings": {
+            "heading": "Warum es überzeugt",
+            "items": "Gezielte Massage für deine Problemzonen\nEinfach in die tägliche Beauty-Routine integrierbar\nProfessionell wirkendes Massagegefühl zu Hause",
+            "background_color": "#fffaf0",
+            "border_color": "#eadfcb",
+            "accent_color": "#7a4f2a",
+            "text_color": "#1f1a14",
+            "heading_size": 18,
+            "body_size": 15,
+            "border_radius": 22
+          }
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "ai_positioning",
+        "ai_benefit_list",
+        "price",
+        "variant_picker",
+        "buy_buttons"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "media_size": "large",
+        "gallery_layout": "stacked",
+        "media_fit": "contain"
+      }
+    },
+    "ai_section_1": {
+      "type": "ai-trust-bar",
+      "settings": {},
+      "blocks": {
+        "trust_item_1": {
+          "type": "trust_item",
+          "settings": {
+            "text": "Für die tägliche Anwendung zuhause"
+          }
+        },
+        "trust_item_2": {
+          "type": "trust_item",
+          "settings": {
+            "text": "Gezielte Massage für Problemzonen"
+          }
+        },
+        "trust_item_3": {
+          "type": "trust_item",
+          "settings": {
+            "text": "Einfach zu bedienen"
+          }
+        },
+        "trust_item_4": {
+          "type": "trust_item",
+          "settings": {
+            "text": "Professionell wirkendes Massagegefühl"
+          }
+        }
+      },
+      "block_order": [
+        "trust_item_1",
+        "trust_item_2",
+        "trust_item_3",
+        "trust_item_4"
+      ]
+    },
+    "ai_section_2": {
+      "type": "ai-before-after",
+      "settings": {
+        "eyebrow": "Vorher / Nachher",
+        "title": "Mehr Routine. Weniger Aufwand.",
+        "before_label": "Vorher",
+        "before_text": "<p>Unregelmäßige Massage, wenig Zeit, kein klares Ritual.</p>",
+        "after_label": "Nachher",
+        "after_text": "<p>Eine einfache Anwendung, die sich leicht in deine Beauty-Routine einfügt.</p>"
+      }
+    },
+    "ai_section_3": {
+      "type": "ai-social-proof",
+      "settings": {
+        "eyebrow": "Warum es wirkt",
+        "title": "Weil Konsistenz stärker ist als Komplexität.",
+        "body": "<p>Dieses Massagegerät ist für Frauen gedacht, die nicht noch ein kompliziertes Beauty-Tool wollen, sondern eine klare Lösung für ihre tägliche Routine.</p>",
+        "quote": "Endlich ein Gerät, das ich wirklich regelmäßig nutze, weil es schnell und unkompliziert ist.",
+        "author": "Klara, 34"
+      }
+    },
+    "ai_section_4": {
+      "type": "ai-benefits-grid",
+      "settings": {
+        "eyebrow": "Dein Vorteil",
+        "title": "Was du in deiner Routine wirklich spürst."
+      },
+      "blocks": {
+        "benefit_1": {
+          "type": "benefit",
+          "settings": {
+            "text": "Gezielte Massage für Problemzonen"
+          }
+        },
+        "benefit_2": {
+          "type": "benefit",
+          "settings": {
+            "text": "Einfach in den Alltag integrierbar"
+          }
+        },
+        "benefit_3": {
+          "type": "benefit",
+          "settings": {
+            "text": "Angenehmes Wärme- und Vakuumgefühl"
+          }
+        },
+        "benefit_4": {
+          "type": "benefit",
+          "settings": {
+            "text": "Für ein gepflegteres Hautgefühl"
+          }
+        },
+        "benefit_5": {
+          "type": "benefit",
+          "settings": {
+            "text": "Ideal für zuhause statt Studio"
+          }
+        }
+      },
+      "block_order": [
+        "benefit_1",
+        "benefit_2",
+        "benefit_3",
+        "benefit_4",
+        "benefit_5"
+      ]
+    },
+    "ai_section_5": {
+      "type": "ai-icon-feature-strip",
+      "settings": {
+        "eyebrow": "Kurz & klar",
+        "title": "Die wichtigsten Kaufgründe auf einen Blick."
+      },
+      "blocks": {
+        "feature_1": {
+          "type": "feature",
+          "settings": {
+            "text": "Für zu Hause entwickelt"
+          }
+        },
+        "feature_2": {
+          "type": "feature",
+          "settings": {
+            "text": "Einfach zu bedienen"
+          }
+        },
+        "feature_3": {
+          "type": "feature",
+          "settings": {
+            "text": "Gezielt einsetzbar"
+          }
+        },
+        "feature_4": {
+          "type": "feature",
+          "settings": {
+            "text": "Routine statt Aufwand"
+          }
+        }
+      },
+      "block_order": [
+        "feature_1",
+        "feature_2",
+        "feature_3",
+        "feature_4"
+      ]
+    },
+    "ai_section_6": {
+      "type": "ai-feature-split",
+      "settings": {
+        "eyebrow": "So funktioniert's",
+        "title": "Ein Gerät. Eine klare Anwendung.",
+        "body": "<p>Das Schröpfmassagegerät kombiniert Vakuum, Wärme und Massage in einem kompakten Format. So kannst du gezielt an deinen gewünschten Zonen arbeiten, ohne komplizierte Abläufe oder zusätzliche Produkte.</p>"
+      },
+      "blocks": {
+        "feature_1": {
+          "type": "feature",
+          "settings": {
+            "text": "Mehrere Intensitätsstufen für flexible Anwendung"
+          }
+        },
+        "feature_2": {
+          "type": "feature",
+          "settings": {
+            "text": "Vakuum-Saugnapf für gezielte Massage"
+          }
+        },
+        "feature_3": {
+          "type": "feature",
+          "settings": {
+            "text": "Wärmefunktion für ein angenehmeres Gefühl"
+          }
+        }
+      },
+      "block_order": [
+        "feature_1",
+        "feature_2",
+        "feature_3"
+      ]
+    },
+    "ai_section_7": {
+      "type": "ai-cta-banner",
+      "settings": {
+        "eyebrow": "Jetzt starten",
+        "title": "Mach deine Anti-Cellulite-Routine einfach.",
+        "body": "<p>Sichere dir das Massagegerät und baue dir in wenigen Minuten eine klare Beauty-Routine für zuhause auf.</p>",
+        "button_label": "Jetzt Routine starten"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "ai_section_1",
+    "ai_section_2",
+    "ai_section_3",
+    "ai_section_4",
+    "ai_section_5",
+    "ai_section_6",
+    "ai_section_7"
+  ]
+}

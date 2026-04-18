@@ -1,0 +1,202 @@
+{% liquid
+  assign sid = section.id
+
+  assign section_width = section.settings.section_width
+  assign custom_width = section.settings.custom_width
+
+  assign margin_top = section.settings.margin_top
+  assign margin_bottom = section.settings.margin_bottom
+  assign padding_side = section.settings.padding_side
+
+  assign line_color = section.settings.line_color
+  assign line_thickness = section.settings.line_thickness
+  assign line_width = section.settings.line_width
+  assign line_alignment = section.settings.line_alignment
+  assign line_opacity = section.settings.line_opacity
+%}
+
+<section
+  id="ai-product-divider-{{ sid }}"
+  class="ai-product-divider-section"
+  style="
+    --apd-line-color: {{ line_color }};
+    --apd-line-thickness: {{ line_thickness }}px;
+    --apd-line-width: {{ line_width }}%;
+    --apd-line-opacity: {{ line_opacity }};
+    margin-top: {{ margin_top }}px;
+    margin-bottom: {{ margin_bottom }}px;
+    padding-left: {{ padding_side }}px;
+    padding-right: {{ padding_side }}px;
+  "
+>
+  <div
+    class="ai-product-divider__inner ai-product-divider__inner--{{ line_alignment }}{% if section_width == 'custom' %} ai-product-divider__inner--custom{% endif %}{% if section_width == 'full' %} ai-product-divider__inner--full{% endif %}"
+    {% if section_width == 'custom' %}
+      style="max-width: {{ custom_width }}px;"
+    {% endif %}
+  >
+    <div class="ai-product-divider__line" aria-hidden="true"></div>
+  </div>
+</section>
+
+<style>
+  #ai-product-divider-{{ sid }} .ai-product-divider__inner {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+  }
+
+  #ai-product-divider-{{ sid }} .ai-product-divider__inner--full {
+    max-width: 100%;
+  }
+
+  #ai-product-divider-{{ sid }} .ai-product-divider__inner--left {
+    justify-content: flex-start;
+  }
+
+  #ai-product-divider-{{ sid }} .ai-product-divider__inner--center {
+    justify-content: center;
+  }
+
+  #ai-product-divider-{{ sid }} .ai-product-divider__inner--right {
+    justify-content: flex-end;
+  }
+
+  #ai-product-divider-{{ sid }} .ai-product-divider__line {
+    display: block;
+    flex: 0 0 var(--apd-line-width);
+    width: var(--apd-line-width);
+    max-width: 100%;
+    height: var(--apd-line-thickness);
+    min-height: var(--apd-line-thickness);
+    background: var(--apd-line-color);
+    border: 0;
+    opacity: var(--apd-line-opacity);
+  }
+</style>
+
+{% schema %}
+{
+  "name": "AI Product Divider",
+  "tag": "section",
+  "class": "section",
+  "templates": ["product"],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Breite"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Container Breite",
+      "default": "full",
+      "options": [
+        { "value": "page", "label": "Page width" },
+        { "value": "full", "label": "Volle Breite" },
+        { "value": "custom", "label": "Custom" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_width",
+      "label": "Custom Breite",
+      "min": 200,
+      "max": 1600,
+      "step": 20,
+      "unit": "px",
+      "default": 700
+    },
+    {
+      "type": "header",
+      "content": "Abstände"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Abstand oben",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Abstand unten",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "padding_side",
+      "label": "Seitlicher Innenabstand",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Linie"
+    },
+    {
+      "type": "range",
+      "id": "line_width",
+      "label": "Linienbreite",
+      "min": 1,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "line_thickness",
+      "label": "Linienstärke",
+      "min": 1,
+      "max": 8,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "select",
+      "id": "line_alignment",
+      "label": "Ausrichtung",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Links" },
+        { "value": "center", "label": "Zentriert" },
+        { "value": "right", "label": "Rechts" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "line_opacity",
+      "label": "Deckkraft",
+      "min": 0.1,
+      "max": 1,
+      "step": 0.1,
+      "default": 1
+    },
+    {
+      "type": "header",
+      "content": "Farben"
+    },
+    {
+      "type": "color",
+      "id": "line_color",
+      "label": "Linienfarbe",
+      "default": "#1f1f1f"
+    }
+  ],
+  "presets": []
+}
+{% endschema %}

@@ -1,0 +1,333 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "text",
+          "settings": {
+            "text": "{{ product.vendor }}",
+            "text_style": "uppercase"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true
+          }
+        },
+        "ai_positioning": {
+          "type": "ai_positioning",
+          "settings": {
+            "eyebrow": "AI Verkaufskonzept",
+            "heading": "Cellulite zuhause gezielt angehen",
+            "text": "<p>Professionelle Schröpfmassage ohne Termin – für Beine und Po in deinem eigenen Rhythmus.</p>",
+            "background_color": "#f8fafc",
+            "border_color": "#e2e8f0",
+            "accent_color": "#0f766e",
+            "text_color": "#0f172a",
+            "muted_text_color": "#475569",
+            "heading_size": 26,
+            "body_size": 15,
+            "border_radius": 18
+          }
+        },
+        "ai_benefit_list": {
+          "type": "ai_benefit_list",
+          "settings": {
+            "heading": "Warum es überzeugt",
+            "items": "Für die gezielte Anwendung an Beinen und Po\nStudio-Feeling ohne Termin und ohne Aufwand\nEinfach in deine tägliche Routine integrierbar",
+            "background_color": "#fffaf0",
+            "border_color": "#eadfcb",
+            "accent_color": "#7a4f2a",
+            "text_color": "#1f1a14",
+            "heading_size": 18,
+            "body_size": 15,
+            "border_radius": 22
+          }
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "ai_positioning",
+        "ai_benefit_list",
+        "price",
+        "variant_picker",
+        "buy_buttons"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "media_size": "large",
+        "gallery_layout": "stacked",
+        "media_fit": "contain"
+      }
+    },
+    "ai_section_1": {
+      "type": "ai-trust-bar",
+      "settings": {},
+      "blocks": {
+        "trust_item_1": {
+          "type": "trust_item",
+          "settings": {
+            "text": "Gezielt für Beine & Po"
+          }
+        },
+        "trust_item_2": {
+          "type": "trust_item",
+          "settings": {
+            "text": "Studio-Feeling ohne Termin"
+          }
+        },
+        "trust_item_3": {
+          "type": "trust_item",
+          "settings": {
+            "text": "Einfach in die Routine integrierbar"
+          }
+        },
+        "trust_item_4": {
+          "type": "trust_item",
+          "settings": {
+            "text": "Für die Anwendung zuhause"
+          }
+        }
+      },
+      "block_order": [
+        "trust_item_1",
+        "trust_item_2",
+        "trust_item_3",
+        "trust_item_4"
+      ]
+    },
+    "ai_section_2": {
+      "type": "ai-before-after",
+      "settings": {
+        "eyebrow": "Der Unterschied",
+        "title": "Vom unregelmäßigen Gefühl zu mehr Routine",
+        "before_label": "Vorher",
+        "before_text": "<p>Unregelmäßige Anwendung, wenig Zeit, kein Studiozugang.</p>",
+        "after_label": "Nachher",
+        "after_text": "<p>Gezielte Schröpfmassage zuhause – flexibel, praktisch und regelmäßig nutzbar.</p>"
+      }
+    },
+    "ai_section_3": {
+      "type": "ai-social-proof",
+      "settings": {
+        "eyebrow": "Warum es bleibt",
+        "title": "Einfach anzuwenden. Schnell Teil deiner Routine.",
+        "body": "<p>Für viele ist der größte Unterschied nicht die Technik, sondern die Kontinuität. Dieses Gerät macht die Anwendung zuhause deutlich unkomplizierter.</p>",
+        "quote": "Ich nutze es abends nach dem Duschen – ohne Termin, ohne Aufwand.",
+        "author": "Lisa, 32"
+      }
+    },
+    "ai_section_4": {
+      "type": "ai-benefits-grid",
+      "settings": {
+        "eyebrow": "Was es dir bringt",
+        "title": "Mehr Klarheit in deiner Beauty-Routine"
+      },
+      "blocks": {
+        "benefit_1": {
+          "type": "benefit",
+          "settings": {
+            "text": "Gezielte Anwendung an Beinen und Po"
+          }
+        },
+        "benefit_2": {
+          "type": "benefit",
+          "settings": {
+            "text": "Praktisch für zuhause"
+          }
+        },
+        "benefit_3": {
+          "type": "benefit",
+          "settings": {
+            "text": "Einfach in den Alltag integrierbar"
+          }
+        },
+        "benefit_4": {
+          "type": "benefit",
+          "settings": {
+            "text": "Professionell inspirierter Massage-Look"
+          }
+        },
+        "benefit_5": {
+          "type": "benefit",
+          "settings": {
+            "text": "Für regelmäßige Nutzung gedacht"
+          }
+        }
+      },
+      "block_order": [
+        "benefit_1",
+        "benefit_2",
+        "benefit_3",
+        "benefit_4",
+        "benefit_5"
+      ]
+    },
+    "ai_section_5": {
+      "type": "ai-icon-feature-strip",
+      "settings": {
+        "eyebrow": "Kurz & stark",
+        "title": "Warum es überzeugt"
+      },
+      "blocks": {
+        "feature_1": {
+          "type": "feature",
+          "settings": {
+            "text": "Ohne Termin nutzbar"
+          }
+        },
+        "feature_2": {
+          "type": "feature",
+          "settings": {
+            "text": "Für tägliche Routine gemacht"
+          }
+        },
+        "feature_3": {
+          "type": "feature",
+          "settings": {
+            "text": "Gezielt anwendbar"
+          }
+        },
+        "feature_4": {
+          "type": "feature",
+          "settings": {
+            "text": "Home-Spa Gefühl"
+          }
+        }
+      },
+      "block_order": [
+        "feature_1",
+        "feature_2",
+        "feature_3",
+        "feature_4"
+      ]
+    },
+    "ai_section_6": {
+      "type": "ai-feature-split",
+      "settings": {
+        "eyebrow": "So funktioniert’s",
+        "title": "Schröpfen mit Wärme und Vakuum",
+        "body": "<p>Das Gerät kombiniert Saugnapf-Effekt und Massagefunktion für die gezielte Anwendung an den gewünschten Körperbereichen. Ideal, wenn du ein professionelleres Gefühl zuhause willst.</p>"
+      },
+      "blocks": {
+        "feature_1": {
+          "type": "feature",
+          "settings": {
+            "text": "Mehrere Gangstufen für flexible Anwendung"
+          }
+        },
+        "feature_2": {
+          "type": "feature",
+          "settings": {
+            "text": "Vakuum-Saugnapf für gezieltes Arbeiten"
+          }
+        },
+        "feature_3": {
+          "type": "feature",
+          "settings": {
+            "text": "Für Körperzonen wie Beine und Po"
+          }
+        },
+        "feature_4": {
+          "type": "feature",
+          "settings": {
+            "text": "Einfach in kurze Sessions integrierbar"
+          }
+        }
+      },
+      "block_order": [
+        "feature_1",
+        "feature_2",
+        "feature_3",
+        "feature_4"
+      ]
+    },
+    "ai_section_7": {
+      "type": "ai-comparison-table",
+      "settings": {
+        "eyebrow": "Der direkte Vergleich",
+        "title": "Warum zuhause oft die bessere Lösung ist",
+        "header_feature": "Option",
+        "header_primary": "Vorteil",
+        "header_competitor": ""
+      },
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "label": "Studio-Termin",
+            "value": "Termin nötig",
+            "comparison": "Mehr Aufwand und weniger..."
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "label": "Zuhause anwenden",
+            "value": "Jederzeit",
+            "comparison": "Einfach in deinen Alltag..."
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "label": "Gezielte Körperzonen",
+            "value": "Beine & Po",
+            "comparison": "Fokussierte Anwendung..."
+          }
+        },
+        "row_4": {
+          "type": "row",
+          "settings": {
+            "label": "Regelmäßigkeit",
+            "value": "Leichter umsetzbar",
+            "comparison": "Bessere Routine durch..."
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4"
+      ]
+    },
+    "ai_section_8": {
+      "type": "ai-cta-banner",
+      "settings": {
+        "eyebrow": "Jetzt starten",
+        "title": "Cellulite zuhause gezielt angehen",
+        "body": "<p>Professionelle Schröpfmassage ohne Termin – für Beine und Po in deinem eigenen Rhythmus.</p>",
+        "button_label": "Jetzt starten"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "ai_section_1",
+    "ai_section_2",
+    "ai_section_3",
+    "ai_section_4",
+    "ai_section_5",
+    "ai_section_6",
+    "ai_section_7",
+    "ai_section_8"
+  ]
+}

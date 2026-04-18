@@ -1,0 +1,63 @@
+{{ 'ai-builder-sections.css' | asset_url | stylesheet_tag }}
+
+{% assign ai_page = product.metafields.ai_builder.page_json.value %}
+{% assign ai_section = blank %}
+
+{% if ai_page and ai_page.sections %}
+  {% for page_section in ai_page.sections %}
+    {% if page_section.type == 'problem_solution' %}
+      {% assign ai_section = page_section %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+{% assign eyebrow = section.settings.eyebrow | strip | default: ai_section.kicker %}
+{% assign title = section.settings.title | strip | default: ai_section.title %}
+{% assign body = section.settings.body | strip | default: ai_section.body %}
+
+{% if eyebrow != blank or title != blank or body != blank %}
+  <section class="ai-builder-section page-width">
+    <div class="ai-builder-section__panel">
+      {% if eyebrow != blank %}
+        <p class="ai-builder-section__eyebrow">{{ eyebrow }}</p>
+      {% endif %}
+      {% if title != blank %}
+        <h2 class="ai-builder-section__title">{{ title }}</h2>
+      {% endif %}
+      {% if body != blank %}
+        <div class="ai-builder-section__body rte">{{ body | newline_to_br }}</div>
+      {% endif %}
+    </div>
+  </section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "AI Problem Solution",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Titel"
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Text"
+    }
+  ],
+  "presets": [
+    {
+      "name": "AI Problem Solution"
+    }
+  ]
+}
+{% endschema %}
