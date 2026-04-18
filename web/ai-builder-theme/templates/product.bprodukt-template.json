@@ -221,34 +221,38 @@
     },
     "ai_section_6": {
       "type": "ai-feature-split",
-      "settings": {
-        "eyebrow": "So funktioniert’s",
-        "title": "Schröpfen mit Wärme und Vakuum",
-        "body": "<p>Das Gerät kombiniert Saugnapf-Effekt und Massagefunktion für die gezielte Anwendung an den gewünschten Körperbereichen. Ideal, wenn du ein professionelleres Gefühl zuhause willst.</p>"
-      },
+      "settings": {},
       "blocks": {
         "feature_1": {
           "type": "feature",
           "settings": {
-            "text": "Mehrere Gangstufen für flexible Anwendung"
+            "media_position": "left",
+            "title": "Mehrere Gangstufen für flexible Anwendung",
+            "text": "<p>Mehrere Gangstufen für flexible Anwendung</p>"
           }
         },
         "feature_2": {
           "type": "feature",
           "settings": {
-            "text": "Vakuum-Saugnapf für gezieltes Arbeiten"
+            "media_position": "right",
+            "title": "Vakuum-Saugnapf für gezieltes Arbeiten",
+            "text": "<p>Vakuum-Saugnapf für gezieltes Arbeiten</p>"
           }
         },
         "feature_3": {
           "type": "feature",
           "settings": {
-            "text": "Für Körperzonen wie Beine und Po"
+            "media_position": "left",
+            "title": "Für Körperzonen wie Beine und Po",
+            "text": "<p>Für Körperzonen wie Beine und Po</p>"
           }
         },
         "feature_4": {
           "type": "feature",
           "settings": {
-            "text": "Einfach in kurze Sessions integrierbar"
+            "media_position": "right",
+            "title": "Einfach in kurze Sessions integrierbar",
+            "text": "<p>Einfach in kurze Sessions integrierbar</p>"
           }
         }
       },

@@ -35,7 +35,7 @@
           "settings": {
             "eyebrow": "AI Verkaufskonzept",
             "heading": "Cellulite-Routine, die endlich in deinen Alltag passt.",
-            "text": "Massiere gezielt zu Hause und setze auf eine einfache Routine für ein glatter wirkendes Hautbild.",
+            "text": "<p>Massiere gezielt zu Hause und setze auf eine einfache Routine für ein glatter wirkendes Hautbild.</p>",
             "background_color": "#f7f3ea",
             "border_color": "#eadfcb",
             "accent_color": "#7a4f2a",
@@ -221,28 +221,30 @@
     },
     "ai_section_6": {
       "type": "ai-feature-split",
-      "settings": {
-        "eyebrow": "So funktioniert's",
-        "title": "Ein Gerät. Eine klare Anwendung.",
-        "body": "<p>Das Schröpfmassagegerät kombiniert Vakuum, Wärme und Massage in einem kompakten Format. So kannst du gezielt an deinen gewünschten Zonen arbeiten, ohne komplizierte Abläufe oder zusätzliche Produkte.</p>"
-      },
+      "settings": {},
       "blocks": {
         "feature_1": {
           "type": "feature",
           "settings": {
-            "text": "Mehrere Intensitätsstufen für flexible Anwendung"
+            "media_position": "left",
+            "title": "Mehrere Intensitätsstufen für flexible Anwendung",
+            "text": "<p>Mehrere Intensitätsstufen für flexible Anwendung</p>"
           }
         },
         "feature_2": {
           "type": "feature",
           "settings": {
-            "text": "Vakuum-Saugnapf für gezielte Massage"
+            "media_position": "right",
+            "title": "Vakuum-Saugnapf für gezielte Massage",
+            "text": "<p>Vakuum-Saugnapf für gezielte Massage</p>"
           }
         },
         "feature_3": {
           "type": "feature",
           "settings": {
-            "text": "Wärmefunktion für ein angenehmeres Gefühl"
+            "media_position": "left",
+            "title": "Wärmefunktion für ein angenehmeres Gefühl",
+            "text": "<p>Wärmefunktion für ein angenehmeres Gefühl</p>"
           }
         }
       },

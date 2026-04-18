@@ -182,34 +182,38 @@
     },
     "ai_section_5": {
       "type": "ai-feature-split",
-      "settings": {
-        "eyebrow": "So funktioniert’s",
-        "title": "Massage, Vakuum und Wärme in einem Gerät",
-        "body": "<p>Das Gerät kombiniert mehrere Anwendungen in einem kompakten Format. So kannst du deine Massage auf Bauch, Beine und Po gezielt ausrichten und deine Routine zu Hause klar strukturieren.</p>"
-      },
+      "settings": {},
       "blocks": {
         "feature_1": {
           "type": "feature",
           "settings": {
-            "text": "Elektrische Anwendung für einfache Nutzung"
+            "media_position": "left",
+            "title": "Elektrische Anwendung für einfache Nutzung",
+            "text": "<p>Elektrische Anwendung für einfache Nutzung</p>"
           }
         },
         "feature_2": {
           "type": "feature",
           "settings": {
-            "text": "Vakuum-Saugnapf für gezielte Massage"
+            "media_position": "right",
+            "title": "Vakuum-Saugnapf für gezielte Massage",
+            "text": "<p>Vakuum-Saugnapf für gezielte Massage</p>"
           }
         },
         "feature_3": {
           "type": "feature",
           "settings": {
-            "text": "Wärmefunktion für mehr Komfort"
+            "media_position": "left",
+            "title": "Wärmefunktion für mehr Komfort",
+            "text": "<p>Wärmefunktion für mehr Komfort</p>"
           }
         },
         "feature_4": {
           "type": "feature",
           "settings": {
-            "text": "Kompakt für die Anwendung zuhause"
+            "media_position": "right",
+            "title": "Kompakt für die Anwendung zuhause",
+            "text": "<p>Kompakt für die Anwendung zuhause</p>"
           }
         }
       },
