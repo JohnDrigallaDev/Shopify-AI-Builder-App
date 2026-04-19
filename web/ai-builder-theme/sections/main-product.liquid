@@ -1043,15 +1043,69 @@
                 block: block,
                 share_link: share_url
               %}
-            {%- when 'custom_liquid' -%}
-              <div class="product__custom-liquid" {{ block.shopify_attributes }}>
-                {{ block.settings.custom_liquid }}
-              </div>
-
             {%- when 'variant_picker' -%}
               {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
             {%- when 'buy_buttons' -%}
               {%- render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true -%}
+            {%- when 'ai_buy_button' -%}
+              {%- assign ai_buy_variant = product.selected_or_first_available_variant -%}
+              {%- assign ai_buy_form_id = 'ai-buy-button-form-' | append: section.id | append: '-' | append: block.id -%}
+              <div
+                id="ai-buy-button-{{ section.id }}-{{ block.id }}"
+                class="ai-buy-button-block"
+                style="
+                  --ai-buy-button-bg: {{ block.settings.button_bg }};
+                  --ai-buy-button-color: {{ block.settings.button_text_color }};
+                  --ai-buy-button-border: {{ block.settings.button_border_color }};
+                  --ai-buy-button-bg-hover: {{ block.settings.button_bg_hover }};
+                  --ai-buy-button-color-hover: {{ block.settings.button_text_color_hover }};
+                  --ai-buy-button-border-hover: {{ block.settings.button_border_color_hover }};
+                  --ai-buy-button-height: {{ block.settings.button_height }}px;
+                  --ai-buy-button-radius: {{ block.settings.button_radius }}px;
+                  --ai-buy-button-font-size: {{ block.settings.button_font_size }}px;
+                  --ai-buy-button-font-weight: {{ block.settings.button_font_weight }};
+                  --ai-buy-button-margin-top: {{ block.settings.margin_top }}px;
+                  --ai-buy-button-margin-bottom: {{ block.settings.margin_bottom }}px;
+                "
+                {{ block.shopify_attributes }}
+              >
+                {%- form 'product', product, id: ai_buy_form_id, class: 'ai-buy-button-block__form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+                  <input
+                    type="hidden"
+                    name="id"
+                    value="{{ ai_buy_variant.id }}"
+                    class="product-variant-id"
+                    {% if ai_buy_variant.available == false %}
+                      disabled
+                    {% endif %}
+                  >
+                  <div class="ai-buy-button-block__buttons">
+                    <button
+                      type="submit"
+                      name="add"
+                      class="ai-buy-button-block__submit"
+                      {% if ai_buy_variant == nil or ai_buy_variant.available == false %}
+                        disabled
+                      {% endif %}
+                    >
+                      <span>
+                        {%- if ai_buy_variant == nil -%}
+                          {{ block.settings.unavailable_text }}
+                        {%- elsif ai_buy_variant.available -%}
+                          {{ block.settings.button_text }}
+                        {%- else -%}
+                          {{ block.settings.sold_out_text }}
+                        {%- endif -%}
+                      </span>
+                    </button>
+                    {%- if block.settings.show_dynamic_checkout -%}
+                      <div class="ai-buy-button-block__dynamic-checkout">
+                        {{ form | payment_button }}
+                      </div>
+                    {%- endif -%}
+                  </div>
+                {%- endform -%}
+              </div>
             {%- when 'rating' -%}
               {%- if product.metafields.reviews.rating.value != blank -%}
                 {% liquid
@@ -1561,6 +1615,142 @@
       ]
     },
     {
+      "type": "ai_buy_button",
+      "name": "AI Buy Button",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_dynamic_checkout",
+          "label": "Dynamischen Checkout anzeigen",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "In den Warenkorb"
+        },
+        {
+          "type": "text",
+          "id": "sold_out_text",
+          "label": "Ausverkauft Text",
+          "default": "Ausverkauft"
+        },
+        {
+          "type": "text",
+          "id": "unavailable_text",
+          "label": "Nicht verfügbar Text",
+          "default": "Nicht verfügbar"
+        },
+        {
+          "type": "range",
+          "id": "button_height",
+          "label": "Button Höhe",
+          "min": 44,
+          "max": 80,
+          "step": 2,
+          "unit": "px",
+          "default": 56
+        },
+        {
+          "type": "range",
+          "id": "button_font_size",
+          "label": "Schriftgröße",
+          "min": 12,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "default": 16
+        },
+        {
+          "type": "select",
+          "id": "button_font_weight",
+          "label": "Schriftstärke",
+          "default": "700",
+          "options": [
+            { "value": "500", "label": "Medium" },
+            { "value": "600", "label": "Semi Bold" },
+            { "value": "700", "label": "Bold" },
+            { "value": "800", "label": "Extra Bold" }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "button_radius",
+          "label": "Eckenradius",
+          "min": 0,
+          "max": 40,
+          "step": 2,
+          "unit": "px",
+          "default": 14
+        },
+        {
+          "type": "header",
+          "content": "Farben"
+        },
+        {
+          "type": "color",
+          "id": "button_bg",
+          "label": "Button Hintergrund",
+          "default": "#111111"
+        },
+        {
+          "type": "color",
+          "id": "button_text_color",
+          "label": "Button Text",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "button_border_color",
+          "label": "Button Rahmen",
+          "default": "#111111"
+        },
+        {
+          "type": "color",
+          "id": "button_bg_hover",
+          "label": "Hover Hintergrund",
+          "default": "#2b2b2b"
+        },
+        {
+          "type": "color",
+          "id": "button_text_color_hover",
+          "label": "Hover Text",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "button_border_color_hover",
+          "label": "Hover Rahmen",
+          "default": "#2b2b2b"
+        },
+        {
+          "type": "header",
+          "content": "Abstände"
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "label": "Abstand oben",
+          "min": 0,
+          "max": 60,
+          "step": 2,
+          "unit": "px",
+          "default": 8
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "label": "Abstand unten",
+          "min": 0,
+          "max": 60,
+          "step": 2,
+          "unit": "px",
+          "default": 8
+        }
+      ]
+    },
+    {
       "type": "description",
       "name": "t:sections.main-product.blocks.description.name",
       "limit": 1
@@ -1583,18 +1773,6 @@
         {
           "type": "paragraph",
           "content": "t:sections.main-product.blocks.share.settings.title_info.content"
-        }
-      ]
-    },
-    {
-      "type": "custom_liquid",
-      "name": "Custom Liquid",
-      "settings": [
-        {
-          "type": "liquid",
-          "id": "custom_liquid",
-          "label": "Liquid Code",
-          "default": ""
         }
       ]
     },
