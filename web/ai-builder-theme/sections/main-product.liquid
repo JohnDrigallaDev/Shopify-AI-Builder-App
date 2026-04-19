@@ -347,106 +347,6 @@
                   </div>
                 </div>
               </section>
-            {%- when 'ai_video_slider' -%}
-              <section
-                id="ai-video-slider-{{ section.id }}-{{ block.id }}"
-                class="ai-video-slider-section ai-video-slider-section--product-info"
-                style="
-                  --avs-bg: {{ block.settings.bg_color }};
-                  --avs-text: {{ block.settings.text_color }};
-                  --avs-subtext: {{ block.settings.subtext_color }};
-                  --avs-card-bg: {{ block.settings.card_bg }};
-                  --avs-overlay: {{ block.settings.overlay_color }};
-                  --avs-accent: {{ block.settings.accent_color }};
-                  --avs-border: {{ block.settings.border_color }};
-                  --avs-radius: {{ block.settings.radius }}px;
-                  --avs-border-width: {{ block.settings.border_width }}px;
-                  --avs-shadow: 0 {{ block.settings.shadow_strength | divided_by: 2.0 }}px {{ block.settings.shadow_strength | times: 2 }}px rgba(0,0,0,0.14);
-                  --avs-gap-desktop: {{ block.settings.gap_desktop }}px;
-                  --avs-gap-mobile: {{ block.settings.gap_mobile }}px;
-                  --avs-heading-size: {{ block.settings.heading_size }}px;
-                  --avs-heading-size-mobile: {{ block.settings.heading_size_mobile }}px;
-                  --avs-title-size: {{ block.settings.title_size }}px;
-                  --avs-title-size-mobile: {{ block.settings.title_size_mobile }}px;
-                  --avs-overlay-opacity: {{ block.settings.overlay_opacity | divided_by: 100.0 }};
-                  --avs-ratio: 9 / 14;
-                  --avs-ratio-mobile: 9 / 14;
-                  background: var(--avs-bg);
-                "
-                {{ block.shopify_attributes }}
-              >
-                <div class="ai-video-slider__inner">
-                  <div class="ai-video-slider__header">
-                    {%- if block.settings.eyebrow != blank -%}
-                      <p class="ai-video-slider__eyebrow">{{ block.settings.eyebrow }}</p>
-                    {%- endif -%}
-                    {%- if block.settings.heading != blank -%}
-                      <h2 class="ai-video-slider__heading">{{ block.settings.heading }}</h2>
-                    {%- endif -%}
-                  </div>
-                  <div class="ai-video-slider__wrap">
-                    <div class="ai-video-slider__viewport">
-                      <div class="ai-video-slider__track">
-                        {%- if block.settings.video_1_url != blank -%}
-                          <article class="ai-video-slider__card">
-                            <div class="ai-video-slider__media">
-                              <div class="ai-video-slider__iframe-wrap">
-                                {{ block.settings.video_1_url | external_video_url: autoplay: false, loop: true, muted: true | external_video_tag }}
-                              </div>
-                              <div class="ai-video-slider__overlay"></div>
-                              <div class="ai-video-slider__content">
-                                <h3 class="ai-video-slider__title">{{ block.settings.video_1_label }}</h3>
-                                {%- if block.settings.video_1_subtitle != blank -%}
-                                  <p class="ai-video-slider__subtitle">{{ block.settings.video_1_subtitle }}</p>
-                                {%- endif -%}
-                              </div>
-                            </div>
-                          </article>
-                        {%- endif -%}
-                        {%- if block.settings.video_2_url != blank -%}
-                          <article class="ai-video-slider__card">
-                            <div class="ai-video-slider__media">
-                              <div class="ai-video-slider__iframe-wrap">
-                                {{ block.settings.video_2_url | external_video_url: autoplay: false, loop: true, muted: true | external_video_tag }}
-                              </div>
-                              <div class="ai-video-slider__overlay"></div>
-                              <div class="ai-video-slider__content">
-                                <h3 class="ai-video-slider__title">{{ block.settings.video_2_label }}</h3>
-                                {%- if block.settings.video_2_subtitle != blank -%}
-                                  <p class="ai-video-slider__subtitle">{{ block.settings.video_2_subtitle }}</p>
-                                {%- endif -%}
-                              </div>
-                            </div>
-                          </article>
-                        {%- endif -%}
-                        {%- if block.settings.video_3_url != blank -%}
-                          <article class="ai-video-slider__card">
-                            <div class="ai-video-slider__media">
-                              <div class="ai-video-slider__iframe-wrap">
-                                {{ block.settings.video_3_url | external_video_url: autoplay: false, loop: true, muted: true | external_video_tag }}
-                              </div>
-                              <div class="ai-video-slider__overlay"></div>
-                              <div class="ai-video-slider__content">
-                                <h3 class="ai-video-slider__title">{{ block.settings.video_3_label }}</h3>
-                                {%- if block.settings.video_3_subtitle != blank -%}
-                                  <p class="ai-video-slider__subtitle">{{ block.settings.video_3_subtitle }}</p>
-                                {%- endif -%}
-                              </div>
-                            </div>
-                          </article>
-                        {%- endif -%}
-                        {%- if block.settings.video_1_url == blank and block.settings.video_2_url == blank and block.settings.video_3_url == blank -%}
-                          <article class="ai-video-slider__card">
-                            <div class="ai-video-slider__media">
-                              <div class="ai-video-slider__placeholder"><span>Video hinzufügen</span></div>
-                            </div>
-                          </article>
-                      {%- endif -%}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
             {%- when 'ai_social_proof_bar' -%}
               <section
                 id="ai-social-proof-bar-{{ section.id }}-{{ block.id }}"
@@ -1196,6 +1096,10 @@
                 block: block,
                 share_link: share_url
               %}
+            {%- when 'custom_liquid' -%}
+              <div class="product__custom-liquid" {{ block.shopify_attributes }}>
+                {{ block.settings.custom_liquid }}
+              </div>
 
             {%- when 'variant_picker' -%}
               {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
@@ -1736,6 +1640,18 @@
       ]
     },
     {
+      "type": "custom_liquid",
+      "name": "Custom Liquid",
+      "settings": [
+        {
+          "type": "liquid",
+          "id": "custom_liquid",
+          "label": "Liquid Code",
+          "default": ""
+        }
+      ]
+    },
+    {
       "type": "ai_positioning",
       "name": "AI Positioning",
       "settings": [
@@ -2222,240 +2138,6 @@
           "id": "icon_color",
           "label": "Icon Farbe",
           "default": "#111111"
-        }
-      ]
-    },
-    {
-      "type": "ai_video_slider",
-      "name": "AI Video Slider",
-      "settings": [
-        {
-          "type": "text",
-          "id": "eyebrow",
-          "label": "Eyebrow",
-          "default": "SOCIAL PROOF"
-        },
-        {
-          "type": "text",
-          "id": "heading",
-          "label": "Überschrift",
-          "default": "Warum Kunden es lieben"
-        },
-        {
-          "type": "header",
-          "content": "Video 1"
-        },
-        {
-          "type": "video_url",
-          "id": "video_1_url",
-          "label": "Externe Video URL",
-          "accept": ["youtube", "vimeo"]
-        },
-        {
-          "type": "text",
-          "id": "video_1_label",
-          "label": "Video 1 Label",
-          "default": "Anwendung"
-        },
-        {
-          "type": "text",
-          "id": "video_1_subtitle",
-          "label": "Video 1 Untertitel",
-          "default": "Produkt-Demo"
-        },
-        {
-          "type": "header",
-          "content": "Video 2"
-        },
-        {
-          "type": "video_url",
-          "id": "video_2_url",
-          "label": "Externe Video URL",
-          "accept": ["youtube", "vimeo"]
-        },
-        {
-          "type": "text",
-          "id": "video_2_label",
-          "label": "Video 2 Label",
-          "default": "Ergebnis"
-        },
-        {
-          "type": "text",
-          "id": "video_2_subtitle",
-          "label": "Video 2 Untertitel",
-          "default": "Kundenerlebnis"
-        },
-        {
-          "type": "header",
-          "content": "Video 3"
-        },
-        {
-          "type": "video_url",
-          "id": "video_3_url",
-          "label": "Externe Video URL",
-          "accept": ["youtube", "vimeo"]
-        },
-        {
-          "type": "text",
-          "id": "video_3_label",
-          "label": "Video 3 Label",
-          "default": "Detail"
-        },
-        {
-          "type": "text",
-          "id": "video_3_subtitle",
-          "label": "Video 3 Untertitel",
-          "default": "Details"
-        },
-        {
-          "type": "header",
-          "content": "Layout"
-        },
-        {
-          "type": "range",
-          "id": "gap_desktop",
-          "label": "Abstand Desktop",
-          "min": 0,
-          "max": 40,
-          "step": 2,
-          "unit": "px",
-          "default": 12
-        },
-        {
-          "type": "range",
-          "id": "gap_mobile",
-          "label": "Abstand Mobile",
-          "min": 0,
-          "max": 24,
-          "step": 2,
-          "unit": "px",
-          "default": 10
-        },
-        {
-          "type": "range",
-          "id": "radius",
-          "label": "Eckenradius",
-          "min": 0,
-          "max": 40,
-          "step": 2,
-          "unit": "px",
-          "default": 20
-        },
-        {
-          "type": "range",
-          "id": "border_width",
-          "label": "Border Breite",
-          "min": 0,
-          "max": 6,
-          "step": 1,
-          "unit": "px",
-          "default": 1
-        },
-        {
-          "type": "range",
-          "id": "shadow_strength",
-          "label": "Shadow Stärke",
-          "min": 0,
-          "max": 40,
-          "step": 2,
-          "unit": "px",
-          "default": 12
-        },
-        {
-          "type": "range",
-          "id": "overlay_opacity",
-          "label": "Overlay Stärke",
-          "min": 0,
-          "max": 100,
-          "step": 5,
-          "unit": "%",
-          "default": 20
-        },
-        {
-          "type": "range",
-          "id": "heading_size",
-          "label": "Überschrift Desktop",
-          "min": 18,
-          "max": 54,
-          "step": 1,
-          "unit": "px",
-          "default": 24
-        },
-        {
-          "type": "range",
-          "id": "heading_size_mobile",
-          "label": "Überschrift Mobile",
-          "min": 18,
-          "max": 42,
-          "step": 1,
-          "unit": "px",
-          "default": 22
-        },
-        {
-          "type": "range",
-          "id": "title_size",
-          "label": "Card Titel Desktop",
-          "min": 12,
-          "max": 28,
-          "step": 1,
-          "unit": "px",
-          "default": 15
-        },
-        {
-          "type": "range",
-          "id": "title_size_mobile",
-          "label": "Card Titel Mobile",
-          "min": 12,
-          "max": 22,
-          "step": 1,
-          "unit": "px",
-          "default": 15
-        },
-        {
-          "type": "header",
-          "content": "Farben"
-        },
-        {
-          "type": "color",
-          "id": "bg_color",
-          "label": "Section Hintergrund",
-          "default": "#ffffff"
-        },
-        {
-          "type": "color",
-          "id": "text_color",
-          "label": "Textfarbe",
-          "default": "#111111"
-        },
-        {
-          "type": "color",
-          "id": "subtext_color",
-          "label": "Subtext Farbe",
-          "default": "#5f6368"
-        },
-        {
-          "type": "color",
-          "id": "accent_color",
-          "label": "Accent Farbe",
-          "default": "#111111"
-        },
-        {
-          "type": "color",
-          "id": "card_bg",
-          "label": "Card Hintergrund",
-          "default": "#f6f6f6"
-        },
-        {
-          "type": "color",
-          "id": "overlay_color",
-          "label": "Overlay Farbe",
-          "default": "#000000"
-        },
-        {
-          "type": "color",
-          "id": "border_color",
-          "label": "Border Farbe",
-          "default": "#e5e7eb"
         }
       ]
     },
