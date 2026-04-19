@@ -29,43 +29,11 @@
           "settings": {
             "show_dynamic_checkout": true
           }
-        },
-        "ai_positioning": {
-          "type": "ai_positioning",
-          "settings": {
-            "eyebrow": "AI Verkaufskonzept",
-            "heading": "Bye, Problemzonen.",
-            "text": "<p>Gezielte Massage für Bauch, Beine und Po – für deine einfache Anti-Cellulite-Routine zu Hause.</p>",
-            "background_color": "#f8fafc",
-            "border_color": "#e2e8f0",
-            "accent_color": "#0f766e",
-            "text_color": "#0f172a",
-            "muted_text_color": "#475569",
-            "heading_size": 26,
-            "body_size": 15,
-            "border_radius": 18
-          }
-        },
-        "ai_benefit_list": {
-          "type": "ai_benefit_list",
-          "settings": {
-            "heading": "Warum es überzeugt",
-            "items": "Gezielte Anwendung auf Bauch, Beine und Po\nUnterstützt deine tägliche Körperpflege-Routine\nEinfach zu Hause statt teurer Spa-Termine",
-            "background_color": "#fffaf0",
-            "border_color": "#eadfcb",
-            "accent_color": "#7a4f2a",
-            "text_color": "#1f1a14",
-            "heading_size": 18,
-            "body_size": 15,
-            "border_radius": 22
-          }
         }
       },
       "block_order": [
         "vendor",
         "title",
-        "ai_positioning",
-        "ai_benefit_list",
         "price",
         "variant_picker",
         "buy_buttons"
@@ -76,109 +44,6 @@
         "gallery_layout": "stacked",
         "media_fit": "contain"
       }
-    },
-    "ai_section_1": {
-      "type": "ai-trust-bar",
-      "settings": {},
-      "blocks": {
-        "trust_item_1": {
-          "type": "trust_item",
-          "settings": {
-            "text": "Gezielte Anwendung für Bauch, Beine, Po"
-          }
-        },
-        "trust_item_2": {
-          "type": "trust_item",
-          "settings": {
-            "text": "Ohne Termin, ohne Studio"
-          }
-        },
-        "trust_item_3": {
-          "type": "trust_item",
-          "settings": {
-            "text": "Für die tägliche Beauty-Routine"
-          }
-        },
-        "trust_item_4": {
-          "type": "trust_item",
-          "settings": {
-            "text": "Kompakt und leicht zu nutzen"
-          }
-        }
-      },
-      "block_order": [
-        "trust_item_1",
-        "trust_item_2",
-        "trust_item_3",
-        "trust_item_4"
-      ]
-    },
-    "ai_section_2": {
-      "type": "ai-before-after",
-      "settings": {
-        "eyebrow": "Sichtbarer Unterschied",
-        "title": "Von gestresster Routine zu gezielter Pflege",
-        "before_label": "Vorher",
-        "before_text": "<p>Unsichere, unregelmäßige Körperpflege ohne klares System.</p>",
-        "after_label": "Nachher",
-        "after_text": "<p>Eine einfache Massage-Routine für Bauch, Beine und Po – direkt zu Hause.</p>"
-      }
-    },
-    "ai_section_3": {
-      "type": "ai-social-proof",
-      "settings": {
-        "eyebrow": "Beliebt im Alltag",
-        "title": "Warum viele bei ihrer Routine bleiben",
-        "body": "<p>Weil das Gerät schnell eingebunden ist und sich wie ein kleines Spa-Upgrade für zuhause anfühlt.</p>",
-        "quote": "Ich nutze es abends für Beine und Bauch – einfach, angenehm und viel konsequenter als vorher.",
-        "author": "Anwenderin, 34"
-      }
-    },
-    "ai_section_4": {
-      "type": "ai-benefits-grid",
-      "settings": {
-        "eyebrow": "Die Vorteile",
-        "title": "Das bringt dir die tägliche Anwendung"
-      },
-      "blocks": {
-        "benefit_1": {
-          "type": "benefit",
-          "settings": {
-            "text": "Gezielte Massage an Problemzonen"
-          }
-        },
-        "benefit_2": {
-          "type": "benefit",
-          "settings": {
-            "text": "Unterstützt deine Bodycare-Routine"
-          }
-        },
-        "benefit_3": {
-          "type": "benefit",
-          "settings": {
-            "text": "Angenehme Anwendung mit Wärme"
-          }
-        },
-        "benefit_4": {
-          "type": "benefit",
-          "settings": {
-            "text": "Für Zuhause statt teurer Spa-Termine"
-          }
-        },
-        "benefit_5": {
-          "type": "benefit",
-          "settings": {
-            "text": "Einfach in den Alltag integrierbar"
-          }
-        }
-      },
-      "block_order": [
-        "benefit_1",
-        "benefit_2",
-        "benefit_3",
-        "benefit_4",
-        "benefit_5"
-      ]
     },
     "ai_section_5": {
       "type": "ai-feature-split",
@@ -236,10 +101,6 @@
   },
   "order": [
     "main",
-    "ai_section_1",
-    "ai_section_2",
-    "ai_section_3",
-    "ai_section_4",
     "ai_section_5",
     "ai_section_6"
   ]
