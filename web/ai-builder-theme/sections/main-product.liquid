@@ -147,7 +147,7 @@
                     --apri-effective-text-weight: {{ block.settings.text_weight }};
                   {%- endif -%}
                   --apri-text-gap: {{ block.settings.text_gap }}px;
-                  --apri-line-height: {{ block.settings.line_height }};
+                  --apri-line-height: 1.2;
                   --apri-star-active: {{ block.settings.star_active_color }};
                   --apri-star-inactive: {{ block.settings.star_inactive_color }};
                   --apri-text-color: {{ block.settings.text_color }};
@@ -388,7 +388,6 @@
                   --asp-card-shadow: 0 {{ block.settings.card_shadow_strength | divided_by: 2.0 }}px {{ block.settings.card_shadow_strength | times: 2 }}px rgba(0,0,0,0.10);
                   --asp-card-padding-x: {{ block.settings.card_padding_x }}px;
                   --asp-card-padding-y: {{ block.settings.card_padding_y }}px;
-                  --asp-card-min-height: {{ block.settings.card_min_height }}px;
                   --asp-items-gap-desktop: {{ block.settings.items_gap_desktop }}px;
                   --asp-items-gap-mobile: {{ block.settings.items_gap_mobile }}px;
                   --asp-avatar-size: {{ block.settings.avatar_size }}px;
@@ -1635,7 +1634,7 @@
           "type": "select",
           "id": "font_mode",
           "label": "Schriftquelle",
-          "default": "theme",
+          "default": "custom",
           "options": [
             { "value": "theme", "label": "Theme-Schrift automatisch" },
             { "value": "custom", "label": "Manuell auswählen" }
@@ -1645,7 +1644,7 @@
           "type": "font_picker",
           "id": "custom_font",
           "label": "Shopify Font",
-          "default": "assistant_n4"
+          "default": "asap_n4"
         },
         {
           "type": "header",
@@ -1685,7 +1684,7 @@
           "max": 40,
           "step": 1,
           "unit": "px",
-          "default": 22
+          "default": 14
         },
         {
           "type": "range",
@@ -1695,7 +1694,7 @@
           "max": 34,
           "step": 1,
           "unit": "px",
-          "default": 18
+          "default": 13
         },
         {
           "type": "range",
@@ -1705,7 +1704,7 @@
           "max": 10,
           "step": 1,
           "unit": "px",
-          "default": 2
+          "default": 1
         },
         {
           "type": "header",
@@ -1719,7 +1718,7 @@
           "max": 34,
           "step": 1,
           "unit": "px",
-          "default": 18
+          "default": 15
         },
         {
           "type": "range",
@@ -1729,7 +1728,7 @@
           "max": 28,
           "step": 1,
           "unit": "px",
-          "default": 16
+          "default": 14
         },
         {
           "type": "select",
@@ -1748,20 +1747,11 @@
           "type": "range",
           "id": "text_gap",
           "label": "Abstand Sterne/Text",
-          "min": 4,
+          "min": 0,
           "max": 24,
           "step": 1,
           "unit": "px",
-          "default": 10
-        },
-        {
-          "type": "range",
-          "id": "line_height",
-          "label": "Zeilenhöhe",
-          "min": 0.8,
-          "max": 2,
-          "step": 0.1,
-          "default": 1.2
+          "default": 8
         },
         {
           "type": "header",
@@ -2306,7 +2296,7 @@
           "max": 40,
           "step": 2,
           "unit": "px",
-          "default": 4
+          "default": 8
         },
         {
           "type": "range",
@@ -2472,7 +2462,7 @@
           "type": "color",
           "id": "outer_bg",
           "label": "Section Farbe",
-          "default": "#ffffff"
+          "default": "transparent"
         },
         {
           "type": "color",
@@ -2598,22 +2588,12 @@
           "type": "range",
           "id": "card_padding_y",
           "label": "Padding oben/unten",
-          "min": 6,
+          "min": 0,
           "max": 28,
           "step": 2,
           "unit": "px",
-          "default": 10
+          "default": 6
         },
-        {
-              "type": "range",
-              "id": "min_height",
-              "label": "Mindesthöhe",
-              "min": 18,
-              "max": 60,
-              "step": 2,
-              "unit": "px",
-              "default": 22
-            },
         {
           "type": "range",
           "id": "card_radius",
@@ -2622,7 +2602,7 @@
           "max": 60,
           "step": 2,
           "unit": "px",
-          "default": 28
+          "default": 16
         },
         {
           "type": "range",
@@ -2648,21 +2628,21 @@
           "type": "range",
           "id": "avatar_size",
           "label": "Avatar Größe Desktop",
-          "min": 24,
+          "min": 20,
           "max": 72,
           "step": 2,
           "unit": "px",
-          "default": 38
+          "default": 34
         },
         {
           "type": "range",
           "id": "avatar_size_mobile",
           "label": "Avatar Größe Mobile",
-          "min": 22,
+          "min": 18,
           "max": 64,
           "step": 2,
           "unit": "px",
-          "default": 34
+          "default": 28
         },
         {
           "type": "range",
@@ -2708,21 +2688,21 @@
           "type": "range",
           "id": "text_size",
           "label": "Textgröße Desktop",
-          "min": 12,
+          "min": 8,
           "max": 24,
           "step": 1,
           "unit": "px",
-          "default": 13
+          "default": 12
         },
         {
           "type": "range",
           "id": "text_size_mobile",
           "label": "Textgröße Mobile",
-          "min": 12,
+          "min": 8,
           "max": 22,
           "step": 1,
           "unit": "px",
-          "default": 13
+          "default": 10
         },
         {
           "type": "range",
@@ -2940,7 +2920,7 @@
           "max": 40,
           "step": 1,
           "unit": "px",
-          "default": 15
+          "default": 17
         },
         {
           "type": "range",
@@ -2950,7 +2930,7 @@
           "max": 34,
           "step": 1,
           "unit": "px",
-          "default": 14
+          "default": 16
         },
         {
           "type": "range",
@@ -3020,7 +3000,7 @@
           "type": "color",
           "id": "section_bg",
           "label": "Section Farbe",
-          "default": "#ffffff"
+          "default": "transparent"
         },
         {
           "type": "color",
@@ -3077,7 +3057,7 @@
           "max": 80,
           "step": 2,
           "unit": "px",
-          "default": 8
+          "default": 4
         },
         {
           "type": "range",
@@ -3087,7 +3067,7 @@
           "max": 80,
           "step": 2,
           "unit": "px",
-          "default": 8
+          "default": 0
         },
         {
           "type": "range",
@@ -3107,7 +3087,7 @@
           "max": 72,
           "step": 1,
           "unit": "px",
-          "default": 32
+          "default": 29
         },
         {
           "type": "range",
@@ -3117,7 +3097,7 @@
           "max": 52,
           "step": 1,
           "unit": "px",
-          "default": 24
+          "default": 23
         },
         {
           "type": "select",
@@ -3154,7 +3134,7 @@
           "type": "select",
           "id": "text_transform",
           "label": "Text Transform",
-          "default": "none",
+          "default": "uppercase",
           "options": [
             { "value": "none", "label": "None" },
             { "value": "uppercase", "label": "Uppercase" },
@@ -3255,7 +3235,7 @@
           "type": "select",
           "id": "font_weight_sale",
           "label": "Schriftstärke aktueller Preis",
-          "default": "700",
+          "default": "500",
           "options": [
             { "value": "400", "label": "Normal" },
             { "value": "500", "label": "Medium" },
@@ -3287,7 +3267,7 @@
           "type": "select",
           "id": "font_weight_compare",
           "label": "Schriftstärke Vergleichspreis",
-          "default": "600",
+          "default": "500",
           "options": [
             { "value": "400", "label": "Normal" },
             { "value": "500", "label": "Medium" },
@@ -3480,7 +3460,7 @@
           "max": 80,
           "step": 2,
           "unit": "px",
-          "default": 8
+          "default": 14
         },
         {
           "type": "range",
@@ -3619,7 +3599,7 @@
           "min": 0.1,
           "max": 1,
           "step": 0.1,
-          "default": 1
+          "default": 0.4
         },
         {
           "type": "color",
@@ -4042,7 +4022,7 @@
           "max": 30,
           "step": 2,
           "unit": "px",
-          "default": 8
+          "default": 6
         },
         {
           "type": "range",
@@ -4052,37 +4032,37 @@
           "max": 24,
           "step": 2,
           "unit": "px",
-          "default": 8
+          "default": 4
         },
         {
           "type": "range",
           "id": "pill_padding_y",
           "label": "Padding oben/unten",
-          "min": 4,
+          "min": 0,
           "max": 18,
           "step": 1,
           "unit": "px",
-          "default": 7
+          "default": 4
         },
         {
           "type": "range",
           "id": "pill_padding_x",
           "label": "Padding links/rechts",
-          "min": 8,
+          "min": 0,
           "max": 28,
           "step": 1,
           "unit": "px",
-          "default": 12
+          "default": 8
         },
         {
           "type": "range",
           "id": "pill_radius",
           "label": "Radius",
-          "min": 8,
+          "min": 0,
           "max": 40,
           "step": 1,
           "unit": "px",
-          "default": 40
+          "default": 16
         },
         {
           "type": "range",
@@ -4098,37 +4078,37 @@
               "type": "range",
               "id": "min_height",
               "label": "Mindesthöhe",
-              "min": 18,
+              "min": 10,
               "max": 60,
               "step": 2,
               "unit": "px",
-              "default": 22
+              "default": 18
             },
         {
           "type": "range",
           "id": "text_size",
           "label": "Textgröße Desktop",
-          "min": 11,
+          "min": 8,
           "max": 24,
-          "step": 1,
-          "unit": "px",
-          "default": 13
-        },
-        {
-          "type": "range",
-          "id": "text_size_mobile",
-          "label": "Textgröße Mobile",
-          "min": 11,
-          "max": 22,
           "step": 1,
           "unit": "px",
           "default": 12
         },
         {
+          "type": "range",
+          "id": "text_size_mobile",
+          "label": "Textgröße Mobile",
+          "min": 8,
+          "max": 22,
+          "step": 1,
+          "unit": "px",
+          "default": 11
+        },
+        {
           "type": "select",
           "id": "font_weight",
           "label": "Schriftstärke",
-          "default": "600",
+          "default": "400",
           "options": [
             { "value": "400", "label": "Normal" },
             { "value": "500", "label": "Medium" },
@@ -4160,17 +4140,17 @@
           "type": "range",
           "id": "icon_gap",
           "label": "Abstand Icon/Text",
-          "min": 4,
+          "min": 0,
           "max": 14,
           "step": 1,
           "unit": "px",
-          "default": 7
+          "default": 4
         },
         {
           "type": "color",
           "id": "section_bg",
           "label": "Section Farbe",
-          "default": "#ffffff"
+          "default": "transparent"
         }
       ]
     },
@@ -6179,7 +6159,7 @@
       "step": 4,
       "unit": "px",
       "label": "t:sections.all.padding.padding_top",
-      "default": 36
+      "default": 0
     },
     {
       "type": "range",
@@ -6189,7 +6169,7 @@
       "step": 4,
       "unit": "px",
       "label": "t:sections.all.padding.padding_bottom",
-      "default": 36
+      "default": 0
     }
   ]
 }

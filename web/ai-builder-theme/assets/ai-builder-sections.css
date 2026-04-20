@@ -390,7 +390,6 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  min-height: var(--asp-card-min-height);
   text-decoration: none;
   color: inherit;
 }
