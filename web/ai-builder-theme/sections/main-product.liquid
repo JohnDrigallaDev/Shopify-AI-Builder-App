@@ -116,6 +116,87 @@
                   {% render 'selling-plans' %}
                 {%- endform -%}
               </div>
+            {%- when 'ai_product_rating_inline' -%}
+              {%- assign apri_rating_steps = block.settings.rating_value | times: 2 | round -%}
+              {%- assign apri_rating_value = apri_rating_steps | divided_by: 2.0 -%}
+              {%- assign apri_formatted_rating = apri_rating_value | round: 1 | replace: '.', block.settings.decimal_separator -%}
+              {%- assign apri_font_mode = block.settings.font_mode -%}
+              {%- assign apri_custom_font = block.settings.custom_font -%}
+              {%- if apri_font_mode == 'custom' -%}
+                <style>
+                  {{ apri_custom_font | font_face: font_display: 'swap' }}
+                </style>
+              {%- endif -%}
+              <div
+                id="ai-product-rating-inline-{{ section.id }}-{{ block.id }}"
+                class="ai-product-rating-inline-block ai-product-rating-inline-block--desktop-{{ block.settings.align_desktop }} ai-product-rating-inline-block--mobile-{{ block.settings.align_mobile }}"
+                style="
+                  --apri-star-size: {{ block.settings.stars_size }}px;
+                  --apri-star-size-mobile: {{ block.settings.stars_size_mobile }}px;
+                  --apri-star-gap: {{ block.settings.stars_gap }}px;
+                  --apri-text-size: {{ block.settings.text_size }}px;
+                  --apri-text-size-mobile: {{ block.settings.text_size_mobile }}px;
+                  --apri-text-weight: {{ block.settings.text_weight }};
+                  {%- if apri_font_mode == 'custom' -%}
+                    --apri-font-family: {{ apri_custom_font.family }}, {{ apri_custom_font.fallback_families }};
+                    --apri-font-style: {{ apri_custom_font.style }};
+                    --apri-effective-text-weight: {{ apri_custom_font.weight }};
+                  {%- else -%}
+                    --apri-font-family: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
+                    --apri-font-style: {{ settings.type_body_font.style }};
+                    --apri-effective-text-weight: {{ block.settings.text_weight }};
+                  {%- endif -%}
+                  --apri-text-gap: {{ block.settings.text_gap }}px;
+                  --apri-line-height: {{ block.settings.line_height }};
+                  --apri-star-active: {{ block.settings.star_active_color }};
+                  --apri-star-inactive: {{ block.settings.star_inactive_color }};
+                  --apri-text-color: {{ block.settings.text_color }};
+                  --apri-wrap-bg: {{ block.settings.wrapper_bg }};
+                  --apri-wrap-radius: {{ block.settings.wrapper_radius }}px;
+                  --apri-wrap-border-width: {{ block.settings.wrapper_border_width }}px;
+                  --apri-wrap-border-color: {{ block.settings.wrapper_border_color }};
+                  --apri-wrap-pad-x: {{ block.settings.wrapper_pad_x }}px;
+                  --apri-wrap-pad-y: {{ block.settings.wrapper_pad_y }}px;
+                  --apri-margin-top: {{ block.settings.margin_top }}px;
+                  --apri-margin-bottom: {{ block.settings.margin_bottom }}px;
+                  --apri-padding-top: {{ block.settings.padding_top }}px;
+                  --apri-padding-bottom: {{ block.settings.padding_bottom }}px;
+                  --apri-padding-side: {{ block.settings.padding_side }}px;
+                "
+                {{ block.shopify_attributes }}
+              >
+                <div class="ai-product-rating-inline-block__wrap">
+                  <div class="ai-product-rating-inline-block__row" aria-label="Produktbewertung {{ apri_formatted_rating }}">
+                    <div class="ai-product-rating-inline-block__stars" aria-hidden="true">
+                      {%- for i in (1..5) -%}
+                        {%- liquid
+                          assign apri_full_threshold = i | times: 2
+                          assign apri_half_threshold = apri_full_threshold | minus: 1
+                          assign apri_star_state = 'empty'
+
+                          if apri_rating_steps >= apri_full_threshold
+                            assign apri_star_state = 'full'
+                          elsif apri_rating_steps == apri_half_threshold
+                            assign apri_star_state = 'half'
+                          endif
+                        -%}
+                        <span class="ai-product-rating-inline-block__star ai-product-rating-inline-block__star--{{ apri_star_state }}">★</span>
+                      {%- endfor -%}
+                    </div>
+
+                    <div class="ai-product-rating-inline-block__text">
+                      <span class="ai-product-rating-inline-block__value">{{ apri_formatted_rating }}</span>
+                      {%- if block.settings.show_reviews_count and block.settings.reviews_count != blank -%}
+                        <span class="ai-product-rating-inline-block__separator">-</span>
+                        <span class="ai-product-rating-inline-block__count">{{ block.settings.reviews_count }}</span>
+                      {%- endif -%}
+                      {%- if block.settings.show_label_text and block.settings.label_text != blank -%}
+                        <span class="ai-product-rating-inline-block__label">{{ block.settings.label_text }}</span>
+                      {%- endif -%}
+                    </div>
+                  </div>
+                </div>
+              </div>
             {%- when 'inventory' -%}
               <p
                 class="product__inventory no-js-hidden{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if product.selected_or_first_available_variant.inventory_management != 'shopify' %} visibility-hidden{% endif %}"
@@ -1494,6 +1575,327 @@
       "type": "price",
       "name": "t:sections.main-product.blocks.price.name",
       "limit": 1
+    },
+    {
+      "type": "ai_product_rating_inline",
+      "name": "AI Product Rating Inline",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Inhalt"
+        },
+        {
+          "type": "range",
+          "id": "rating_value",
+          "label": "Bewertungswert",
+          "min": 0,
+          "max": 5,
+          "step": 0.5,
+          "default": 4.5
+        },
+        {
+          "type": "text",
+          "id": "reviews_count",
+          "label": "Anzahl Bewertungen",
+          "default": "94 Bewertungen"
+        },
+        {
+          "type": "text",
+          "id": "label_text",
+          "label": "Zusatztext",
+          "default": "Verifizierte Käufer"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_reviews_count",
+          "label": "Anzahl Bewertungen anzeigen",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_label_text",
+          "label": "Zusatztext anzeigen",
+          "default": false
+        },
+        {
+          "type": "select",
+          "id": "decimal_separator",
+          "label": "Dezimaltrennzeichen",
+          "default": ".",
+          "options": [
+            { "value": ".", "label": "Punkt" },
+            { "value": ",", "label": "Komma" }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Schriftart"
+        },
+        {
+          "type": "select",
+          "id": "font_mode",
+          "label": "Schriftquelle",
+          "default": "theme",
+          "options": [
+            { "value": "theme", "label": "Theme-Schrift automatisch" },
+            { "value": "custom", "label": "Manuell auswählen" }
+          ]
+        },
+        {
+          "type": "font_picker",
+          "id": "custom_font",
+          "label": "Shopify Font",
+          "default": "assistant_n4"
+        },
+        {
+          "type": "header",
+          "content": "Ausrichtung"
+        },
+        {
+          "type": "select",
+          "id": "align_desktop",
+          "label": "Desktop Ausrichtung",
+          "default": "left",
+          "options": [
+            { "value": "left", "label": "Links" },
+            { "value": "center", "label": "Zentriert" },
+            { "value": "right", "label": "Rechts" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "align_mobile",
+          "label": "Mobile Ausrichtung",
+          "default": "left",
+          "options": [
+            { "value": "left", "label": "Links" },
+            { "value": "center", "label": "Zentriert" },
+            { "value": "right", "label": "Rechts" }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Sterne"
+        },
+        {
+          "type": "range",
+          "id": "stars_size",
+          "label": "Stern Größe Desktop",
+          "min": 10,
+          "max": 40,
+          "step": 1,
+          "unit": "px",
+          "default": 22
+        },
+        {
+          "type": "range",
+          "id": "stars_size_mobile",
+          "label": "Stern Größe Mobile",
+          "min": 10,
+          "max": 34,
+          "step": 1,
+          "unit": "px",
+          "default": 18
+        },
+        {
+          "type": "range",
+          "id": "stars_gap",
+          "label": "Abstand Sterne",
+          "min": 0,
+          "max": 10,
+          "step": 1,
+          "unit": "px",
+          "default": 2
+        },
+        {
+          "type": "header",
+          "content": "Text"
+        },
+        {
+          "type": "range",
+          "id": "text_size",
+          "label": "Textgröße Desktop",
+          "min": 10,
+          "max": 34,
+          "step": 1,
+          "unit": "px",
+          "default": 18
+        },
+        {
+          "type": "range",
+          "id": "text_size_mobile",
+          "label": "Textgröße Mobile",
+          "min": 10,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "default": 16
+        },
+        {
+          "type": "select",
+          "id": "text_weight",
+          "label": "Schriftstärke",
+          "default": "700",
+          "options": [
+            { "value": "400", "label": "Normal" },
+            { "value": "500", "label": "Medium" },
+            { "value": "600", "label": "Semibold" },
+            { "value": "700", "label": "Bold" },
+            { "value": "800", "label": "Extra Bold" }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "text_gap",
+          "label": "Abstand Sterne/Text",
+          "min": 4,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "default": 10
+        },
+        {
+          "type": "range",
+          "id": "line_height",
+          "label": "Zeilenhöhe",
+          "min": 0.8,
+          "max": 2,
+          "step": 0.1,
+          "default": 1.2
+        },
+        {
+          "type": "header",
+          "content": "Wrapper"
+        },
+        {
+          "type": "range",
+          "id": "wrapper_pad_x",
+          "label": "Padding links/rechts",
+          "min": 0,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "wrapper_pad_y",
+          "label": "Padding oben/unten",
+          "min": 0,
+          "max": 20,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "wrapper_radius",
+          "label": "Radius",
+          "min": 0,
+          "max": 30,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "wrapper_border_width",
+          "label": "Border Breite",
+          "min": 0,
+          "max": 4,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "header",
+          "content": "Farben"
+        },
+        {
+          "type": "color",
+          "id": "star_active_color",
+          "label": "Aktive Sterne",
+          "default": "#f5b301"
+        },
+        {
+          "type": "color",
+          "id": "star_inactive_color",
+          "label": "Inaktive Sterne",
+          "default": "#e5e7eb"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Textfarbe",
+          "default": "#111111"
+        },
+        {
+          "type": "color",
+          "id": "wrapper_bg",
+          "label": "Wrapper Hintergrund",
+          "default": "transparent"
+        },
+        {
+          "type": "color",
+          "id": "wrapper_border_color",
+          "label": "Wrapper Border",
+          "default": "transparent"
+        },
+        {
+          "type": "header",
+          "content": "Abstände"
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "label": "Abstand oben",
+          "min": 0,
+          "max": 40,
+          "step": 2,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "label": "Abstand unten",
+          "min": 0,
+          "max": 40,
+          "step": 2,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "padding_top",
+          "label": "Padding oben",
+          "min": 0,
+          "max": 24,
+          "step": 2,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "padding_bottom",
+          "label": "Padding unten",
+          "min": 0,
+          "max": 24,
+          "step": 2,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "padding_side",
+          "label": "Padding Seite",
+          "min": 0,
+          "max": 24,
+          "step": 2,
+          "unit": "px",
+          "default": 0
+        }
+      ]
     },
     {
       "type": "sku",

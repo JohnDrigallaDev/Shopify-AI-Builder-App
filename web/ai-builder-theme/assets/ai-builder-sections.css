@@ -1643,6 +1643,103 @@
   width: 100%;
 }
 
+.product__info-container .ai-product-rating-inline-block {
+  display: flex;
+  margin-top: var(--apri-margin-top, 0);
+  margin-bottom: var(--apri-margin-bottom, 0);
+  padding: var(--apri-padding-top, 0) var(--apri-padding-side, 0) var(--apri-padding-bottom, 0);
+}
+
+.product__info-container .ai-product-rating-inline-block--mobile-left {
+  justify-content: flex-start;
+}
+
+.product__info-container .ai-product-rating-inline-block--mobile-center {
+  justify-content: center;
+}
+
+.product__info-container .ai-product-rating-inline-block--mobile-right {
+  justify-content: flex-end;
+}
+
+.product__info-container .ai-product-rating-inline-block__wrap {
+  width: fit-content;
+  max-width: 100%;
+  padding: var(--apri-wrap-pad-y, 0) var(--apri-wrap-pad-x, 0);
+  border: var(--apri-wrap-border-width, 0) solid var(--apri-wrap-border-color, transparent);
+  border-radius: var(--apri-wrap-radius, 0);
+  background: var(--apri-wrap-bg, transparent);
+}
+
+.product__info-container .ai-product-rating-inline-block__row {
+  display: inline-flex;
+  max-width: 100%;
+  align-items: center;
+  gap: var(--apri-text-gap, 10px);
+  flex-wrap: nowrap;
+}
+
+.product__info-container .ai-product-rating-inline-block__stars {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: var(--apri-star-gap, 2px);
+  line-height: 0;
+}
+
+.product__info-container .ai-product-rating-inline-block__star {
+  display: inline-flex;
+  width: var(--apri-star-size-mobile, 18px);
+  height: var(--apri-star-size-mobile, 18px);
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-family: Arial, sans-serif;
+  font-size: var(--apri-star-size-mobile, 18px);
+  line-height: 1;
+  color: var(--apri-star-inactive, #e5e7eb);
+}
+
+.product__info-container .ai-product-rating-inline-block__star--full {
+  color: var(--apri-star-active, #f5b301);
+}
+
+.product__info-container .ai-product-rating-inline-block__star--half {
+  background: linear-gradient(90deg, var(--apri-star-active, #f5b301) 0 50%, var(--apri-star-inactive, #e5e7eb) 50% 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.product__info-container .ai-product-rating-inline-block__text {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  color: var(--apri-text-color, #111111);
+  font-family: var(--apri-font-family, inherit);
+  font-size: var(--apri-text-size-mobile, 16px);
+  font-style: var(--apri-font-style, normal);
+  font-weight: var(--apri-effective-text-weight, var(--apri-text-weight, 700));
+  line-height: var(--apri-line-height, 1.2);
+}
+
+.product__info-container .ai-product-rating-inline-block__value,
+.product__info-container .ai-product-rating-inline-block__count,
+.product__info-container .ai-product-rating-inline-block__label,
+.product__info-container .ai-product-rating-inline-block__separator {
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  font-style: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+}
+
+.product__info-container .ai-product-rating-inline-block__separator {
+  opacity: 0.75;
+}
+
 @media screen and (max-width: 989px) {
   .ai-builder-section__split,
   .ai-builder-section__before-after,
@@ -1664,6 +1761,30 @@
 
   .storylio-slider__rail {
     grid-auto-columns: minmax(280px, 72%);
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .product__info-container .ai-product-rating-inline-block--desktop-left {
+    justify-content: flex-start;
+  }
+
+  .product__info-container .ai-product-rating-inline-block--desktop-center {
+    justify-content: center;
+  }
+
+  .product__info-container .ai-product-rating-inline-block--desktop-right {
+    justify-content: flex-end;
+  }
+
+  .product__info-container .ai-product-rating-inline-block__star {
+    width: var(--apri-star-size, 22px);
+    height: var(--apri-star-size, 22px);
+    font-size: var(--apri-star-size, 22px);
+  }
+
+  .product__info-container .ai-product-rating-inline-block__text {
+    font-size: var(--apri-text-size, 18px);
   }
 }
 
