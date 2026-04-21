@@ -1,0 +1,463 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "ai_social_proof_bar": {
+          "type": "ai_social_proof_bar",
+          "settings": {
+            "card_padding_y": 6,
+            "card_radius": 16,
+            "avatar_size": 34,
+            "avatar_size_mobile": 28,
+            "text_size": 12,
+            "text_size_mobile": 10,
+            "content": "<p><strong>Beliebt bei Käufern</strong> und aktuell stark nachgefragt</p>"
+          }
+        },
+        "ai_product_rating_inline": {
+          "type": "ai_product_rating_inline",
+          "settings": {
+            "font_mode": "custom",
+            "custom_font": "asap_n4",
+            "stars_size": 14,
+            "stars_size_mobile": 13,
+            "stars_gap": 1,
+            "text_size": 15,
+            "text_size_mobile": 14,
+            "text_gap": 8,
+            "rating_value": 4.5
+          }
+        },
+        "ai_product_title": {
+          "type": "ai_product_title",
+          "settings": {
+            "margin_top": 4,
+            "margin_bottom": 0,
+            "title_size": 29,
+            "title_size_mobile": 23,
+            "text_transform": "uppercase"
+          }
+        },
+        "ai_product_teaser_text": {
+          "type": "ai_product_teaser_text",
+          "settings": {
+            "margin_top": 14,
+            "text": "<p>Die ergonomische Konturform unterstützt Seitenschläfer dort, wo Nacken und Schulter es brauchen.</p>"
+          }
+        },
+        "ai_product_divider": {
+          "type": "ai_product_divider",
+          "settings": {
+            "line_opacity": 0.4
+          }
+        },
+        "ai_price_highlight": {
+          "type": "ai_price_highlight",
+          "settings": {
+            "font_weight_sale": "500",
+            "font_weight_compare": "500"
+          }
+        },
+        "ai_product_pills": {
+          "type": "ai_product_pills",
+          "settings": {
+            "gap_mobile": 4,
+            "gap_desktop": 6,
+            "pill_padding_y": 4,
+            "pill_padding_x": 8,
+            "pill_radius": 16,
+            "pill_border_width": 0,
+            "min_height": 18,
+            "text_size_mobile": 11,
+            "text_size": 12,
+            "font_weight": "400",
+            "icon_gap": 4,
+            "section_bg": "transparent"
+          }
+        },
+        "ai_product_benefits": {
+          "type": "ai_product_benefits",
+          "settings": {
+            "benefit_1_text": "Konturform für seitliches Liegen",
+            "benefit_2_text": "Gezielte Entlastung im Nackenbereich",
+            "benefit_3_text": "Stabilere Schlafposition ohne ständiges...",
+            "benefit_4_text": "",
+            "benefit_5_text": "",
+            "benefit_6_text": "",
+            "show_benefit_4": false,
+            "show_benefit_5": false,
+            "show_benefit_6": false
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button"
+          }
+        },
+        "ai_buy_button": {
+          "type": "ai_buy_button",
+          "settings": {
+            "button_text": "Jetzt ansehen",
+            "show_dynamic_checkout": false
+          }
+        },
+        "ai_payment_icons": {
+          "type": "ai_payment_icons",
+          "settings": {
+            "section_bg": "transparent",
+            "icon_height": 19,
+            "icon_height_mobile": 19
+          }
+        },
+        "ai_trust_badges": {
+          "type": "ai_trust_badges",
+          "settings": {
+            "padding_top": 8,
+            "outer_bg": "transparent"
+          }
+        },
+        "product_ai_accordion": {
+          "type": "product_ai_accordion",
+          "settings": {
+            "ai_acc_single_open": true,
+            "ai_acc_first_open": false,
+            "ai_acc_item_1_show": true,
+            "ai_acc_item_1_icon": "truck",
+            "ai_acc_item_1_title": "Versand",
+            "ai_acc_item_1_content": "<p>Die Lieferzeit beträgt in der Regel ca. 5 Werktage. Du erhältst eine Versandbestätigung, sobald deine Bestellung unterwegs ist.</p>",
+            "ai_acc_item_2_show": true,
+            "ai_acc_item_2_icon": "rueckgabe",
+            "ai_acc_item_2_title": "Rückgabe",
+            "ai_acc_item_2_content": "<p>Du kannst deine Bestellung innerhalb von 30 Tagen zurückgeben, sofern sie unbenutzt und vollständig ist. Kontaktiere dafür einfach unseren Support.</p>",
+            "ai_acc_item_3_show": true,
+            "ai_acc_item_3_icon": "book-open",
+            "ai_acc_item_3_title": "Produktdetails",
+            "ai_acc_item_3_content": "<ul><li>Memory-Schaum-Nackenkissen mit konturierter Form für Seiten-, Rücken- und Bauchschläfer.</li><li>Unterstützt Nacken und Schulter durch ergonomische Anpassung für stabileres Liegen.</li></ul>",
+            "ai_acc_item_4_show": true,
+            "ai_acc_item_4_icon": "chat-bubble",
+            "ai_acc_item_4_title": "Support",
+            "ai_acc_item_4_content": "<p>Unser Support hilft dir bei Fragen zur Bestellung, Lieferung oder Anwendung des Produkts schnell und unkompliziert weiter.</p>",
+            "ai_acc_item_5_show": false
+          }
+        }
+      },
+      "block_order": [
+        "ai_social_proof_bar",
+        "ai_product_rating_inline",
+        "ai_product_title",
+        "ai_product_teaser_text",
+        "ai_product_divider",
+        "ai_price_highlight",
+        "ai_product_pills",
+        "ai_product_benefits",
+        "variant_picker",
+        "ai_buy_button",
+        "ai_payment_icons",
+        "ai_trust_badges",
+        "product_ai_accordion"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "media_size": "large",
+        "gallery_layout": "stacked",
+        "media_fit": "contain",
+        "image_zoom": "none",
+        "mobile_thumbnails": "show",
+        "hide_variants": true,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "ai_section_1": {
+      "type": "ai-trust-badges",
+      "settings": {
+        "max_width_mode": "page",
+        "columns_desktop": 4,
+        "columns_mobile": "1",
+        "section_style_mode": "solid",
+        "outer_bg": "#ffffff",
+        "card_bg": "#f8fafc",
+        "card_border_color": "#e2e8f0",
+        "card_border_width": 1,
+        "card_radius": 18,
+        "card_shadow_strength": 6,
+        "heading_color": "#0f172a",
+        "text_color": "#475569",
+        "icon_color": "#0f766e",
+        "section_top": 16,
+        "section_bottom": 20,
+        "margin_top": 8,
+        "margin_bottom": 8
+      },
+      "blocks": {
+        "badge_1": {
+          "type": "badge",
+          "settings": {
+            "title": "Sichere Zahlung",
+            "text": "<p>Einfach und geschützt bezahlen.</p>",
+            "icon_style": "klarna"
+          }
+        },
+        "badge_2": {
+          "type": "badge",
+          "settings": {
+            "title": "Risikofrei testen",
+            "text": "<p>Klare Rückgabeoptionen sorgen für Sicherheit.</p>",
+            "icon_style": "shield"
+          }
+        },
+        "badge_3": {
+          "type": "badge",
+          "settings": {
+            "title": "Sauber verpackt",
+            "text": "<p>Praktisch und unaufgeregt geliefert.</p>",
+            "icon_style": "box"
+          }
+        },
+        "badge_4": {
+          "type": "badge",
+          "settings": {
+            "title": "Schnelle Abwicklung",
+            "text": "<p>Bestellung ohne unnötige Schritte.</p>",
+            "icon_style": "scoop"
+          }
+        }
+      },
+      "block_order": [
+        "badge_1",
+        "badge_2",
+        "badge_3",
+        "badge_4"
+      ]
+    },
+    "ai_section_2": {
+      "type": "ai-trust-badges",
+      "settings": {
+        "max_width_mode": "page",
+        "columns_desktop": 3,
+        "columns_mobile": "1",
+        "section_style_mode": "solid",
+        "outer_bg": "#ffffff",
+        "card_bg": "#f8fafc",
+        "card_border_color": "#e2e8f0",
+        "card_border_width": 1,
+        "card_radius": 18,
+        "card_shadow_strength": 6,
+        "heading_color": "#0f172a",
+        "text_color": "#475569",
+        "icon_color": "#0f766e",
+        "section_top": 16,
+        "section_bottom": 20,
+        "margin_top": 8,
+        "margin_bottom": 8
+      },
+      "blocks": {
+        "badge_1": {
+          "type": "badge",
+          "settings": {
+            "title": "Kontur für Seitenlage",
+            "text": "<p>Passt zu typischen Schlafpositionen.</p>",
+            "icon_style": "scoop"
+          }
+        },
+        "badge_2": {
+          "type": "badge",
+          "settings": {
+            "title": "Gezielte Entlastung",
+            "text": "<p>Unterstützt dort, wo Nacken und Schulter es brauchen.</p>",
+            "icon_style": "shield"
+          }
+        },
+        "badge_3": {
+          "type": "badge",
+          "settings": {
+            "title": "Weniger Nachjustieren",
+            "text": "<p>Hält die Position ruhiger durch die Nacht.</p>",
+            "icon_style": "box"
+          }
+        }
+      },
+      "block_order": [
+        "badge_1",
+        "badge_2",
+        "badge_3"
+      ]
+    },
+    "ai_section_3": {
+      "type": "ai-feature-split",
+      "settings": {},
+      "blocks": {
+        "feature_1": {
+          "type": "feature",
+          "settings": {
+            "media_position": "left",
+            "title": "PROBLEMBEWUSSTSEIN",
+            "text": "<p>Zu viel Druck am Nacken macht Seitenschlaf schnell unbequem.</p>"
+          }
+        },
+        "feature_2": {
+          "type": "feature",
+          "settings": {
+            "media_position": "right",
+            "title": "PRODUKTVORSTELLUNG",
+            "text": "<p>Die ergonomische Form stützt Nacken und Schulter gezielt.</p>"
+          }
+        },
+        "feature_3": {
+          "type": "feature",
+          "settings": {
+            "media_position": "left",
+            "title": "SOCIAL PROOF",
+            "text": "<p>Mehr Ruhe durch ein Kissen, das den Schlaf stabiler hält.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "feature_1",
+        "feature_2",
+        "feature_3"
+      ]
+    },
+    "ai_section_4": {
+      "type": "ai-feature-split",
+      "settings": {},
+      "blocks": {
+        "feature_1": {
+          "type": "feature",
+          "settings": {
+            "media_position": "left",
+            "title": "PROBLEMBEWUSSTSEIN",
+            "text": "<p>Konturform unterstützt Seitenschläfer an der richtigen Stelle.</p>"
+          }
+        },
+        "feature_2": {
+          "type": "feature",
+          "settings": {
+            "media_position": "right",
+            "title": "PRODUKTVORSTELLUNG",
+            "text": "<p>Memory-Schaum passt sich dem Kopf kontrolliert an.</p>"
+          }
+        },
+        "feature_3": {
+          "type": "feature",
+          "settings": {
+            "media_position": "left",
+            "title": "SOCIAL PROOF",
+            "text": "<p>Praktische Lösung für alle, die nachts weniger Druck wollen.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "feature_1",
+        "feature_2",
+        "feature_3"
+      ]
+    },
+    "ai_section_5": {
+      "type": "ai-feature-split",
+      "settings": {},
+      "blocks": {
+        "feature_1": {
+          "type": "feature",
+          "settings": {
+            "media_position": "left",
+            "title": "PROBLEMBEWUSSTSEIN",
+            "text": "<p>Für Menschen, die nachts oft die Position wechseln.</p>"
+          }
+        },
+        "feature_2": {
+          "type": "feature",
+          "settings": {
+            "media_position": "right",
+            "title": "PRODUKTVORSTELLUNG",
+            "text": "<p>Für spürbar mehr Struktur im Nackenbereich.</p>"
+          }
+        },
+        "feature_3": {
+          "type": "feature",
+          "settings": {
+            "media_position": "left",
+            "title": "SOCIAL PROOF",
+            "text": "<p>Für ein Kissen, das simpel ist und den Job erledigt.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "feature_1",
+        "feature_2",
+        "feature_3"
+      ]
+    },
+    "ai_section_6": {
+      "type": "ai-comparison-table",
+      "settings": {
+        "eyebrow": "Kurz verglichen",
+        "title": "Warum dieses Kissen anders wirkt",
+        "header_feature": "Ohne passende Form",
+        "header_primary": "Mit Kontur-Kissen",
+        "header_competitor": ""
+      },
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "label": "Nackenstütze",
+            "value": "Unruhig",
+            "comparison": "Gezielt geführt"
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "label": "Seitenschlaf",
+            "value": "Druckpunkte",
+            "comparison": "Mehr Entlastung"
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "label": "Position halten",
+            "value": "Ständiges Nachjustieren",
+            "comparison": "Stabiler liegen"
+          }
+        },
+        "row_4": {
+          "type": "row",
+          "settings": {
+            "label": "Schlafgefühl",
+            "value": "Verspannt",
+            "comparison": "Ruhiger"
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4"
+      ]
+    },
+    "ai_section_7": {
+      "type": "ai-cta-banner",
+      "settings": {
+        "eyebrow": "Jetzt starten",
+        "title": "Weniger Nackenstress beginnt heute Nacht.",
+        "body": "<p>Sichern Sie sich das konturierte Memory-Schaum-Kissen für mehr Halt, weniger Druck und eine ruhigere Schlafposition.</p>",
+        "button_label": "Jetzt ansehen"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "ai_section_1",
+    "ai_section_2",
+    "ai_section_3",
+    "ai_section_4",
+    "ai_section_5",
+    "ai_section_6",
+    "ai_section_7"
+  ]
+}
