@@ -1,0 +1,348 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "ai_social_proof_bar": {
+          "type": "ai_social_proof_bar",
+          "settings": {
+            "card_padding_y": 6,
+            "card_radius": 16,
+            "avatar_size": 34,
+            "avatar_size_mobile": 28,
+            "text_size": 12,
+            "text_size_mobile": 10,
+            "content": "<p><strong>Beliebt bei Käufern</strong> und aktuell stark nachgefragt</p>"
+          }
+        },
+        "ai_product_rating_inline": {
+          "type": "ai_product_rating_inline",
+          "settings": {
+            "font_mode": "custom",
+            "custom_font": "asap_n4",
+            "stars_size": 14,
+            "stars_size_mobile": 13,
+            "stars_gap": 1,
+            "text_size": 15,
+            "text_size_mobile": 14,
+            "text_gap": 8,
+            "rating_value": 4.5
+          }
+        },
+        "ai_product_title": {
+          "type": "ai_product_title",
+          "settings": {
+            "margin_top": 4,
+            "margin_bottom": 0,
+            "title_size": 29,
+            "title_size_mobile": 23,
+            "text_transform": "uppercase"
+          }
+        },
+        "ai_product_teaser_text": {
+          "type": "ai_product_teaser_text",
+          "settings": {
+            "margin_top": 14,
+            "text": "<p>Saugen, wischen und fertig — ideal für Fliesen, Laminat, Vinyl und Haustierhaare.</p>"
+          }
+        },
+        "ai_product_divider": {
+          "type": "ai_product_divider",
+          "settings": {
+            "line_opacity": 0.4
+          }
+        },
+        "ai_price_highlight": {
+          "type": "ai_price_highlight",
+          "settings": {
+            "font_weight_sale": "500",
+            "font_weight_compare": "500"
+          }
+        },
+        "ai_product_pills": {
+          "type": "ai_product_pills",
+          "settings": {
+            "gap_mobile": 4,
+            "gap_desktop": 6,
+            "pill_padding_y": 4,
+            "pill_padding_x": 8,
+            "pill_radius": 16,
+            "pill_border_width": 0,
+            "min_height": 18,
+            "text_size_mobile": 11,
+            "text_size": 12,
+            "font_weight": "400",
+            "icon_gap": 4,
+            "section_bg": "transparent"
+          }
+        },
+        "ai_product_benefits": {
+          "type": "ai_product_benefits",
+          "settings": {
+            "benefit_1_text": "Reduziert den Reinigungsaufwand mit...",
+            "benefit_2_text": "Nimmt Schmutz und nasse Verschmutzungen in...",
+            "benefit_3_text": "Gemacht für Hartböden und den Alltag mit...",
+            "benefit_4_text": "",
+            "benefit_5_text": "",
+            "benefit_6_text": "",
+            "show_benefit_4": false,
+            "show_benefit_5": false,
+            "show_benefit_6": false
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button"
+          }
+        },
+        "ai_buy_button": {
+          "type": "ai_buy_button",
+          "settings": {
+            "button_text": "Jetzt vereinfachen",
+            "show_dynamic_checkout": false
+          }
+        },
+        "ai_payment_icons": {
+          "type": "ai_payment_icons",
+          "settings": {
+            "section_bg": "transparent",
+            "icon_height": 19,
+            "icon_height_mobile": 19
+          }
+        },
+        "ai_trust_badges": {
+          "type": "ai_trust_badges",
+          "settings": {
+            "padding_top": 8,
+            "outer_bg": "transparent"
+          }
+        }
+      },
+      "block_order": [
+        "ai_social_proof_bar",
+        "ai_product_rating_inline",
+        "ai_product_title",
+        "ai_product_teaser_text",
+        "ai_product_divider",
+        "ai_price_highlight",
+        "ai_product_pills",
+        "ai_product_benefits",
+        "variant_picker",
+        "ai_buy_button",
+        "ai_payment_icons",
+        "ai_trust_badges"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "media_size": "large",
+        "gallery_layout": "stacked",
+        "media_fit": "contain",
+        "image_zoom": "none",
+        "mobile_thumbnails": "show",
+        "hide_variants": true,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "ai_section_1": {
+      "type": "ai-trust-badges",
+      "settings": {
+        "max_width_mode": "page",
+        "columns_desktop": 4,
+        "columns_mobile": "1",
+        "section_style_mode": "solid",
+        "outer_bg": "#ffffff",
+        "card_bg": "#f8fafc",
+        "card_border_color": "#e2e8f0",
+        "card_border_width": 1,
+        "card_radius": 18,
+        "card_shadow_strength": 6,
+        "heading_color": "#0f172a",
+        "text_color": "#475569",
+        "icon_color": "#0f766e",
+        "section_top": 16,
+        "section_bottom": 20,
+        "margin_top": 8,
+        "margin_bottom": 8
+      },
+      "blocks": {
+        "badge_1": {
+          "type": "badge",
+          "settings": {
+            "title": "Schneller Versand",
+            "text": "<p>Direkt zu dir nach Hause geliefert.</p>",
+            "icon_style": "box"
+          }
+        },
+        "badge_2": {
+          "type": "badge",
+          "settings": {
+            "title": "Sichere Zahlung",
+            "text": "<p>Bequem und geschützt bezahlen.</p>",
+            "icon_style": "klarna"
+          }
+        },
+        "badge_3": {
+          "type": "badge",
+          "settings": {
+            "title": "Einfache Rückgabe",
+            "text": "<p>Ohne Stress wieder zurückgeben.</p>",
+            "icon_style": "shield"
+          }
+        },
+        "badge_4": {
+          "type": "badge",
+          "settings": {
+            "title": "Sauberer Alltag",
+            "text": "<p>Für Hartböden und Haustiere gemacht.</p>",
+            "icon_style": "scoop"
+          }
+        }
+      },
+      "block_order": [
+        "badge_1",
+        "badge_2",
+        "badge_3",
+        "badge_4"
+      ]
+    },
+    "ai_section_2": {
+      "type": "ai-feature-split",
+      "settings": {},
+      "blocks": {
+        "feature_1": {
+          "type": "feature",
+          "settings": {
+            "media_position": "left",
+            "title": "PROBLEMBEWUSSTSEIN",
+            "text": "<p>Ein Durchgang statt zweimal reinigen.</p>"
+          }
+        },
+        "feature_2": {
+          "type": "feature",
+          "settings": {
+            "media_position": "right",
+            "title": "PRODUKTVORSTELLUNG",
+            "text": "<p>Saugt Schmutz und wischt nasse Verschmutzungen direkt mit.</p>"
+          }
+        },
+        "feature_3": {
+          "type": "feature",
+          "settings": {
+            "media_position": "left",
+            "title": "SOCIAL PROOF",
+            "text": "<p>Für Haushalte, die schnell saubere Böden sehen wollen.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "feature_1",
+        "feature_2",
+        "feature_3"
+      ]
+    },
+    "ai_section_3": {
+      "type": "ai-feature-split",
+      "settings": {},
+      "blocks": {
+        "feature_1": {
+          "type": "feature",
+          "settings": {
+            "media_position": "left",
+            "title": "PROBLEMBEWUSSTSEIN",
+            "text": "<p>Problem: Zu viel Aufwand für jeden kleinen Fleck.</p>"
+          }
+        },
+        "feature_2": {
+          "type": "feature",
+          "settings": {
+            "media_position": "right",
+            "title": "PRODUKTVORSTELLUNG",
+            "text": "<p>Lösung: 3-in-1 Reinigung für Saugen, Wischen und Nassschmutz.</p>"
+          }
+        },
+        "feature_3": {
+          "type": "feature",
+          "settings": {
+            "media_position": "left",
+            "title": "SOCIAL PROOF",
+            "text": "<p>Social Proof: Ideal für Hartböden, Tierhaare und tägliche Routinen.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "feature_1",
+        "feature_2",
+        "feature_3"
+      ]
+    },
+    "ai_section_4": {
+      "type": "ai-comparison-table",
+      "settings": {
+        "eyebrow": "Direkter Vergleich",
+        "title": "Warum 1-Step-Reinigung den Unterschied macht",
+        "header_feature": "Kriterium",
+        "header_primary": "Hearten Nass...",
+        "header_competitor": ""
+      },
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "label": "Reinigungsschritte",
+            "value": "1 Schritt",
+            "comparison": "Saugen und wischen..."
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "label": "Nasse Verschmutzungen",
+            "value": "Direkt mitgenommen",
+            "comparison": "Kein separates Nachwischen..."
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "label": "Haustierhaare",
+            "value": "Hartböden-tauglich",
+            "comparison": "Für Alltag mit Tieren..."
+          }
+        },
+        "row_4": {
+          "type": "row",
+          "settings": {
+            "label": "Bedienung",
+            "value": "Leicht & selbstfahrend",
+            "comparison": "Weniger Kraftaufwand beim..."
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4"
+      ]
+    },
+    "ai_section_5": {
+      "type": "ai-cta-banner",
+      "settings": {
+        "eyebrow": "Jetzt vereinfachen",
+        "title": "Mach aus Putzen wieder eine schnelle Sache",
+        "body": "<p>Wenn du Hartböden, Haustiere und wenig Zeit hast, ist das genau der Shortcut für saubere Böden ohne Umwege.</p>",
+        "button_label": "Jetzt vereinfachen"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "ai_section_1",
+    "ai_section_2",
+    "ai_section_3",
+    "ai_section_4",
+    "ai_section_5"
+  ]
+}
