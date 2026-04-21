@@ -910,6 +910,142 @@
                   </div>
                 </div>
               </section>
+            {%- when 'ai_product_reviews' -%}
+              <section
+                id="ai-product-reviews-{{ section.id }}-{{ block.id }}"
+                class="ai-product-reviews-section ai-product-reviews-section--product-info"
+                style="
+                  --apr-outer-bg: {{ block.settings.outer_bg }};
+                  --apr-outer-gradient: {{ block.settings.outer_gradient }};
+                  --apr-outer-border: {{ block.settings.outer_border_color }};
+                  --apr-outer-border-width: {{ block.settings.outer_border_width }}px;
+                  --apr-outer-radius: {{ block.settings.outer_radius }}px;
+                  --apr-margin-top: {{ block.settings.margin_top }}px;
+                  --apr-margin-bottom: {{ block.settings.margin_bottom }}px;
+                  --apr-padding-top: {{ block.settings.padding_top }}px;
+                  --apr-padding-bottom: {{ block.settings.padding_bottom }}px;
+                  --apr-padding-x: {{ block.settings.padding_horizontal }}rem;
+                  --apr-padding-x-mobile: {{ block.settings.padding_horizontal_mobile }}rem;
+                  --apr-card-bg: {{ block.settings.card_bg }};
+                  --apr-card-border: {{ block.settings.card_border_color }};
+                  --apr-card-border-width: {{ block.settings.card_border_width }}px;
+                  --apr-card-radius: {{ block.settings.card_radius }}px;
+                  --apr-card-pad-y: {{ block.settings.card_padding_vertical }}px;
+                  --apr-card-pad-x: {{ block.settings.card_padding_horizontal }}px;
+                  --apr-avatar-width: {{ block.settings.avatar_width }}px;
+                  --apr-avatar-radius: {{ block.settings.avatar_radius }}px;
+                  --apr-avatar-border-width: {{ block.settings.avatar_border_width }}px;
+                  --apr-avatar-border: {{ block.settings.avatar_border_color }};
+                  --apr-star-size: {{ block.settings.star_size }}px;
+                  --apr-star-color: {{ block.settings.star_color }};
+                  --apr-name-color: {{ block.settings.name_color }};
+                  --apr-text-color: {{ block.settings.text_color }};
+                  --apr-name-size: {{ block.settings.name_size }}px;
+                  --apr-name-size-mobile: {{ block.settings.name_size_mobile }}px;
+                  --apr-name-line-height: {{ block.settings.name_line_height }}%;
+                  --apr-copy-size: {{ block.settings.copy_size }}px;
+                  --apr-copy-size-mobile: {{ block.settings.copy_size_mobile }}px;
+                  --apr-copy-line-height: {{ block.settings.copy_line_height }}%;
+                  --apr-copy-margin-top: {{ block.settings.copy_margin_top }}px;
+                  {%- if block.settings.use_custom_name_font -%}
+                    --apr-name-font-family: {{ block.settings.custom_name_font.family }}, {{ block.settings.custom_name_font.fallback_families }};
+                    --apr-name-font-weight: {{ block.settings.custom_name_font.weight }};
+                    --apr-name-font-style: {{ block.settings.custom_name_font.style }};
+                  {%- else -%}
+                    --apr-name-font-family: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
+                    --apr-name-font-weight: 700;
+                    --apr-name-font-style: {{ settings.type_body_font.style }};
+                  {%- endif -%}
+                  {%- if block.settings.use_custom_copy_font -%}
+                    --apr-copy-font-family: {{ block.settings.custom_copy_font.family }}, {{ block.settings.custom_copy_font.fallback_families }};
+                    --apr-copy-font-weight: {{ block.settings.custom_copy_font.weight }};
+                    --apr-copy-font-style: {{ block.settings.custom_copy_font.style }};
+                  {%- else -%}
+                    --apr-copy-font-family: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
+                    --apr-copy-font-weight: {{ settings.type_body_font.weight }};
+                    --apr-copy-font-style: {{ settings.type_body_font.style }};
+                  {%- endif -%}
+                "
+                {{ block.shopify_attributes }}
+              >
+                {%- if block.settings.use_custom_name_font -%}
+                  <style>
+                    {{ block.settings.custom_name_font | font_face: font_display: 'swap' }}
+                  </style>
+                {%- endif -%}
+                {%- if block.settings.use_custom_copy_font -%}
+                  <style>
+                    {{ block.settings.custom_copy_font | font_face: font_display: 'swap' }}
+                  </style>
+                {%- endif -%}
+
+                <div class="ai-product-reviews__rail">
+                  {%- for i in (1..3) -%}
+                    {%- liquid
+                      assign show_key = 'show_review_' | append: i
+                      assign avatar_key = 'avatar_' | append: i
+                      assign hide_avatar_key = 'hide_avatar_' | append: i
+                      assign name_key = 'customer_name_' | append: i
+                      assign star_key = 'star_count_' | append: i
+                      assign text_key = 'review_text_' | append: i
+
+                      assign show_review = block.settings[show_key]
+                      assign avatar = block.settings[avatar_key]
+                      assign hide_avatar = block.settings[hide_avatar_key]
+                      assign customer_name = block.settings[name_key]
+                      assign star_count = block.settings[star_key]
+                      assign review_text = block.settings[text_key]
+                    -%}
+                    {%- if show_review and customer_name != blank and review_text != blank -%}
+                      <article class="ai-product-reviews__card">
+                        {%- unless hide_avatar -%}
+                          <div class="ai-product-reviews__avatar ai-product-reviews__avatar--{{ block.settings.avatar_ratio }}">
+                            {%- if avatar != blank -%}
+                              {{
+                                avatar
+                                | image_url: width: 240
+                                | image_tag:
+                                  widths: '80,120,180,240',
+                                  loading: 'lazy',
+                                  alt: customer_name
+                              }}
+                            {%- else -%}
+                              {{ 'image' | placeholder_svg_tag }}
+                            {%- endif -%}
+                          </div>
+                        {%- endunless -%}
+
+                        <div class="ai-product-reviews__content">
+                          <div class="ai-product-reviews__headline">
+                            <p class="ai-product-reviews__name">{{ customer_name }}</p>
+                            {%- if star_count > 0 -%}
+                              <div class="ai-product-reviews__stars" aria-label="{{ star_count }} von 5 Sternen">
+                                {%- for star in (1..star_count) -%}
+                                  {%- if block.settings.star_icon != blank -%}
+                                    {{
+                                      block.settings.star_icon
+                                      | image_url: width: 80
+                                      | image_tag:
+                                        widths: '16,24,32,48,80',
+                                        loading: 'lazy',
+                                        alt: ''
+                                    }}
+                                  {%- else -%}
+                                    <svg viewBox="0 0 20 19" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                      <path d="M10 0L12.9389 5.95492L19.5106 6.90983L14.7553 11.5451L15.8779 18.0902L10 15L4.12215 18.0902L5.24472 11.5451L0.489435 6.90983L7.06107 5.95492L10 0Z"/>
+                                    </svg>
+                                  {%- endif -%}
+                                {%- endfor -%}
+                              </div>
+                            {%- endif -%}
+                          </div>
+                          <p class="ai-product-reviews__copy">{{ review_text }}</p>
+                        </div>
+                      </article>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </div>
+              </section>
             {%- when 'ai_promo_code_banner' -%}
               <section
                 id="ai-promo-code-banner-{{ section.id }}-{{ block.id }}"
@@ -4593,6 +4729,481 @@
           "id": "text_color",
           "label": "Text Farbe",
           "default": "#d97eb5"
+        }
+      ]
+    },
+    {
+      "type": "ai_product_reviews",
+      "name": "AI Product Reviews",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Review 1"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_review_1",
+          "label": "Review 1 anzeigen",
+          "default": true
+        },
+        {
+          "type": "image_picker",
+          "id": "avatar_1",
+          "label": "Avatar 1"
+        },
+        {
+          "type": "checkbox",
+          "id": "hide_avatar_1",
+          "label": "Avatar 1 ausblenden",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "customer_name_1",
+          "label": "Name 1",
+          "default": "Daniel G."
+        },
+        {
+          "type": "range",
+          "id": "star_count_1",
+          "label": "Sterne 1",
+          "min": 0,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "review_text_1",
+          "label": "Text 1",
+          "default": "Mein Sohn war total stolz, sich selbst als Held zu sehen."
+        },
+        {
+          "type": "header",
+          "content": "Review 2"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_review_2",
+          "label": "Review 2 anzeigen",
+          "default": true
+        },
+        {
+          "type": "image_picker",
+          "id": "avatar_2",
+          "label": "Avatar 2"
+        },
+        {
+          "type": "checkbox",
+          "id": "hide_avatar_2",
+          "label": "Avatar 2 ausblenden",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "customer_name_2",
+          "label": "Name 2",
+          "default": "Sarah M."
+        },
+        {
+          "type": "range",
+          "id": "star_count_2",
+          "label": "Sterne 2",
+          "min": 0,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "review_text_2",
+          "label": "Text 2",
+          "default": "Wirklich hochwertig gemacht und als Geschenk einfach perfekt."
+        },
+        {
+          "type": "header",
+          "content": "Review 3"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_review_3",
+          "label": "Review 3 anzeigen",
+          "default": true
+        },
+        {
+          "type": "image_picker",
+          "id": "avatar_3",
+          "label": "Avatar 3"
+        },
+        {
+          "type": "checkbox",
+          "id": "hide_avatar_3",
+          "label": "Avatar 3 ausblenden",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "customer_name_3",
+          "label": "Name 3",
+          "default": "Lisa K."
+        },
+        {
+          "type": "range",
+          "id": "star_count_3",
+          "label": "Sterne 3",
+          "min": 0,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "review_text_3",
+          "label": "Text 3",
+          "default": "Sehr schön umgesetzt und direkt ein Highlight beim Auspacken."
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "label": "Abstand oben",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "default": 10
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "label": "Abstand unten",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "default": 10
+        },
+        {
+          "type": "range",
+          "id": "padding_top",
+          "label": "Padding oben",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "padding_bottom",
+          "label": "Padding unten",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "padding_horizontal",
+          "label": "Padding links/rechts Desktop",
+          "min": 0,
+          "max": 30,
+          "step": 1,
+          "unit": "rem",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "padding_horizontal_mobile",
+          "label": "Padding links/rechts Mobile",
+          "min": 0,
+          "max": 15,
+          "step": 0.5,
+          "unit": "rem",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "outer_radius",
+          "label": "Section Radius",
+          "min": 0,
+          "max": 60,
+          "step": 2,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "outer_border_width",
+          "label": "Section Border",
+          "min": 0,
+          "max": 10,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "card_padding_vertical",
+          "label": "Card Padding oben/unten",
+          "min": 0,
+          "max": 40,
+          "step": 2,
+          "unit": "px",
+          "default": 12
+        },
+        {
+          "type": "range",
+          "id": "card_padding_horizontal",
+          "label": "Card Padding links/rechts",
+          "min": 0,
+          "max": 40,
+          "step": 2,
+          "unit": "px",
+          "default": 14
+        },
+        {
+          "type": "range",
+          "id": "card_radius",
+          "label": "Card Radius",
+          "min": 0,
+          "max": 60,
+          "step": 2,
+          "unit": "px",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "card_border_width",
+          "label": "Card Border",
+          "min": 0,
+          "max": 6,
+          "step": 1,
+          "unit": "px",
+          "default": 1
+        },
+        {
+          "type": "header",
+          "content": "Avatar"
+        },
+        {
+          "type": "range",
+          "id": "avatar_width",
+          "label": "Avatar Größe",
+          "min": 34,
+          "max": 120,
+          "step": 2,
+          "unit": "px",
+          "default": 58
+        },
+        {
+          "type": "select",
+          "id": "avatar_ratio",
+          "label": "Avatar Format",
+          "default": "square",
+          "options": [
+            { "value": "square", "label": "Quadrat" },
+            { "value": "portrait", "label": "Portrait" },
+            { "value": "landscape", "label": "Landscape" }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "avatar_radius",
+          "label": "Avatar Radius",
+          "min": 0,
+          "max": 60,
+          "step": 2,
+          "unit": "px",
+          "default": 14
+        },
+        {
+          "type": "range",
+          "id": "avatar_border_width",
+          "label": "Avatar Border",
+          "min": 0,
+          "max": 6,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "header",
+          "content": "Sterne"
+        },
+        {
+          "type": "image_picker",
+          "id": "star_icon",
+          "label": "Eigenes Stern Icon"
+        },
+        {
+          "type": "range",
+          "id": "star_size",
+          "label": "Stern Größe",
+          "min": 8,
+          "max": 30,
+          "step": 1,
+          "unit": "px",
+          "default": 13
+        },
+        {
+          "type": "header",
+          "content": "Schrift"
+        },
+        {
+          "type": "checkbox",
+          "id": "use_custom_name_font",
+          "label": "Name Schrift manuell wählen",
+          "default": false
+        },
+        {
+          "type": "font_picker",
+          "id": "custom_name_font",
+          "label": "Name Schrift",
+          "default": "assistant_n7"
+        },
+        {
+          "type": "range",
+          "id": "name_size",
+          "label": "Name Größe Desktop",
+          "min": 10,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "default": 13
+        },
+        {
+          "type": "range",
+          "id": "name_size_mobile",
+          "label": "Name Größe Mobile",
+          "min": 10,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "default": 12
+        },
+        {
+          "type": "range",
+          "id": "name_line_height",
+          "label": "Name Zeilenhöhe",
+          "min": 80,
+          "max": 200,
+          "step": 5,
+          "unit": "%",
+          "default": 120
+        },
+        {
+          "type": "checkbox",
+          "id": "use_custom_copy_font",
+          "label": "Text Schrift manuell wählen",
+          "default": false
+        },
+        {
+          "type": "font_picker",
+          "id": "custom_copy_font",
+          "label": "Text Schrift",
+          "default": "assistant_n4"
+        },
+        {
+          "type": "range",
+          "id": "copy_size",
+          "label": "Text Größe Desktop",
+          "min": 10,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "default": 13
+        },
+        {
+          "type": "range",
+          "id": "copy_size_mobile",
+          "label": "Text Größe Mobile",
+          "min": 10,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "default": 12
+        },
+        {
+          "type": "range",
+          "id": "copy_line_height",
+          "label": "Text Zeilenhöhe",
+          "min": 80,
+          "max": 220,
+          "step": 5,
+          "unit": "%",
+          "default": 130
+        },
+        {
+          "type": "range",
+          "id": "copy_margin_top",
+          "label": "Text Abstand oben",
+          "min": 0,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "default": 4
+        },
+        {
+          "type": "header",
+          "content": "Farben"
+        },
+        {
+          "type": "color",
+          "id": "outer_bg",
+          "label": "Section Farbe",
+          "default": "transparent"
+        },
+        {
+          "type": "color_background",
+          "id": "outer_gradient",
+          "label": "Section Verlauf"
+        },
+        {
+          "type": "color",
+          "id": "outer_border_color",
+          "label": "Section Border",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "card_bg",
+          "label": "Card Hintergrund",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "card_border_color",
+          "label": "Card Border",
+          "default": "#e5e7eb"
+        },
+        {
+          "type": "color",
+          "id": "avatar_border_color",
+          "label": "Avatar Border",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "star_color",
+          "label": "Stern Farbe",
+          "default": "#f5b301"
+        },
+        {
+          "type": "color",
+          "id": "name_color",
+          "label": "Name Farbe",
+          "default": "#111111"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text Farbe",
+          "default": "#2b2b2b"
         }
       ]
     },

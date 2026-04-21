@@ -1057,6 +1057,238 @@
   word-break: break-word;
 }
 
+.product__info-container .ai-product-accordion-section--product-info {
+  margin-top: var(--apa-margin-top);
+  margin-bottom: var(--apa-margin-bottom);
+  padding: var(--apa-padding-top) var(--apa-padding-side) var(--apa-padding-bottom);
+  background: var(--apa-section-bg);
+}
+
+.product__info-container .ai-product-accordion-section--product-info .ai-product-accordion__wrap {
+  display: grid;
+  gap: var(--apa-item-gap);
+  font-family: var(--apa-font-family, inherit);
+  font-style: var(--apa-font-style, inherit);
+  font-weight: var(--apa-font-weight, inherit);
+}
+
+.product__info-container .ai-product-accordion-section--product-info .ai-product-accordion__item {
+  overflow: hidden;
+  border: var(--apa-border-width) solid var(--apa-border);
+  border-radius: var(--apa-radius);
+  background: var(--apa-item-bg);
+}
+
+.product__info-container .ai-product-accordion-section--product-info .ai-product-accordion__summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: var(--apa-pad-y) var(--apa-pad-x);
+  cursor: pointer;
+  list-style: none;
+}
+
+.product__info-container .ai-product-accordion-section--product-info .ai-product-accordion__summary::-webkit-details-marker {
+  display: none;
+}
+
+.product__info-container .ai-product-accordion-section--product-info .ai-product-accordion__summary-left {
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+  align-items: center;
+  gap: 12px;
+}
+
+.product__info-container .ai-product-accordion-section--product-info .ai-product-accordion__icon {
+  display: inline-flex;
+  width: var(--apa-icon-size-mobile);
+  min-width: var(--apa-icon-size-mobile);
+  height: var(--apa-icon-size-mobile);
+  align-items: center;
+  justify-content: center;
+  color: var(--apa-icon);
+  line-height: 0;
+}
+
+.product__info-container .ai-product-accordion-section--product-info .ai-product-accordion__icon svg,
+.product__info-container .ai-product-accordion-section--product-info .ai-product-accordion__icon-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.product__info-container .ai-product-accordion-section--product-info .ai-product-accordion__title {
+  min-width: 0;
+  color: var(--apa-text);
+  font-size: var(--apa-title-size-mobile);
+  font-weight: var(--apa-title-weight);
+  line-height: 1.3;
+}
+
+.product__info-container .ai-product-accordion-section--product-info .ai-product-accordion__chevron {
+  display: inline-flex;
+  width: var(--apa-chevron-size-mobile);
+  min-width: var(--apa-chevron-size-mobile);
+  height: var(--apa-chevron-size-mobile);
+  align-items: center;
+  justify-content: center;
+  color: var(--apa-chevron);
+  line-height: 0;
+  transition: transform 0.22s ease;
+}
+
+.product__info-container .ai-product-accordion-section--product-info .ai-product-accordion__chevron svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.product__info-container .ai-product-accordion-section--product-info .ai-product-accordion__item[open] .ai-product-accordion__chevron {
+  transform: rotate(180deg);
+}
+
+.product__info-container .ai-product-accordion-section--product-info .ai-product-accordion__content {
+  padding: 0 var(--apa-pad-x) var(--apa-pad-y) calc(var(--apa-pad-x) + var(--apa-icon-size-mobile) + 12px);
+  color: var(--apa-answer);
+  font-size: var(--apa-answer-size-mobile);
+  line-height: var(--apa-answer-line-height);
+}
+
+.product__info-container .ai-product-accordion-section--product-info .ai-product-accordion__content p,
+.product__info-container .ai-product-accordion-section--product-info .ai-product-accordion__content ul,
+.product__info-container .ai-product-accordion-section--product-info .ai-product-accordion__content ol {
+  margin-top: 0;
+}
+
+.product__info-container .ai-product-accordion-section--product-info .ai-product-accordion__content p:last-child,
+.product__info-container .ai-product-accordion-section--product-info .ai-product-accordion__content ul:last-child,
+.product__info-container .ai-product-accordion-section--product-info .ai-product-accordion__content ol:last-child {
+  margin-bottom: 0;
+}
+
+.product__info-container .ai-product-reviews-section--product-info {
+  margin-top: var(--apr-margin-top);
+  margin-bottom: var(--apr-margin-bottom);
+  padding: var(--apr-padding-top) var(--apr-padding-x-mobile) var(--apr-padding-bottom);
+  border: var(--apr-outer-border-width) solid var(--apr-outer-border);
+  border-radius: var(--apr-outer-radius);
+  background: var(--apr-outer-bg);
+  background-image: var(--apr-outer-gradient);
+  overflow: visible;
+}
+
+.product__info-container .ai-product-reviews-section--product-info .ai-product-reviews__rail {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(260px, 88%);
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.product__info-container .ai-product-reviews-section--product-info .ai-product-reviews__rail::-webkit-scrollbar {
+  display: none;
+}
+
+.product__info-container .ai-product-reviews-section--product-info .ai-product-reviews__card {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  gap: 1.2rem;
+  scroll-snap-align: start;
+  padding: calc(var(--apr-card-pad-y) * 0.75) calc(var(--apr-card-pad-x) * 0.75);
+  border: var(--apr-card-border-width) solid var(--apr-card-border);
+  border-radius: var(--apr-card-radius);
+  background: var(--apr-card-bg);
+}
+
+.product__info-container .ai-product-reviews-section--product-info .ai-product-reviews__avatar {
+  width: var(--apr-avatar-width);
+  min-width: var(--apr-avatar-width);
+  overflow: hidden;
+  border: var(--apr-avatar-border-width) solid var(--apr-avatar-border);
+  border-radius: var(--apr-avatar-radius);
+  background: #e8e8e8;
+}
+
+.product__info-container .ai-product-reviews-section--product-info .ai-product-reviews__avatar--square {
+  aspect-ratio: 1 / 1;
+}
+
+.product__info-container .ai-product-reviews-section--product-info .ai-product-reviews__avatar--portrait {
+  aspect-ratio: 9 / 11;
+}
+
+.product__info-container .ai-product-reviews-section--product-info .ai-product-reviews__avatar--landscape {
+  aspect-ratio: 4 / 3;
+}
+
+.product__info-container .ai-product-reviews-section--product-info .ai-product-reviews__avatar img,
+.product__info-container .ai-product-reviews-section--product-info .ai-product-reviews__avatar svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product__info-container .ai-product-reviews-section--product-info .ai-product-reviews__content {
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.product__info-container .ai-product-reviews-section--product-info .ai-product-reviews__headline {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.product__info-container .ai-product-reviews-section--product-info .ai-product-reviews__name {
+  margin: 0;
+  color: var(--apr-name-color);
+  font-family: var(--apr-name-font-family, inherit);
+  font-size: var(--apr-name-size-mobile);
+  font-style: var(--apr-name-font-style, inherit);
+  font-weight: var(--apr-name-font-weight, 700);
+  line-height: var(--apr-name-line-height);
+}
+
+.product__info-container .ai-product-reviews-section--product-info .ai-product-reviews__stars {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  line-height: 1;
+}
+
+.product__info-container .ai-product-reviews-section--product-info .ai-product-reviews__stars svg,
+.product__info-container .ai-product-reviews-section--product-info .ai-product-reviews__stars img {
+  display: block;
+  width: var(--apr-star-size);
+  height: var(--apr-star-size);
+  flex-shrink: 0;
+}
+
+.product__info-container .ai-product-reviews-section--product-info .ai-product-reviews__stars svg path {
+  fill: var(--apr-star-color);
+}
+
+.product__info-container .ai-product-reviews-section--product-info .ai-product-reviews__copy {
+  margin: var(--apr-copy-margin-top) 0 0;
+  color: var(--apr-text-color);
+  font-family: var(--apr-copy-font-family, inherit);
+  font-size: var(--apr-copy-size-mobile);
+  font-style: var(--apr-copy-font-style, inherit);
+  font-weight: var(--apr-copy-font-weight, inherit);
+  line-height: var(--apr-copy-line-height);
+}
+
 .product__info-container .ai-promo-code-banner-section--product-info {
   margin: 0.8rem 0;
   padding-top: var(--apcb-product-info-padding-top, 4px);
@@ -1347,6 +1579,48 @@
 
   .product__info-container .ai-product-benefits-section--product-info .ai-product-benefits__text {
     font-size: var(--apb-text-size);
+  }
+
+  .product__info-container .ai-product-accordion-section--product-info .ai-product-accordion__icon {
+    width: var(--apa-icon-size);
+    min-width: var(--apa-icon-size);
+    height: var(--apa-icon-size);
+  }
+
+  .product__info-container .ai-product-accordion-section--product-info .ai-product-accordion__title {
+    font-size: var(--apa-title-size);
+  }
+
+  .product__info-container .ai-product-accordion-section--product-info .ai-product-accordion__chevron {
+    width: var(--apa-chevron-size);
+    min-width: var(--apa-chevron-size);
+    height: var(--apa-chevron-size);
+  }
+
+  .product__info-container .ai-product-accordion-section--product-info .ai-product-accordion__content {
+    padding-left: calc(var(--apa-pad-x) + var(--apa-icon-size) + 12px);
+    font-size: var(--apa-answer-size);
+  }
+
+  .product__info-container .ai-product-reviews-section--product-info {
+    padding-left: var(--apr-padding-x);
+    padding-right: var(--apr-padding-x);
+  }
+
+  .product__info-container .ai-product-reviews-section--product-info .ai-product-reviews__rail {
+    grid-auto-columns: minmax(300px, 72%);
+  }
+
+  .product__info-container .ai-product-reviews-section--product-info .ai-product-reviews__card {
+    padding: var(--apr-card-pad-y) var(--apr-card-pad-x);
+  }
+
+  .product__info-container .ai-product-reviews-section--product-info .ai-product-reviews__name {
+    font-size: var(--apr-name-size);
+  }
+
+  .product__info-container .ai-product-reviews-section--product-info .ai-product-reviews__copy {
+    font-size: var(--apr-copy-size);
   }
 
   .product__info-container .ai-promo-code-banner-section--product-info .ai-promo-code-banner__text {
