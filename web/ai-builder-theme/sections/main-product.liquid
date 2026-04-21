@@ -910,6 +910,8 @@
                   </div>
                 </div>
               </section>
+            {%- when 'product_ai_accordion' -%}
+              {% render 'product-ai-accordion', block: block %}
             {%- when 'ai_product_reviews' -%}
               <section
                 id="ai-product-reviews-{{ section.id }}-{{ block.id }}"
@@ -4729,6 +4731,538 @@
           "id": "text_color",
           "label": "Text Farbe",
           "default": "#d97eb5"
+        }
+      ]
+    },
+    {
+      "type": "product_ai_accordion",
+      "name": "Produkt Accordion Icons",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Allgemein"
+        },
+        {
+          "type": "checkbox",
+          "id": "ai_acc_single_open",
+          "label": "Immer nur ein Element gleichzeitig öffnen",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "ai_acc_first_open",
+          "label": "Erstes Element standardmäßig geöffnet",
+          "default": false
+        },
+        {
+          "type": "header",
+          "content": "Abstände"
+        },
+        {
+          "type": "range",
+          "id": "ai_acc_margin_top",
+          "min": 0,
+          "max": 40,
+          "step": 2,
+          "unit": "px",
+          "label": "Abstand oben",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "ai_acc_margin_bottom",
+          "min": 0,
+          "max": 40,
+          "step": 2,
+          "unit": "px",
+          "label": "Abstand unten",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "ai_acc_padding_y",
+          "min": 8,
+          "max": 32,
+          "step": 2,
+          "unit": "px",
+          "label": "Innenabstand je Zeile Desktop",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "ai_acc_padding_y_mobile",
+          "min": 8,
+          "max": 28,
+          "step": 2,
+          "unit": "px",
+          "label": "Innenabstand je Zeile Mobile",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "ai_acc_answer_padding_bottom",
+          "min": 0,
+          "max": 30,
+          "step": 2,
+          "unit": "px",
+          "label": "Antwort Abstand unten Desktop",
+          "default": 18
+        },
+        {
+          "type": "range",
+          "id": "ai_acc_answer_padding_bottom_mobile",
+          "min": 0,
+          "max": 24,
+          "step": 2,
+          "unit": "px",
+          "label": "Antwort Abstand unten Mobile",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "ai_acc_item_gap",
+          "min": 6,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "label": "Abstand Icon zu Text Desktop",
+          "default": 14
+        },
+        {
+          "type": "range",
+          "id": "ai_acc_item_gap_mobile",
+          "min": 6,
+          "max": 20,
+          "step": 1,
+          "unit": "px",
+          "label": "Abstand Icon zu Text Mobile",
+          "default": 12
+        },
+        {
+          "type": "header",
+          "content": "Linien"
+        },
+        {
+          "type": "color",
+          "id": "ai_acc_divider_color",
+          "label": "Trennlinien Farbe",
+          "default": "#d9d9d9"
+        },
+        {
+          "type": "range",
+          "id": "ai_acc_divider_thickness",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "unit": "px",
+          "label": "Trennlinien Dicke",
+          "default": 1
+        },
+        {
+          "type": "header",
+          "content": "Text"
+        },
+        {
+          "type": "color",
+          "id": "ai_acc_text_color",
+          "label": "Frage Farbe",
+          "default": "#111111"
+        },
+        {
+          "type": "color",
+          "id": "ai_acc_answer_color",
+          "label": "Antwort Farbe",
+          "default": "#555555"
+        },
+        {
+          "type": "range",
+          "id": "ai_acc_title_size",
+          "min": 12,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "label": "Frage Schriftgröße Desktop",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "ai_acc_title_size_mobile",
+          "min": 12,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "label": "Frage Schriftgröße Mobile",
+          "default": 15
+        },
+        {
+          "type": "range",
+          "id": "ai_acc_text_size",
+          "min": 11,
+          "max": 22,
+          "step": 1,
+          "unit": "px",
+          "label": "Antwort Schriftgröße Desktop",
+          "default": 14
+        },
+        {
+          "type": "range",
+          "id": "ai_acc_text_size_mobile",
+          "min": 11,
+          "max": 20,
+          "step": 1,
+          "unit": "px",
+          "label": "Antwort Schriftgröße Mobile",
+          "default": 14
+        },
+        {
+          "type": "select",
+          "id": "ai_acc_title_weight",
+          "label": "Frage Schriftstärke",
+          "default": "600",
+          "options": [
+            { "value": "500", "label": "Medium" },
+            { "value": "600", "label": "Semi Bold" },
+            { "value": "700", "label": "Bold" }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "ai_acc_text_line_height",
+          "min": 1.2,
+          "max": 2.0,
+          "step": 0.1,
+          "label": "Antwort Zeilenhöhe",
+          "default": 1.6
+        },
+        {
+          "type": "header",
+          "content": "Icons"
+        },
+        {
+          "type": "color",
+          "id": "ai_acc_icon_color",
+          "label": "Icon Farbe",
+          "default": "#111111"
+        },
+        {
+          "type": "range",
+          "id": "ai_acc_icon_size",
+          "min": 14,
+          "max": 34,
+          "step": 1,
+          "unit": "px",
+          "label": "Icon Größe Desktop",
+          "default": 22
+        },
+        {
+          "type": "range",
+          "id": "ai_acc_icon_size_mobile",
+          "min": 14,
+          "max": 30,
+          "step": 1,
+          "unit": "px",
+          "label": "Icon Größe Mobile",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "ai_acc_icon_stroke",
+          "min": 1,
+          "max": 3,
+          "step": 0.1,
+          "label": "Icon Linienbreite",
+          "default": 1.8
+        },
+        {
+          "type": "header",
+          "content": "Pfeil"
+        },
+        {
+          "type": "color",
+          "id": "ai_acc_chevron_color",
+          "label": "Pfeil Farbe",
+          "default": "#111111"
+        },
+        {
+          "type": "range",
+          "id": "ai_acc_chevron_size",
+          "min": 14,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "label": "Pfeil Größe Desktop",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "ai_acc_chevron_size_mobile",
+          "min": 14,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "label": "Pfeil Größe Mobile",
+          "default": 18
+        },
+        {
+          "type": "header",
+          "content": "Element 1"
+        },
+        {
+          "type": "checkbox",
+          "id": "ai_acc_item_1_show",
+          "label": "Element 1 anzeigen",
+          "default": true
+        },
+        {
+          "type": "select",
+          "id": "ai_acc_item_1_icon",
+          "label": "Icon Element 1",
+          "default": "eye",
+          "options": [
+            { "value": "none", "label": "Kein Icon" },
+            { "value": "adjustments-horizontal", "label": "Anpassung" },
+            { "value": "banknotes", "label": "Geld" },
+            { "value": "battery-100", "label": "Batterie voll" },
+            { "value": "battery-0", "label": "Batterie leer" },
+            { "value": "bell-slash", "label": "Benachrichtigung aus" },
+            { "value": "bell", "label": "Benachrichtigung" },
+            { "value": "book-open", "label": "Buch" },
+            { "value": "calendar", "label": "Kalender" },
+            { "value": "camera", "label": "Kamera" },
+            { "value": "chat-bubble", "label": "Chat" },
+            { "value": "check-badge", "label": "Badge" },
+            { "value": "clock", "label": "Uhr" },
+            { "value": "clipboard", "label": "Clipboard" },
+            { "value": "setting", "label": "Einstellung" },
+            { "value": "rueckgabe", "label": "Rückgabe" },
+            { "value": "eye", "label": "Auge" },
+            { "value": "gift", "label": "Geschenk" },
+            { "value": "earth", "label": "Welt" },
+            { "value": "heart", "label": "Herz" },
+            { "value": "lock-closed", "label": "Schloss" },
+            { "value": "truck", "label": "Lieferung" }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "ai_acc_item_1_title",
+          "label": "Titel Element 1",
+          "default": "Frage Titel"
+        },
+        {
+          "type": "richtext",
+          "id": "ai_acc_item_1_content",
+          "label": "Inhalt Element 1",
+          "default": "<p>Hier steht der Inhalt des ersten ausklappbaren Elements.</p>"
+        },
+        {
+          "type": "header",
+          "content": "Element 2"
+        },
+        {
+          "type": "checkbox",
+          "id": "ai_acc_item_2_show",
+          "label": "Element 2 anzeigen",
+          "default": true
+        },
+        {
+          "type": "select",
+          "id": "ai_acc_item_2_icon",
+          "label": "Icon Element 2",
+          "default": "lock-closed",
+          "options": [
+            { "value": "none", "label": "Kein Icon" },
+            { "value": "adjustments-horizontal", "label": "Anpassung" },
+            { "value": "banknotes", "label": "Geld" },
+            { "value": "battery-100", "label": "Batterie voll" },
+            { "value": "battery-0", "label": "Batterie leer" },
+            { "value": "bell-slash", "label": "Benachrichtigung aus" },
+            { "value": "bell", "label": "Benachrichtigung" },
+            { "value": "book-open", "label": "Buch" },
+            { "value": "calendar", "label": "Kalender" },
+            { "value": "camera", "label": "Kamera" },
+            { "value": "chat-bubble", "label": "Chat" },
+            { "value": "check-badge", "label": "Badge" },
+            { "value": "clock", "label": "Uhr" },
+            { "value": "clipboard", "label": "Clipboard" },
+            { "value": "setting", "label": "Einstellung" },
+            { "value": "rueckgabe", "label": "Rückgabe" },
+            { "value": "eye", "label": "Auge" },
+            { "value": "gift", "label": "Geschenk" },
+            { "value": "earth", "label": "Welt" },
+            { "value": "heart", "label": "Herz" },
+            { "value": "lock-closed", "label": "Schloss" },
+            { "value": "truck", "label": "Lieferung" }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "ai_acc_item_2_title",
+          "label": "Titel Element 2",
+          "default": "Frage Titel"
+        },
+        {
+          "type": "richtext",
+          "id": "ai_acc_item_2_content",
+          "label": "Inhalt Element 2",
+          "default": "<p>Hier steht der Inhalt des zweiten ausklappbaren Elements.</p>"
+        },
+        {
+          "type": "header",
+          "content": "Element 3"
+        },
+        {
+          "type": "checkbox",
+          "id": "ai_acc_item_3_show",
+          "label": "Element 3 anzeigen",
+          "default": true
+        },
+        {
+          "type": "select",
+          "id": "ai_acc_item_3_icon",
+          "label": "Icon Element 3",
+          "default": "book-open",
+          "options": [
+            { "value": "none", "label": "Kein Icon" },
+            { "value": "adjustments-horizontal", "label": "Anpassung" },
+            { "value": "banknotes", "label": "Geld" },
+            { "value": "battery-100", "label": "Batterie voll" },
+            { "value": "battery-0", "label": "Batterie leer" },
+            { "value": "bell-slash", "label": "Benachrichtigung aus" },
+            { "value": "bell", "label": "Benachrichtigung" },
+            { "value": "book-open", "label": "Buch" },
+            { "value": "calendar", "label": "Kalender" },
+            { "value": "camera", "label": "Kamera" },
+            { "value": "chat-bubble", "label": "Chat" },
+            { "value": "check-badge", "label": "Badge" },
+            { "value": "clock", "label": "Uhr" },
+            { "value": "clipboard", "label": "Clipboard" },
+            { "value": "setting", "label": "Einstellung" },
+            { "value": "rueckgabe", "label": "Rückgabe" },
+            { "value": "eye", "label": "Auge" },
+            { "value": "gift", "label": "Geschenk" },
+            { "value": "earth", "label": "Welt" },
+            { "value": "heart", "label": "Herz" },
+            { "value": "lock-closed", "label": "Schloss" },
+            { "value": "truck", "label": "Lieferung" }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "ai_acc_item_3_title",
+          "label": "Titel Element 3",
+          "default": "Frage Titel"
+        },
+        {
+          "type": "richtext",
+          "id": "ai_acc_item_3_content",
+          "label": "Inhalt Element 3",
+          "default": "<p>Hier steht der Inhalt des dritten ausklappbaren Elements.</p>"
+        },
+        {
+          "type": "header",
+          "content": "Element 4"
+        },
+        {
+          "type": "checkbox",
+          "id": "ai_acc_item_4_show",
+          "label": "Element 4 anzeigen",
+          "default": false
+        },
+        {
+          "type": "select",
+          "id": "ai_acc_item_4_icon",
+          "label": "Icon Element 4",
+          "default": "truck",
+          "options": [
+            { "value": "none", "label": "Kein Icon" },
+            { "value": "adjustments-horizontal", "label": "Anpassung" },
+            { "value": "banknotes", "label": "Geld" },
+            { "value": "battery-100", "label": "Batterie voll" },
+            { "value": "battery-0", "label": "Batterie leer" },
+            { "value": "bell-slash", "label": "Benachrichtigung aus" },
+            { "value": "bell", "label": "Benachrichtigung" },
+            { "value": "book-open", "label": "Buch" },
+            { "value": "calendar", "label": "Kalender" },
+            { "value": "camera", "label": "Kamera" },
+            { "value": "chat-bubble", "label": "Chat" },
+            { "value": "check-badge", "label": "Badge" },
+            { "value": "clock", "label": "Uhr" },
+            { "value": "clipboard", "label": "Clipboard" },
+            { "value": "setting", "label": "Einstellung" },
+            { "value": "rueckgabe", "label": "Rückgabe" },
+            { "value": "eye", "label": "Auge" },
+            { "value": "gift", "label": "Geschenk" },
+            { "value": "earth", "label": "Welt" },
+            { "value": "heart", "label": "Herz" },
+            { "value": "lock-closed", "label": "Schloss" },
+            { "value": "truck", "label": "Lieferung" }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "ai_acc_item_4_title",
+          "label": "Titel Element 4",
+          "default": "Frage Titel"
+        },
+        {
+          "type": "richtext",
+          "id": "ai_acc_item_4_content",
+          "label": "Inhalt Element 4",
+          "default": "<p>Hier steht der Inhalt des vierten ausklappbaren Elements.</p>"
+        },
+        {
+          "type": "header",
+          "content": "Element 5"
+        },
+        {
+          "type": "checkbox",
+          "id": "ai_acc_item_5_show",
+          "label": "Element 5 anzeigen",
+          "default": false
+        },
+        {
+          "type": "select",
+          "id": "ai_acc_item_5_icon",
+          "label": "Icon Element 5",
+          "default": "gift",
+          "options": [
+            { "value": "none", "label": "Kein Icon" },
+            { "value": "adjustments-horizontal", "label": "Anpassung" },
+            { "value": "banknotes", "label": "Geld" },
+            { "value": "battery-100", "label": "Batterie voll" },
+            { "value": "battery-0", "label": "Batterie leer" },
+            { "value": "bell-slash", "label": "Benachrichtigung aus" },
+            { "value": "bell", "label": "Benachrichtigung" },
+            { "value": "book-open", "label": "Buch" },
+            { "value": "calendar", "label": "Kalender" },
+            { "value": "camera", "label": "Kamera" },
+            { "value": "chat-bubble", "label": "Chat" },
+            { "value": "check-badge", "label": "Badge" },
+            { "value": "clock", "label": "Uhr" },
+            { "value": "clipboard", "label": "Clipboard" },
+            { "value": "setting", "label": "Einstellung" },
+            { "value": "rueckgabe", "label": "Rückgabe" },
+            { "value": "eye", "label": "Auge" },
+            { "value": "gift", "label": "Geschenk" },
+            { "value": "earth", "label": "Welt" },
+            { "value": "heart", "label": "Herz" },
+            { "value": "lock-closed", "label": "Schloss" },
+            { "value": "truck", "label": "Lieferung" }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "ai_acc_item_5_title",
+          "label": "Titel Element 5",
+          "default": "Frage Titel"
+        },
+        {
+          "type": "richtext",
+          "id": "ai_acc_item_5_content",
+          "label": "Inhalt Element 5",
+          "default": "<p>Hier steht der Inhalt des fünften ausklappbaren Elements.</p>"
         }
       ]
     },
