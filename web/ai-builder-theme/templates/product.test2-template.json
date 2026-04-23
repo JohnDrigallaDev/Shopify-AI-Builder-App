@@ -43,7 +43,7 @@
           "type": "ai_product_teaser_text",
           "settings": {
             "margin_top": 14,
-            "text": "<p>Das kühlende Kissen für spürbar mehr Komfort bei Sommerfahrten, im Büro und zu Hause.</p>"
+            "text": "<p>IPL-Haarentfernung für Achseln, Beine und Bikinizone – bequem zuhause, wann immer du willst.</p>"
           }
         },
         "ai_product_divider": {
@@ -80,14 +80,14 @@
           "type": "ai_product_benefits",
           "settings": {
             "benefit_1_icon": "heart",
-            "benefit_1_text": "<p>Mehr Komfort</p>",
+            "benefit_1_text": "<p>Schnelle Routine für zuhause</p>",
             "benefit_2_icon": "adjustments-horizontal",
-            "benefit_2_text": "<p>Spürbar bequem</p>",
-            "benefit_3_icon": "earth",
-            "benefit_3_text": "<p>Flexibel nutzbar</p>",
-            "benefit_4_icon": "check-badge",
+            "benefit_2_text": "<p>Für regelmäßige Behandlungen ohne Studio-Termin</p>",
+            "benefit_3_icon": "battery-100",
+            "benefit_3_text": "<p>Für mehrere Zonen flexibel einsetzbar</p>",
+            "benefit_4_icon": "earth",
             "benefit_4_text": "",
-            "benefit_5_icon": "clock",
+            "benefit_5_icon": "check-badge",
             "benefit_5_text": "",
             "benefit_6_icon": "gift",
             "benefit_6_text": "",
@@ -103,7 +103,7 @@
             "icon_size": 16,
             "icon_size_mobile": 16,
             "icon_stroke": 1.5,
-            "text_size": 11,
+            "text_size": 13,
             "text_size_mobile": 11,
             "line_height": 1.3,
             "bold_weight": "700",
@@ -120,29 +120,8 @@
         "ai_buy_button": {
           "type": "ai_buy_button",
           "settings": {
-            "button_text": "Jetzt kühler sitzen",
+            "button_text": "In den Warenkorb",
             "show_dynamic_checkout": false
-          }
-        },
-        "ai_payment_icons": {
-          "type": "ai_payment_icons",
-          "settings": {
-            "section_bg": "transparent",
-            "icon_height": 17,
-            "icon_height_mobile": 16
-          }
-        },
-        "ai_trust_badges": {
-          "type": "ai_trust_badges",
-          "settings": {
-            "padding_top": 0,
-            "outer_bg": "transparent",
-            "columns_mobile": "2",
-            "grid_gap_desktop": 4,
-            "grid_gap_mobile": 4,
-            "card_padding_y": 0,
-            "icon_size": 28,
-            "icon_size_mobile": 24
           }
         },
         "ai_stock_status": {
@@ -167,6 +146,86 @@
             "low_stock_bg": "transparent",
             "out_of_stock_bg": "transparent"
           }
+        },
+        "ai_payment_icons": {
+          "type": "ai_payment_icons",
+          "settings": {
+            "section_bg": "transparent",
+            "padding_top": 0,
+            "icon_height": 19,
+            "icon_height_mobile": 19
+          }
+        },
+        "ai_trust_badges": {
+          "type": "ai_trust_badges",
+          "settings": {
+            "badge_1_icon_style": "box",
+            "badge_1_title": "Free Shipping",
+            "badge_1_text": "over €99 in DE",
+            "badge_2_icon_style": "credit-card",
+            "badge_2_title": "Pay Later",
+            "badge_2_text": "up to 30 days",
+            "badge_3_icon_style": "hand-heart",
+            "badge_3_title": "Handmade",
+            "badge_3_text": "in Venice, Italy",
+            "badge_4_icon_style": "leaf",
+            "badge_4_title": "100% Vegan",
+            "badge_4_text": "just pure Cotton",
+            "padding_top": 0,
+            "padding_bottom": 4,
+            "columns_mobile": "2",
+            "grid_gap_desktop": 4,
+            "grid_gap_mobile": 4,
+            "card_padding_y": 0,
+            "card_padding_x": 14,
+            "card_radius": 12,
+            "card_border_width": 0,
+            "card_shadow_strength": 0,
+            "icon_size": 28,
+            "icon_size_mobile": 24,
+            "heading_size": 13,
+            "heading_size_mobile": 11,
+            "text_size": 11,
+            "text_size_mobile": 10,
+            "outer_bg": "transparent",
+            "card_bg": "#f3f3f3",
+            "card_border_color": "#f3f3f3",
+            "heading_color": "#111111",
+            "text_color": "#2b2b2b",
+            "icon_color": "#111111"
+          }
+        },
+        "product_ai_accordion": {
+          "type": "product_ai_accordion",
+          "settings": {
+            "ai_acc_single_open": true,
+            "ai_acc_first_open": false,
+            "ai_acc_item_1_show": true,
+            "ai_acc_item_1_icon": "truck",
+            "ai_acc_item_1_title": "Versand",
+            "ai_acc_item_1_content": "<p>Die Lieferzeit beträgt in der Regel ca. 5 Werktage. Du erhältst eine Versandbestätigung, sobald deine Bestellung unterwegs ist.</p>",
+            "ai_acc_item_2_show": true,
+            "ai_acc_item_2_icon": "rueckgabe",
+            "ai_acc_item_2_title": "Rückgabe",
+            "ai_acc_item_2_content": "<p>Du kannst deine Bestellung innerhalb von 30 Tagen zurückgeben, sofern sie unbenutzt und vollständig ist. Kontaktiere dafür einfach unseren Support.</p>",
+            "ai_acc_item_3_show": true,
+            "ai_acc_item_3_icon": "book-open",
+            "ai_acc_item_3_title": "Produktdetails",
+            "ai_acc_item_3_content": "<ul><li>4-in-1 IPL-Haarentferner für die Anwendung an Gesicht und Körper, gedacht für regelmäßige Behandlungen zuhause.</li><li>Kompaktes Gerät für Achseln, Beine und Bikinizone mit mehreren Einstell- und Anwendungsoptionen.</li></ul>",
+            "ai_acc_item_4_show": true,
+            "ai_acc_item_4_icon": "chat-bubble",
+            "ai_acc_item_4_title": "Support",
+            "ai_acc_item_4_content": "<p>Unser Support hilft dir bei Fragen zur Bestellung, Lieferung oder Anwendung des Produkts schnell und unkompliziert weiter.</p>",
+            "ai_acc_item_5_show": false
+          }
+        },
+        "ai_product_reviews": {
+          "type": "ai_product_reviews",
+          "settings": {
+            "show_review_1": false,
+            "show_review_2": false,
+            "show_review_3": false
+          }
         }
       },
       "block_order": [
@@ -176,19 +235,23 @@
         "ai_product_teaser_text",
         "ai_product_divider",
         "ai_price_highlight",
-        "ai_product_pills",
-        "ai_product_benefits",
         "variant_picker",
-        "ai_buy_button",
+        "ai_product_benefits",
         "ai_stock_status",
+        "ai_buy_button",
         "ai_payment_icons",
-        "ai_trust_badges"
+        "ai_trust_badges",
+        "ai_product_reviews",
+        "product_ai_accordion"
       ],
       "settings": {
         "enable_sticky_info": true,
         "media_size": "small",
         "gallery_layout": "thumbnail_slider",
         "media_fit": "contain",
+        "image_zoom": "none",
+        "mobile_thumbnails": "show",
+        "hide_variants": true,
         "thumbnail_gap_desktop": 0,
         "thumbnail_gap_mobile": 0,
         "thumbnail_size_desktop": 92,
@@ -201,118 +264,81 @@
         "padding_bottom": 0
       }
     },
+    "ai_section_2": {
+      "type": "ai-feature-split",
+      "settings": {},
+      "blocks": {
+        "feature_1": {
+          "type": "feature",
+          "settings": {
+            "media_position": "left",
+            "title": "Immer wieder dieselbe Haarentfernung.",
+            "text": "<p>Die Haare kommen zurück, bevor du eigentlich wieder Lust auf den nächsten Termin hast. Genau das macht die Routine nervig und teuer. Du willst ein Ergebnis, das sich in deinen Alltag einfügt, nicht umgekehrt.</p>"
+          }
+        },
+        "feature_2": {
+          "type": "feature",
+          "settings": {
+            "media_position": "right",
+            "title": "IPL für deine Home-Routine.",
+            "text": "<p>Dieses Gerät ist für die regelmäßige Anwendung zuhause gedacht und unterstützt dich bei der Behandlung von Gesicht und Körper. Du nutzt es flexibel dann, wenn es in deinen Tag passt.</p>"
+          }
+        },
+        "feature_3": {
+          "type": "feature",
+          "settings": {
+            "media_position": "left",
+            "title": "Über 2.000 Bestellungen.",
+            "text": "<p>Das Produkt wird bereits von vielen Käuferinnen bestellt, die eine einfache Lösung für zuhause suchen. Das Ergebnis, das sie anstreben, ist klar: glattere Haut, weniger Terminstress und mehr Kontrolle über die eigene...</p>"
+          }
+        }
+      },
+      "block_order": [
+        "feature_1",
+        "feature_2",
+        "feature_3"
+      ]
+    },
     "ai_section_3": {
-      "type": "ai-feature-split",
-      "settings": {
-      },
-      "blocks": {
-        "feature_1": {
-          "type": "feature",
-          "settings": {
-            "media_position": "left",
-            "title": "3D-Waben für bessere Luftzirkulation",
-            "text": "<p>Dieses Kühlkissen hilft dir, Hitzestau beim Sitzen spürbar zu reduzieren. Die 3D-Wabenstruktur sorgt für mehr Luftzirkulation, das gelartige Material fühlt sich angenehm kühl an und bleibt auch bei längeren Fahrten komfortabel.</p>"
-          }
-        },
-        "feature_2": {
-          "type": "feature",
-          "settings": {
-            "media_position": "right",
-            "title": "Kühlendes Gel-Feeling bei Sommerhitze",
-            "text": "<p>Kühlendes Gel-Feeling bei Sommerhitze</p>"
-          }
-        },
-        "feature_3": {
-          "type": "feature",
-          "settings": {
-            "media_position": "left",
-            "title": "Angenehmer Sitzkomfort auf kurzen und langen Strecken",
-            "text": "<p>Angenehmer Sitzkomfort auf kurzen und langen Strecken</p>"
-          }
-        }
-      },
-      "block_order": [
-        "feature_1",
-        "feature_2",
-        "feature_3"
-      ]
-    },
-    "ai_section_4": {
-      "type": "ai-feature-split",
-      "settings": {
-      },
-      "blocks": {
-        "feature_1": {
-          "type": "feature",
-          "settings": {
-            "media_position": "left",
-            "title": "Sofort einsatzbereit",
-            "text": "<p>Kein komplizierter Aufbau, keine extra Schritte. Das Kissen wird einfach auf den Sitz gelegt und direkt genutzt. Ideal, wenn du im Sommer schnell mehr Komfort im Auto willst.</p>"
-          }
-        },
-        "feature_2": {
-          "type": "feature",
-          "settings": {
-            "media_position": "right",
-            "title": "Leicht zu platzieren",
-            "text": "<p>Leicht zu platzieren</p>"
-          }
-        },
-        "feature_3": {
-          "type": "feature",
-          "settings": {
-            "media_position": "left",
-            "title": "Für tägliche Fahrten gemacht",
-            "text": "<p>Für tägliche Fahrten gemacht</p>"
-          }
-        }
-      },
-      "block_order": [
-        "feature_1",
-        "feature_2",
-        "feature_3"
-      ]
-    },
-    "ai_section_5": {
       "type": "ai-comparison-table",
       "settings": {
-        "eyebrow": "Direkter Vergleich",
-        "title": "Warum normales Sitzen im Sommer nervt.",
-        "header_feature": "Normales Polster",
-        "header_primary": "Dieses Kühlkissen",
+        "eyebrow": "Direkt verglichen",
+        "title": "Warum zuhause einfach besser passt.",
+        "header_feature": "Zuhause",
+        "header_primary": "Studio",
         "header_competitor": ""
       },
       "blocks": {
         "row_1": {
           "type": "row",
           "settings": {
-            "label": "Hitzegefühl",
-            "value": "Staut sich",
-            "comparison": "Bleibt kühler"
+            "label": "Termin nötig",
+            "value": "Nein",
+            "comparison": "Ja"
           }
         },
         "row_2": {
           "type": "row",
           "settings": {
-            "label": "Luftzirkulation",
-            "value": "Kaum vorhanden",
-            "comparison": "3D-Waben-Design"
+            "label": "Flexibel nutzbar",
+            "value": "Ja",
+            "comparison": "Eingeschränkt"
           }
         },
         "row_3": {
           "type": "row",
           "settings": {
-            "label": "Sitzkomfort",
-            "value": "Wird schnell unangenehm",
-            "comparison": "Spürbar entspannter"
+            "label": "Anwendung für mehrere Zonen",
+            "value": "Achseln, Beine, Bikinizone",
+            "comparison": "Oft getrennt"
           }
         },
         "row_4": {
           "type": "row",
           "settings": {
-            "label": "Einsatzort",
-            "value": "Nur Auto",
-            "comparison": "Auto, Büro, Zuhause"
+            "label": "Routine im Alltag",
+            "value": "Einfach",
+            "comparison": "Aufwendig"
           }
         }
       },
@@ -323,21 +349,20 @@
         "row_4"
       ]
     },
-    "ai_section_6": {
+    "ai_section_4": {
       "type": "ai-cta-banner",
       "settings": {
-        "eyebrow": "Jetzt wechseln",
-        "title": "Sofort kühler sitzen beginnt hier.",
-        "body": "<p>Mach Sommerfahrten angenehmer und reduziere das heiße Sitzgefühl dort, wo du es am meisten spürst. Für Auto, Büro und Zuhause.</p>",
-        "button_label": "Jetzt kühler sitzen"
+        "eyebrow": "Jetzt starten",
+        "title": "Glatte Haut. Ohne Termin.",
+        "body": "<p>Hol dir die IPL-Routine für zuhause und behandle deine wichtigsten Zonen flexibel, wann es dir passt.</p>",
+        "button_label": "Jetzt entdecken"
       }
     }
   },
   "order": [
     "main",
+    "ai_section_2",
     "ai_section_3",
-    "ai_section_4",
-    "ai_section_5",
-    "ai_section_6"
+    "ai_section_4"
   ]
 }
