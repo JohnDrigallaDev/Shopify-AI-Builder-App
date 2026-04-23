@@ -1,0 +1,311 @@
+{% liquid
+  assign pai_variant = product.selected_or_first_available_variant
+  assign pai_mode = block.settings.status_mode
+  assign pai_threshold = block.settings.low_stock_threshold | default: 5
+  assign pai_continue_rule = block.settings.continue_selling_behavior | default: 'in'
+  assign pai_status = 'in'
+  assign pai_inventory_qty = pai_variant.inventory_quantity | default: 0
+
+  if pai_mode == 'manual'
+    assign pai_status = block.settings.manual_status
+  else
+    if pai_variant == blank
+      assign pai_status = 'out'
+    elsif pai_variant.available == false and pai_variant.inventory_policy != 'continue'
+      assign pai_status = 'out'
+    elsif pai_variant.inventory_management == blank
+      assign pai_status = 'in'
+    elsif pai_inventory_qty <= 0 and pai_variant.inventory_policy == 'continue'
+      assign pai_status = pai_continue_rule
+    elsif pai_inventory_qty <= 0
+      assign pai_status = 'out'
+    elsif pai_inventory_qty <= pai_threshold
+      assign pai_status = 'low'
+    else
+      assign pai_status = 'in'
+    endif
+  endif
+
+  assign pai_status_text = block.settings.in_stock_text
+  if pai_status == 'low'
+    assign pai_status_text = block.settings.low_stock_text
+  elsif pai_status == 'out'
+    assign pai_status_text = block.settings.out_of_stock_text
+  endif
+
+  assign pai_wrapper_id = 'pai-stock-status-' | append: section.id | append: '-' | append: block.id
+%}
+
+<div
+  id="{{ pai_wrapper_id }}"
+  class="pai-stock-status pai-stock-status--{{ pai_status }}"
+  {{ block.shopify_attributes }}
+  data-block-id="{{ block.id }}"
+  data-mode="{{ block.settings.status_mode }}"
+  data-threshold="{{ block.settings.low_stock_threshold }}"
+  data-manual-status="{{ block.settings.manual_status }}"
+  data-continue-behavior="{{ block.settings.continue_selling_behavior }}"
+  data-text-in="{{ block.settings.in_stock_text | escape }}"
+  data-text-low="{{ block.settings.low_stock_text | escape }}"
+  data-text-out="{{ block.settings.out_of_stock_text | escape }}"
+  style="
+    --pai-font-size: {{ block.settings.text_size }}px;
+    --pai-icon-size: {{ block.settings.icon_size }}px;
+    --pai-gap: {{ block.settings.content_gap }}px;
+    --pai-padding-y: {{ block.settings.padding_y }}px;
+    --pai-padding-x: {{ block.settings.padding_x }}px;
+    --pai-radius: {{ block.settings.border_radius }}px;
+    --pai-border-width: {{ block.settings.border_width }}px;
+    --pai-border-color: {{ block.settings.border_color }};
+    --pai-bg-in: {{ block.settings.in_stock_bg }};
+    --pai-bg-low: {{ block.settings.low_stock_bg }};
+    --pai-bg-out: {{ block.settings.out_of_stock_bg }};
+    --pai-color-in: #14a800;
+    --pai-color-low: #d9822b;
+    --pai-color-out: #8a8a8a;
+  "
+>
+  <div class="pai-stock-status__inner">
+    <span class="pai-stock-status__icon" aria-hidden="true">
+      <span class="pai-icon pai-icon--in">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path fill="currentColor" d="M3 13.5L2.25 12H7.5l-.6-1.5H2L1.25 9h7.8l-.6-1.5H1.11L.25 6H4a2 2 0 0 1 2-2h12v4h3l3 4v5h-2a3 3 0 0 1-3 3a3 3 0 0 1-3-3h-4a3 3 0 0 1-3 3a3 3 0 0 1-3-3H4v-3.5H3m16 5a1.5 1.5 0 0 0 1.5-1.5a1.5 1.5 0 0 0-1.5-1.5a1.5 1.5 0 0 0-1.5 1.5a1.5 1.5 0 0 0 1.5 1.5m1.5-9H18V12h4.46L20.5 9.5M9 18.5a1.5 1.5 0 0 0 1.5-1.5A1.5 1.5 0 0 0 9 15.5A1.5 1.5 0 0 0 7.5 17A1.5 1.5 0 0 0 9 18.5Z"/>
+        </svg>
+      </span>
+
+      <span class="pai-icon pai-icon--out">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5">
+            <path d="M20.5 13.25v6.25l-9 4l-9-4v-6.111m9-.389v10.5m9-14.5l-9 4l-9-4m18 0l-9-4l-9 4"/>
+            <path d="m2.5 9l-2-3.5l9-4l2 3.5m9 4l2-3.5l-8.5-4L11.5 5m0 8l-2 3.5l-9-4l2-3.5m9 4l2.5 3.5l9-4.5l-2.5-3"/>
+          </g>
+        </svg>
+      </span>
+
+      <span class="pai-icon pai-icon--low">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+            <path d="M0 0h24v24H0z" stroke="none"/>
+            <path fill="currentColor" stroke="none" d="M12 7a5 5 0 1 1-4.995 5.217L7 12l.005-.217A5 5 0 0 1 12 7z"/>
+          </g>
+        </svg>
+      </span>
+    </span>
+
+    <span class="pai-stock-status__text">{{ pai_status_text }}</span>
+  </div>
+
+  <script type="application/json" class="pai-variant-data">
+    {
+      {% for variant in product.variants %}
+        "{{ variant.id }}": {
+          "available": {{ variant.available | json }},
+          "inventory_quantity": {{ variant.inventory_quantity | default: 0 | json }},
+          "inventory_management": {{ variant.inventory_management | json }},
+          "inventory_policy": {{ variant.inventory_policy | json }}
+        }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    }
+  </script>
+</div>
+
+<style>
+  #{{ pai_wrapper_id }} {
+    width: 100%;
+    font: inherit;
+  }
+
+  #{{ pai_wrapper_id }} .pai-stock-status__inner {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--pai-gap);
+    width: 100%;
+    padding: var(--pai-padding-y) var(--pai-padding-x);
+    border-radius: var(--pai-radius);
+    border: var(--pai-border-width) solid var(--pai-border-color);
+    font-family: inherit;
+    font-size: var(--pai-font-size);
+    line-height: 1.35;
+    font-weight: 500;
+    transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+  }
+
+  #{{ pai_wrapper_id }} .pai-stock-status__icon {
+    width: var(--pai-icon-size);
+    height: var(--pai-icon-size);
+    min-width: var(--pai-icon-size);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: inherit;
+  }
+
+  #{{ pai_wrapper_id }} .pai-icon {
+    display: none;
+    width: 100%;
+    height: 100%;
+  }
+
+  #{{ pai_wrapper_id }} .pai-icon svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  #{{ pai_wrapper_id }} .pai-stock-status__text {
+    color: inherit;
+    font: inherit;
+    letter-spacing: 0;
+  }
+
+  #{{ pai_wrapper_id }}.pai-stock-status--in .pai-stock-status__inner {
+    color: var(--pai-color-in);
+    background: var(--pai-bg-in);
+  }
+
+  #{{ pai_wrapper_id }}.pai-stock-status--low .pai-stock-status__inner {
+    color: var(--pai-color-low);
+    background: var(--pai-bg-low);
+  }
+
+  #{{ pai_wrapper_id }}.pai-stock-status--out .pai-stock-status__inner {
+    color: var(--pai-color-out);
+    background: var(--pai-bg-out);
+  }
+
+  #{{ pai_wrapper_id }}.pai-stock-status--in .pai-icon--in,
+  #{{ pai_wrapper_id }}.pai-stock-status--low .pai-icon--low,
+  #{{ pai_wrapper_id }}.pai-stock-status--out .pai-icon--out {
+    display: inline-flex;
+  }
+</style>
+
+<script>
+  (function() {
+    const root = document.getElementById('{{ pai_wrapper_id }}');
+    if (!root) return;
+
+    const jsonEl = root.querySelector('.pai-variant-data');
+    if (!jsonEl) return;
+
+    let variantMap = {};
+    try {
+      variantMap = JSON.parse(jsonEl.textContent);
+    } catch (e) {
+      variantMap = {};
+    }
+
+    const settings = {
+      mode: root.dataset.mode || 'auto',
+      threshold: parseInt(root.dataset.threshold || '5', 10),
+      manualStatus: root.dataset.manualStatus || 'in',
+      continueBehavior: root.dataset.continueBehavior || 'in',
+      textIn: root.dataset.textIn || 'In stock. Delivered in 3-5 days.',
+      textLow: root.dataset.textLow || 'Low stock. Delivered in 3-5 days.',
+      textOut: root.dataset.textOut || 'Out of stock.'
+    };
+
+    const textEl = root.querySelector('.pai-stock-status__text');
+
+    function findVariantInput() {
+      const closestSection = root.closest('section, .shopify-section, main, .product');
+      if (closestSection) {
+        const localInput = closestSection.querySelector('form[action*="/cart/add"] input[name="id"]');
+        if (localInput) return localInput;
+      }
+      return document.querySelector('form[action*="/cart/add"] input[name="id"]');
+    }
+
+    function getStatusFromVariant(variantData) {
+      if (settings.mode === 'manual') {
+        return settings.manualStatus;
+      }
+
+      if (!variantData) return 'out';
+
+      const available = !!variantData.available;
+      const qty = parseInt(variantData.inventory_quantity || 0, 10);
+      const inventoryManagement = variantData.inventory_management;
+      const inventoryPolicy = variantData.inventory_policy;
+
+      if (!available && inventoryPolicy !== 'continue') {
+        return 'out';
+      }
+
+      if (!inventoryManagement) {
+        return available ? 'in' : 'out';
+      }
+
+      if (qty <= 0 && inventoryPolicy === 'continue') {
+        return settings.continueBehavior;
+      }
+
+      if (qty <= 0) {
+        return 'out';
+      }
+
+      if (qty <= settings.threshold) {
+        return 'low';
+      }
+
+      return 'in';
+    }
+
+    function getTextFromStatus(status) {
+      if (status === 'low') return settings.textLow;
+      if (status === 'out') return settings.textOut;
+      return settings.textIn;
+    }
+
+    function renderStatus(status) {
+      root.classList.remove('pai-stock-status--in', 'pai-stock-status--low', 'pai-stock-status--out');
+      root.classList.add('pai-stock-status--' + status);
+      if (textEl) textEl.textContent = getTextFromStatus(status);
+    }
+
+    function updateFromCurrentVariant() {
+      if (settings.mode === 'manual') {
+        renderStatus(settings.manualStatus);
+        return;
+      }
+
+      const input = findVariantInput();
+      if (!input) return;
+
+      const variantId = String(input.value || '');
+      const variantData = variantMap[variantId];
+      const status = getStatusFromVariant(variantData);
+      renderStatus(status);
+    }
+
+    updateFromCurrentVariant();
+
+    const variantInput = findVariantInput();
+    if (variantInput) {
+      const observer = new MutationObserver(updateFromCurrentVariant);
+      observer.observe(variantInput, { attributes: true, attributeFilter: ['value'] });
+      variantInput.addEventListener('change', updateFromCurrentVariant);
+      variantInput.addEventListener('input', updateFromCurrentVariant);
+    }
+
+    document.addEventListener('change', function(event) {
+      const target = event.target;
+      if (!target) return;
+      if (target.name === 'id' || target.matches('select, input[type="radio"], input[type="hidden"]')) {
+        setTimeout(updateFromCurrentVariant, 10);
+      }
+    });
+
+    document.addEventListener('variant:change', function() {
+      setTimeout(updateFromCurrentVariant, 10);
+    });
+
+    document.addEventListener('product:variant-change', function() {
+      setTimeout(updateFromCurrentVariant, 10);
+    });
+
+    document.addEventListener('shopify:block:select', function() {
+      setTimeout(updateFromCurrentVariant, 10);
+    });
+  })();
+</script>

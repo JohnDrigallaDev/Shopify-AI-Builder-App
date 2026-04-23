@@ -144,6 +144,29 @@
             "icon_size": 28,
             "icon_size_mobile": 24
           }
+        },
+        "ai_stock_status": {
+          "type": "ai_stock_status",
+          "settings": {
+            "status_mode": "auto",
+            "low_stock_threshold": 5,
+            "continue_selling_behavior": "in",
+            "manual_status": "in",
+            "in_stock_text": "In stock. Delivered in 3-5 days.",
+            "low_stock_text": "Low stock. Delivered in 3-5 days.",
+            "out_of_stock_text": "Out of stock.",
+            "text_size": 13,
+            "icon_size": 22,
+            "content_gap": 10,
+            "padding_y": 8,
+            "padding_x": 0,
+            "border_radius": 0,
+            "border_width": 0,
+            "border_color": "#e5e5e5",
+            "in_stock_bg": "transparent",
+            "low_stock_bg": "transparent",
+            "out_of_stock_bg": "transparent"
+          }
         }
       },
       "block_order": [
@@ -157,6 +180,7 @@
         "ai_product_benefits",
         "variant_picker",
         "ai_buy_button",
+        "ai_stock_status",
         "ai_payment_icons",
         "ai_trust_badges"
       ],

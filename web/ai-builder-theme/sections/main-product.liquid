@@ -751,6 +751,8 @@
               </section>
             {%- when 'ai_product_benefits' -%}
               {% render 'product-ai-benefits', block: block %}
+            {%- when 'ai_stock_status' -%}
+              {% render 'product-ai-stock-status', block: block, product: product, section: section %}
             {%- when 'product_ai_accordion' -%}
               {% render 'product-ai-accordion', block: block %}
             {%- when 'ai_product_reviews' -%}
@@ -2147,6 +2149,166 @@
       ]
     },
     {
+      "type": "ai_stock_status",
+      "name": "AI Stock Status",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "status_mode",
+          "label": "Mode",
+          "default": "auto",
+          "options": [
+            { "value": "auto", "label": "Automatic" },
+            { "value": "manual", "label": "Manual" }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "low_stock_threshold",
+          "label": "Low stock threshold",
+          "min": 1,
+          "max": 50,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "select",
+          "id": "continue_selling_behavior",
+          "label": "If inventory is 0 but continue selling is enabled",
+          "default": "in",
+          "options": [
+            { "value": "in", "label": "Show In stock" },
+            { "value": "low", "label": "Show Low stock" },
+            { "value": "out", "label": "Show Out of stock" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "manual_status",
+          "label": "Manual status",
+          "default": "in",
+          "options": [
+            { "value": "in", "label": "In stock" },
+            { "value": "low", "label": "Low stock" },
+            { "value": "out", "label": "Out of stock" }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "in_stock_text",
+          "label": "In stock text",
+          "default": "In stock. Delivered in 3-5 days."
+        },
+        {
+          "type": "text",
+          "id": "low_stock_text",
+          "label": "Low stock text",
+          "default": "Low stock. Delivered in 3-5 days."
+        },
+        {
+          "type": "text",
+          "id": "out_of_stock_text",
+          "label": "Out of stock text",
+          "default": "Out of stock."
+        },
+        {
+          "type": "range",
+          "id": "text_size",
+          "label": "Text size",
+          "min": 10,
+          "max": 32,
+          "step": 1,
+          "unit": "px",
+          "default": 13
+        },
+        {
+          "type": "range",
+          "id": "icon_size",
+          "label": "Icon size",
+          "min": 14,
+          "max": 40,
+          "step": 1,
+          "unit": "px",
+          "default": 22
+        },
+        {
+          "type": "range",
+          "id": "content_gap",
+          "label": "Gap",
+          "min": 4,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "default": 10
+        },
+        {
+          "type": "range",
+          "id": "padding_y",
+          "label": "Padding top/bottom",
+          "min": 0,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "default": 8
+        },
+        {
+          "type": "range",
+          "id": "padding_x",
+          "label": "Padding left/right",
+          "min": 0,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "border_radius",
+          "label": "Border radius",
+          "min": 0,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "border_width",
+          "label": "Border width",
+          "min": 0,
+          "max": 4,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "color",
+          "id": "border_color",
+          "label": "Border color",
+          "default": "#e5e5e5"
+        },
+        {
+          "type": "color",
+          "id": "in_stock_bg",
+          "label": "In stock background",
+          "default": "transparent"
+        },
+        {
+          "type": "color",
+          "id": "low_stock_bg",
+          "label": "Low stock background",
+          "default": "transparent"
+        },
+        {
+          "type": "color",
+          "id": "out_of_stock_bg",
+          "label": "Out of stock background",
+          "default": "transparent"
+        }
+      ]
+    },
+    {
       "type": "ai_trust_badges",
       "name": "AI Trust Badges",
       "settings": [
@@ -3058,7 +3220,7 @@
           "max": 40,
           "step": 2,
           "unit": "px",
-          "default": 2
+          "default": 0
         },
         {
           "type": "range",
