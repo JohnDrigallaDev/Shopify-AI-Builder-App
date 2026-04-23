@@ -43,7 +43,7 @@
           "type": "ai_product_teaser_text",
           "settings": {
             "margin_top": 14,
-            "text": "<p>Die ergonomische Konturform unterstützt Seitenschläfer dort, wo Nacken und Schulter es brauchen.</p>"
+            "text": "<p>Saugen, wischen und fertig — ideal für Fliesen, Laminat, Vinyl und Haustierhaare.</p>"
           }
         },
         "ai_product_divider": {
@@ -80,14 +80,14 @@
           "type": "ai_product_benefits",
           "settings": {
             "benefit_1_icon": "heart",
-            "benefit_1_text": "<p>Konturform</p>",
-            "benefit_2_icon": "adjustments-horizontal",
-            "benefit_2_text": "<p>Gezielte Entlastung</p>",
-            "benefit_3_icon": "clock",
-            "benefit_3_text": "<p>Ruhiger liegen</p>",
+            "benefit_1_text": "<p>Weniger Aufwand</p>",
+            "benefit_2_icon": "battery-100",
+            "benefit_2_text": "<p>Starke Aufnahme</p>",
+            "benefit_3_icon": "earth",
+            "benefit_3_text": "<p>Alltagstauglich</p>",
             "benefit_4_icon": "check-badge",
             "benefit_4_text": "",
-            "benefit_5_icon": "earth",
+            "benefit_5_icon": "clock",
             "benefit_5_text": "",
             "benefit_6_icon": "gift",
             "benefit_6_text": "",
@@ -96,8 +96,8 @@
             "show_benefit_6": false,
             "padding_top": 18,
             "padding_bottom": 18,
-            "row_gap": 2,
-            "row_gap_mobile": 2,
+            "row_gap": 8,
+            "row_gap_mobile": 7,
             "icon_gap": 8,
             "icon_gap_mobile": 8,
             "icon_size": 16,
@@ -120,7 +120,7 @@
         "ai_buy_button": {
           "type": "ai_buy_button",
           "settings": {
-            "button_text": "Jetzt ansehen",
+            "button_text": "Jetzt vereinfachen",
             "show_dynamic_checkout": false
           }
         },
@@ -135,38 +135,8 @@
         "ai_trust_badges": {
           "type": "ai_trust_badges",
           "settings": {
-            "padding_top": 0,
-            "outer_bg": "transparent",
-            "columns_mobile": "2",
-            "grid_gap_desktop": 4,
-            "grid_gap_mobile": 4,
-            "card_padding_y": 0,
-            "icon_size": 28,
-            "icon_size_mobile": 24
-          }
-        },
-        "product_ai_accordion": {
-          "type": "product_ai_accordion",
-          "settings": {
-            "ai_acc_single_open": true,
-            "ai_acc_first_open": false,
-            "ai_acc_item_1_show": true,
-            "ai_acc_item_1_icon": "truck",
-            "ai_acc_item_1_title": "Versand",
-            "ai_acc_item_1_content": "<p>Die Lieferzeit beträgt in der Regel ca. 5 Werktage. Du erhältst eine Versandbestätigung, sobald deine Bestellung unterwegs ist.</p>",
-            "ai_acc_item_2_show": true,
-            "ai_acc_item_2_icon": "rueckgabe",
-            "ai_acc_item_2_title": "Rückgabe",
-            "ai_acc_item_2_content": "<p>Du kannst deine Bestellung innerhalb von 30 Tagen zurückgeben, sofern sie unbenutzt und vollständig ist. Kontaktiere dafür einfach unseren Support.</p>",
-            "ai_acc_item_3_show": true,
-            "ai_acc_item_3_icon": "book-open",
-            "ai_acc_item_3_title": "Produktdetails",
-            "ai_acc_item_3_content": "<ul><li>Memory-Schaum-Nackenkissen mit konturierter Form für Seiten-, Rücken- und Bauchschläfer.</li><li>Unterstützt Nacken und Schulter durch ergonomische Anpassung für stabileres Liegen.</li></ul>",
-            "ai_acc_item_4_show": true,
-            "ai_acc_item_4_icon": "chat-bubble",
-            "ai_acc_item_4_title": "Support",
-            "ai_acc_item_4_content": "<p>Unser Support hilft dir bei Fragen zur Bestellung, Lieferung oder Anwendung des Produkts schnell und unkompliziert weiter.</p>",
-            "ai_acc_item_5_show": false
+            "padding_top": 8,
+            "outer_bg": "transparent"
           }
         }
       },
@@ -182,8 +152,7 @@
         "variant_picker",
         "ai_buy_button",
         "ai_payment_icons",
-        "ai_trust_badges",
-        "product_ai_accordion"
+        "ai_trust_badges"
       ],
       "settings": {
         "enable_sticky_info": true,
@@ -205,17 +174,78 @@
         "padding_bottom": 0
       }
     },
-    "ai_section_3": {
-      "type": "ai-feature-split",
+    "ai_section_1": {
+      "type": "ai-trust-badges",
       "settings": {
+        "max_width_mode": "page",
+        "columns_desktop": 2,
+        "columns_mobile": "1",
+        "section_style_mode": "solid",
+        "outer_bg": "#ffffff",
+        "card_bg": "#f3f3f3",
+        "card_border_color": "#f3f3f3",
+        "card_border_width": 0,
+        "card_radius": 12,
+        "card_shadow_strength": 0,
+        "heading_color": "#111111",
+        "text_color": "#2b2b2b",
+        "icon_color": "#111111",
+        "section_top": 8,
+        "section_bottom": 8,
+        "margin_top": 4,
+        "margin_bottom": 4
       },
+      "blocks": {
+        "badge_1": {
+          "type": "badge",
+          "settings": {
+            "title": "Schneller Versand",
+            "text": "<p>Direkt zu dir nach Hause geliefert.</p>",
+            "icon_style": "box"
+          }
+        },
+        "badge_2": {
+          "type": "badge",
+          "settings": {
+            "title": "Sichere Zahlung",
+            "text": "<p>Bequem und geschützt bezahlen.</p>",
+            "icon_style": "klarna"
+          }
+        },
+        "badge_3": {
+          "type": "badge",
+          "settings": {
+            "title": "Einfache Rückgabe",
+            "text": "<p>Ohne Stress wieder zurückgeben.</p>",
+            "icon_style": "shield"
+          }
+        },
+        "badge_4": {
+          "type": "badge",
+          "settings": {
+            "title": "Sauberer Alltag",
+            "text": "<p>Für Hartböden und Haustiere gemacht.</p>",
+            "icon_style": "scoop"
+          }
+        }
+      },
+      "block_order": [
+        "badge_1",
+        "badge_2",
+        "badge_3",
+        "badge_4"
+      ]
+    },
+    "ai_section_2": {
+      "type": "ai-feature-split",
+      "settings": {},
       "blocks": {
         "feature_1": {
           "type": "feature",
           "settings": {
             "media_position": "left",
             "title": "PROBLEMBEWUSSTSEIN",
-            "text": "<p>Zu viel Druck am Nacken macht Seitenschlaf schnell unbequem.</p>"
+            "text": "<p>Ein Durchgang statt zweimal reinigen.</p>"
           }
         },
         "feature_2": {
@@ -223,7 +253,7 @@
           "settings": {
             "media_position": "right",
             "title": "PRODUKTVORSTELLUNG",
-            "text": "<p>Die ergonomische Form stützt Nacken und Schulter gezielt.</p>"
+            "text": "<p>Saugt Schmutz und wischt nasse Verschmutzungen direkt mit.</p>"
           }
         },
         "feature_3": {
@@ -231,7 +261,42 @@
           "settings": {
             "media_position": "left",
             "title": "SOCIAL PROOF",
-            "text": "<p>Mehr Ruhe durch ein Kissen, das den Schlaf stabiler hält.</p>"
+            "text": "<p>Für Haushalte, die schnell saubere Böden sehen wollen.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "feature_1",
+        "feature_2",
+        "feature_3"
+      ]
+    },
+    "ai_section_3": {
+      "type": "ai-feature-split",
+      "settings": {},
+      "blocks": {
+        "feature_1": {
+          "type": "feature",
+          "settings": {
+            "media_position": "left",
+            "title": "PROBLEMBEWUSSTSEIN",
+            "text": "<p>Problem: Zu viel Aufwand für jeden kleinen Fleck.</p>"
+          }
+        },
+        "feature_2": {
+          "type": "feature",
+          "settings": {
+            "media_position": "right",
+            "title": "PRODUKTVORSTELLUNG",
+            "text": "<p>Lösung: 3-in-1 Reinigung für Saugen, Wischen und Nassschmutz.</p>"
+          }
+        },
+        "feature_3": {
+          "type": "feature",
+          "settings": {
+            "media_position": "left",
+            "title": "SOCIAL PROOF",
+            "text": "<p>Social Proof: Ideal für Hartböden, Tierhaare und tägliche Routinen.</p>"
           }
         }
       },
@@ -242,117 +307,45 @@
       ]
     },
     "ai_section_4": {
-      "type": "ai-feature-split",
-      "settings": {
-      },
-      "blocks": {
-        "feature_1": {
-          "type": "feature",
-          "settings": {
-            "media_position": "left",
-            "title": "PROBLEMBEWUSSTSEIN",
-            "text": "<p>Konturform unterstützt Seitenschläfer an der richtigen Stelle.</p>"
-          }
-        },
-        "feature_2": {
-          "type": "feature",
-          "settings": {
-            "media_position": "right",
-            "title": "PRODUKTVORSTELLUNG",
-            "text": "<p>Memory-Schaum passt sich dem Kopf kontrolliert an.</p>"
-          }
-        },
-        "feature_3": {
-          "type": "feature",
-          "settings": {
-            "media_position": "left",
-            "title": "SOCIAL PROOF",
-            "text": "<p>Praktische Lösung für alle, die nachts weniger Druck wollen.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "feature_1",
-        "feature_2",
-        "feature_3"
-      ]
-    },
-    "ai_section_5": {
-      "type": "ai-feature-split",
-      "settings": {
-      },
-      "blocks": {
-        "feature_1": {
-          "type": "feature",
-          "settings": {
-            "media_position": "left",
-            "title": "PROBLEMBEWUSSTSEIN",
-            "text": "<p>Für Menschen, die nachts oft die Position wechseln.</p>"
-          }
-        },
-        "feature_2": {
-          "type": "feature",
-          "settings": {
-            "media_position": "right",
-            "title": "PRODUKTVORSTELLUNG",
-            "text": "<p>Für spürbar mehr Struktur im Nackenbereich.</p>"
-          }
-        },
-        "feature_3": {
-          "type": "feature",
-          "settings": {
-            "media_position": "left",
-            "title": "SOCIAL PROOF",
-            "text": "<p>Für ein Kissen, das simpel ist und den Job erledigt.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "feature_1",
-        "feature_2",
-        "feature_3"
-      ]
-    },
-    "ai_section_6": {
       "type": "ai-comparison-table",
       "settings": {
-        "eyebrow": "Kurz verglichen",
-        "title": "Warum dieses Kissen anders wirkt",
-        "header_feature": "Ohne passende Form",
-        "header_primary": "Mit Kontur-Kissen",
+        "eyebrow": "Direkter Vergleich",
+        "title": "Warum 1-Step-Reinigung den Unterschied macht",
+        "header_feature": "Kriterium",
+        "header_primary": "Hearten Nass...",
         "header_competitor": ""
       },
       "blocks": {
         "row_1": {
           "type": "row",
           "settings": {
-            "label": "Nackenstütze",
-            "value": "Unruhig",
-            "comparison": "Gezielt geführt"
+            "label": "Reinigungsschritte",
+            "value": "1 Schritt",
+            "comparison": "Saugen und wischen..."
           }
         },
         "row_2": {
           "type": "row",
           "settings": {
-            "label": "Seitenschlaf",
-            "value": "Druckpunkte",
-            "comparison": "Mehr Entlastung"
+            "label": "Nasse Verschmutzungen",
+            "value": "Direkt mitgenommen",
+            "comparison": "Kein separates Nachwischen..."
           }
         },
         "row_3": {
           "type": "row",
           "settings": {
-            "label": "Position halten",
-            "value": "Ständiges Nachjustieren",
-            "comparison": "Stabiler liegen"
+            "label": "Haustierhaare",
+            "value": "Hartböden-tauglich",
+            "comparison": "Für Alltag mit Tieren..."
           }
         },
         "row_4": {
           "type": "row",
           "settings": {
-            "label": "Schlafgefühl",
-            "value": "Verspannt",
-            "comparison": "Ruhiger"
+            "label": "Bedienung",
+            "value": "Leicht & selbstfahrend",
+            "comparison": "Weniger Kraftaufwand beim..."
           }
         }
       },
@@ -363,22 +356,22 @@
         "row_4"
       ]
     },
-    "ai_section_7": {
+    "ai_section_5": {
       "type": "ai-cta-banner",
       "settings": {
-        "eyebrow": "Jetzt starten",
-        "title": "Weniger Nackenstress beginnt heute Nacht.",
-        "body": "<p>Sichern Sie sich das konturierte Memory-Schaum-Kissen für mehr Halt, weniger Druck und eine ruhigere Schlafposition.</p>",
-        "button_label": "Jetzt ansehen"
+        "eyebrow": "Jetzt vereinfachen",
+        "title": "Mach aus Putzen wieder eine schnelle Sache",
+        "body": "<p>Wenn du Hartböden, Haustiere und wenig Zeit hast, ist das genau der Shortcut für saubere Böden ohne Umwege.</p>",
+        "button_label": "Jetzt vereinfachen"
       }
     }
   },
   "order": [
     "main",
+    "ai_section_1",
+    "ai_section_2",
     "ai_section_3",
     "ai_section_4",
-    "ai_section_5",
-    "ai_section_6",
-    "ai_section_7"
+    "ai_section_5"
   ]
 }

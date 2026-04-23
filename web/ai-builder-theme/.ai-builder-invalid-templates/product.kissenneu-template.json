@@ -96,8 +96,8 @@
             "show_benefit_6": false,
             "padding_top": 18,
             "padding_bottom": 18,
-            "row_gap": 2,
-            "row_gap_mobile": 2,
+            "row_gap": 8,
+            "row_gap_mobile": 7,
             "icon_gap": 8,
             "icon_gap_mobile": 8,
             "icon_size": 16,
@@ -135,14 +135,8 @@
         "ai_trust_badges": {
           "type": "ai_trust_badges",
           "settings": {
-            "padding_top": 0,
-            "outer_bg": "transparent",
-            "columns_mobile": "2",
-            "grid_gap_desktop": 4,
-            "grid_gap_mobile": 4,
-            "card_padding_y": 0,
-            "icon_size": 28,
-            "icon_size_mobile": 24
+            "padding_top": 8,
+            "outer_bg": "transparent"
           }
         },
         "product_ai_accordion": {
@@ -205,10 +199,124 @@
         "padding_bottom": 0
       }
     },
+    "ai_section_1": {
+      "type": "ai-trust-badges",
+      "settings": {
+        "max_width_mode": "page",
+        "columns_desktop": 2,
+        "columns_mobile": "1",
+        "section_style_mode": "solid",
+        "outer_bg": "#ffffff",
+        "card_bg": "#f3f3f3",
+        "card_border_color": "#f3f3f3",
+        "card_border_width": 0,
+        "card_radius": 12,
+        "card_shadow_strength": 0,
+        "heading_color": "#111111",
+        "text_color": "#2b2b2b",
+        "icon_color": "#111111",
+        "section_top": 8,
+        "section_bottom": 8,
+        "margin_top": 4,
+        "margin_bottom": 4
+      },
+      "blocks": {
+        "badge_1": {
+          "type": "badge",
+          "settings": {
+            "title": "Sichere Zahlung",
+            "text": "<p>Einfach und geschützt bezahlen.</p>",
+            "icon_style": "klarna"
+          }
+        },
+        "badge_2": {
+          "type": "badge",
+          "settings": {
+            "title": "Risikofrei testen",
+            "text": "<p>Klare Rückgabeoptionen sorgen für Sicherheit.</p>",
+            "icon_style": "shield"
+          }
+        },
+        "badge_3": {
+          "type": "badge",
+          "settings": {
+            "title": "Sauber verpackt",
+            "text": "<p>Praktisch und unaufgeregt geliefert.</p>",
+            "icon_style": "box"
+          }
+        },
+        "badge_4": {
+          "type": "badge",
+          "settings": {
+            "title": "Schnelle Abwicklung",
+            "text": "<p>Bestellung ohne unnötige Schritte.</p>",
+            "icon_style": "scoop"
+          }
+        }
+      },
+      "block_order": [
+        "badge_1",
+        "badge_2",
+        "badge_3",
+        "badge_4"
+      ]
+    },
+    "ai_section_2": {
+      "type": "ai-trust-badges",
+      "settings": {
+        "max_width_mode": "page",
+        "columns_desktop": 2,
+        "columns_mobile": "1",
+        "section_style_mode": "solid",
+        "outer_bg": "#ffffff",
+        "card_bg": "#f3f3f3",
+        "card_border_color": "#f3f3f3",
+        "card_border_width": 0,
+        "card_radius": 12,
+        "card_shadow_strength": 0,
+        "heading_color": "#111111",
+        "text_color": "#2b2b2b",
+        "icon_color": "#111111",
+        "section_top": 8,
+        "section_bottom": 8,
+        "margin_top": 4,
+        "margin_bottom": 4
+      },
+      "blocks": {
+        "badge_1": {
+          "type": "badge",
+          "settings": {
+            "title": "Kontur für Seitenlage",
+            "text": "<p>Passt zu typischen Schlafpositionen.</p>",
+            "icon_style": "scoop"
+          }
+        },
+        "badge_2": {
+          "type": "badge",
+          "settings": {
+            "title": "Gezielte Entlastung",
+            "text": "<p>Unterstützt dort, wo Nacken und Schulter es brauchen.</p>",
+            "icon_style": "shield"
+          }
+        },
+        "badge_3": {
+          "type": "badge",
+          "settings": {
+            "title": "Weniger Nachjustieren",
+            "text": "<p>Hält die Position ruhiger durch die Nacht.</p>",
+            "icon_style": "box"
+          }
+        }
+      },
+      "block_order": [
+        "badge_1",
+        "badge_2",
+        "badge_3"
+      ]
+    },
     "ai_section_3": {
       "type": "ai-feature-split",
-      "settings": {
-      },
+      "settings": {},
       "blocks": {
         "feature_1": {
           "type": "feature",
@@ -243,8 +351,7 @@
     },
     "ai_section_4": {
       "type": "ai-feature-split",
-      "settings": {
-      },
+      "settings": {},
       "blocks": {
         "feature_1": {
           "type": "feature",
@@ -279,8 +386,7 @@
     },
     "ai_section_5": {
       "type": "ai-feature-split",
-      "settings": {
-      },
+      "settings": {},
       "blocks": {
         "feature_1": {
           "type": "feature",
@@ -375,6 +481,8 @@
   },
   "order": [
     "main",
+    "ai_section_1",
+    "ai_section_2",
     "ai_section_3",
     "ai_section_4",
     "ai_section_5",

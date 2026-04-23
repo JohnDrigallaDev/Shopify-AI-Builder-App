@@ -43,7 +43,7 @@
           "type": "ai_product_teaser_text",
           "settings": {
             "margin_top": 14,
-            "text": "<p>Die ergonomische Konturform unterstützt Seitenschläfer dort, wo Nacken und Schulter es brauchen.</p>"
+            "text": "<p>Das kühlende Kissen für spürbar mehr Komfort bei Sommerfahrten, im Büro und zu Hause.</p>"
           }
         },
         "ai_product_divider": {
@@ -80,14 +80,14 @@
           "type": "ai_product_benefits",
           "settings": {
             "benefit_1_icon": "heart",
-            "benefit_1_text": "<p>Konturform</p>",
+            "benefit_1_text": "<p>Mehr Komfort</p>",
             "benefit_2_icon": "adjustments-horizontal",
-            "benefit_2_text": "<p>Gezielte Entlastung</p>",
-            "benefit_3_icon": "clock",
-            "benefit_3_text": "<p>Ruhiger liegen</p>",
+            "benefit_2_text": "<p>Spürbar bequem</p>",
+            "benefit_3_icon": "earth",
+            "benefit_3_text": "<p>Flexibel nutzbar</p>",
             "benefit_4_icon": "check-badge",
             "benefit_4_text": "",
-            "benefit_5_icon": "earth",
+            "benefit_5_icon": "clock",
             "benefit_5_text": "",
             "benefit_6_icon": "gift",
             "benefit_6_text": "",
@@ -96,8 +96,8 @@
             "show_benefit_6": false,
             "padding_top": 18,
             "padding_bottom": 18,
-            "row_gap": 2,
-            "row_gap_mobile": 2,
+            "row_gap": 8,
+            "row_gap_mobile": 7,
             "icon_gap": 8,
             "icon_gap_mobile": 8,
             "icon_size": 16,
@@ -120,7 +120,7 @@
         "ai_buy_button": {
           "type": "ai_buy_button",
           "settings": {
-            "button_text": "Jetzt ansehen",
+            "button_text": "Jetzt kühler sitzen",
             "show_dynamic_checkout": false
           }
         },
@@ -128,45 +128,15 @@
           "type": "ai_payment_icons",
           "settings": {
             "section_bg": "transparent",
-            "icon_height": 19,
-            "icon_height_mobile": 19
+            "icon_height": 17,
+            "icon_height_mobile": 16
           }
         },
         "ai_trust_badges": {
           "type": "ai_trust_badges",
           "settings": {
-            "padding_top": 0,
-            "outer_bg": "transparent",
-            "columns_mobile": "2",
-            "grid_gap_desktop": 4,
-            "grid_gap_mobile": 4,
-            "card_padding_y": 0,
-            "icon_size": 28,
-            "icon_size_mobile": 24
-          }
-        },
-        "product_ai_accordion": {
-          "type": "product_ai_accordion",
-          "settings": {
-            "ai_acc_single_open": true,
-            "ai_acc_first_open": false,
-            "ai_acc_item_1_show": true,
-            "ai_acc_item_1_icon": "truck",
-            "ai_acc_item_1_title": "Versand",
-            "ai_acc_item_1_content": "<p>Die Lieferzeit beträgt in der Regel ca. 5 Werktage. Du erhältst eine Versandbestätigung, sobald deine Bestellung unterwegs ist.</p>",
-            "ai_acc_item_2_show": true,
-            "ai_acc_item_2_icon": "rueckgabe",
-            "ai_acc_item_2_title": "Rückgabe",
-            "ai_acc_item_2_content": "<p>Du kannst deine Bestellung innerhalb von 30 Tagen zurückgeben, sofern sie unbenutzt und vollständig ist. Kontaktiere dafür einfach unseren Support.</p>",
-            "ai_acc_item_3_show": true,
-            "ai_acc_item_3_icon": "book-open",
-            "ai_acc_item_3_title": "Produktdetails",
-            "ai_acc_item_3_content": "<ul><li>Memory-Schaum-Nackenkissen mit konturierter Form für Seiten-, Rücken- und Bauchschläfer.</li><li>Unterstützt Nacken und Schulter durch ergonomische Anpassung für stabileres Liegen.</li></ul>",
-            "ai_acc_item_4_show": true,
-            "ai_acc_item_4_icon": "chat-bubble",
-            "ai_acc_item_4_title": "Support",
-            "ai_acc_item_4_content": "<p>Unser Support hilft dir bei Fragen zur Bestellung, Lieferung oder Anwendung des Produkts schnell und unkompliziert weiter.</p>",
-            "ai_acc_item_5_show": false
+            "padding_top": 8,
+            "outer_bg": "transparent"
           }
         }
       },
@@ -182,17 +152,13 @@
         "variant_picker",
         "ai_buy_button",
         "ai_payment_icons",
-        "ai_trust_badges",
-        "product_ai_accordion"
+        "ai_trust_badges"
       ],
       "settings": {
         "enable_sticky_info": true,
         "media_size": "small",
         "gallery_layout": "thumbnail_slider",
         "media_fit": "contain",
-        "image_zoom": "none",
-        "mobile_thumbnails": "show",
-        "hide_variants": true,
         "thumbnail_gap_desktop": 0,
         "thumbnail_gap_mobile": 0,
         "thumbnail_size_desktop": 92,
@@ -205,33 +171,147 @@
         "padding_bottom": 0
       }
     },
+    "ai_section_1": {
+      "type": "ai-trust-badges",
+      "settings": {
+        "max_width_mode": "page",
+        "columns_desktop": 2,
+        "columns_mobile": "1",
+        "section_style_mode": "solid",
+        "outer_bg": "#ffffff",
+        "card_bg": "#f3f3f3",
+        "card_border_color": "#f3f3f3",
+        "card_border_width": 0,
+        "card_radius": 12,
+        "card_shadow_strength": 0,
+        "heading_color": "#111111",
+        "text_color": "#2b2b2b",
+        "icon_color": "#111111",
+        "section_top": 8,
+        "section_bottom": 8,
+        "margin_top": 4,
+        "margin_bottom": 4
+      },
+      "blocks": {
+        "badge_1": {
+          "type": "badge",
+          "settings": {
+            "title": "Schneller Versand",
+            "text": "<p>Direkt zu dir geliefert</p>",
+            "icon_style": "box"
+          }
+        },
+        "badge_2": {
+          "type": "badge",
+          "settings": {
+            "title": "Sichere Zahlung",
+            "text": "<p>Mit gängigen Zahlungsarten</p>",
+            "icon_style": "klarna"
+          }
+        },
+        "badge_3": {
+          "type": "badge",
+          "settings": {
+            "title": "Einfacher Support",
+            "text": "<p>Bei Fragen schnell erreichbar</p>",
+            "icon_style": "shield"
+          }
+        },
+        "badge_4": {
+          "type": "badge",
+          "settings": {
+            "title": "Praktisch im Alltag",
+            "text": "<p>Für Auto, Büro und Zuhause</p>",
+            "icon_style": "scoop"
+          }
+        }
+      },
+      "block_order": [
+        "badge_1",
+        "badge_2",
+        "badge_3",
+        "badge_4"
+      ]
+    },
+    "ai_section_2": {
+      "type": "ai-trust-badges",
+      "settings": {
+        "max_width_mode": "page",
+        "columns_desktop": 2,
+        "columns_mobile": "1",
+        "section_style_mode": "solid",
+        "outer_bg": "#ffffff",
+        "card_bg": "#f3f3f3",
+        "card_border_color": "#f3f3f3",
+        "card_border_width": 0,
+        "card_radius": 12,
+        "card_shadow_strength": 0,
+        "heading_color": "#111111",
+        "text_color": "#2b2b2b",
+        "icon_color": "#111111",
+        "section_top": 8,
+        "section_bottom": 8,
+        "margin_top": 4,
+        "margin_bottom": 4
+      },
+      "blocks": {
+        "badge_1": {
+          "type": "badge",
+          "settings": {
+            "title": "Sommerfahrten",
+            "text": "<p>Mehr Komfort bei Hitze</p>",
+            "icon_style": "shield"
+          }
+        },
+        "badge_2": {
+          "type": "badge",
+          "settings": {
+            "title": "Bürostuhl",
+            "text": "<p>Angenehmer sitzen im Alltag</p>",
+            "icon_style": "scoop"
+          }
+        },
+        "badge_3": {
+          "type": "badge",
+          "settings": {
+            "title": "Zuhause nutzbar",
+            "text": "<p>Auch auf Stuhl oder Sofa</p>",
+            "icon_style": "box"
+          }
+        }
+      },
+      "block_order": [
+        "badge_1",
+        "badge_2",
+        "badge_3"
+      ]
+    },
     "ai_section_3": {
       "type": "ai-feature-split",
-      "settings": {
-      },
+      "settings": {},
       "blocks": {
         "feature_1": {
           "type": "feature",
           "settings": {
             "media_position": "left",
-            "title": "PROBLEMBEWUSSTSEIN",
-            "text": "<p>Zu viel Druck am Nacken macht Seitenschlaf schnell unbequem.</p>"
+            "title": "3D-Waben für bessere Luftzirkulation",
+            "text": "<p>Dieses Kühlkissen hilft dir, Hitzestau beim Sitzen spürbar zu reduzieren. Die 3D-Wabenstruktur sorgt für mehr Luftzirkulation, das gelartige Material fühlt sich angenehm kühl an und bleibt auch bei längeren Fahrten komfortabel.</p>"
           }
         },
         "feature_2": {
           "type": "feature",
           "settings": {
             "media_position": "right",
-            "title": "PRODUKTVORSTELLUNG",
-            "text": "<p>Die ergonomische Form stützt Nacken und Schulter gezielt.</p>"
+            "title": "Kühlendes Gel-Feeling bei Sommerhitze",
+            "text": "<p>Kühlendes Gel-Feeling bei Sommerhitze</p>"
           }
         },
         "feature_3": {
           "type": "feature",
           "settings": {
             "media_position": "left",
-            "title": "SOCIAL PROOF",
-            "text": "<p>Mehr Ruhe durch ein Kissen, das den Schlaf stabiler hält.</p>"
+            "title": "Angenehmer Sitzkomfort auf kurzen und langen Strecken",
+            "text": "<p>Angenehmer Sitzkomfort auf kurzen und langen Strecken</p>"
           }
         }
       },
@@ -243,31 +323,30 @@
     },
     "ai_section_4": {
       "type": "ai-feature-split",
-      "settings": {
-      },
+      "settings": {},
       "blocks": {
         "feature_1": {
           "type": "feature",
           "settings": {
             "media_position": "left",
-            "title": "PROBLEMBEWUSSTSEIN",
-            "text": "<p>Konturform unterstützt Seitenschläfer an der richtigen Stelle.</p>"
+            "title": "Sofort einsatzbereit",
+            "text": "<p>Kein komplizierter Aufbau, keine extra Schritte. Das Kissen wird einfach auf den Sitz gelegt und direkt genutzt. Ideal, wenn du im Sommer schnell mehr Komfort im Auto willst.</p>"
           }
         },
         "feature_2": {
           "type": "feature",
           "settings": {
             "media_position": "right",
-            "title": "PRODUKTVORSTELLUNG",
-            "text": "<p>Memory-Schaum passt sich dem Kopf kontrolliert an.</p>"
+            "title": "Leicht zu platzieren",
+            "text": "<p>Leicht zu platzieren</p>"
           }
         },
         "feature_3": {
           "type": "feature",
           "settings": {
             "media_position": "left",
-            "title": "SOCIAL PROOF",
-            "text": "<p>Praktische Lösung für alle, die nachts weniger Druck wollen.</p>"
+            "title": "Für tägliche Fahrten gemacht",
+            "text": "<p>Für tägliche Fahrten gemacht</p>"
           }
         }
       },
@@ -278,81 +357,45 @@
       ]
     },
     "ai_section_5": {
-      "type": "ai-feature-split",
-      "settings": {
-      },
-      "blocks": {
-        "feature_1": {
-          "type": "feature",
-          "settings": {
-            "media_position": "left",
-            "title": "PROBLEMBEWUSSTSEIN",
-            "text": "<p>Für Menschen, die nachts oft die Position wechseln.</p>"
-          }
-        },
-        "feature_2": {
-          "type": "feature",
-          "settings": {
-            "media_position": "right",
-            "title": "PRODUKTVORSTELLUNG",
-            "text": "<p>Für spürbar mehr Struktur im Nackenbereich.</p>"
-          }
-        },
-        "feature_3": {
-          "type": "feature",
-          "settings": {
-            "media_position": "left",
-            "title": "SOCIAL PROOF",
-            "text": "<p>Für ein Kissen, das simpel ist und den Job erledigt.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "feature_1",
-        "feature_2",
-        "feature_3"
-      ]
-    },
-    "ai_section_6": {
       "type": "ai-comparison-table",
       "settings": {
-        "eyebrow": "Kurz verglichen",
-        "title": "Warum dieses Kissen anders wirkt",
-        "header_feature": "Ohne passende Form",
-        "header_primary": "Mit Kontur-Kissen",
+        "eyebrow": "Direkter Vergleich",
+        "title": "Warum normales Sitzen im Sommer nervt.",
+        "header_feature": "Normales Polster",
+        "header_primary": "Dieses Kühlkissen",
         "header_competitor": ""
       },
       "blocks": {
         "row_1": {
           "type": "row",
           "settings": {
-            "label": "Nackenstütze",
-            "value": "Unruhig",
-            "comparison": "Gezielt geführt"
+            "label": "Hitzegefühl",
+            "value": "Staut sich",
+            "comparison": "Bleibt kühler"
           }
         },
         "row_2": {
           "type": "row",
           "settings": {
-            "label": "Seitenschlaf",
-            "value": "Druckpunkte",
-            "comparison": "Mehr Entlastung"
+            "label": "Luftzirkulation",
+            "value": "Kaum vorhanden",
+            "comparison": "3D-Waben-Design"
           }
         },
         "row_3": {
           "type": "row",
           "settings": {
-            "label": "Position halten",
-            "value": "Ständiges Nachjustieren",
-            "comparison": "Stabiler liegen"
+            "label": "Sitzkomfort",
+            "value": "Wird schnell unangenehm",
+            "comparison": "Spürbar entspannter"
           }
         },
         "row_4": {
           "type": "row",
           "settings": {
-            "label": "Schlafgefühl",
-            "value": "Verspannt",
-            "comparison": "Ruhiger"
+            "label": "Einsatzort",
+            "value": "Nur Auto",
+            "comparison": "Auto, Büro, Zuhause"
           }
         }
       },
@@ -363,22 +406,23 @@
         "row_4"
       ]
     },
-    "ai_section_7": {
+    "ai_section_6": {
       "type": "ai-cta-banner",
       "settings": {
-        "eyebrow": "Jetzt starten",
-        "title": "Weniger Nackenstress beginnt heute Nacht.",
-        "body": "<p>Sichern Sie sich das konturierte Memory-Schaum-Kissen für mehr Halt, weniger Druck und eine ruhigere Schlafposition.</p>",
-        "button_label": "Jetzt ansehen"
+        "eyebrow": "Jetzt wechseln",
+        "title": "Sofort kühler sitzen beginnt hier.",
+        "body": "<p>Mach Sommerfahrten angenehmer und reduziere das heiße Sitzgefühl dort, wo du es am meisten spürst. Für Auto, Büro und Zuhause.</p>",
+        "button_label": "Jetzt kühler sitzen"
       }
     }
   },
   "order": [
     "main",
+    "ai_section_1",
+    "ai_section_2",
     "ai_section_3",
     "ai_section_4",
     "ai_section_5",
-    "ai_section_6",
-    "ai_section_7"
+    "ai_section_6"
   ]
 }

@@ -114,10 +114,13 @@
     position: relative;
     display: flex;
     align-items: center;
-    gap: 10px;
-    min-height: 62px;
+    gap: 8px;
+    min-height: max(24px, calc(38px + (var(--atb-pad-y) * 2)));
     height: 100%;
-    padding: var(--atb-pad-y) var(--atb-pad-x);
+    padding-top: max(0px, var(--atb-pad-y));
+    padding-bottom: max(0px, var(--atb-pad-y));
+    padding-left: var(--atb-pad-x);
+    padding-right: var(--atb-pad-x);
     border-radius: var(--atb-card-radius);
     border: var(--atb-card-border-width) solid var(--atb-card-border);
     background: var(--atb-card-bg);
@@ -171,7 +174,7 @@
   }
 
   #{{ atb_id }} .ai-trust-badges__text {
-    margin-top: 2px;
+    margin-top: 1px;
     color: var(--atb-text-color);
     font-size: var(--atb-text-size-mobile);
     line-height: 1.08;
@@ -201,8 +204,8 @@
     }
 
     #{{ atb_id }} .ai-trust-badges__card {
-      gap: 12px;
-      min-height: 70px;
+      gap: 10px;
+      min-height: max(28px, calc(42px + (var(--atb-pad-y) * 2)));
     }
 
     #{{ atb_id }} .ai-trust-badges__icon {
