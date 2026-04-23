@@ -860,122 +860,7 @@
                 </div>
               </section>
             {%- when 'ai_product_benefits' -%}
-              <section
-                id="ai-product-benefits-{{ section.id }}-{{ block.id }}"
-                class="ai-product-benefits-section ai-product-benefits-section--product-info"
-                style="
-                  --apb-section-bg: {{ block.settings.section_bg }};
-                  --apb-card-bg: {{ block.settings.card_bg }};
-                  --apb-card-border: {{ block.settings.card_border_color }};
-                  --apb-card-border-width: {{ block.settings.card_border_width }}px;
-                  --apb-card-radius: {{ block.settings.card_radius }}px;
-                  --apb-card-padding-y: {{ block.settings.card_padding_y }}px;
-                  --apb-card-padding-x: {{ block.settings.card_padding_x }}px;
-                  --apb-card-shadow: 0 {{ block.settings.shadow_strength | divided_by: 2.0 }}px {{ block.settings.shadow_strength | times: 2 }}px rgba(0,0,0,0.10);
-                  --apb-gap-desktop: {{ block.settings.gap_desktop }}px;
-                  --apb-gap-mobile: {{ block.settings.gap_mobile }}px;
-                  --apb-icon-size: {{ block.settings.icon_size }}px;
-                  --apb-icon-size-mobile: {{ block.settings.icon_size_mobile }}px;
-                  --apb-icon-color: {{ block.settings.icon_color }};
-                  --apb-icon-bg: {{ block.settings.icon_bg }};
-                  --apb-icon-border: {{ block.settings.icon_border_color }};
-                  --apb-icon-border-width: {{ block.settings.icon_border_width }}px;
-                  --apb-icon-radius: {{ block.settings.icon_radius }}px;
-                  --apb-text-size: {{ block.settings.text_size }}px;
-                  --apb-text-size-mobile: {{ block.settings.text_size_mobile }}px;
-                  --apb-text-color: {{ block.settings.text_color }};
-                  --apb-font-weight: {{ block.settings.font_weight }};
-                  --apb-product-info-padding-top: {{ block.settings.padding_top }}px;
-                  --apb-product-info-padding-bottom: {{ block.settings.padding_bottom }}px;
-                  background: var(--apb-section-bg);
-                "
-                {{ block.shopify_attributes }}
-              >
-                <div class="ai-product-benefits__inner">
-                  <div class="ai-product-benefits__grid ai-product-benefits__grid--desktop-{{ block.settings.columns_desktop }} ai-product-benefits__grid--mobile-{{ block.settings.columns_mobile }}">
-                    {%- for index in (1..6) -%}
-                      {%- assign enabled_key = 'show_benefit_' | append: index -%}
-                      {%- assign text_key = 'benefit_' | append: index | append: '_text' -%}
-                      {%- assign icon_key = 'benefit_' | append: index | append: '_icon_style' -%}
-                      {%- assign image_key = 'benefit_' | append: index | append: '_custom_icon' -%}
-                      {%- assign benefit_enabled = block.settings[enabled_key] -%}
-                      {%- assign benefit_text = block.settings[text_key] | strip -%}
-                      {%- assign benefit_icon = block.settings[icon_key] -%}
-                      {%- assign benefit_image = block.settings[image_key] -%}
-                      {%- if benefit_enabled and benefit_text != blank -%}
-                        <div class="ai-product-benefits__item">
-                          <div class="ai-product-benefits__card{% if block.settings.show_pill_style %} is-pill{% endif %}">
-                            <div class="ai-product-benefits__icon-wrap">
-                              {%- if benefit_image != blank -%}
-                                <div class="ai-product-benefits__icon ai-product-benefits__icon--image">
-                                  {{
-                                    benefit_image
-                                    | image_url: width: 120
-                                    | image_tag:
-                                      class: 'ai-product-benefits__icon-image',
-                                      widths: '40,60,80,120',
-                                      loading: 'lazy',
-                                      alt: benefit_text
-                                  }}
-                                </div>
-                              {%- else -%}
-                                <div class="ai-product-benefits__icon" aria-hidden="true">
-                                  {%- case benefit_icon -%}
-                                    {%- when 'box' -%}
-                                      <svg viewBox="0 0 24 24" fill="none">
-                                        <path d="M3 7.5 12 3l9 4.5M3 7.5V17l9 4 9-4V7.5M3 7.5 12 12m0 9v-9m0 0 9-4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-                                      </svg>
-                                    {%- when 'return' -%}
-                                      <svg viewBox="0 0 24 24" fill="none">
-                                        <path d="M8 8 4 12l4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M5 12h7c4.4 0 7 2.6 7 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-                                      </svg>
-                                    {%- when 'truck' -%}
-                                      <svg viewBox="0 0 24 24" fill="none">
-                                        <path d="M3 6h11v8H3zM14 9h3l3 3v2h-6z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
-                                        <circle cx="8" cy="17.5" r="1.5" fill="currentColor"/>
-                                        <circle cx="18" cy="17.5" r="1.5" fill="currentColor"/>
-                                      </svg>
-                                    {%- when 'shield' -%}
-                                      <svg viewBox="0 0 24 24" fill="none">
-                                        <path d="M12 3l7 3v5c0 4.8-2.9 8.8-7 10-4.1-1.2-7-5.2-7-10V6l7-3Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
-                                        <path d="m9.5 11.8 1.6 1.7 3.4-3.7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-                                      </svg>
-                                    {%- when 'star' -%}
-                                      <svg viewBox="0 0 24 24" fill="none">
-                                        <path d="m12 3.8 2.4 4.8 5.3.8-3.9 3.8.9 5.4L12 16.1 7.3 18.6l.9-5.4L4.3 9.4l5.3-.8L12 3.8Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
-                                      </svg>
-                                    {%- when 'leaf' -%}
-                                      <svg viewBox="0 0 24 24" fill="none">
-                                        <path d="M18.5 5.5c-6.8 0-11 3.8-11 9.2 0 2.4 1.9 4.3 4.2 4.3 4.8 0 6.8-4.5 6.8-8.6V5.5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
-                                        <path d="M8 18c1.6-2.6 4-4.8 7.5-6.7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
-                                      </svg>
-                                    {%- when 'heart' -%}
-                                      <svg viewBox="0 0 24 24" fill="none">
-                                        <path d="M12 20s-6.8-4.3-8.5-8C2.1 8.8 4 5.5 7.4 5.5c2 0 3.4 1 4.6 2.6 1.2-1.6 2.6-2.6 4.6-2.6C20 5.5 21.9 8.8 20.5 12 18.8 15.7 12 20 12 20Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
-                                      </svg>
-                                    {%- when 'clock' -%}
-                                      <svg viewBox="0 0 24 24" fill="none">
-                                        <circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.7"/>
-                                        <path d="M12 7.8v4.6l3 1.8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-                                      </svg>
-                                    {%- else -%}
-                                      <svg viewBox="0 0 24 24" fill="none">
-                                        <path d="M12 3.5 14.2 5l2.7-.2 1.2 2.4 2.3 1.5-.7 2.6.7 2.7-2.3 1.4-1.2 2.4-2.7-.2L12 20.5l-2.2-1.5-2.7.2-1.2-2.4-2.3-1.4.7-2.7-.7-2.6 2.3-1.5 1.2-2.4 2.7.2L12 3.5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
-                                        <path d="m9.3 12.2 1.8 1.8 3.6-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-                                      </svg>
-                                  {%- endcase -%}
-                                </div>
-                              {%- endif -%}
-                            </div>
-                            <div class="ai-product-benefits__text">{{ benefit_text }}</div>
-                          </div>
-                        </div>
-                      {%- endif -%}
-                    {%- endfor -%}
-                  </div>
-                </div>
-              </section>
+              {% render 'product-ai-benefits', block: block %}
             {%- when 'product_ai_accordion' -%}
               {% render 'product-ai-accordion', block: block %}
             {%- when 'ai_product_reviews' -%}
@@ -4369,33 +4254,40 @@
           "default": true
         },
         {
-          "type": "text",
-          "id": "benefit_1_text",
-          "label": "Benefit 1 Text",
-          "default": "High Quality"
-        },
-        {
           "type": "select",
-          "id": "benefit_1_icon_style",
+          "id": "benefit_1_icon",
           "label": "Benefit 1 Icon",
-          "default": "badge",
+          "default": "heart",
           "options": [
-            { "value": "badge", "label": "Qualität / Badge" },
-            { "value": "box", "label": "Box / Versand" },
-            { "value": "return", "label": "Returns / Zurück" },
-            { "value": "truck", "label": "Truck / Lieferung" },
-            { "value": "shield", "label": "Shield / Sicherheit" },
-            { "value": "star", "label": "Star / Bewertung" },
-            { "value": "leaf", "label": "Leaf / Natürlich" },
-            { "value": "heart", "label": "Heart / Love" },
-            { "value": "clock", "label": "Clock / Schnell" }
+            { "value": "none", "label": "Kein Icon" },
+            { "value": "adjustments-horizontal", "label": "Anpassung" },
+            { "value": "banknotes", "label": "Geld" },
+            { "value": "battery-100", "label": "Batterie voll" },
+            { "value": "battery-0", "label": "Batterie leer" },
+            { "value": "bell-slash", "label": "Benachrichtigung aus" },
+            { "value": "bell", "label": "Benachrichtigung" },
+            { "value": "book-open", "label": "Buch" },
+            { "value": "calendar", "label": "Kalender" },
+            { "value": "camera", "label": "Kamera" },
+            { "value": "chat-bubble", "label": "Chat" },
+            { "value": "check-badge", "label": "Badge" },
+            { "value": "clock", "label": "Uhr" },
+            { "value": "clipboard", "label": "Clipboard" },
+            { "value": "setting", "label": "Einstellung" },
+            { "value": "rueckgabe", "label": "Rückgabe" },
+            { "value": "eye", "label": "Auge" },
+            { "value": "gift", "label": "Geschenk" },
+            { "value": "earth", "label": "Welt" },
+            { "value": "heart", "label": "Herz" },
+            { "value": "lock-closed", "label": "Schloss" },
+            { "value": "truck", "label": "Lieferung" }
           ]
         },
         {
-          "type": "image_picker",
-          "id": "benefit_1_custom_icon",
-          "label": "Benefit 1 eigenes Icon",
-          "info": "Überschreibt das vordefinierte Icon."
+          "type": "richtext",
+          "id": "benefit_1_text",
+          "label": "Benefit 1 Text",
+          "default": "<p><strong>Premium comfort:</strong> soft organic cotton</p>"
         },
         {
           "type": "checkbox",
@@ -4404,33 +4296,40 @@
           "default": true
         },
         {
-          "type": "text",
-          "id": "benefit_2_text",
-          "label": "Benefit 2 Text",
-          "default": "Fast shipping"
-        },
-        {
           "type": "select",
-          "id": "benefit_2_icon_style",
+          "id": "benefit_2_icon",
           "label": "Benefit 2 Icon",
-          "default": "truck",
+          "default": "adjustments-horizontal",
           "options": [
-            { "value": "badge", "label": "Qualität / Badge" },
-            { "value": "box", "label": "Box / Versand" },
-            { "value": "return", "label": "Returns / Zurück" },
-            { "value": "truck", "label": "Truck / Lieferung" },
-            { "value": "shield", "label": "Shield / Sicherheit" },
-            { "value": "star", "label": "Star / Bewertung" },
-            { "value": "leaf", "label": "Leaf / Natürlich" },
-            { "value": "heart", "label": "Heart / Love" },
-            { "value": "clock", "label": "Clock / Schnell" }
+            { "value": "none", "label": "Kein Icon" },
+            { "value": "adjustments-horizontal", "label": "Anpassung" },
+            { "value": "banknotes", "label": "Geld" },
+            { "value": "battery-100", "label": "Batterie voll" },
+            { "value": "battery-0", "label": "Batterie leer" },
+            { "value": "bell-slash", "label": "Benachrichtigung aus" },
+            { "value": "bell", "label": "Benachrichtigung" },
+            { "value": "book-open", "label": "Buch" },
+            { "value": "calendar", "label": "Kalender" },
+            { "value": "camera", "label": "Kamera" },
+            { "value": "chat-bubble", "label": "Chat" },
+            { "value": "check-badge", "label": "Badge" },
+            { "value": "clock", "label": "Uhr" },
+            { "value": "clipboard", "label": "Clipboard" },
+            { "value": "setting", "label": "Einstellung" },
+            { "value": "rueckgabe", "label": "Rückgabe" },
+            { "value": "eye", "label": "Auge" },
+            { "value": "gift", "label": "Geschenk" },
+            { "value": "earth", "label": "Welt" },
+            { "value": "heart", "label": "Herz" },
+            { "value": "lock-closed", "label": "Schloss" },
+            { "value": "truck", "label": "Lieferung" }
           ]
         },
         {
-          "type": "image_picker",
-          "id": "benefit_2_custom_icon",
-          "label": "Benefit 2 eigenes Icon",
-          "info": "Überschreibt das vordefinierte Icon."
+          "type": "richtext",
+          "id": "benefit_2_text",
+          "label": "Benefit 2 Text",
+          "default": "<p><strong>Perfect fit:</strong> modern unisex cut</p>"
         },
         {
           "type": "checkbox",
@@ -4439,67 +4338,82 @@
           "default": true
         },
         {
-          "type": "text",
-          "id": "benefit_3_text",
-          "label": "Benefit 3 Text",
-          "default": "Free returns"
-        },
-        {
           "type": "select",
-          "id": "benefit_3_icon_style",
+          "id": "benefit_3_icon",
           "label": "Benefit 3 Icon",
-          "default": "return",
+          "default": "battery-100",
           "options": [
-            { "value": "badge", "label": "Qualität / Badge" },
-            { "value": "box", "label": "Box / Versand" },
-            { "value": "return", "label": "Returns / Zurück" },
-            { "value": "truck", "label": "Truck / Lieferung" },
-            { "value": "shield", "label": "Shield / Sicherheit" },
-            { "value": "star", "label": "Star / Bewertung" },
-            { "value": "leaf", "label": "Leaf / Natürlich" },
-            { "value": "heart", "label": "Heart / Love" },
-            { "value": "clock", "label": "Clock / Schnell" }
+            { "value": "none", "label": "Kein Icon" },
+            { "value": "adjustments-horizontal", "label": "Anpassung" },
+            { "value": "banknotes", "label": "Geld" },
+            { "value": "battery-100", "label": "Batterie voll" },
+            { "value": "battery-0", "label": "Batterie leer" },
+            { "value": "bell-slash", "label": "Benachrichtigung aus" },
+            { "value": "bell", "label": "Benachrichtigung" },
+            { "value": "book-open", "label": "Buch" },
+            { "value": "calendar", "label": "Kalender" },
+            { "value": "camera", "label": "Kamera" },
+            { "value": "chat-bubble", "label": "Chat" },
+            { "value": "check-badge", "label": "Badge" },
+            { "value": "clock", "label": "Uhr" },
+            { "value": "clipboard", "label": "Clipboard" },
+            { "value": "setting", "label": "Einstellung" },
+            { "value": "rueckgabe", "label": "Rückgabe" },
+            { "value": "eye", "label": "Auge" },
+            { "value": "gift", "label": "Geschenk" },
+            { "value": "earth", "label": "Welt" },
+            { "value": "heart", "label": "Herz" },
+            { "value": "lock-closed", "label": "Schloss" },
+            { "value": "truck", "label": "Lieferung" }
           ]
         },
         {
-          "type": "image_picker",
-          "id": "benefit_3_custom_icon",
-          "label": "Benefit 3 eigenes Icon",
-          "info": "Überschreibt das vordefinierte Icon."
+          "type": "richtext",
+          "id": "benefit_3_text",
+          "label": "Benefit 3 Text",
+          "default": "<p><strong>Easy care:</strong> machine washable</p>"
         },
         {
           "type": "checkbox",
           "id": "show_benefit_4",
           "label": "Benefit 4 anzeigen",
-          "default": false
-        },
-        {
-          "type": "text",
-          "id": "benefit_4_text",
-          "label": "Benefit 4 Text"
+          "default": true
         },
         {
           "type": "select",
-          "id": "benefit_4_icon_style",
+          "id": "benefit_4_icon",
           "label": "Benefit 4 Icon",
-          "default": "shield",
+          "default": "earth",
           "options": [
-            { "value": "badge", "label": "Qualität / Badge" },
-            { "value": "box", "label": "Box / Versand" },
-            { "value": "return", "label": "Returns / Zurück" },
-            { "value": "truck", "label": "Truck / Lieferung" },
-            { "value": "shield", "label": "Shield / Sicherheit" },
-            { "value": "star", "label": "Star / Bewertung" },
-            { "value": "leaf", "label": "Leaf / Natürlich" },
-            { "value": "heart", "label": "Heart / Love" },
-            { "value": "clock", "label": "Clock / Schnell" }
+            { "value": "none", "label": "Kein Icon" },
+            { "value": "adjustments-horizontal", "label": "Anpassung" },
+            { "value": "banknotes", "label": "Geld" },
+            { "value": "battery-100", "label": "Batterie voll" },
+            { "value": "battery-0", "label": "Batterie leer" },
+            { "value": "bell-slash", "label": "Benachrichtigung aus" },
+            { "value": "bell", "label": "Benachrichtigung" },
+            { "value": "book-open", "label": "Buch" },
+            { "value": "calendar", "label": "Kalender" },
+            { "value": "camera", "label": "Kamera" },
+            { "value": "chat-bubble", "label": "Chat" },
+            { "value": "check-badge", "label": "Badge" },
+            { "value": "clock", "label": "Uhr" },
+            { "value": "clipboard", "label": "Clipboard" },
+            { "value": "setting", "label": "Einstellung" },
+            { "value": "rueckgabe", "label": "Rückgabe" },
+            { "value": "eye", "label": "Auge" },
+            { "value": "gift", "label": "Geschenk" },
+            { "value": "earth", "label": "Welt" },
+            { "value": "heart", "label": "Herz" },
+            { "value": "lock-closed", "label": "Schloss" },
+            { "value": "truck", "label": "Lieferung" }
           ]
         },
         {
-          "type": "image_picker",
-          "id": "benefit_4_custom_icon",
-          "label": "Benefit 4 eigenes Icon",
-          "info": "Überschreibt das vordefinierte Icon."
+          "type": "richtext",
+          "id": "benefit_4_text",
+          "label": "Benefit 4 Text",
+          "default": "<p><strong>Sustainable choice:</strong> eco-friendly materials</p>"
         },
         {
           "type": "checkbox",
@@ -4508,32 +4422,39 @@
           "default": false
         },
         {
-          "type": "text",
-          "id": "benefit_5_text",
-          "label": "Benefit 5 Text"
-        },
-        {
           "type": "select",
-          "id": "benefit_5_icon_style",
+          "id": "benefit_5_icon",
           "label": "Benefit 5 Icon",
-          "default": "star",
+          "default": "check-badge",
           "options": [
-            { "value": "badge", "label": "Qualität / Badge" },
-            { "value": "box", "label": "Box / Versand" },
-            { "value": "return", "label": "Returns / Zurück" },
-            { "value": "truck", "label": "Truck / Lieferung" },
-            { "value": "shield", "label": "Shield / Sicherheit" },
-            { "value": "star", "label": "Star / Bewertung" },
-            { "value": "leaf", "label": "Leaf / Natürlich" },
-            { "value": "heart", "label": "Heart / Love" },
-            { "value": "clock", "label": "Clock / Schnell" }
+            { "value": "none", "label": "Kein Icon" },
+            { "value": "adjustments-horizontal", "label": "Anpassung" },
+            { "value": "banknotes", "label": "Geld" },
+            { "value": "battery-100", "label": "Batterie voll" },
+            { "value": "battery-0", "label": "Batterie leer" },
+            { "value": "bell-slash", "label": "Benachrichtigung aus" },
+            { "value": "bell", "label": "Benachrichtigung" },
+            { "value": "book-open", "label": "Buch" },
+            { "value": "calendar", "label": "Kalender" },
+            { "value": "camera", "label": "Kamera" },
+            { "value": "chat-bubble", "label": "Chat" },
+            { "value": "check-badge", "label": "Badge" },
+            { "value": "clock", "label": "Uhr" },
+            { "value": "clipboard", "label": "Clipboard" },
+            { "value": "setting", "label": "Einstellung" },
+            { "value": "rueckgabe", "label": "Rückgabe" },
+            { "value": "eye", "label": "Auge" },
+            { "value": "gift", "label": "Geschenk" },
+            { "value": "earth", "label": "Welt" },
+            { "value": "heart", "label": "Herz" },
+            { "value": "lock-closed", "label": "Schloss" },
+            { "value": "truck", "label": "Lieferung" }
           ]
         },
         {
-          "type": "image_picker",
-          "id": "benefit_5_custom_icon",
-          "label": "Benefit 5 eigenes Icon",
-          "info": "Überschreibt das vordefinierte Icon."
+          "type": "richtext",
+          "id": "benefit_5_text",
+          "label": "Benefit 5 Text"
         },
         {
           "type": "checkbox",
@@ -4542,32 +4463,43 @@
           "default": false
         },
         {
-          "type": "text",
+          "type": "select",
+          "id": "benefit_6_icon",
+          "label": "Benefit 6 Icon",
+          "default": "heart",
+          "options": [
+            { "value": "none", "label": "Kein Icon" },
+            { "value": "adjustments-horizontal", "label": "Anpassung" },
+            { "value": "banknotes", "label": "Geld" },
+            { "value": "battery-100", "label": "Batterie voll" },
+            { "value": "battery-0", "label": "Batterie leer" },
+            { "value": "bell-slash", "label": "Benachrichtigung aus" },
+            { "value": "bell", "label": "Benachrichtigung" },
+            { "value": "book-open", "label": "Buch" },
+            { "value": "calendar", "label": "Kalender" },
+            { "value": "camera", "label": "Kamera" },
+            { "value": "chat-bubble", "label": "Chat" },
+            { "value": "check-badge", "label": "Badge" },
+            { "value": "clock", "label": "Uhr" },
+            { "value": "clipboard", "label": "Clipboard" },
+            { "value": "setting", "label": "Einstellung" },
+            { "value": "rueckgabe", "label": "Rückgabe" },
+            { "value": "eye", "label": "Auge" },
+            { "value": "gift", "label": "Geschenk" },
+            { "value": "earth", "label": "Welt" },
+            { "value": "heart", "label": "Herz" },
+            { "value": "lock-closed", "label": "Schloss" },
+            { "value": "truck", "label": "Lieferung" }
+          ]
+        },
+        {
+          "type": "richtext",
           "id": "benefit_6_text",
           "label": "Benefit 6 Text"
         },
         {
-          "type": "select",
-          "id": "benefit_6_icon_style",
-          "label": "Benefit 6 Icon",
-          "default": "heart",
-          "options": [
-            { "value": "badge", "label": "Qualität / Badge" },
-            { "value": "box", "label": "Box / Versand" },
-            { "value": "return", "label": "Returns / Zurück" },
-            { "value": "truck", "label": "Truck / Lieferung" },
-            { "value": "shield", "label": "Shield / Sicherheit" },
-            { "value": "star", "label": "Star / Bewertung" },
-            { "value": "leaf", "label": "Leaf / Natürlich" },
-            { "value": "heart", "label": "Heart / Love" },
-            { "value": "clock", "label": "Clock / Schnell" }
-          ]
-        },
-        {
-          "type": "image_picker",
-          "id": "benefit_6_custom_icon",
-          "label": "Benefit 6 eigenes Icon",
-          "info": "Überschreibt das vordefinierte Icon."
+          "type": "header",
+          "content": "Design"
         },
         {
           "type": "range",
@@ -4577,7 +4509,7 @@
           "max": 40,
           "step": 2,
           "unit": "px",
-          "default": 2
+          "default": 18
         },
         {
           "type": "range",
@@ -4587,102 +4519,47 @@
           "max": 40,
           "step": 2,
           "unit": "px",
-          "default": 2
+          "default": 18
         },
         {
           "type": "range",
-          "id": "columns_desktop",
-          "label": "Spalten Desktop",
-          "min": 1,
-          "max": 3,
-          "step": 1,
-          "default": 1
-        },
-        {
-          "type": "select",
-          "id": "columns_mobile",
-          "label": "Spalten Mobile",
-          "default": "1",
-          "options": [
-            { "value": "1", "label": "1 Spalte" },
-            { "value": "2", "label": "2 Spalten" }
-          ]
-        },
-        {
-          "type": "range",
-          "id": "gap_desktop",
-          "label": "Abstand Desktop",
+          "id": "row_gap",
+          "label": "Zeilenabstand Desktop",
           "min": 0,
           "max": 24,
-          "step": 2,
+          "step": 1,
           "unit": "px",
           "default": 8
         },
         {
           "type": "range",
-          "id": "gap_mobile",
-          "label": "Abstand Mobile",
+          "id": "row_gap_mobile",
+          "label": "Zeilenabstand Mobile",
           "min": 0,
           "max": 20,
-          "step": 2,
+          "step": 1,
           "unit": "px",
-          "default": 8
-        },
-        {
-          "type": "checkbox",
-          "id": "show_pill_style",
-          "label": "Pill Style nutzen",
-          "default": false
+          "default": 7
         },
         {
           "type": "range",
-          "id": "card_padding_y",
-          "label": "Card Padding oben/unten",
+          "id": "icon_gap",
+          "label": "Abstand Icon/Text Desktop",
           "min": 4,
-          "max": 18,
+          "max": 24,
           "step": 1,
           "unit": "px",
           "default": 8
         },
         {
           "type": "range",
-          "id": "card_padding_x",
-          "label": "Card Padding links/rechts",
-          "min": 6,
-          "max": 22,
+          "id": "icon_gap_mobile",
+          "label": "Abstand Icon/Text Mobile",
+          "min": 4,
+          "max": 20,
           "step": 1,
           "unit": "px",
-          "default": 10
-        },
-        {
-          "type": "range",
-          "id": "card_radius",
-          "label": "Card Radius",
-          "min": 0,
-          "max": 30,
-          "step": 2,
-          "unit": "px",
-          "default": 14
-        },
-        {
-          "type": "range",
-          "id": "card_border_width",
-          "label": "Card Border",
-          "min": 0,
-          "max": 3,
-          "step": 1,
-          "unit": "px",
-          "default": 0
-        },
-        {
-          "type": "range",
-          "id": "shadow_strength",
-          "label": "Shadow Stärke",
-          "min": 0,
-          "max": 18,
-          "step": 2,
-          "unit": "px",
-          "default": 0
+          "default": 8
         },
         {
           "type": "range",
@@ -4692,7 +4569,7 @@
           "max": 30,
           "step": 1,
           "unit": "px",
-          "default": 20
+          "default": 16
         },
         {
           "type": "range",
@@ -4702,27 +4579,16 @@
           "max": 26,
           "step": 1,
           "unit": "px",
-          "default": 18
+          "default": 16
         },
         {
           "type": "range",
-          "id": "icon_radius",
-          "label": "Icon Radius",
-          "min": 0,
-          "max": 20,
-          "step": 1,
-          "unit": "px",
-          "default": 10
-        },
-        {
-          "type": "range",
-          "id": "icon_border_width",
-          "label": "Icon Border",
-          "min": 0,
+          "id": "icon_stroke",
+          "label": "Icon Linienbreite",
+          "min": 1,
           "max": 3,
-          "step": 1,
-          "unit": "px",
-          "default": 0
+          "step": 0.1,
+          "default": 1.5
         },
         {
           "type": "range",
@@ -4732,7 +4598,7 @@
           "max": 22,
           "step": 1,
           "unit": "px",
-          "default": 14
+          "default": 13
         },
         {
           "type": "range",
@@ -4742,61 +4608,39 @@
           "max": 20,
           "step": 1,
           "unit": "px",
-          "default": 13
+          "default": 12
+        },
+        {
+          "type": "range",
+          "id": "line_height",
+          "label": "Zeilenhöhe",
+          "min": 1,
+          "max": 1.8,
+          "step": 0.1,
+          "default": 1.3
         },
         {
           "type": "select",
-          "id": "font_weight",
-          "label": "Schriftstärke",
-          "default": "500",
+          "id": "bold_weight",
+          "label": "Fett-Markierung Stärke",
+          "default": "700",
           "options": [
-            { "value": "400", "label": "Normal" },
-            { "value": "500", "label": "Medium" },
-            { "value": "600", "label": "Semibold" },
-            { "value": "700", "label": "Bold" }
+            { "value": "600", "label": "Semi Bold" },
+            { "value": "700", "label": "Bold" },
+            { "value": "800", "label": "Extra Bold" }
           ]
-        },
-        {
-          "type": "color",
-          "id": "section_bg",
-          "label": "Section Farbe",
-          "default": "#ffffff"
-        },
-        {
-          "type": "color",
-          "id": "card_bg",
-          "label": "Card Hintergrund",
-          "default": "#fbe7f3"
-        },
-        {
-          "type": "color",
-          "id": "card_border_color",
-          "label": "Card Border",
-          "default": "#efc8de"
         },
         {
           "type": "color",
           "id": "icon_color",
           "label": "Icon Farbe",
-          "default": "#d97eb5"
-        },
-        {
-          "type": "color",
-          "id": "icon_bg",
-          "label": "Icon Hintergrund",
-          "default": "#ffffff"
-        },
-        {
-          "type": "color",
-          "id": "icon_border_color",
-          "label": "Icon Border Farbe",
-          "default": "#efc8de"
+          "default": "#222222"
         },
         {
           "type": "color",
           "id": "text_color",
           "label": "Text Farbe",
-          "default": "#d97eb5"
+          "default": "#2b2b2b"
         }
       ]
     },

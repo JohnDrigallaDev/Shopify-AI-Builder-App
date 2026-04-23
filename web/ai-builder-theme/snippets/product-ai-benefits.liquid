@@ -1,0 +1,125 @@
+{% liquid
+  assign block_font = settings.type_body_font
+  assign text_size = block.settings.text_size | default: 13
+  assign text_size_mobile = block.settings.text_size_mobile | default: 13
+  assign icon_size = block.settings.icon_size | default: 16
+  assign icon_size_mobile = block.settings.icon_size_mobile | default: 16
+  assign row_gap = block.settings.row_gap | default: 8
+  assign row_gap_mobile = block.settings.row_gap_mobile | default: 7
+  assign icon_gap = block.settings.icon_gap | default: 8
+  assign icon_gap_mobile = block.settings.icon_gap_mobile | default: 8
+%}
+
+<style>
+  .ai-product-benefits-{{ block.id }} {
+    --apb-icon-color: {{ block.settings.icon_color }};
+    --apb-text-color: {{ block.settings.text_color }};
+    --apb-text-size: {{ text_size }}px;
+    --apb-icon-size: {{ icon_size }}px;
+    --apb-row-gap: {{ row_gap }}px;
+    --apb-icon-gap: {{ icon_gap }}px;
+    margin-top: {{ block.settings.padding_top }}px;
+    margin-bottom: {{ block.settings.padding_bottom }}px;
+    font-family: {{ block_font.family }}, {{ block_font.fallback_families }};
+    font-weight: {{ block_font.weight }};
+    font-style: {{ block_font.style }};
+  }
+
+  .ai-product-benefits-{{ block.id }} * {
+    box-sizing: border-box;
+  }
+
+  .ai-product-benefits-{{ block.id }} .apb-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--apb-row-gap);
+    margin: 0;
+    padding: 0;
+  }
+
+  .ai-product-benefits-{{ block.id }} .apb-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--apb-icon-gap);
+    min-width: 0;
+  }
+
+  .ai-product-benefits-{{ block.id }} .apb-icon {
+    width: var(--apb-icon-size);
+    height: var(--apb-icon-size);
+    flex: 0 0 var(--apb-icon-size);
+    color: var(--apb-icon-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.1em;
+  }
+
+  .ai-product-benefits-{{ block.id }} .apb-icon svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: {{ block.settings.icon_stroke | default: 2.4 }};
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .ai-product-benefits-{{ block.id }} .apb-text {
+    color: var(--apb-text-color);
+    font-size: var(--apb-text-size);
+    line-height: {{ block.settings.line_height }};
+    min-width: 0;
+  }
+
+  .ai-product-benefits-{{ block.id }} .apb-text p {
+    margin: 0;
+  }
+
+  .ai-product-benefits-{{ block.id }} .apb-text p + p {
+    margin-top: 0.35em;
+  }
+
+  .ai-product-benefits-{{ block.id }} .apb-text strong,
+  .ai-product-benefits-{{ block.id }} .apb-text b {
+    font-weight: {{ block.settings.bold_weight }};
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-product-benefits-{{ block.id }} {
+      --apb-text-size: {{ text_size_mobile }}px;
+      --apb-icon-size: {{ icon_size_mobile }}px;
+      --apb-row-gap: {{ row_gap_mobile }}px;
+      --apb-icon-gap: {{ icon_gap_mobile }}px;
+    }
+  }
+</style>
+
+<div class="ai-product-benefits-{{ block.id }}" {{ block.shopify_attributes }}>
+  <div class="apb-list">
+    {% for i in (1..6) %}
+      {% liquid
+        assign enabled_key = 'show_benefit_' | append: i
+        assign icon_key = 'benefit_' | append: i | append: '_icon'
+        assign text_key = 'benefit_' | append: i | append: '_text'
+        assign benefit_enabled = block.settings[enabled_key]
+        assign benefit_icon = block.settings[icon_key]
+        assign benefit_text = block.settings[text_key]
+      %}
+
+      {% if benefit_enabled and benefit_text != blank %}
+        <div class="apb-item">
+          {% unless benefit_icon == 'none' %}
+            <span class="apb-icon" aria-hidden="true">
+              {% render 'ai-product-info-icon', icon: benefit_icon %}
+            </span>
+          {% endunless %}
+          <div class="apb-text">
+            {{ benefit_text }}
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
