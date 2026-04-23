@@ -1,0 +1,48 @@
+{% liquid
+  assign badge_title = title | default: ''
+  assign badge_text = text
+  assign badge_icon = icon | default: 'box'
+  assign badge_link = link
+  assign badge_custom_icon = custom_icon
+  assign badge_hide_icon = hide_icon
+%}
+
+{% capture badge_inner %}
+  {% unless badge_hide_icon %}
+    <div class="ai-trust-badges__icon">
+      {% if badge_custom_icon != blank %}
+        <img
+          src="{{ badge_custom_icon | image_url: width: 160 }}"
+          alt="{{ badge_title | strip_html | escape }}"
+          loading="lazy"
+        >
+      {% else %}
+        {% render 'ai-product-info-icon', icon: badge_icon %}
+      {% endif %}
+    </div>
+  {% endunless %}
+
+  <div class="ai-trust-badges__content">
+    {% if badge_title != blank %}
+      <h3 class="ai-trust-badges__title">{{ badge_title }}</h3>
+    {% endif %}
+
+    {% if badge_text != blank %}
+      <div class="ai-trust-badges__text">
+        {{ badge_text }}
+      </div>
+    {% endif %}
+  </div>
+{% endcapture %}
+
+<div class="ai-trust-badges__item" {% if wrapper_attrs != blank %}{{ wrapper_attrs }}{% endif %}>
+  {% if badge_link != blank %}
+    <a class="ai-trust-badges__card ai-trust-badges__card--link" href="{{ badge_link }}">
+      {{ badge_inner }}
+    </a>
+  {% else %}
+    <div class="ai-trust-badges__card">
+      {{ badge_inner }}
+    </div>
+  {% endif %}
+</div>

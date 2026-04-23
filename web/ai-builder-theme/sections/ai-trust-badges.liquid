@@ -1,282 +1,8 @@
-{% liquid
-  assign sid = section.id
-
-  assign outer_bg = section.settings.outer_bg
-  assign outer_gradient = section.settings.outer_gradient
-  assign section_style_mode = section.settings.section_style_mode
-
-  assign card_bg = section.settings.card_bg
-  assign card_border_color = section.settings.card_border_color
-  assign card_border_width = section.settings.card_border_width
-  assign card_radius = section.settings.card_radius
-  assign card_shadow_strength = section.settings.card_shadow_strength
-
-  assign heading_color = section.settings.heading_color
-  assign text_color = section.settings.text_color
-  assign icon_color = section.settings.icon_color
-
-  assign section_top = section.settings.section_top
-  assign section_bottom = section.settings.section_bottom
-  assign section_side = section.settings.section_side
-  assign margin_top = section.settings.margin_top
-  assign margin_bottom = section.settings.margin_bottom
-
-  assign max_width_mode = section.settings.max_width_mode
-  assign max_width_custom = section.settings.max_width_custom
-
-  assign columns_desktop = section.settings.columns_desktop
-  assign columns_mobile = section.settings.columns_mobile
-  assign grid_gap_desktop = section.settings.grid_gap_desktop
-  assign grid_gap_mobile = section.settings.grid_gap_mobile
-
-  assign card_padding_y = section.settings.card_padding_y
-  assign card_padding_x = section.settings.card_padding_x
-
-  assign icon_size = section.settings.icon_size
-  assign icon_size_mobile = section.settings.icon_size_mobile
-
-  assign heading_size = section.settings.heading_size
-  assign heading_size_mobile = section.settings.heading_size_mobile
-  assign text_size = section.settings.text_size
-  assign text_size_mobile = section.settings.text_size_mobile
-
-  assign show_divider = section.settings.show_divider
-  assign divider_color = section.settings.divider_color
-  assign divider_width = section.settings.divider_width
+{% render 'shared-ai-trust-badges',
+  source: section,
+  source_type: 'section',
+  render_id: 'ai-trust-badges-' | append: section.id
 %}
-
-<section
-  id="ai-trust-badges-{{ sid }}"
-  class="ai-trust-badges-section"
-  style="
-    --atb-outer-bg: {{ outer_bg }};
-    --atb-card-bg: {{ card_bg }};
-    --atb-card-border: {{ card_border_color }};
-    --atb-card-border-width: {{ card_border_width }}px;
-    --atb-card-radius: {{ card_radius }}px;
-    --atb-card-shadow: 0 {{ card_shadow_strength | divided_by: 2.0 }}px {{ card_shadow_strength | times: 2 }}px rgba(0,0,0,0.10);
-    --atb-heading-color: {{ heading_color }};
-    --atb-text-color: {{ text_color }};
-    --atb-icon-color: {{ icon_color }};
-    --atb-gap-desktop: {{ grid_gap_desktop }}px;
-    --atb-gap-mobile: {{ grid_gap_mobile }}px;
-    --atb-pad-y: {{ card_padding_y }}px;
-    --atb-pad-x: {{ card_padding_x }}px;
-    --atb-icon-size: {{ icon_size }}px;
-    --atb-icon-size-mobile: {{ icon_size_mobile }}px;
-    --atb-heading-size: {{ heading_size }}px;
-    --atb-heading-size-mobile: {{ heading_size_mobile }}px;
-    --atb-text-size: {{ text_size }}px;
-    --atb-text-size-mobile: {{ text_size_mobile }}px;
-    --atb-divider-color: {{ divider_color }};
-    --atb-divider-width: {{ divider_width }}px;
-    margin-top: {{ margin_top }}px;
-    margin-bottom: {{ margin_bottom }}px;
-    padding-top: {{ section_top }}px;
-    padding-bottom: {{ section_bottom }}px;
-    padding-left: {{ section_side }}px;
-    padding-right: {{ section_side }}px;
-    {% if section_style_mode == 'gradient' %}
-      background: {{ outer_gradient }};
-    {% else %}
-      background: var(--atb-outer-bg);
-    {% endif %}
-  "
->
-  <div
-    class="ai-trust-badges__inner{% if max_width_mode == 'custom' %} ai-trust-badges__inner--custom{% endif %}{% if max_width_mode == 'full' %} ai-trust-badges__inner--full{% endif %}"
-    {% if max_width_mode == 'custom' %}
-      style="max-width: {{ max_width_custom }}px;"
-    {% endif %}
-  >
-    <div class="ai-trust-badges__grid">
-      {% for block in section.blocks %}
-        <div class="ai-trust-badges__item" {{ block.shopify_attributes }}>
-          {% if block.settings.link != blank %}
-            <a class="ai-trust-badges__card ai-trust-badges__card--link" href="{{ block.settings.link }}">
-          {% else %}
-            <div class="ai-trust-badges__card">
-          {% endif %}
-
-            {% unless block.settings.hide_icon %}
-              <div class="ai-trust-badges__icon">
-                {% if block.settings.custom_icon != blank %}
-                  <img
-                    src="{{ block.settings.custom_icon | image_url: width: 160 }}"
-                    alt="{{ block.settings.title | strip_html | escape }}"
-                    loading="lazy"
-                  >
-                {% else %}
-                  {% case block.settings.icon_style %}
-                    {% when 'box' %}
-                      <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M3 7.5 12 3l9 4.5M3 7.5V17l9 4 9-4V7.5M3 7.5 12 12m0 9v-9m0 0 9-4.5"/>
-                      </svg>
-                    {% when 'shield' %}
-                      <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M12 3l7 3v5c0 4.8-2.9 8.8-7 10-4.1-1.2-7-5.2-7-10V6l7-3Zm0 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Z"/>
-                      </svg>
-                    {% when 'klarna' %}
-                      <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M5 4h3v16H5zm5 0h3v7.2L19 4h4.2l-6.7 8.1 7.1 7.9h-4.4L13 12.8V20h-3z"/>
-                      </svg>
-                    {% when 'scoop' %}
-                      <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M4 10.5c0-1.4 1.1-2.5 2.5-2.5.4-2 2.1-3.5 4.2-3.5 1.4 0 2.8.7 3.6 1.9.4-.2.9-.4 1.5-.4 1.7 0 3.2 1.2 3.5 2.9 1.1.3 1.9 1.3 1.9 2.5 0 1.4-1.1 2.6-2.6 2.6H7.1c-1.7 0-3.1-1.4-3.1-3.1Zm3.2 5h8.2l1.8 3.7H9.1Zm9.8-.2 2.8-.9 1.2 3.4-2.8.9z"/>
-                      </svg>
-                    {% else %}
-                      <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M3 7.5 12 3l9 4.5M3 7.5V17l9 4 9-4V7.5M3 7.5 12 12m0 9v-9m0 0 9-4.5"/>
-                      </svg>
-                  {% endcase %}
-                {% endif %}
-              </div>
-            {% endunless %}
-
-            <div class="ai-trust-badges__content">
-              {% if block.settings.title != blank %}
-                <h3 class="ai-trust-badges__title">{{ block.settings.title }}</h3>
-              {% endif %}
-
-              {% if block.settings.text != blank %}
-                <div class="ai-trust-badges__text rte">
-                  {{ block.settings.text }}
-                </div>
-              {% endif %}
-            </div>
-
-          {% if block.settings.link != blank %}
-            </a>
-          {% else %}
-            </div>
-          {% endif %}
-        </div>
-      {% endfor %}
-    </div>
-  </div>
-</section>
-
-<style>
-  #ai-trust-badges-{{ sid }} .ai-trust-badges__inner {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  #ai-trust-badges-{{ sid }} .ai-trust-badges__inner--full {
-    max-width: 100%;
-  }
-
-  #ai-trust-badges-{{ sid }} .ai-trust-badges__grid {
-    display: grid;
-    grid-template-columns: repeat({{ columns_mobile }}, minmax(0, 1fr));
-    gap: var(--atb-gap-mobile);
-  }
-
-  #ai-trust-badges-{{ sid }} .ai-trust-badges__card {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    min-height: 108px;
-    padding: var(--atb-pad-y) var(--atb-pad-x);
-    border-radius: var(--atb-card-radius);
-    border: var(--atb-card-border-width) solid var(--atb-card-border);
-    background: var(--atb-card-bg);
-    box-shadow: var(--atb-card-shadow);
-    text-decoration: none;
-    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
-  }
-
-  #ai-trust-badges-{{ sid }} .ai-trust-badges__card--link:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 14px 28px rgba(0,0,0,0.12);
-  }
-
-  #ai-trust-badges-{{ sid }} .ai-trust-badges__icon {
-    width: var(--atb-icon-size-mobile);
-    min-width: var(--atb-icon-size-mobile);
-    height: var(--atb-icon-size-mobile);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  #ai-trust-badges-{{ sid }} .ai-trust-badges__icon img,
-  #ai-trust-badges-{{ sid }} .ai-trust-badges__icon svg {
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
-
-  #ai-trust-badges-{{ sid }} .ai-trust-badges__icon svg {
-    fill: none;
-    stroke: var(--atb-icon-color);
-    stroke-width: 1.6;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
-
-  #ai-trust-badges-{{ sid }} .ai-trust-badges__content {
-    flex: 1 1 auto;
-    min-width: 0;
-  }
-
-  #ai-trust-badges-{{ sid }} .ai-trust-badges__title {
-    margin: 0;
-    color: var(--atb-heading-color);
-    font-size: var(--atb-heading-size-mobile);
-    line-height: 1.12;
-    letter-spacing: -0.02em;
-    font-weight: 700;
-  }
-
-  #ai-trust-badges-{{ sid }} .ai-trust-badges__text {
-    margin-top: 4px;
-    color: var(--atb-text-color);
-    font-size: var(--atb-text-size-mobile);
-    line-height: 1.35;
-  }
-
-  #ai-trust-badges-{{ sid }} .ai-trust-badges__text p {
-    margin: 0;
-  }
-
-  {% if show_divider %}
-    #ai-trust-badges-{{ sid }} .ai-trust-badges__card::after {
-      content: "";
-      position: absolute;
-      inset: auto 0 0 0;
-      height: var(--atb-divider-width);
-      background: var(--atb-divider-color);
-      opacity: .12;
-      border-bottom-left-radius: var(--atb-card-radius);
-      border-bottom-right-radius: var(--atb-card-radius);
-    }
-  {% endif %}
-
-  @media screen and (min-width: 768px) {
-    #ai-trust-badges-{{ sid }} .ai-trust-badges__grid {
-      grid-template-columns: repeat({{ columns_desktop }}, minmax(0, 1fr));
-      gap: var(--atb-gap-desktop);
-    }
-
-    #ai-trust-badges-{{ sid }} .ai-trust-badges__icon {
-      width: var(--atb-icon-size);
-      min-width: var(--atb-icon-size);
-      height: var(--atb-icon-size);
-    }
-
-    #ai-trust-badges-{{ sid }} .ai-trust-badges__title {
-      font-size: var(--atb-heading-size);
-    }
-
-    #ai-trust-badges-{{ sid }} .ai-trust-badges__text {
-      font-size: var(--atb-text-size);
-    }
-  }
-</style>
 
 {% schema %}
 {
@@ -325,14 +51,8 @@
       "label": "Spalten Mobile",
       "default": "1",
       "options": [
-        {
-          "value": "1",
-          "label": "1"
-        },
-        {
-          "value": "2",
-          "label": "2"
-        }
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" }
       ]
     },
     {
@@ -343,7 +63,7 @@
       "max": 40,
       "step": 2,
       "unit": "px",
-      "default": 18
+      "default": 10
     },
     {
       "type": "range",
@@ -353,7 +73,7 @@
       "max": 24,
       "step": 2,
       "unit": "px",
-      "default": 14
+      "default": 8
     },
     {
       "type": "header",
@@ -367,7 +87,7 @@
       "max": 40,
       "step": 2,
       "unit": "px",
-      "default": 20
+      "default": 12
     },
     {
       "type": "range",
@@ -377,7 +97,7 @@
       "max": 40,
       "step": 2,
       "unit": "px",
-      "default": 22
+      "default": 14
     },
     {
       "type": "range",
@@ -387,7 +107,7 @@
       "max": 30,
       "step": 2,
       "unit": "px",
-      "default": 4
+      "default": 12
     },
     {
       "type": "range",
@@ -437,7 +157,7 @@
       "max": 80,
       "step": 2,
       "unit": "px",
-      "default": 42
+      "default": 22
     },
     {
       "type": "range",
@@ -447,7 +167,7 @@
       "max": 64,
       "step": 2,
       "unit": "px",
-      "default": 36
+      "default": 18
     },
     {
       "type": "header",
@@ -461,7 +181,7 @@
       "max": 32,
       "step": 1,
       "unit": "px",
-      "default": 18
+      "default": 13
     },
     {
       "type": "range",
@@ -471,7 +191,7 @@
       "max": 26,
       "step": 1,
       "unit": "px",
-      "default": 16
+      "default": 12
     },
     {
       "type": "range",
@@ -481,7 +201,7 @@
       "max": 24,
       "step": 1,
       "unit": "px",
-      "default": 15
+      "default": 11
     },
     {
       "type": "range",
@@ -491,7 +211,7 @@
       "max": 22,
       "step": 1,
       "unit": "px",
-      "default": 14
+      "default": 10
     },
     {
       "type": "header",
@@ -505,7 +225,7 @@
       "max": 120,
       "step": 4,
       "unit": "px",
-      "default": 16
+      "default": 8
     },
     {
       "type": "range",
@@ -515,7 +235,7 @@
       "max": 120,
       "step": 4,
       "unit": "px",
-      "default": 16
+      "default": 8
     },
     {
       "type": "range",
@@ -535,7 +255,7 @@
       "max": 120,
       "step": 4,
       "unit": "px",
-      "default": 16
+      "default": 4
     },
     {
       "type": "range",
@@ -545,7 +265,7 @@
       "max": 120,
       "step": 4,
       "unit": "px",
-      "default": 16
+      "default": 4
     },
     {
       "type": "header",
@@ -577,13 +297,13 @@
       "type": "color",
       "id": "card_bg",
       "label": "Card Hintergrund",
-      "default": "#f4f0eb"
+      "default": "#f3f3f3"
     },
     {
       "type": "color",
       "id": "card_border_color",
       "label": "Card Border",
-      "default": "#e6e0d8"
+      "default": "#f3f3f3"
     },
     {
       "type": "color",
@@ -619,13 +339,13 @@
           "type": "text",
           "id": "title",
           "label": "Titel",
-          "default": "Free shipping"
+          "default": "Free Shipping"
         },
         {
           "type": "richtext",
           "id": "text",
           "label": "Text",
-          "default": "<p>for orders over 49€</p>"
+          "default": "<p>over €99 in DE</p>"
         },
         {
           "type": "select",
@@ -634,6 +354,13 @@
           "default": "box",
           "options": [
             { "value": "box", "label": "Paket" },
+            { "value": "credit-card", "label": "Karte" },
+            { "value": "hand-heart", "label": "Hand + Herz" },
+            { "value": "leaf", "label": "Leaf" },
+            { "value": "truck", "label": "Truck" },
+            { "value": "lock-closed", "label": "Lock" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "check-badge", "label": "Check Badge" },
             { "value": "shield", "label": "Shield" },
             { "value": "klarna", "label": "K Style" },
             { "value": "scoop", "label": "Scoop" }
@@ -654,6 +381,45 @@
           "id": "hide_icon",
           "label": "Icon ausblenden",
           "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AI Trust Badges",
+      "blocks": [
+        {
+          "type": "badge",
+          "settings": {
+            "title": "Free Shipping",
+            "text": "<p>over €99 in DE</p>",
+            "icon_style": "box"
+          }
+        },
+        {
+          "type": "badge",
+          "settings": {
+            "title": "Pay Later",
+            "text": "<p>up to 30 days</p>",
+            "icon_style": "credit-card"
+          }
+        },
+        {
+          "type": "badge",
+          "settings": {
+            "title": "Handmade",
+            "text": "<p>in Venice, Italy</p>",
+            "icon_style": "hand-heart"
+          }
+        },
+        {
+          "type": "badge",
+          "settings": {
+            "title": "100% Vegan",
+            "text": "<p>just pure Cotton</p>",
+            "icon_style": "leaf"
+          }
         }
       ]
     }

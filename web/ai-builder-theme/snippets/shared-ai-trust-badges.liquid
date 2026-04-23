@@ -1,0 +1,222 @@
+{% liquid
+  assign atb_id = render_id
+  assign settings = source.settings
+  assign source_kind = source_type | default: 'section'
+%}
+
+<section
+  id="{{ atb_id }}"
+  class="ai-trust-badges-section{% if source_kind == 'block' %} ai-trust-badges-section--product-info{% endif %}"
+  {% if source_kind == 'block' %}
+    {{ source.shopify_attributes }}
+  {% endif %}
+  style="
+    --atb-outer-bg: {{ settings.outer_bg }};
+    --atb-card-bg: {{ settings.card_bg }};
+    --atb-card-border: {{ settings.card_border_color }};
+    --atb-card-border-width: {{ settings.card_border_width }}px;
+    --atb-card-radius: {{ settings.card_radius }}px;
+    --atb-card-shadow: none;
+    --atb-heading-color: {{ settings.heading_color }};
+    --atb-text-color: {{ settings.text_color }};
+    --atb-icon-color: {{ settings.icon_color }};
+    --atb-gap-desktop: {{ settings.grid_gap_desktop }}px;
+    --atb-gap-mobile: {{ settings.grid_gap_mobile }}px;
+    --atb-pad-y: {{ settings.card_padding_y }}px;
+    --atb-pad-x: {{ settings.card_padding_x }}px;
+    --atb-icon-size: {{ settings.icon_size }}px;
+    --atb-icon-size-mobile: {{ settings.icon_size_mobile }}px;
+    --atb-heading-size: {{ settings.heading_size }}px;
+    --atb-heading-size-mobile: {{ settings.heading_size_mobile }}px;
+    --atb-text-size: {{ settings.text_size }}px;
+    --atb-text-size-mobile: {{ settings.text_size_mobile }}px;
+    --atb-divider-color: {{ settings.divider_color }};
+    --atb-divider-width: {{ settings.divider_width }}px;
+    --atb-mobile-columns: {{ settings.columns_mobile }};
+    margin-top: {% if source_kind == 'block' %}0{% else %}{{ settings.margin_top }}px{% endif %};
+    margin-bottom: {% if source_kind == 'block' %}0{% else %}{{ settings.margin_bottom }}px{% endif %};
+    padding-top: {% if source_kind == 'block' %}{{ settings.padding_top }}px{% else %}{{ settings.section_top }}px{% endif %};
+    padding-bottom: {% if source_kind == 'block' %}{{ settings.padding_bottom }}px{% else %}{{ settings.section_bottom }}px{% endif %};
+    padding-left: {% if source_kind == 'block' %}0{% else %}{{ settings.section_side }}px{% endif %};
+    padding-right: {% if source_kind == 'block' %}0{% else %}{{ settings.section_side }}px{% endif %};
+    {% if settings.section_style_mode == 'gradient' %}
+      background: {{ settings.outer_gradient }};
+    {% else %}
+      background: var(--atb-outer-bg);
+    {% endif %}
+  "
+>
+  <div
+    class="ai-trust-badges__inner{% if source_kind == 'section' and settings.max_width_mode == 'custom' %} ai-trust-badges__inner--custom{% endif %}{% if source_kind == 'section' and settings.max_width_mode == 'full' %} ai-trust-badges__inner--full{% endif %}"
+    {% if source_kind == 'section' and settings.max_width_mode == 'custom' %}
+      style="max-width: {{ settings.max_width_custom }}px;"
+    {% endif %}
+  >
+    <div class="ai-trust-badges__grid">
+      {% if source_kind == 'section' %}
+        {% for badge_block in source.blocks %}
+          {% render 'ai-trust-badge-card',
+            title: badge_block.settings.title,
+            text: badge_block.settings.text,
+            icon: badge_block.settings.icon_style,
+            custom_icon: badge_block.settings.custom_icon,
+            link: badge_block.settings.link,
+            hide_icon: badge_block.settings.hide_icon,
+            wrapper_attrs: badge_block.shopify_attributes
+          %}
+        {% endfor %}
+      {% else %}
+        {% for i in (1..4) %}
+          {% liquid
+            assign title_key = 'badge_' | append: i | append: '_title'
+            assign text_key = 'badge_' | append: i | append: '_text'
+            assign icon_key = 'badge_' | append: i | append: '_icon_style'
+            assign badge_title = settings[title_key]
+            assign badge_text = settings[text_key]
+            assign badge_icon = settings[icon_key]
+          %}
+          {% if badge_title != blank or badge_text != blank %}
+            {% render 'ai-trust-badge-card',
+              title: badge_title,
+              text: badge_text,
+              icon: badge_icon
+            %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<style>
+  #{{ atb_id }} .ai-trust-badges__inner {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  #{{ atb_id }} .ai-trust-badges__inner--full {
+    max-width: 100%;
+  }
+
+  #{{ atb_id }} .ai-trust-badges__grid {
+    display: grid;
+    grid-template-columns: repeat(var(--atb-mobile-columns), minmax(0, 1fr));
+    gap: var(--atb-gap-mobile);
+  }
+
+  #{{ atb_id }} .ai-trust-badges__item {
+    min-width: 0;
+    height: 100%;
+  }
+
+  #{{ atb_id }} .ai-trust-badges__card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 62px;
+    height: 100%;
+    padding: var(--atb-pad-y) var(--atb-pad-x);
+    border-radius: var(--atb-card-radius);
+    border: var(--atb-card-border-width) solid var(--atb-card-border);
+    background: var(--atb-card-bg);
+    box-shadow: var(--atb-card-shadow);
+    text-decoration: none;
+    transition: opacity .18s ease;
+  }
+
+  #{{ atb_id }} .ai-trust-badges__card--link:hover {
+    opacity: .92;
+  }
+
+  #{{ atb_id }} .ai-trust-badges__icon {
+    width: var(--atb-icon-size-mobile);
+    min-width: var(--atb-icon-size-mobile);
+    height: var(--atb-icon-size-mobile);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--atb-icon-color);
+  }
+
+  #{{ atb_id }} .ai-trust-badges__icon img,
+  #{{ atb_id }} .ai-trust-badges__icon svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  #{{ atb_id }} .ai-trust-badges__icon svg {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.9;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  #{{ atb_id }} .ai-trust-badges__content {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  #{{ atb_id }} .ai-trust-badges__title {
+    margin: 0;
+    color: var(--atb-heading-color);
+    font-size: var(--atb-heading-size-mobile);
+    line-height: 1.06;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+  }
+
+  #{{ atb_id }} .ai-trust-badges__text {
+    margin-top: 2px;
+    color: var(--atb-text-color);
+    font-size: var(--atb-text-size-mobile);
+    line-height: 1.08;
+  }
+
+  #{{ atb_id }} .ai-trust-badges__text p {
+    margin: 0;
+  }
+
+  {% if settings.show_divider %}
+    #{{ atb_id }} .ai-trust-badges__card::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0 0;
+      height: var(--atb-divider-width);
+      background: var(--atb-divider-color);
+      opacity: .08;
+      border-bottom-left-radius: var(--atb-card-radius);
+      border-bottom-right-radius: var(--atb-card-radius);
+    }
+  {% endif %}
+
+  @media screen and (min-width: 768px) {
+    #{{ atb_id }} .ai-trust-badges__grid {
+      grid-template-columns: repeat({% if source_kind == 'block' %}2{% else %}{{ settings.columns_desktop }}{% endif %}, minmax(0, 1fr));
+      gap: var(--atb-gap-desktop);
+    }
+
+    #{{ atb_id }} .ai-trust-badges__card {
+      gap: 12px;
+      min-height: 70px;
+    }
+
+    #{{ atb_id }} .ai-trust-badges__icon {
+      width: var(--atb-icon-size);
+      min-width: var(--atb-icon-size);
+      height: var(--atb-icon-size);
+    }
+
+    #{{ atb_id }} .ai-trust-badges__title {
+      font-size: var(--atb-heading-size);
+    }
+
+    #{{ atb_id }} .ai-trust-badges__text {
+      font-size: var(--atb-text-size);
+    }
+  }
+</style>
