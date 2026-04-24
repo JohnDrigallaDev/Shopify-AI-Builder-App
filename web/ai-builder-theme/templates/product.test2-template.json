@@ -266,7 +266,8 @@
     },
     "ai_section_2": {
       "type": "ai-feature-split",
-      "settings": {},
+      "settings": {
+      },
       "blocks": {
         "feature_1": {
           "type": "feature",
@@ -302,43 +303,82 @@
     "ai_section_3": {
       "type": "ai-comparison-table",
       "settings": {
-        "eyebrow": "Direkt verglichen",
-        "title": "Warum zuhause einfach besser passt.",
-        "header_feature": "Zuhause",
-        "header_primary": "Studio",
-        "header_competitor": ""
+        "pai_heading": "Warum zuhause einfach besser passt.",
+        "pai_heading_size": "h1",
+        "pai_text": "",
+        "pai_content_alignment": "center",
+        "pai_button_label": "",
+        "pai_button_link": "",
+        "pai_button_secondary": false,
+        "pai_layout": "table_second",
+        "pai_desktop_gap": 60,
+        "pai_color_scheme": "background-1",
+        "pai_logo_width": 90,
+        "pai_logo_width_mobile": 70,
+        "pai_brand_label": "Studio",
+        "pai_competitor_label": "",
+        "pai_table_max_width": 800,
+        "pai_table_radius": 12,
+        "pai_border_width": 1,
+        "pai_border_color": "#e7e7e7",
+        "pai_shadow_opacity": 10,
+        "pai_shadow_y": 8,
+        "pai_shadow_blur": 20,
+        "pai_cell_padding_y": 18,
+        "pai_cell_padding_x": 24,
+        "pai_cell_padding_y_mobile": 14,
+        "pai_cell_padding_x_mobile": 12,
+        "pai_header_font_size": 18,
+        "pai_header_font_size_mobile": 14,
+        "pai_feature_font_size": 16,
+        "pai_feature_font_size_mobile": 13,
+        "pai_feature_weight": "600",
+        "pai_feature_alignment": "left",
+        "pai_icon_size": 24,
+        "pai_text_color": "#111111",
+        "pai_feature_bg": "#ffffff",
+        "pai_cell_bg": "#ffffff",
+        "pai_active_bg": "#111111",
+        "pai_active_text": "#ffffff",
+        "pai_check_color": "#26a641",
+        "pai_cross_color": "#111111",
+        "pai_active_check_color": "#53AF01",
+        "pai_active_cross_color": "#ffffff",
+        "pai_padding_top": 36,
+        "pai_padding_bottom": 36,
+        "pai_mobile_gap": 12
       },
       "blocks": {
         "row_1": {
-          "type": "row",
+          "type": "pai_row",
           "settings": {
-            "label": "Termin nötig",
-            "value": "Nein",
-            "comparison": "Ja"
+            "pai_feature": "Termin nötig",
+            "pai_brand_has": true,
+            "pai_other_has": true
           }
         },
         "row_2": {
-          "type": "row",
+          "type": "pai_row",
           "settings": {
-            "label": "Flexibel nutzbar",
-            "value": "Ja",
-            "comparison": "Eingeschränkt"
+            "pai_feature": "Flexibel nutzbar",
+            "pai_brand_has": true,
+            "pai_other_has": false
           }
         },
         "row_3": {
-          "type": "row",
+          "type": "pai_row",
           "settings": {
-            "label": "Anwendung für mehrere Zonen",
-            "value": "Achseln, Beine, Bikinizone",
-            "comparison": "Oft getrennt"
+            "pai_feature": "Anwendung für mehrere Zonen",
+            "pai_brand_has": true,
+            "pai_other_has": false
           }
         },
         "row_4": {
-          "type": "row",
+          "type": "pai_row",
           "settings": {
-            "label": "Routine im Alltag",
-            "value": "Einfach",
-            "comparison": "Aufwendig"
+            "pai_feature": "Routine im Alltag",
+            "pai_brand_has": true,
+            "pai_other_has": false
           }
         }
       },

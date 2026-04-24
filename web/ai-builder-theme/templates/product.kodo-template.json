@@ -43,7 +43,7 @@
           "type": "ai_product_teaser_text",
           "settings": {
             "margin_top": 14,
-            "text": "<p>Für Haarentfernung zuhause, die sich anfühlt wie Salon-Feeling – ohne laufende Behandlungskosten.</p>"
+            "text": "<p>KODO macht dauerhafte Haarentfernung einfach, bequem und planbar – ohne Studio und ohne laufende Kosten.</p>"
           }
         },
         "ai_product_divider": {
@@ -79,17 +79,17 @@
         "ai_product_benefits": {
           "type": "ai_product_benefits",
           "settings": {
-            "benefit_1_icon": "heart",
-            "benefit_1_text": "<p>Einfach zuhause anwendbar</p>",
+            "benefit_1_icon": "banknotes",
+            "benefit_1_text": "<p>Sparen statt wiederkehrender Studio-Termine</p>",
             "benefit_2_icon": "adjustments-horizontal",
-            "benefit_2_text": "<p>Für langfristig weniger Körperhaar gedacht</p>",
-            "benefit_3_icon": "battery-100",
-            "benefit_3_text": "<p>Salon-Gefühl ohne Termin- und Zusatzkosten</p>",
+            "benefit_2_text": "<p>Haarentfernung bequem in den eigenen vier Wänden</p>",
+            "benefit_3_icon": "check-circle",
+            "benefit_3_text": "<p>Einmal investieren, langfristig nutzen</p>",
             "benefit_4_icon": "earth",
             "benefit_4_text": "",
-            "benefit_5_icon": "check-badge",
+            "benefit_5_icon": "shield",
             "benefit_5_text": "",
-            "benefit_6_icon": "gift",
+            "benefit_6_icon": "star",
             "benefit_6_text": "",
             "show_benefit_4": false,
             "show_benefit_5": false,
@@ -211,7 +211,7 @@
             "ai_acc_item_3_show": true,
             "ai_acc_item_3_icon": "book-open",
             "ai_acc_item_3_title": "Produktdetails",
-            "ai_acc_item_3_content": "<ul><li>4-in-1 IPL-Photoepilator für Haarentfernung zu Hause für Gesicht und Körper.</li><li>Für regelmäßige Anwendung mit Fokus auf langfristig weniger Körperhaar und einfache Heimnutzung.</li></ul>",
+            "ai_acc_item_3_content": "<ul><li>4-in-1 IPL/Epiliergerät für die Haarentfernung zu Hause, geeignet für Gesicht und Körper.</li><li>Für regelmäßige Anwendungen auf mehreren Körperzonen konzipiert, mit Fokus auf komfortable Nutzung und langfristige...</li></ul>",
             "ai_acc_item_4_show": true,
             "ai_acc_item_4_icon": "chat-bubble",
             "ai_acc_item_4_title": "Support",
@@ -222,9 +222,21 @@
         "ai_product_reviews": {
           "type": "ai_product_reviews",
           "settings": {
-            "show_review_1": false,
-            "show_review_2": false,
-            "show_review_3": false
+            "show_review_1": true,
+            "hide_avatar_1": true,
+            "customer_name_1": "Laura K.",
+            "star_count_1": 5,
+            "review_text_1": "Ich wollte keine Termine mehr buchen und nutze das Gerät jetzt einfach zuhause. Die Anwendung ist unkompliziert und ich mag, dass ich meine Routine selbst planen kann.",
+            "show_review_2": true,
+            "hide_avatar_2": true,
+            "customer_name_2": "Nina S.",
+            "star_count_2": 5,
+            "review_text_2": "Für mich war wichtig, dass ich Gesicht und Körper mit einem Gerät abdecken kann. Genau das macht den Alltag viel einfacher, weil ich nicht mehr für jede Zone ein anderes Tool brauche.",
+            "show_review_3": true,
+            "hide_avatar_3": true,
+            "customer_name_3": "Julia M.",
+            "star_count_3": 5,
+            "review_text_3": "Nach ein paar Anwendungen wirkt die Haarentfernung für mich deutlich planbarer als früher im Studio. Vor allem finde ich gut, dass ich die Behandlung bequem zuhause machen kann."
           }
         }
       },
@@ -273,24 +285,24 @@
           "type": "feature",
           "settings": {
             "media_position": "left",
-            "title": "Schon wieder Rasur?",
-            "text": "<p>Stoppeln, Termine und ständiges Nacharbeiten kosten jeden Tag Zeit.</p>"
+            "title": "Ständig Termine? Genau das bremst dich aus.",
+            "text": "<p>Studio-Besuche kosten nicht nur Geld, sondern auch Zeit und Planung. Wenn du arbeiten, Familie und Alltag unter einen Hut bringen musst, wird jede Behandlung zur Zusatzaufgabe. Viele brechen deshalb einfach wieder ab.</p>"
           }
         },
         "feature_2": {
           "type": "feature",
           "settings": {
             "media_position": "right",
-            "title": "IPL für zuhause",
-            "text": "<p>KODO 2026 bringt die Haarentfernung in deine Routine – einfach, bequem und auf langfristig weniger Körperhaar ausgelegt.</p>"
+            "title": "KODO macht Haarentfernung zuhause einfach.",
+            "text": "<p>Mit dem 4-in-1-Konzept erledigst du deine Routine bequem in den eigenen vier Wänden. Das Gerät ist auf Gesicht und Körper ausgelegt und hilft dir, Behandlung und Alltag besser zu kombinieren.</p>"
           }
         },
         "feature_3": {
           "type": "feature",
           "settings": {
             "media_position": "left",
-            "title": "Über 2.000 Menschen",
-            "text": "<p>Über 2.000 Menschen haben KODO 2026 bereits ausprobiert und schwören darauf.</p>"
+            "title": "Mehr als 2.000 Käufer haben sich dafür entschieden.",
+            "text": "<p>Die Produktseite zeigt bereits über 2.000 Bestellungen. Viele entscheiden sich genau deshalb für eine Lösung, die zuhause nutzbar ist und den Fokus auf einfache, wiederholbare Anwendung legt.</p>"
           }
         }
       },
@@ -301,45 +313,9 @@
       ]
     },
     "ai_section_3": {
-      "type": "ai-feature-split",
-      "settings": {
-      },
-      "blocks": {
-        "feature_1": {
-          "type": "feature",
-          "settings": {
-            "media_position": "left",
-            "title": "4-in-1 für mehr Flexibilität",
-            "text": "<p>Ein Gerät für verschiedene Bereiche statt mehrere Tools im Bad.</p>"
-          }
-        },
-        "feature_2": {
-          "type": "feature",
-          "settings": {
-            "media_position": "right",
-            "title": "Für Gesicht und Körper",
-            "text": "<p>Praktisch für die wichtigsten Zonen in deiner persönlichen Routine.</p>"
-          }
-        },
-        "feature_3": {
-          "type": "feature",
-          "settings": {
-            "media_position": "left",
-            "title": "Langfristig gedacht",
-            "text": "<p>Ausgelegt für Frauen, die weniger Körperhaar mit Heimbehandlung möchten.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "feature_1",
-        "feature_2",
-        "feature_3"
-      ]
-    },
-    "ai_section_4": {
       "type": "ai-comparison-table",
       "settings": {
-        "pai_heading": "Warum zuhause die bessere Lösung sein kann",
+        "pai_heading": "Studio oder zuhause?",
         "pai_heading_size": "h1",
         "pai_text": "",
         "pai_content_alignment": "center",
@@ -351,7 +327,7 @@
         "pai_color_scheme": "background-1",
         "pai_logo_width": 90,
         "pai_logo_width_mobile": 70,
-        "pai_brand_label": "Stattdessen",
+        "pai_brand_label": "KODO zuhause",
         "pai_competitor_label": "",
         "pai_table_max_width": 800,
         "pai_table_radius": 12,
@@ -388,7 +364,7 @@
         "row_1": {
           "type": "pai_row",
           "settings": {
-            "pai_feature": "Anwendung",
+            "pai_feature": "Zeitaufwand",
             "pai_brand_has": true,
             "pai_other_has": false
           }
@@ -404,15 +380,15 @@
         "row_3": {
           "type": "pai_row",
           "settings": {
-            "pai_feature": "Routine",
-            "pai_brand_has": true,
+            "pai_feature": "Planung",
+            "pai_brand_has": false,
             "pai_other_has": false
           }
         },
         "row_4": {
           "type": "pai_row",
           "settings": {
-            "pai_feature": "Gefühl",
+            "pai_feature": "Anwendung",
             "pai_brand_has": true,
             "pai_other_has": false
           }
@@ -425,13 +401,13 @@
         "row_4"
       ]
     },
-    "ai_section_5": {
+    "ai_section_4": {
       "type": "ai-cta-banner",
       "settings": {
         "eyebrow": "Jetzt starten",
-        "title": "Hol dir Salon-Feeling nach Hause.",
-        "body": "<p>Weniger Aufwand. Weniger Folgekosten. Mehr Kontrolle über deine Haarentfernung im Alltag.</p>",
-        "button_label": "Jetzt entdecken"
+        "title": "Wechsle von Studio-Terminen zu deiner Routine zuhause.",
+        "body": "<p>Einmal investieren, flexibel anwenden, glatte Haut bequemer organisieren.</p>",
+        "button_label": "Jetzt zuhause starten"
       }
     }
   },
@@ -439,7 +415,6 @@
     "main",
     "ai_section_2",
     "ai_section_3",
-    "ai_section_4",
-    "ai_section_5"
+    "ai_section_4"
   ]
 }

@@ -1,129 +1,821 @@
-{{ 'ai-builder-sections.css' | asset_url | stylesheet_tag }}
+{% liquid
+  assign pai_title = section.settings.pai_heading
+  assign pai_text = section.settings.pai_text
+  assign pai_brand_label = section.settings.pai_brand_label | default: shop.name
+%}
 
-{% assign ai_page = product.metafields.ai_builder.page_json.value %}
-{% assign ai_section = blank %}
+<section
+  id="pai-compare-{{ section.id }}"
+  class="pai-compare color-{{ section.settings.pai_color_scheme }} gradient"
+  style="
+    --pai-pt-m: {{ section.settings.pai_padding_top | times: 0.75 | round: 0 }}px;
+    --pai-pb-m: {{ section.settings.pai_padding_bottom | times: 0.75 | round: 0 }}px;
+    --pai-pt: {{ section.settings.pai_padding_top }}px;
+    --pai-pb: {{ section.settings.pai_padding_bottom }}px;
+    --pai-radius: {{ section.settings.pai_table_radius }}px;
+    --pai-border: {{ section.settings.pai_border_width }}px;
+    --pai-border-color: {{ section.settings.pai_border_color }};
+    --pai-shadow: 0 {{ section.settings.pai_shadow_y }}px {{ section.settings.pai_shadow_blur }}px rgba(0,0,0,{{ section.settings.pai_shadow_opacity | divided_by: 100.0 }});
+    --pai-active-bg: {{ section.settings.pai_active_bg }};
+    --pai-active-text: {{ section.settings.pai_active_text }};
+    --pai-cell-bg: {{ section.settings.pai_cell_bg }};
+    --pai-feature-bg: {{ section.settings.pai_feature_bg }};
+    --pai-check: {{ section.settings.pai_check_color }};
+    --pai-cross: {{ section.settings.pai_cross_color }};
+    --pai-active-check: {{ section.settings.pai_active_check_color }};
+    --pai-active-cross: {{ section.settings.pai_active_cross_color }};
+    --pai-text-color: {{ section.settings.pai_text_color }};
+    --pai-feature-size: {{ section.settings.pai_feature_font_size }}px;
+    --pai-icon-size: {{ section.settings.pai_icon_size }}px;
+    --pai-logo-mobile: {{ section.settings.pai_logo_width_mobile }}px;
+    --pai-mobile-gap: {{ section.settings.pai_mobile_gap }}px;
+  "
+>
+  <div class="page-width pai-compare__padding">
+    <div class="pai-compare__grid {% if section.settings.pai_layout == 'table_first' %}pai-compare__grid--reverse{% endif %} {% if pai_title == blank and pai_text == blank %}pai-compare__grid--table-only{% endif %}">
+      {% unless pai_title == blank and pai_text == blank and section.settings.pai_button_label == blank %}
+        <div class="pai-compare__content">
+          {% if pai_title != blank %}
+            <h2 class="pai-compare__heading {{ section.settings.pai_heading_size }}">
+              {{ pai_title }}
+            </h2>
+          {% endif %}
 
-{% if ai_page and ai_page.sections %}
-  {% for page_section in ai_page.sections %}
-    {% if page_section.type == 'comparison_table' %}
-      {% assign ai_section = page_section %}
-      {% break %}
-    {% endif %}
-  {% endfor %}
-{% endif %}
+          {% if pai_text != blank %}
+            <div class="pai-compare__text rte">
+              {{ pai_text }}
+            </div>
+          {% endif %}
 
-{% assign eyebrow = section.settings.eyebrow | strip | default: ai_section.kicker %}
-{% assign title = section.settings.title | strip | default: ai_section.title %}
-{% assign header_feature = section.settings.header_feature | strip | default: ai_section.headers[0] %}
-{% assign header_primary = section.settings.header_primary | strip | default: ai_section.headers[1] %}
-{% assign header_competitor = section.settings.header_competitor | strip | default: ai_section.headers[2] %}
+          {% if section.settings.pai_button_label != blank %}
+            <a
+              class="button {% if section.settings.pai_button_secondary %}button--secondary{% else %}button--primary{% endif %}"
+              {% if section.settings.pai_button_link != blank %}
+                href="{{ section.settings.pai_button_link }}"
+              {% else %}
+                role="link"
+                aria-disabled="true"
+              {% endif %}
+            >
+              {{ section.settings.pai_button_label }}
+            </a>
+          {% endif %}
+        </div>
+      {% endunless %}
 
-{% if eyebrow != blank or title != blank or ai_section.rows != blank or section.blocks.size > 0 %}
-  <section class="ai-builder-section page-width">
-    <div class="ai-builder-section__comparison">
-      {% if eyebrow != blank %}
-        <p class="ai-builder-section__eyebrow">{{ eyebrow }}</p>
-      {% endif %}
-      {% if title != blank %}
-        <h2 class="ai-builder-section__title">{{ title }}</h2>
-      {% endif %}
-      <div class="ai-builder-section__table-wrap">
-        <table class="ai-builder-section__table">
+      <div class="pai-compare__table-wrap">
+        <table class="pai-compare__table">
           <thead>
             <tr>
-              <th>{{ header_feature | default: 'Merkmal' }}</th>
-              <th>{{ header_primary | default: 'Unser Produkt' }}</th>
-              <th>{{ header_competitor | default: 'Standardlösung' }}</th>
+              <th class="pai-compare__empty"></th>
+
+              <th class="pai-compare__brand">
+                {% if section.settings.pai_logo != blank %}
+                  {{
+                    section.settings.pai_logo
+                    | image_url: width: 300
+                    | image_tag:
+                      loading: 'lazy',
+                      width: section.settings.pai_logo_width,
+                      alt: pai_brand_label
+                  }}
+                {% else %}
+                  <span>{{ pai_brand_label }}</span>
+                {% endif %}
+              </th>
+
+              <th class="pai-compare__competitor">
+                {{ section.settings.pai_competitor_label }}
+              </th>
             </tr>
           </thead>
+
           <tbody>
-            {% if section.blocks.size > 0 %}
-              {% for block in section.blocks %}
-                {% assign label = block.settings.label | strip %}
-                {% assign value = block.settings.value | strip %}
-                {% assign comparison = block.settings.comparison | strip %}
-                {% if label != blank or value != blank or comparison != blank %}
-                  <tr {{ block.shopify_attributes }}>
-                    <td>{{ label | default: 'Merkmal' }}</td>
-                    <td>{{ value | default: 'Ja' }}</td>
-                    <td>{{ comparison | default: 'Standard' }}</td>
-                  </tr>
-                {% endif %}
-              {% endfor %}
-            {% elsif ai_section.rows != blank %}
-              {% for row in ai_section.rows %}
-                <tr>
-                  <td>{{ row.label | default: 'Merkmal' }}</td>
-                  <td>{{ row.value | default: 'Ja' }}</td>
-                  <td>{{ row.comparison | default: 'Standard' }}</td>
-                </tr>
-              {% endfor %}
-            {% endif %}
+            {% for block in section.blocks %}
+              <tr {{ block.shopify_attributes }}>
+                <td class="pai-compare__feature">
+                  <span>{{ block.settings.pai_feature }}</span>
+                </td>
+
+                <td class="pai-compare__value pai-compare__value--active">
+                  {% if block.settings.pai_brand_has %}
+                    <span class="pai-compare__icon pai-compare__icon--check">
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M9.2 16.6 4.9 12.3l-1.7 1.7 6 6L21.1 8.1l-1.7-1.7L9.2 16.6Z"/>
+                      </svg>
+                    </span>
+                  {% else %}
+                    <span class="pai-compare__icon pai-compare__icon--cross">
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="m6.4 5 12.6 12.6-1.4 1.4L5 6.4 6.4 5Z"/>
+                        <path d="M19 6.4 6.4 19 5 17.6 17.6 5 19 6.4Z"/>
+                      </svg>
+                    </span>
+                  {% endif %}
+                </td>
+
+                <td class="pai-compare__value">
+                  {% if block.settings.pai_other_has %}
+                    <span class="pai-compare__icon pai-compare__icon--check">
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M9.2 16.6 4.9 12.3l-1.7 1.7 6 6L21.1 8.1l-1.7-1.7L9.2 16.6Z"/>
+                      </svg>
+                    </span>
+                  {% else %}
+                    <span class="pai-compare__icon pai-compare__icon--cross">
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="m6.4 5 12.6 12.6-1.4 1.4L5 6.4 6.4 5Z"/>
+                        <path d="M19 6.4 6.4 19 5 17.6 17.6 5 19 6.4Z"/>
+                      </svg>
+                    </span>
+                  {% endif %}
+                </td>
+              </tr>
+            {% endfor %}
           </tbody>
         </table>
       </div>
     </div>
-  </section>
-{% endif %}
+  </div>
+</section>
+
+<style>
+  #pai-compare-{{ section.id }} {
+    color: var(--pai-text-color);
+  }
+
+  #pai-compare-{{ section.id }} .pai-compare__padding {
+    padding-top: var(--pai-pt-m);
+    padding-bottom: var(--pai-pb-m);
+  }
+
+  #pai-compare-{{ section.id }} .pai-compare__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+    align-items: center;
+  }
+
+  #pai-compare-{{ section.id }} .pai-compare__grid--table-only {
+    max-width: {{ section.settings.pai_table_max_width }}px;
+    margin: 0 auto;
+  }
+
+  #pai-compare-{{ section.id }} .pai-compare__content {
+    text-align: {{ section.settings.pai_content_alignment }};
+    max-width: 620px;
+    margin: 0 auto;
+  }
+
+  #pai-compare-{{ section.id }} .pai-compare__heading {
+    margin: 0 0 14px;
+  }
+
+  #pai-compare-{{ section.id }} .pai-compare__text {
+    margin-bottom: 22px;
+  }
+
+  #pai-compare-{{ section.id }} .pai-compare__table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #pai-compare-{{ section.id }} .pai-compare__table {
+    width: 100%;
+    min-width: 420px;
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+    border-radius: var(--pai-radius);
+    box-shadow: var(--pai-shadow);
+  }
+
+  #pai-compare-{{ section.id }} th,
+  #pai-compare-{{ section.id }} td {
+    border: var(--pai-border) solid var(--pai-border-color);
+    border-left-width: 0;
+    border-top-width: 0;
+    padding: {{ section.settings.pai_cell_padding_y }}px {{ section.settings.pai_cell_padding_x }}px;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  #pai-compare-{{ section.id }} th:first-child,
+  #pai-compare-{{ section.id }} td:first-child {
+    border-left-width: var(--pai-border);
+  }
+
+  #pai-compare-{{ section.id }} thead th {
+    border-top-width: var(--pai-border);
+    font-weight: 700;
+    font-size: {{ section.settings.pai_header_font_size }}px;
+    line-height: 1.2;
+  }
+
+  #pai-compare-{{ section.id }} .pai-compare__empty {
+    background: transparent;
+    border-top-color: transparent;
+    border-left-color: transparent;
+  }
+
+  #pai-compare-{{ section.id }} .pai-compare__brand {
+    background: var(--pai-active-bg);
+    color: var(--pai-active-text);
+  }
+
+  #pai-compare-{{ section.id }} .pai-compare__brand img {
+    display: block;
+    max-width: {{ section.settings.pai_logo_width }}px;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  #pai-compare-{{ section.id }} .pai-compare__competitor {
+    background: var(--pai-cell-bg);
+  }
+
+  #pai-compare-{{ section.id }} .pai-compare__feature {
+    background: var(--pai-feature-bg);
+    text-align: {{ section.settings.pai_feature_alignment }};
+    font-size: var(--pai-feature-size);
+    font-weight: {{ section.settings.pai_feature_weight }};
+    line-height: 1.25;
+  }
+
+  #pai-compare-{{ section.id }} .pai-compare__feature span {
+    display: block;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    hyphens: auto;
+  }
+
+  #pai-compare-{{ section.id }} .pai-compare__value {
+    background: var(--pai-cell-bg);
+  }
+
+  #pai-compare-{{ section.id }} .pai-compare__value--active {
+    background: var(--pai-active-bg);
+    color: var(--pai-active-text);
+  }
+
+  #pai-compare-{{ section.id }} .pai-compare__icon {
+    width: var(--pai-icon-size);
+    height: var(--pai-icon-size);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #pai-compare-{{ section.id }} .pai-compare__icon svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  #pai-compare-{{ section.id }} .pai-compare__icon--check svg {
+    fill: var(--pai-check);
+  }
+
+  #pai-compare-{{ section.id }} .pai-compare__icon--cross svg {
+    fill: var(--pai-cross);
+  }
+
+  #pai-compare-{{ section.id }} .pai-compare__value--active .pai-compare__icon--check svg {
+    fill: var(--pai-active-check);
+  }
+
+  #pai-compare-{{ section.id }} .pai-compare__value--active .pai-compare__icon--cross svg {
+    fill: var(--pai-active-cross);
+  }
+
+  #pai-compare-{{ section.id }} tbody tr:first-child td:first-child {
+    border-top-left-radius: var(--pai-radius);
+  }
+
+  #pai-compare-{{ section.id }} thead th:nth-child(2) {
+    border-top-left-radius: var(--pai-radius);
+    border-top-right-radius: var(--pai-radius);
+  }
+
+  #pai-compare-{{ section.id }} thead th:last-child {
+    border-top-right-radius: var(--pai-radius);
+  }
+
+  #pai-compare-{{ section.id }} tbody tr:last-child td:first-child {
+    border-bottom-left-radius: var(--pai-radius);
+  }
+
+  #pai-compare-{{ section.id }} tbody tr:last-child td:last-child {
+    border-bottom-right-radius: var(--pai-radius);
+  }
+
+  @media screen and (min-width: 900px) {
+    #pai-compare-{{ section.id }} .pai-compare__padding {
+      padding-top: var(--pai-pt);
+      padding-bottom: var(--pai-pb);
+    }
+
+    #pai-compare-{{ section.id }} .pai-compare__grid {
+      grid-template-columns: minmax(0, 0.85fr) minmax(420px, 1fr);
+      gap: {{ section.settings.pai_desktop_gap }}px;
+    }
+
+    #pai-compare-{{ section.id }} .pai-compare__grid--reverse .pai-compare__table-wrap {
+      order: -1;
+    }
+
+    #pai-compare-{{ section.id }} .pai-compare__grid--table-only {
+      display: block;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    #pai-compare-{{ section.id }} .pai-compare__grid {
+      gap: var(--pai-mobile-gap);
+    }
+
+    #pai-compare-{{ section.id }} .pai-compare__table-wrap {
+      overflow-x: visible;
+    }
+
+    #pai-compare-{{ section.id }} .pai-compare__table {
+      min-width: 0;
+      table-layout: fixed;
+    }
+
+    #pai-compare-{{ section.id }} th,
+    #pai-compare-{{ section.id }} td {
+      padding: {{ section.settings.pai_cell_padding_y_mobile }}px {{ section.settings.pai_cell_padding_x_mobile }}px;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      hyphens: auto;
+    }
+
+    #pai-compare-{{ section.id }} .pai-compare__brand img {
+      max-width: var(--pai-logo-mobile);
+    }
+
+    #pai-compare-{{ section.id }} thead th {
+      font-size: {{ section.settings.pai_header_font_size_mobile }}px;
+    }
+
+    #pai-compare-{{ section.id }} .pai-compare__feature {
+      font-size: {{ section.settings.pai_feature_font_size_mobile }}px;
+    }
+  }
+</style>
 
 {% schema %}
 {
-  "name": "AI Comparison Table",
-  "tag": "section",
-  "class": "section",
+  "name": "Product AI Comparison",
+  "disabled_on": {
+    "groups": ["header", "footer", "custom.popup"]
+  },
   "settings": [
     {
-      "type": "text",
-      "id": "eyebrow",
-      "label": "Eyebrow"
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "pai_heading",
+      "label": "Heading",
+      "default": "Why choose us?"
+    },
+    {
+      "type": "select",
+      "id": "pai_heading_size",
+      "label": "Heading size",
+      "default": "h1",
+      "options": [
+        { "value": "h2", "label": "Small" },
+        { "value": "h1", "label": "Medium" },
+        { "value": "h0", "label": "Large" }
+      ]
+    },
+    {
+      "type": "richtext",
+      "id": "pai_text",
+      "label": "Text",
+      "default": "<p>Show customers why your product is the better choice.</p>"
+    },
+    {
+      "type": "select",
+      "id": "pai_content_alignment",
+      "label": "Content alignment",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
     },
     {
       "type": "text",
-      "id": "title",
-      "label": "Titel"
+      "id": "pai_button_label",
+      "label": "Button label"
+    },
+    {
+      "type": "url",
+      "id": "pai_button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "checkbox",
+      "id": "pai_button_secondary",
+      "label": "Use secondary button style",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "pai_layout",
+      "label": "Desktop layout",
+      "default": "table_second",
+      "options": [
+        { "value": "table_first", "label": "Table first" },
+        { "value": "table_second", "label": "Content first" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "pai_desktop_gap",
+      "label": "Desktop gap",
+      "min": 20,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "pai_mobile_gap",
+      "label": "Mobile gap",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "color_scheme",
+      "id": "pai_color_scheme",
+      "label": "Color scheme",
+      "default": "background-1"
+    },
+    {
+      "type": "header",
+      "content": "Table labels"
+    },
+    {
+      "type": "image_picker",
+      "id": "pai_logo",
+      "label": "Brand logo"
+    },
+    {
+      "type": "range",
+      "id": "pai_logo_width",
+      "label": "Logo width desktop",
+      "min": 30,
+      "max": 180,
+      "step": 5,
+      "unit": "px",
+      "default": 90
+    },
+    {
+      "type": "range",
+      "id": "pai_logo_width_mobile",
+      "label": "Logo width mobile",
+      "min": 30,
+      "max": 140,
+      "step": 5,
+      "unit": "px",
+      "default": 70
     },
     {
       "type": "text",
-      "id": "header_feature",
-      "label": "Tabellenkopf 1"
+      "id": "pai_brand_label",
+      "label": "Brand label",
+      "default": "Our brand"
     },
     {
       "type": "text",
-      "id": "header_primary",
-      "label": "Tabellenkopf 2"
+      "id": "pai_competitor_label",
+      "label": "Competitor label",
+      "default": "Others"
     },
     {
-      "type": "text",
-      "id": "header_competitor",
-      "label": "Tabellenkopf 3"
+      "type": "header",
+      "content": "Table style"
+    },
+    {
+      "type": "range",
+      "id": "pai_table_max_width",
+      "label": "Table max width",
+      "min": 500,
+      "max": 1200,
+      "step": 50,
+      "unit": "px",
+      "default": 800
+    },
+    {
+      "type": "range",
+      "id": "pai_table_radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "pai_border_width",
+      "label": "Border width",
+      "min": 0,
+      "max": 6,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "pai_border_color",
+      "label": "Border color",
+      "default": "#e7e7e7"
+    },
+    {
+      "type": "range",
+      "id": "pai_shadow_opacity",
+      "label": "Shadow opacity",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "%",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "pai_shadow_y",
+      "label": "Shadow vertical",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "pai_shadow_blur",
+      "label": "Shadow blur",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Cell spacing"
+    },
+    {
+      "type": "range",
+      "id": "pai_cell_padding_y",
+      "label": "Cell vertical padding desktop",
+      "min": 6,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "pai_cell_padding_x",
+      "label": "Cell horizontal padding desktop",
+      "min": 8,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "pai_cell_padding_y_mobile",
+      "label": "Cell vertical padding mobile",
+      "min": 6,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "pai_cell_padding_x_mobile",
+      "label": "Cell horizontal padding mobile",
+      "min": 6,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "pai_header_font_size",
+      "label": "Header font size desktop",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "pai_header_font_size_mobile",
+      "label": "Header font size mobile",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "pai_feature_font_size",
+      "label": "Feature font size desktop",
+      "min": 10,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "pai_feature_font_size_mobile",
+      "label": "Feature font size mobile",
+      "min": 10,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    },
+    {
+      "type": "select",
+      "id": "pai_feature_weight",
+      "label": "Feature font weight",
+      "default": "600",
+      "options": [
+        { "value": "400", "label": "Regular" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi bold" },
+        { "value": "700", "label": "Bold" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "pai_feature_alignment",
+      "label": "Feature alignment",
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "pai_icon_size",
+      "label": "Icon size",
+      "min": 14,
+      "max": 42,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "pai_text_color",
+      "label": "Text color",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "pai_feature_bg",
+      "label": "Feature cell background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "pai_cell_bg",
+      "label": "Other cell background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "pai_active_bg",
+      "label": "Brand column background",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "pai_active_text",
+      "label": "Brand column text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "pai_check_color",
+      "label": "Check color",
+      "default": "#26a641"
+    },
+    {
+      "type": "color",
+      "id": "pai_cross_color",
+      "label": "Cross color",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "pai_active_check_color",
+      "label": "Brand check color",
+      "default": "#53AF01"
+    },
+    {
+      "type": "color",
+      "id": "pai_active_cross_color",
+      "label": "Brand cross color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "pai_padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "pai_padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 36
     }
   ],
   "blocks": [
     {
-      "type": "row",
-      "name": "Vergleichszeile",
+      "type": "pai_row",
+      "name": "Comparison row",
       "settings": [
         {
           "type": "text",
-          "id": "label",
-          "label": "Merkmal"
+          "id": "pai_feature",
+          "label": "Feature",
+          "default": "Feature benefit"
         },
         {
-          "type": "text",
-          "id": "value",
-          "label": "Unser Produkt"
+          "type": "checkbox",
+          "id": "pai_brand_has",
+          "label": "Brand has this",
+          "default": true
         },
         {
-          "type": "text",
-          "id": "comparison",
-          "label": "Vergleich"
+          "type": "checkbox",
+          "id": "pai_other_has",
+          "label": "Others have this",
+          "default": false
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "AI Comparison Table"
+      "name": "Product AI Comparison",
+      "blocks": [
+        { "type": "pai_row" },
+        { "type": "pai_row" },
+        { "type": "pai_row" },
+        { "type": "pai_row" }
+      ]
     }
   ]
 }
