@@ -6,7 +6,7 @@
 
 <section
   id="pai-compare-{{ section.id }}"
-  class="pai-compare color-{{ section.settings.pai_color_scheme }} gradient"
+  class="pai-compare"
   style="
     --pai-pt-m: {{ section.settings.pai_padding_top | times: 0.75 | round: 0 }}px;
     --pai-pb-m: {{ section.settings.pai_padding_bottom | times: 0.75 | round: 0 }}px;
@@ -188,7 +188,8 @@
     border-spacing: 0;
     overflow: hidden;
     border-radius: var(--pai-radius);
-    box-shadow: var(--pai-shadow);
+    box-shadow: none;
+    background: transparent;
   }
 
   #pai-compare-{{ section.id }} th,
@@ -344,6 +345,18 @@
       table-layout: fixed;
     }
 
+    #pai-compare-{{ section.id }} .pai-compare__empty {
+      width: 44%;
+      min-width: 44%;
+      padding: 0;
+      border-top: 0;
+      border-left: 0;
+      border-right: 0;
+      border-bottom: 0;
+      background: transparent;
+      visibility: hidden;
+    }
+
     #pai-compare-{{ section.id }} th,
     #pai-compare-{{ section.id }} td {
       padding: {{ section.settings.pai_cell_padding_y_mobile }}px {{ section.settings.pai_cell_padding_x_mobile }}px;
@@ -358,6 +371,15 @@
 
     #pai-compare-{{ section.id }} thead th {
       font-size: {{ section.settings.pai_header_font_size_mobile }}px;
+    }
+
+    #pai-compare-{{ section.id }} thead th:nth-child(2) {
+      border-top-left-radius: var(--pai-radius);
+    }
+
+    #pai-compare-{{ section.id }} tbody tr:first-child td:first-child {
+      border-top-width: var(--pai-border);
+      border-top-left-radius: var(--pai-radius);
     }
 
     #pai-compare-{{ section.id }} .pai-compare__feature {
@@ -460,12 +482,6 @@
       "step": 2,
       "unit": "px",
       "default": 12
-    },
-    {
-      "type": "color_scheme",
-      "id": "pai_color_scheme",
-      "label": "Color scheme",
-      "default": "background-1"
     },
     {
       "type": "header",
