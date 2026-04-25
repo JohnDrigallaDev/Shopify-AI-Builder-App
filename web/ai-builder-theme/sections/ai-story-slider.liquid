@@ -1,0 +1,731 @@
+{% liquid
+  assign ai_font = section.settings.ai_story_font
+%}
+
+<style>
+  {% if section.settings.ai_story_use_custom_font %}
+    {{ ai_font | font_face: font_display: 'swap' }}
+  {% endif %}
+
+  #pai-story-bubbles-{{ section.id }} {
+    background: {{ section.settings.ai_story_bg }};
+    padding-top: {{ section.settings.ai_story_padding_top }}px;
+    padding-bottom: {{ section.settings.ai_story_padding_bottom }}px;
+    overflow: hidden;
+  }
+
+  #pai-story-bubbles-{{ section.id }} .pai-story-row {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    gap: {{ section.settings.ai_story_gap_desktop }}px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-width: 100%;
+    padding-left: {{ section.settings.ai_story_side_padding_desktop }}px;
+    padding-right: {{ section.settings.ai_story_side_padding_desktop }}px;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  #pai-story-bubbles-{{ section.id }} .pai-story-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  {% if section.settings.ai_story_align_desktop == 'center' %}
+    #pai-story-bubbles-{{ section.id }} .pai-story-row {
+      justify-content: center;
+    }
+  {% else %}
+    #pai-story-bubbles-{{ section.id }} .pai-story-row {
+      justify-content: flex-start;
+    }
+  {% endif %}
+
+  #pai-story-bubbles-{{ section.id }} .pai-story-item {
+    flex: 0 0 auto;
+    width: {{ section.settings.ai_story_size_desktop }}px;
+    text-align: center;
+    color: {{ section.settings.ai_story_text_color }};
+    text-decoration: none;
+    display: block;
+  }
+
+  #pai-story-bubbles-{{ section.id }} .pai-story-image-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    margin-bottom: {{ section.settings.ai_story_text_gap }}px;
+  }
+
+  #pai-story-bubbles-{{ section.id }} .pai-story-circle {
+    width: 100%;
+    height: 100%;
+    border-radius: {{ section.settings.ai_story_roundness }}%;
+    overflow: hidden;
+    background: {{ section.settings.ai_story_placeholder_bg }};
+    border: {{ section.settings.ai_story_border_width }}px solid {{ section.settings.ai_story_border_color }};
+    box-sizing: border-box;
+    display: grid;
+    place-items: center;
+    position: relative;
+  }
+
+  #pai-story-bubbles-{{ section.id }} .pai-story-circle.is-highlighted {
+    border: {{ section.settings.ai_story_highlight_width }}px solid {{ section.settings.ai_story_highlight_color }};
+    padding: {{ section.settings.ai_story_highlight_inner_gap }}px;
+    background:
+      linear-gradient({{ section.settings.ai_story_placeholder_bg }}, {{ section.settings.ai_story_placeholder_bg }}) padding-box,
+      {{ section.settings.ai_story_highlight_gradient }} border-box;
+  }
+
+  #pai-story-bubbles-{{ section.id }} .pai-story-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: inherit;
+  }
+
+  #pai-story-bubbles-{{ section.id }} .pai-story-placeholder {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    color: {{ section.settings.ai_story_placeholder_icon }};
+    opacity: .45;
+  }
+
+  #pai-story-bubbles-{{ section.id }} .pai-story-placeholder svg {
+    width: 46%;
+    height: 46%;
+  }
+
+  #pai-story-bubbles-{{ section.id }} .pai-story-label {
+    margin: 0;
+    color: {{ section.settings.ai_story_text_color }};
+    {% if section.settings.ai_story_use_custom_font %}
+      font-family: {{ ai_font.family }}, {{ ai_font.fallback_families }};
+    {% else %}
+      font-family: var(--font-body-family);
+      font-style: var(--font-body-style);
+    {% endif %}
+    font-weight: {{ section.settings.ai_story_font_weight }};
+    font-size: {{ section.settings.ai_story_font_size_desktop }}px;
+    line-height: {{ section.settings.ai_story_line_height }}%;
+    word-break: break-word;
+  }
+
+  #pai-story-bubbles-{{ section.id }} .pai-story-badge {
+    position: absolute;
+    z-index: 2;
+    left: 50%;
+    top: 50%;
+    transform: translate(
+      calc(-50% + {{ section.settings.ai_badge_offset_x }}px),
+      calc(-50% + {{ section.settings.ai_badge_offset_y }}px)
+    );
+    padding: {{ section.settings.ai_badge_padding_y }}px {{ section.settings.ai_badge_padding_x }}px;
+    border-radius: {{ section.settings.ai_badge_radius }}px;
+    font-size: {{ section.settings.ai_badge_font_size }}px;
+    font-weight: {{ section.settings.ai_badge_font_weight }};
+    line-height: 1;
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  #pai-story-bubbles-{{ section.id }} .pai-anim-bounce {
+    animation: paiBubbleBounce-{{ section.id }} 2.2s ease-in-out infinite;
+  }
+
+  #pai-story-bubbles-{{ section.id }} .pai-anim-pulse {
+    animation: paiBubblePulse-{{ section.id }} 2.2s ease-in-out infinite;
+  }
+
+  #pai-story-bubbles-{{ section.id }} .pai-anim-wiggle {
+    animation: paiBubbleWiggle-{{ section.id }} 2.2s ease-in-out infinite;
+  }
+
+  @keyframes paiBubbleBounce-{{ section.id }} {
+    0%, 100% { transform: translateY(0); }
+    35% { transform: translateY(-8px); }
+    60% { transform: translateY(0); }
+    75% { transform: translateY(-4px); }
+  }
+
+  @keyframes paiBubblePulse-{{ section.id }} {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.06); }
+  }
+
+  @keyframes paiBubbleWiggle-{{ section.id }} {
+    0%, 100% { transform: rotate(0deg); }
+    20% { transform: rotate(8deg); }
+    40% { transform: rotate(-6deg); }
+    60% { transform: rotate(4deg); }
+    80% { transform: rotate(-3deg); }
+  }
+
+  {% if section.settings.ai_story_hover_zoom %}
+    @media screen and (min-width: 750px) {
+      #pai-story-bubbles-{{ section.id }} .pai-story-circle img {
+        transition: transform .35s ease;
+      }
+
+      #pai-story-bubbles-{{ section.id }} .pai-story-item:hover .pai-story-circle img {
+        transform: scale(1.07);
+      }
+    }
+  {% endif %}
+
+  @media screen and (max-width: 749px) {
+    #pai-story-bubbles-{{ section.id }} {
+      padding-top: {{ section.settings.ai_story_padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.ai_story_padding_bottom_mobile }}px;
+    }
+
+    #pai-story-bubbles-{{ section.id }} .pai-story-row {
+      gap: {{ section.settings.ai_story_gap_mobile }}px;
+      padding-left: {{ section.settings.ai_story_side_padding_mobile }}px;
+      padding-right: {{ section.settings.ai_story_side_padding_mobile }}px;
+      justify-content: flex-start;
+    }
+
+    #pai-story-bubbles-{{ section.id }} .pai-story-item {
+      width: {{ section.settings.ai_story_size_mobile }}px;
+    }
+
+    #pai-story-bubbles-{{ section.id }} .pai-story-label {
+      font-size: {{ section.settings.ai_story_font_size_mobile }}px;
+    }
+  }
+</style>
+
+<section id="pai-story-bubbles-{{ section.id }}">
+  <div class="pai-story-row">
+    {% for block in section.blocks %}
+      {% liquid
+        assign bubble_link = block.settings.ai_link
+        if bubble_link == blank
+          assign bubble_link = '#'
+        endif
+      %}
+
+      <a
+        class="pai-story-item"
+        href="{{ bubble_link }}"
+        aria-label="{{ block.settings.ai_title | escape }}"
+        {{ block.shopify_attributes }}
+      >
+        <div class="pai-story-image-wrap">
+          <div
+            class="
+              pai-story-circle
+              {% if block.settings.ai_highlight %}is-highlighted{% endif %}
+              {% if block.settings.ai_animation_enable %}
+                {% case block.settings.ai_animation_style %}
+                  {% when 'bounce' %}pai-anim-bounce
+                  {% when 'pulse' %}pai-anim-pulse
+                  {% when 'wiggle' %}pai-anim-wiggle
+                {% endcase %}
+              {% endif %}
+            "
+          >
+            {% if block.settings.ai_image != blank %}
+              {{
+                block.settings.ai_image
+                | image_url: width: 400
+                | image_tag:
+                  loading: 'lazy',
+                  alt: block.settings.ai_title
+              }}
+            {% else %}
+              <div class="pai-story-placeholder">
+                <svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
+                  <circle cx="32" cy="32" r="21" stroke="currentColor" stroke-width="4"/>
+                  <path d="M18 18L46 46" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+                  <text x="32" y="54" text-anchor="middle" font-size="8" fill="currentColor">No image</text>
+                </svg>
+              </div>
+            {% endif %}
+          </div>
+
+          {% if block.settings.ai_show_badge %}
+            <div
+              class="pai-story-badge"
+              style="background: {{ block.settings.ai_badge_bg }}; color: {{ block.settings.ai_badge_text_color }};"
+            >
+              {{ block.settings.ai_badge_text }}
+            </div>
+          {% endif %}
+        </div>
+
+        {% if block.settings.ai_title != blank %}
+          <p class="pai-story-label">{{ block.settings.ai_title }}</p>
+        {% endif %}
+      </a>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "AI Story Slider",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "color",
+      "id": "ai_story_bg",
+      "label": "Background",
+      "default": "#F9F6F2"
+    },
+    {
+      "type": "range",
+      "id": "ai_story_padding_top",
+      "min": 0,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding top desktop",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "ai_story_padding_bottom",
+      "min": 0,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding bottom desktop",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "ai_story_padding_top_mobile",
+      "min": 0,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding top mobile",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "ai_story_padding_bottom_mobile",
+      "min": 0,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding bottom mobile",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "ai_story_side_padding_desktop",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Side padding desktop",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "ai_story_side_padding_mobile",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Side padding mobile",
+      "default": 12
+    },
+    {
+      "type": "select",
+      "id": "ai_story_align_desktop",
+      "label": "Desktop alignment",
+      "default": "center",
+      "options": [
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "left",
+          "label": "Left / scroll"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Bubble"
+    },
+    {
+      "type": "range",
+      "id": "ai_story_size_desktop",
+      "min": 50,
+      "max": 180,
+      "step": 2,
+      "unit": "px",
+      "label": "Bubble size desktop",
+      "default": 92
+    },
+    {
+      "type": "range",
+      "id": "ai_story_size_mobile",
+      "min": 50,
+      "max": 140,
+      "step": 2,
+      "unit": "px",
+      "label": "Bubble size mobile",
+      "default": 82
+    },
+    {
+      "type": "range",
+      "id": "ai_story_gap_desktop",
+      "min": 0,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "label": "Gap desktop",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "ai_story_gap_mobile",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "label": "Gap mobile",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "ai_story_roundness",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Image roundness",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "ai_story_border_width",
+      "min": 0,
+      "max": 8,
+      "step": 1,
+      "unit": "px",
+      "label": "Image border width",
+      "default": 0
+    },
+    {
+      "type": "color",
+      "id": "ai_story_border_color",
+      "label": "Image border color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "ai_story_placeholder_bg",
+      "label": "Placeholder background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "ai_story_placeholder_icon",
+      "label": "Placeholder icon color",
+      "default": "#CFCFCF"
+    },
+    {
+      "type": "checkbox",
+      "id": "ai_story_hover_zoom",
+      "label": "Zoom image on hover",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Highlight ring"
+    },
+    {
+      "type": "color",
+      "id": "ai_story_highlight_color",
+      "label": "Highlight color fallback",
+      "default": "#D1B190"
+    },
+    {
+      "type": "color_background",
+      "id": "ai_story_highlight_gradient",
+      "label": "Highlight gradient",
+      "default": "linear-gradient(135deg, #F8D49A, #D1B190, #B77CFF)"
+    },
+    {
+      "type": "range",
+      "id": "ai_story_highlight_width",
+      "min": 1,
+      "max": 12,
+      "step": 0.5,
+      "unit": "px",
+      "label": "Highlight thickness",
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "ai_story_highlight_inner_gap",
+      "min": 0,
+      "max": 8,
+      "step": 1,
+      "unit": "px",
+      "label": "Inner gap",
+      "default": 3
+    },
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "checkbox",
+      "id": "ai_story_use_custom_font",
+      "label": "Use custom font",
+      "default": false
+    },
+    {
+      "type": "font_picker",
+      "id": "ai_story_font",
+      "label": "Font",
+      "default": "josefin_sans_n4"
+    },
+    {
+      "type": "range",
+      "id": "ai_story_font_size_desktop",
+      "min": 8,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size desktop",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "ai_story_font_size_mobile",
+      "min": 8,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size mobile",
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "ai_story_font_weight",
+      "min": 100,
+      "max": 900,
+      "step": 100,
+      "label": "Font weight",
+      "default": 400
+    },
+    {
+      "type": "range",
+      "id": "ai_story_line_height",
+      "min": 80,
+      "max": 180,
+      "step": 5,
+      "unit": "%",
+      "label": "Line height",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "ai_story_text_gap",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Space between image and text",
+      "default": 10
+    },
+    {
+      "type": "color",
+      "id": "ai_story_text_color",
+      "label": "Text color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Badge"
+    },
+    {
+      "type": "range",
+      "id": "ai_badge_offset_x",
+      "min": -60,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Horizontal position",
+      "default": -20
+    },
+    {
+      "type": "range",
+      "id": "ai_badge_offset_y",
+      "min": -60,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Vertical position",
+      "default": 34
+    },
+    {
+      "type": "range",
+      "id": "ai_badge_radius",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Badge radius",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "ai_badge_font_size",
+      "min": 8,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Badge font size",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "ai_badge_font_weight",
+      "min": 100,
+      "max": 900,
+      "step": 100,
+      "label": "Badge font weight",
+      "default": 700
+    },
+    {
+      "type": "range",
+      "id": "ai_badge_padding_x",
+      "min": 2,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Badge horizontal padding",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "ai_badge_padding_y",
+      "min": 0,
+      "max": 12,
+      "step": 1,
+      "unit": "px",
+      "label": "Badge vertical padding",
+      "default": 3
+    }
+  ],
+  "blocks": [
+    {
+      "type": "ai_story_item",
+      "name": "Story item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "ai_image",
+          "label": "Image / icon"
+        },
+        {
+          "type": "text",
+          "id": "ai_title",
+          "label": "Text",
+          "default": "Kategorie A"
+        },
+        {
+          "type": "url",
+          "id": "ai_link",
+          "label": "Link"
+        },
+        {
+          "type": "checkbox",
+          "id": "ai_highlight",
+          "label": "Show highlight ring",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "ai_show_badge",
+          "label": "Show badge",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "ai_badge_text",
+          "label": "Badge text",
+          "default": "Neu"
+        },
+        {
+          "type": "color",
+          "id": "ai_badge_bg",
+          "label": "Badge background",
+          "default": "#D9534F"
+        },
+        {
+          "type": "color",
+          "id": "ai_badge_text_color",
+          "label": "Badge text color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "checkbox",
+          "id": "ai_animation_enable",
+          "label": "Enable animation",
+          "default": false
+        },
+        {
+          "type": "select",
+          "id": "ai_animation_style",
+          "label": "Animation",
+          "default": "bounce",
+          "options": [
+            {
+              "value": "bounce",
+              "label": "Bounce"
+            },
+            {
+              "value": "pulse",
+              "label": "Pulse"
+            },
+            {
+              "value": "wiggle",
+              "label": "Wiggle"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AI Story Slider",
+      "blocks": [
+        {
+          "type": "ai_story_item"
+        },
+        {
+          "type": "ai_story_item"
+        },
+        {
+          "type": "ai_story_item"
+        },
+        {
+          "type": "ai_story_item"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
