@@ -399,6 +399,51 @@
         "row_4"
       ]
     },
+    "ai_section_6": {
+      "type": "ai-vs-comparison",
+      "settings": {
+        "pai_vs_heading": "Mit Handschuh vs. ohne Lösung im Alltag",
+        "pai_vs_left_label": "Mit Handschuh",
+        "pai_vs_right_label": "Ohne Handschuh",
+        "pai_vs_right_grayscale": true
+      },
+      "blocks": {
+        "row_1": {
+          "type": "pai_vs_row",
+          "settings": {
+            "pai_vs_left_text": "Haare direkt beim Streicheln aufnehmen",
+            "pai_vs_right_text": "Haare bleiben im Fell und auf Möbeln"
+          }
+        },
+        "row_2": {
+          "type": "pai_vs_row",
+          "settings": {
+            "pai_vs_left_text": "Weniger Aufwand auf Sofa und Kleidung",
+            "pai_vs_right_text": "Mehr Nacharbeit mit Fusselrolle und Bürste"
+          }
+        },
+        "row_3": {
+          "type": "pai_vs_row",
+          "settings": {
+            "pai_vs_left_text": "Einfach in den Alltag mit dem Hund integrieren",
+            "pai_vs_right_text": "Lose Haare sammeln sich weiter an"
+          }
+        },
+        "row_4": {
+          "type": "pai_vs_row",
+          "settings": {
+            "pai_vs_left_text": "Schnelle Routine ohne Extra-Schritt",
+            "pai_vs_right_text": "Mehr Reinigungsaufwand im Nachgang"
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4"
+      ]
+    },
     "ai_section_4": {
       "type": "ai-cta-banner",
       "settings": {
@@ -527,6 +572,7 @@
     "main",
     "ai_section_2",
     "ai_section_3",
+    "ai_section_6",
     "ai_section_5",
     "ai_section_4"
   ]

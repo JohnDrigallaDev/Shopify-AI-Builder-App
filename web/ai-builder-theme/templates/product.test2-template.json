@@ -388,6 +388,51 @@
         "row_4"
       ]
     },
+    "ai_section_7": {
+      "type": "ai-vs-comparison",
+      "settings": {
+        "pai_vs_heading": "IPL zuhause vs. Studio-Routine",
+        "pai_vs_left_label": "IPL zuhause",
+        "pai_vs_right_label": "Kosmetikstudio / Dermatologe",
+        "pai_vs_right_grayscale": true
+      },
+      "blocks": {
+        "row_1": {
+          "type": "pai_vs_row",
+          "settings": {
+            "pai_vs_left_text": "Behandlung im eigenen Alltag",
+            "pai_vs_right_text": "Termine und Anfahrt einplanen"
+          }
+        },
+        "row_2": {
+          "type": "pai_vs_row",
+          "settings": {
+            "pai_vs_left_text": "Mehr Flexibilität für mehrere Zonen",
+            "pai_vs_right_text": "Weniger spontan und planbar"
+          }
+        },
+        "row_3": {
+          "type": "pai_vs_row",
+          "settings": {
+            "pai_vs_left_text": "Ohne laufende Studio-Kosten pro Termin",
+            "pai_vs_right_text": "Wiederkehrende Behandlungskosten"
+          }
+        },
+        "row_4": {
+          "type": "pai_vs_row",
+          "settings": {
+            "pai_vs_left_text": "Komfortabel zuhause anwendbar",
+            "pai_vs_right_text": "Abhängig von freien Slots"
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4"
+      ]
+    },
     "ai_section_4": {
       "type": "ai-cta-banner",
       "settings": {
@@ -578,6 +623,7 @@
     "main",
     "ai_section_2",
     "ai_section_3",
+    "ai_section_7",
     "ai_section_5",
     "ai_section_6",
     "ai_section_4"

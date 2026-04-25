@@ -424,6 +424,51 @@
         "row_4"
       ]
     },
+    "ai_section_8": {
+      "type": "ai-vs-comparison",
+      "settings": {
+        "pai_vs_heading": "Dein Gerät zuhause vs. Studio-Termine",
+        "pai_vs_left_label": "Zuhause",
+        "pai_vs_right_label": "Kosmetikstudio / Dermatologe",
+        "pai_vs_right_grayscale": true
+      },
+      "blocks": {
+        "row_1": {
+          "type": "pai_vs_row",
+          "settings": {
+            "pai_vs_left_text": "Direkt zuhause und ohne Anfahrt nutzbar",
+            "pai_vs_right_text": "Zeitaufwand durch Anreise und Termine"
+          }
+        },
+        "row_2": {
+          "type": "pai_vs_row",
+          "settings": {
+            "pai_vs_left_text": "Besser in die eigene Routine integrierbar",
+            "pai_vs_right_text": "Weniger flexibel im Alltag"
+          }
+        },
+        "row_3": {
+          "type": "pai_vs_row",
+          "settings": {
+            "pai_vs_left_text": "Langfristig ohne laufende Sitzungsgebühren",
+            "pai_vs_right_text": "Wiederkehrende Kosten pro Behandlung"
+          }
+        },
+        "row_4": {
+          "type": "pai_vs_row",
+          "settings": {
+            "pai_vs_left_text": "Privat und bequem zuhause anwendbar",
+            "pai_vs_right_text": "Abhängig von Terminverfügbarkeit"
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4"
+      ]
+    },
     "ai_section_5": {
       "type": "ai-cta-banner",
       "settings": {
@@ -615,6 +660,7 @@
     "ai_section_2",
     "ai_section_3",
     "ai_section_4",
+    "ai_section_8",
     "ai_section_6",
     "ai_section_7",
     "ai_section_5"

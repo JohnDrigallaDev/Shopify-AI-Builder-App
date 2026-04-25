@@ -400,6 +400,51 @@
         "row_4"
       ]
     },
+    "ai_section_7": {
+      "type": "ai-vs-comparison",
+      "settings": {
+        "pai_vs_heading": "KODO zuhause vs. Studio-Termine",
+        "pai_vs_left_label": "KODO",
+        "pai_vs_right_label": "Kosmetikstudio / Dermatologe",
+        "pai_vs_right_grayscale": true
+      },
+      "blocks": {
+        "row_1": {
+          "type": "pai_vs_row",
+          "settings": {
+            "pai_vs_left_text": "Anwendung zuhause, wann es dir passt",
+            "pai_vs_right_text": "Feste Termine und Anfahrt"
+          }
+        },
+        "row_2": {
+          "type": "pai_vs_row",
+          "settings": {
+            "pai_vs_left_text": "Einmal investieren statt laufender Behandlungskosten",
+            "pai_vs_right_text": "Wiederkehrende Kosten pro Sitzung"
+          }
+        },
+        "row_3": {
+          "type": "pai_vs_row",
+          "settings": {
+            "pai_vs_left_text": "Flexibel für Gesicht und Körper nutzbar",
+            "pai_vs_right_text": "Abhängig von Verfügbarkeit und Aufwand"
+          }
+        },
+        "row_4": {
+          "type": "pai_vs_row",
+          "settings": {
+            "pai_vs_left_text": "Routine im eigenen Tempo",
+            "pai_vs_right_text": "Weniger Kontrolle über deinen Ablauf"
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4"
+      ]
+    },
     "ai_section_4": {
       "type": "ai-cta-banner",
       "settings": {
@@ -590,6 +635,7 @@
     "main",
     "ai_section_2",
     "ai_section_3",
+    "ai_section_7",
     "ai_section_5",
     "ai_section_6",
     "ai_section_4"
