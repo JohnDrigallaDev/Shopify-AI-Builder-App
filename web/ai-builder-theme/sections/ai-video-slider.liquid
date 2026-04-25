@@ -1,0 +1,1499 @@
+{% liquid
+  assign ai_lazy = section.settings.ai_lazy_load
+  assign ai_bg_mode = section.settings.ai_background_mode
+%}
+
+<style>
+  {{ section.settings.ai_heading_font | font_face: font_display: 'swap' }}
+
+  #pa-video-slider-{{ section.id }} {
+    margin-top: {{ section.settings.ai_margin_top }}px;
+    margin-bottom: {{ section.settings.ai_margin_bottom }}px;
+    border-top: {{ section.settings.ai_border_width }}px solid {{ section.settings.ai_border_color }};
+    border-bottom: {{ section.settings.ai_border_width }}px solid {{ section.settings.ai_border_color }};
+    overflow: hidden;
+    {% if ai_bg_mode == 'solid' %}
+      background: {{ section.settings.ai_background_color }};
+    {% else %}
+      background: {{ section.settings.ai_background_gradient }};
+    {% endif %}
+  }
+
+  #pa-video-slider-{{ section.id }} .pa-video-inner {
+    max-width:
+      {% if section.settings.ai_width_mode == 'custom' %}
+        {{ section.settings.ai_custom_width }}px
+      {% elsif section.settings.ai_width_mode == 'page' %}
+        var(--page-width, 1200px)
+      {% else %}
+        none
+      {% endif %};
+    margin: 0 auto;
+    padding:
+      {{ section.settings.ai_padding_top }}px
+      {{ section.settings.ai_padding_sides_mobile }}rem
+      {{ section.settings.ai_padding_bottom }}px;
+    position: relative;
+  }
+
+  #pa-video-slider-{{ section.id }} .pa-video-viewport {
+    overflow: visible;
+    position: relative;
+    padding: {% if section.settings.ai_shadow_enabled %}14px{% else %}4px{% endif %};
+    cursor: grab;
+  }
+
+  #pa-video-slider-{{ section.id }} .pa-video-viewport.is-dragging {
+    cursor: grabbing;
+  }
+
+  #pa-video-slider-{{ section.id }} .pa-video-track {
+    --pae-visible: {{ section.settings.ai_slides_mobile }};
+    --pae-overlap: 72px;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    padding: 18px 0;
+    transition: transform 360ms ease;
+    will-change: transform;
+  }
+
+  #pa-video-slider-{{ section.id }} .pa-video-card {
+    flex: 0 0 calc(100% / var(--pae-visible));
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+    margin-left: calc(var(--pae-overlap) * -1);
+    padding: 0 4px;
+    border-radius: {{ section.settings.ai_card_radius }}px;
+    border: {{ section.settings.ai_card_border_width }}px solid {{ section.settings.ai_card_border_color }};
+    background: #111;
+    transform: scale(.84) translateZ(-120px);
+    transform-origin: center center;
+    opacity: .62;
+    transition: transform 600ms cubic-bezier(.22,.61,.36,1), opacity 600ms ease;
+    z-index: 1;
+    {% if section.settings.ai_shadow_enabled %}
+      box-shadow: 0 8px 24px {{ section.settings.ai_shadow_color | color_modify: 'alpha', 0.22 }};
+    {% endif %}
+    {% if section.settings.ai_ratio_mobile == 'portrait' %}
+      aspect-ratio: 9.6 / 14;
+    {% elsif section.settings.ai_ratio_mobile == 'square' %}
+      aspect-ratio: 1 / 1;
+    {% else %}
+      aspect-ratio: 12 / 9;
+    {% endif %}
+  }
+
+  #pa-video-slider-{{ section.id }} .pa-video-card:first-child {
+    margin-left: 0;
+  }
+
+  #pa-video-slider-{{ section.id }} .pa-video-card.is-left {
+    transform: translateX(8%) scale(.89) rotateY({{ section.settings.ai_rotate | times: -1 }}deg) translateZ(-80px);
+    opacity: .8;
+    z-index: 2;
+  }
+
+  #pa-video-slider-{{ section.id }} .pa-video-card.is-right {
+    transform: translateX(-8%) scale(.89) rotateY({{ section.settings.ai_rotate }}deg) translateZ(-80px);
+    opacity: .8;
+    z-index: 2;
+  }
+
+  #pa-video-slider-{{ section.id }} .pa-video-card.is-active {
+    transform: scale(1.03) rotateY(0deg) translateZ(0);
+    opacity: 1;
+    z-index: 3;
+  }
+
+  #pa-video-slider-{{ section.id }} .pa-media-wrap {
+    position: absolute;
+    inset: 0;
+  }
+
+  #pa-video-slider-{{ section.id }} .pa-media-wrap::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: {{ section.settings.ai_overlay_color | color_modify: 'alpha', section.settings.ai_overlay_opacity }};
+    pointer-events: none;
+  }
+
+  #pa-video-slider-{{ section.id }} video,
+  #pa-video-slider-{{ section.id }} iframe {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    border: 0;
+  }
+
+  #pa-video-slider-{{ section.id }} .pa-card-content {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: {{ section.settings.ai_horizontal_mobile }};
+    justify-content: {{ section.settings.ai_vertical_mobile }};
+    padding: {{ section.settings.ai_card_padding_y_mobile }}px {{ section.settings.ai_card_padding_x_mobile }}px;
+    pointer-events: none;
+  }
+
+  #pa-video-slider-{{ section.id }} .pa-card-title {
+    margin: 0;
+    color: {{ section.settings.ai_title_color }};
+    font-size: {{ section.settings.ai_title_size_mobile }}px;
+    line-height: {{ section.settings.ai_title_line_height }}%;
+    text-align:
+      {% if section.settings.ai_horizontal_mobile == 'center' %}center{% elsif section.settings.ai_horizontal_mobile == 'flex-end' %}right{% else %}left{% endif %};
+    {% if section.settings.ai_use_heading_font %}
+      font-family: {{ section.settings.ai_heading_font.family }}, {{ section.settings.ai_heading_font.fallback_families }};
+      font-weight: {{ section.settings.ai_heading_font.weight }};
+      font-style: {{ section.settings.ai_heading_font.style }};
+    {% endif %}
+  }
+
+  #pa-video-slider-{{ section.id }} .pa-stars {
+    display: flex;
+    gap: 3px;
+    margin-top: {{ section.settings.ai_stars_margin_mobile }}px;
+    justify-content: {{ section.settings.ai_horizontal_mobile }};
+  }
+
+  #pa-video-slider-{{ section.id }} .pa-stars svg,
+  #pa-video-slider-{{ section.id }} .pa-stars img {
+    width: {{ section.settings.ai_stars_size_mobile }}px;
+    height: {{ section.settings.ai_stars_size_mobile }}px;
+    display: block;
+  }
+
+  #pa-video-slider-{{ section.id }} .pa-card-controls {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 4;
+    display: flex;
+    gap: 8px;
+  }
+
+  #pa-video-slider-{{ section.id }} .pa-control-btn {
+    width: {{ section.settings.ai_control_size_mobile }}px;
+    height: {{ section.settings.ai_control_size_mobile }}px;
+    border-radius: 999px;
+    border: {{ section.settings.ai_control_border_width }}px solid {{ section.settings.ai_control_border_color }};
+    background: {{ section.settings.ai_control_bg | color_modify: 'alpha', 0.35 }};
+    color: {{ section.settings.ai_control_icon_color }};
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    padding: 0;
+    box-shadow: 0 4px 16px rgba(0,0,0,.16);
+  }
+
+  #pa-video-slider-{{ section.id }} .pa-control-btn svg {
+    width: 50%;
+    height: 50%;
+    fill: currentColor;
+  }
+
+  #pa-video-slider-{{ section.id }} .pa-control-btn:hover {
+    background: {{ section.settings.ai_control_bg_hover | color_modify: 'alpha', 0.45 }};
+    border-color: {{ section.settings.ai_control_border_hover }};
+    color: {{ section.settings.ai_control_icon_hover }};
+  }
+
+  #pa-video-slider-{{ section.id }} .pa-icon-pause,
+  #pa-video-slider-{{ section.id }} .pa-icon-sound-on {
+    display: none;
+  }
+
+  #pa-video-slider-{{ section.id }} .is-active .pa-icon-play,
+  #pa-video-slider-{{ section.id }} .is-active .pa-icon-sound-off {
+    display: none;
+  }
+
+  #pa-video-slider-{{ section.id }} .is-active .pa-icon-pause,
+  #pa-video-slider-{{ section.id }} .is-active .pa-icon-sound-on {
+    display: block;
+  }
+
+  #pa-video-slider-{{ section.id }} .pa-arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 5;
+    width: {{ section.settings.ai_arrow_size_mobile }}px;
+    height: {{ section.settings.ai_arrow_size_mobile }}px;
+    border-radius: {{ section.settings.ai_arrow_radius }}px;
+    border: {{ section.settings.ai_arrow_border_width }}px solid {{ section.settings.ai_arrow_border_color }};
+    background: {{ section.settings.ai_arrow_bg }};
+    color: {{ section.settings.ai_arrow_color }};
+    display: {% if section.settings.ai_show_arrows_mobile %}grid{% else %}none{% endif %};
+    place-items: center;
+    cursor: pointer;
+    transform: translateY(-50%);
+    box-shadow: 0 4px 18px rgba(0,0,0,.14);
+  }
+
+  #pa-video-slider-{{ section.id }} .pa-arrow:hover {
+    background: {{ section.settings.ai_arrow_bg_hover }};
+    color: {{ section.settings.ai_arrow_color_hover }};
+    border-color: {{ section.settings.ai_arrow_border_hover }};
+  }
+
+  #pa-video-slider-{{ section.id }} .pa-arrow svg {
+    width: {{ section.settings.ai_arrow_icon_mobile }}px;
+    height: {{ section.settings.ai_arrow_icon_mobile }}px;
+    stroke: currentColor;
+  }
+
+  #pa-video-slider-{{ section.id }} .pa-prev {
+    left: 14px;
+  }
+
+  #pa-video-slider-{{ section.id }} .pa-next {
+    right: 14px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    #pa-video-slider-{{ section.id }} .pa-video-inner {
+      padding-left: {{ section.settings.ai_padding_sides }}rem;
+      padding-right: {{ section.settings.ai_padding_sides }}rem;
+    }
+
+    #pa-video-slider-{{ section.id }} .pa-video-track {
+      --pae-visible: {{ section.settings.ai_slides_desktop }};
+      --pae-overlap: 56px;
+      padding: 26px 0;
+    }
+
+    #pa-video-slider-{{ section.id }} .pa-video-card {
+      {% if section.settings.ai_ratio_desktop == 'portrait' %}
+        aspect-ratio: 9.6 / 14;
+      {% elsif section.settings.ai_ratio_desktop == 'square' %}
+        aspect-ratio: 1 / 1;
+      {% else %}
+        aspect-ratio: 12 / 9;
+      {% endif %}
+    }
+
+    #pa-video-slider-{{ section.id }} .pa-card-content {
+      align-items: {{ section.settings.ai_horizontal_desktop }};
+      justify-content: {{ section.settings.ai_vertical_desktop }};
+      padding: {{ section.settings.ai_card_padding_y }}px {{ section.settings.ai_card_padding_x }}px;
+    }
+
+    #pa-video-slider-{{ section.id }} .pa-card-title {
+      font-size: {{ section.settings.ai_title_size }}px;
+      text-align:
+        {% if section.settings.ai_horizontal_desktop == 'center' %}center{% elsif section.settings.ai_horizontal_desktop == 'flex-end' %}right{% else %}left{% endif %};
+    }
+
+    #pa-video-slider-{{ section.id }} .pa-stars {
+      margin-top: {{ section.settings.ai_stars_margin }}px;
+      justify-content: {{ section.settings.ai_horizontal_desktop }};
+    }
+
+    #pa-video-slider-{{ section.id }} .pa-stars svg,
+    #pa-video-slider-{{ section.id }} .pa-stars img {
+      width: {{ section.settings.ai_stars_size }}px;
+      height: {{ section.settings.ai_stars_size }}px;
+    }
+
+    #pa-video-slider-{{ section.id }} .pa-control-btn {
+      width: {{ section.settings.ai_control_size }}px;
+      height: {{ section.settings.ai_control_size }}px;
+    }
+
+    #pa-video-slider-{{ section.id }} .pa-arrow {
+      display: {% if section.settings.ai_show_arrows_desktop %}grid{% else %}none{% endif %};
+      width: {{ section.settings.ai_arrow_size }}px;
+      height: {{ section.settings.ai_arrow_size }}px;
+    }
+
+    #pa-video-slider-{{ section.id }} .pa-arrow svg {
+      width: {{ section.settings.ai_arrow_icon }}px;
+      height: {{ section.settings.ai_arrow_icon }}px;
+    }
+
+    #pa-video-slider-{{ section.id }} .pa-prev {
+      left: 40px;
+    }
+
+    #pa-video-slider-{{ section.id }} .pa-next {
+      right: 40px;
+    }
+  }
+</style>
+
+<section id="pa-video-slider-{{ section.id }}">
+  <div class="pa-video-inner">
+    <div class="pa-video-viewport" data-pa-video-viewport>
+      <div class="pa-video-track" data-pa-video-track>
+        {% if section.blocks.size > 1 %}
+          {% for repeat in (1..3) %}
+            {% for block in section.blocks %}
+              <article class="pa-video-card" data-pa-video-card {% if repeat == 2 %}{{ block.shopify_attributes }}{% endif %}>
+                <div class="pa-card-controls">
+                  {% if section.settings.ai_show_sound %}
+                    <button class="pa-control-btn pa-sound-btn" type="button" aria-label="Ton umschalten">
+                      <svg class="pa-icon-sound-off" viewBox="0 0 24 24">
+                        <path d="M4 9v6h4l5 4V5L8 9H4zm13.5 3 3-3 1.5 1.5-3 3 3 3-1.5 1.5-3-3-3 3-1.5-1.5 3-3-3-3L14.5 9l3 3z"/>
+                      </svg>
+                      <svg class="pa-icon-sound-on" viewBox="0 0 24 24">
+                        <path d="M4 9v6h4l5 4V5L8 9H4zm12.5 3a4.5 4.5 0 0 0-2.2-3.87v7.74A4.5 4.5 0 0 0 16.5 12zm-2.2-8.2v2.1A7 7 0 0 1 18.5 12a7 7 0 0 1-4.2 6.1v2.1A9 9 0 0 0 20.5 12a9 9 0 0 0-6.2-8.2z"/>
+                      </svg>
+                    </button>
+                  {% endif %}
+
+                  {% if section.settings.ai_show_play %}
+                    <button class="pa-control-btn pa-play-btn" type="button" aria-label="Video abspielen oder pausieren">
+                      <svg class="pa-icon-play" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z"/>
+                      </svg>
+                      <svg class="pa-icon-pause" viewBox="0 0 24 24">
+                        <path d="M7 5h4v14H7V5zm6 0h4v14h-4V5z"/>
+                      </svg>
+                    </button>
+                  {% endif %}
+                </div>
+
+                <div class="pa-media-wrap">
+                  {% if block.settings.ai_video != blank %}
+                    {{
+                      block.settings.ai_video
+                      | video_tag:
+                        autoplay: false,
+                        loop: true,
+                        muted: true,
+                        playsinline: true,
+                        controls: false,
+                        preload: 'metadata'
+                    }}
+                  {% elsif block.settings.ai_video_url != blank %}
+                    {% assign ai_embed_id = block.settings.ai_video_url.id %}
+                    {% if block.settings.ai_video_url.type == 'youtube' %}
+                      <iframe
+                        src="https://www.youtube.com/embed/{{ ai_embed_id }}?mute=1&controls=0&playsinline=1&rel=0&loop=1&playlist={{ ai_embed_id }}"
+                        allow="autoplay; encrypted-media; picture-in-picture"
+                        loading="{% if ai_lazy %}lazy{% else %}eager{% endif %}"
+                        allowfullscreen>
+                      </iframe>
+                    {% elsif block.settings.ai_video_url.type == 'vimeo' %}
+                      <iframe
+                        src="https://player.vimeo.com/video/{{ ai_embed_id }}?muted=1&background=1&loop=1"
+                        allow="autoplay; fullscreen; picture-in-picture"
+                        loading="{% if ai_lazy %}lazy{% else %}eager{% endif %}"
+                        allowfullscreen>
+                      </iframe>
+                    {% endif %}
+                  {% else %}
+                    <video muted playsinline loop preload="metadata">
+                      <source src="https://cdn.shopify.com/videos/c/o/v/fbb140fd46e3429eba459e1549dbbe38.mp4" type="video/mp4">
+                    </video>
+                  {% endif %}
+                </div>
+
+                <div class="pa-card-content">
+                  {% if block.settings.ai_title != blank %}
+                    <p class="pa-card-title">{{ block.settings.ai_title }}</p>
+                  {% endif %}
+
+                  {% unless section.settings.ai_hide_stars %}
+                    {% if block.settings.ai_rating > 0 %}
+                      <div class="pa-stars" aria-label="{{ block.settings.ai_rating }} von 5 Sternen">
+                        {% assign full_rating = block.settings.ai_rating | floor %}
+                        {% assign rating_decimal = block.settings.ai_rating | minus: full_rating %}
+                        {% assign next_star_index = full_rating | plus: 1 %}
+                        {% for star_index in (1..5) %}
+                          {% if section.settings.ai_star_icon != blank %}
+                            {% if star_index <= block.settings.ai_rating %}
+                              {{ section.settings.ai_star_icon | image_url: width: 60 | image_tag: loading: 'lazy' }}
+                            {% endif %}
+                          {% else %}
+                            {% assign fill_percent = 0 %}
+                            {% if star_index <= full_rating %}
+                              {% assign fill_percent = 100 %}
+                            {% elsif star_index == next_star_index %}
+                              {% assign fill_percent = rating_decimal | times: 100 %}
+                            {% endif %}
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                              <defs>
+                                <linearGradient id="pa-star-{{ section.id }}-{{ block.id }}-{{ repeat }}-{{ star_index }}">
+                                  <stop offset="{{ fill_percent }}%" stop-color="{{ section.settings.ai_stars_color }}"></stop>
+                                  <stop offset="{{ fill_percent }}%" stop-color="transparent"></stop>
+                                </linearGradient>
+                              </defs>
+                              <path
+                                d="M12 2.4 15 8.6l6.8 1-4.9 4.8 1.2 6.8L12 18l-6.1 3.2 1.2-6.8-4.9-4.8 6.8-1L12 2.4Z"
+                                fill="url(#pa-star-{{ section.id }}-{{ block.id }}-{{ repeat }}-{{ star_index }})"
+                                stroke="{{ section.settings.ai_stars_color }}"
+                                stroke-width="1.4"
+                              />
+                            </svg>
+                          {% endif %}
+                        {% endfor %}
+                      </div>
+                    {% endif %}
+                  {% endunless %}
+                </div>
+              </article>
+            {% endfor %}
+          {% endfor %}
+        {% else %}
+          {% for block in section.blocks %}
+            <article class="pa-video-card" data-pa-video-card {{ block.shopify_attributes }}>
+              <div class="pa-card-controls">
+                {% if section.settings.ai_show_sound %}
+                  <button class="pa-control-btn pa-sound-btn" type="button" aria-label="Ton umschalten">
+                    <svg class="pa-icon-sound-off" viewBox="0 0 24 24">
+                      <path d="M4 9v6h4l5 4V5L8 9H4zm13.5 3 3-3 1.5 1.5-3 3 3 3-1.5 1.5-3-3-3 3-1.5-1.5 3-3-3-3L14.5 9l3 3z"/>
+                    </svg>
+                    <svg class="pa-icon-sound-on" viewBox="0 0 24 24">
+                      <path d="M4 9v6h4l5 4V5L8 9H4zm12.5 3a4.5 4.5 0 0 0-2.2-3.87v7.74A4.5 4.5 0 0 0 16.5 12zm-2.2-8.2v2.1A7 7 0 0 1 18.5 12a7 7 0 0 1-4.2 6.1v2.1A9 9 0 0 0 20.5 12a9 9 0 0 0-6.2-8.2z"/>
+                    </svg>
+                  </button>
+                {% endif %}
+
+                {% if section.settings.ai_show_play %}
+                  <button class="pa-control-btn pa-play-btn" type="button" aria-label="Video abspielen oder pausieren">
+                    <svg class="pa-icon-play" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z"/>
+                    </svg>
+                    <svg class="pa-icon-pause" viewBox="0 0 24 24">
+                      <path d="M7 5h4v14H7V5zm6 0h4v14h-4V5z"/>
+                    </svg>
+                  </button>
+                {% endif %}
+              </div>
+
+              <div class="pa-media-wrap">
+                {% if block.settings.ai_video != blank %}
+                  {{
+                    block.settings.ai_video
+                    | video_tag:
+                      autoplay: false,
+                      loop: true,
+                      muted: true,
+                      playsinline: true,
+                      controls: false,
+                      preload: 'metadata'
+                  }}
+                {% elsif block.settings.ai_video_url != blank %}
+                  {% assign ai_embed_id = block.settings.ai_video_url.id %}
+                  {% if block.settings.ai_video_url.type == 'youtube' %}
+                    <iframe
+                      src="https://www.youtube.com/embed/{{ ai_embed_id }}?mute=1&controls=0&playsinline=1&rel=0&loop=1&playlist={{ ai_embed_id }}"
+                      allow="autoplay; encrypted-media; picture-in-picture"
+                      loading="{% if ai_lazy %}lazy{% else %}eager{% endif %}"
+                      allowfullscreen>
+                    </iframe>
+                  {% elsif block.settings.ai_video_url.type == 'vimeo' %}
+                    <iframe
+                      src="https://player.vimeo.com/video/{{ ai_embed_id }}?muted=1&background=1&loop=1"
+                      allow="autoplay; fullscreen; picture-in-picture"
+                      loading="{% if ai_lazy %}lazy{% else %}eager{% endif %}"
+                      allowfullscreen>
+                    </iframe>
+                  {% endif %}
+                {% else %}
+                  <video muted playsinline loop preload="metadata">
+                    <source src="https://cdn.shopify.com/videos/c/o/v/fbb140fd46e3429eba459e1549dbbe38.mp4" type="video/mp4">
+                  </video>
+                {% endif %}
+              </div>
+
+              <div class="pa-card-content">
+                {% if block.settings.ai_title != blank %}
+                  <p class="pa-card-title">{{ block.settings.ai_title }}</p>
+                {% endif %}
+
+                {% unless section.settings.ai_hide_stars %}
+                  {% if block.settings.ai_rating > 0 %}
+                    <div class="pa-stars" aria-label="{{ block.settings.ai_rating }} von 5 Sternen">
+                      {% assign full_rating = block.settings.ai_rating | floor %}
+                      {% assign rating_decimal = block.settings.ai_rating | minus: full_rating %}
+                      {% assign next_star_index = full_rating | plus: 1 %}
+                      {% for star_index in (1..5) %}
+                        {% if section.settings.ai_star_icon != blank %}
+                          {% if star_index <= block.settings.ai_rating %}
+                            {{ section.settings.ai_star_icon | image_url: width: 60 | image_tag: loading: 'lazy' }}
+                          {% endif %}
+                        {% else %}
+                          {% assign fill_percent = 0 %}
+                          {% if star_index <= full_rating %}
+                            {% assign fill_percent = 100 %}
+                          {% elsif star_index == next_star_index %}
+                            {% assign fill_percent = rating_decimal | times: 100 %}
+                          {% endif %}
+                          <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <defs>
+                              <linearGradient id="pa-star-{{ section.id }}-{{ block.id }}-{{ star_index }}">
+                                <stop offset="{{ fill_percent }}%" stop-color="{{ section.settings.ai_stars_color }}"></stop>
+                                <stop offset="{{ fill_percent }}%" stop-color="transparent"></stop>
+                              </linearGradient>
+                            </defs>
+                            <path
+                              d="M12 2.4 15 8.6l6.8 1-4.9 4.8 1.2 6.8L12 18l-6.1 3.2 1.2-6.8-4.9-4.8 6.8-1L12 2.4Z"
+                              fill="url(#pa-star-{{ section.id }}-{{ block.id }}-{{ star_index }})"
+                              stroke="{{ section.settings.ai_stars_color }}"
+                              stroke-width="1.4"
+                            />
+                          </svg>
+                        {% endif %}
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                {% endunless %}
+              </div>
+            </article>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+
+    <button class="pa-arrow pa-prev" type="button" aria-label="Vorheriges Video" data-pa-prev>
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M15 5 8 12l7 7" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+    <button class="pa-arrow pa-next" type="button" aria-label="Nächstes Video" data-pa-next>
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="m9 5 7 7-7 7" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </div>
+</section>
+
+<script>
+  (() => {
+    const root = document.querySelector('#pa-video-slider-{{ section.id }}');
+    if (!root) return;
+
+    const viewport = root.querySelector('[data-pa-video-viewport]');
+    const track = root.querySelector('[data-pa-video-track]');
+    const cards = Array.from(root.querySelectorAll('[data-pa-video-card]'));
+    const prev = root.querySelector('[data-pa-prev]');
+    const next = root.querySelector('[data-pa-next]');
+    const originalCount = {{ section.blocks.size | default: 0 }};
+    const canLoop = originalCount > 1;
+
+    let index = canLoop ? originalCount : 0;
+    let startX = 0;
+    let currentX = 0;
+    let isDragging = false;
+    let startedOnInteractive = false;
+    let cardWidth = 0;
+    let cardStep = 0;
+
+    function maxIndex() {
+      return Math.max(0, cards.length - 1);
+    }
+
+    function measure() {
+      if (!cards.length) return;
+      cardWidth = cards[0].offsetWidth;
+      if (cards.length > 1) {
+        const secondStyle = window.getComputedStyle(cards[1]);
+        const overlapMargin = parseFloat(secondStyle.marginLeft || '0');
+        cardStep = cardWidth + overlapMargin;
+      } else {
+        cardStep = cardWidth;
+      }
+    }
+
+    function setClasses() {
+      cards.forEach((card, cardIndex) => {
+        card.classList.toggle('is-active', cardIndex === index);
+        card.classList.toggle('is-left', cardIndex === index - 1);
+        card.classList.toggle('is-right', cardIndex === index + 1);
+      });
+    }
+
+    function pauseAll() {
+      cards.forEach(card => {
+        const video = card.querySelector('video');
+        const playBtn = card.querySelector('.pa-play-btn');
+        if (video) video.pause();
+        if (playBtn) playBtn.classList.remove('is-active');
+      });
+    }
+
+    function playActive() {
+      pauseAll();
+      const activeCard = cards[index];
+      if (!activeCard) return;
+      const video = activeCard.querySelector('video');
+      const playBtn = activeCard.querySelector('.pa-play-btn');
+      if (video) {
+        video.play().catch(() => {});
+        if (playBtn) playBtn.classList.add('is-active');
+      }
+    }
+
+    function update(shouldPlay = true) {
+      measure();
+      index = Math.max(0, Math.min(index, maxIndex()));
+      const viewportWidth = viewport.getBoundingClientRect().width;
+      const offset = (viewportWidth / 2) - (cardWidth / 2) - (index * cardStep);
+      track.style.transform = `translate3d(${offset}px, 0, 0)`;
+      setClasses();
+      if (shouldPlay) playActive();
+    }
+
+    function normalizeLoop() {
+      if (!canLoop) return;
+
+      if (index >= originalCount * 2) {
+        index = originalCount;
+        update(false);
+      } else if (index < originalCount) {
+        index = (originalCount * 2) - 1;
+        update(false);
+      }
+    }
+
+    function go(direction) {
+      if (!canLoop) return;
+      index += direction;
+      update(true);
+      window.setTimeout(normalizeLoop, 380);
+    }
+
+    if (next) {
+      next.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        go(1);
+      });
+    }
+    if (prev) {
+      prev.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        go(-1);
+      });
+    }
+
+    viewport.addEventListener('pointerdown', (event) => {
+      if (!canLoop) return;
+      if (event.target.closest('button, a')) {
+        startedOnInteractive = true;
+        return;
+      }
+      startedOnInteractive = false;
+      isDragging = true;
+      startX = event.clientX;
+      currentX = startX;
+      viewport.classList.add('is-dragging');
+      track.style.transition = 'none';
+      if (viewport.setPointerCapture) {
+        viewport.setPointerCapture(event.pointerId);
+      }
+    });
+
+    viewport.addEventListener('pointermove', (event) => {
+      if (!isDragging || startedOnInteractive) return;
+      currentX = event.clientX;
+      const delta = currentX - startX;
+      const viewportWidth = viewport.getBoundingClientRect().width;
+      const baseOffset = (viewportWidth / 2) - (cardWidth / 2) - (index * cardStep);
+      track.style.transform = `translate3d(${baseOffset + delta}px, 0, 0)`;
+    });
+
+    function endDrag() {
+      if (startedOnInteractive) {
+        startedOnInteractive = false;
+        return;
+      }
+      if (!isDragging) return;
+      isDragging = false;
+      viewport.classList.remove('is-dragging');
+      track.style.transition = 'transform 360ms ease';
+
+      const delta = currentX - startX;
+      if (Math.abs(delta) > 45) {
+        if (delta < 0) go(1);
+        else go(-1);
+      } else {
+        update(false);
+      }
+    }
+
+    viewport.addEventListener('pointerup', endDrag);
+    viewport.addEventListener('pointercancel', endDrag);
+    viewport.addEventListener('pointerleave', endDrag);
+
+    cards.forEach(card => {
+      const video = card.querySelector('video');
+      const playBtn = card.querySelector('.pa-play-btn');
+      const soundBtn = card.querySelector('.pa-sound-btn');
+
+      if (video) {
+        video.muted = true;
+      }
+
+      if (playBtn) {
+        playBtn.addEventListener('click', (event) => {
+          event.stopPropagation();
+          if (!video) return;
+
+          if (video.paused) {
+            pauseAll();
+            video.play().catch(() => {});
+            playBtn.classList.add('is-active');
+          } else {
+            video.pause();
+            playBtn.classList.remove('is-active');
+          }
+        });
+      }
+
+      if (soundBtn) {
+        soundBtn.addEventListener('click', (event) => {
+          event.stopPropagation();
+          if (!video) return;
+
+          video.muted = !video.muted;
+          soundBtn.classList.toggle('is-active', !video.muted);
+        });
+      }
+    });
+
+    window.addEventListener('resize', () => update(false));
+    document.addEventListener('shopify:section:load', () => update(false));
+
+    update(true);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "AI Video Slider",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Slider"
+    },
+    {
+      "type": "range",
+      "id": "ai_slides_desktop",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "label": "Slides per view",
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "ai_slides_mobile",
+      "min": 1,
+      "max": 3,
+      "step": 0.1,
+      "label": "Slides per view - mobile",
+      "default": 1.5
+    },
+    {
+      "type": "range",
+      "id": "ai_rotate",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "deg",
+      "label": "Slides rotate",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "ai_gap",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Gap",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "ai_gap_mobile",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Gap - mobile",
+      "default": 10
+    },
+    {
+      "type": "header",
+      "content": "Slide"
+    },
+    {
+      "type": "select",
+      "id": "ai_ratio_desktop",
+      "label": "Aspect ratio",
+      "default": "portrait",
+      "options": [
+        { "label": "Portrait", "value": "portrait" },
+        { "label": "Square", "value": "square" },
+        { "label": "Landscape", "value": "landscape" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "ai_ratio_mobile",
+      "label": "Aspect ratio - mobile",
+      "default": "portrait",
+      "options": [
+        { "label": "Portrait", "value": "portrait" },
+        { "label": "Square", "value": "square" },
+        { "label": "Landscape", "value": "landscape" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "ai_card_radius",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Roundness",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "ai_card_border_width",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Border thickness",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "ai_overlay_opacity",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "label": "Overlay",
+      "default": 0.2
+    },
+    {
+      "type": "checkbox",
+      "id": "ai_shadow_enabled",
+      "label": "Use shadow",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "select",
+      "id": "ai_horizontal_desktop",
+      "label": "Horizontal position",
+      "default": "center",
+      "options": [
+        { "label": "Left", "value": "flex-start" },
+        { "label": "Center", "value": "center" },
+        { "label": "Right", "value": "flex-end" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "ai_horizontal_mobile",
+      "label": "Horizontal position - mobile",
+      "default": "center",
+      "options": [
+        { "label": "Left", "value": "flex-start" },
+        { "label": "Center", "value": "center" },
+        { "label": "Right", "value": "flex-end" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "ai_vertical_desktop",
+      "label": "Vertical position",
+      "default": "flex-end",
+      "options": [
+        { "label": "Top", "value": "flex-start" },
+        { "label": "Center", "value": "center" },
+        { "label": "Bottom", "value": "flex-end" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "ai_vertical_mobile",
+      "label": "Vertical position - mobile",
+      "default": "flex-end",
+      "options": [
+        { "label": "Top", "value": "flex-start" },
+        { "label": "Center", "value": "center" },
+        { "label": "Bottom", "value": "flex-end" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "ai_card_padding_y",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding vertical",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "ai_card_padding_y_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding vertical - mobile",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "ai_card_padding_x",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding horizontal",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "ai_card_padding_x_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding horizontal - mobile",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Title"
+    },
+    {
+      "type": "checkbox",
+      "id": "ai_use_heading_font",
+      "label": "Use custom font",
+      "default": false
+    },
+    {
+      "type": "font_picker",
+      "id": "ai_heading_font",
+      "label": "Font family",
+      "default": "josefin_sans_n4"
+    },
+    {
+      "type": "range",
+      "id": "ai_title_size",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Font size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "ai_title_size_mobile",
+      "min": 0,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Font size - mobile",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "ai_title_line_height",
+      "min": 50,
+      "max": 200,
+      "step": 10,
+      "unit": "%",
+      "label": "Line height",
+      "default": 130
+    },
+    {
+      "type": "header",
+      "content": "Stars"
+    },
+    {
+      "type": "checkbox",
+      "id": "ai_hide_stars",
+      "label": "Hide stars",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "ai_star_icon",
+      "label": "Custom star icon"
+    },
+    {
+      "type": "range",
+      "id": "ai_stars_size",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "ai_stars_size_mobile",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Size - mobile",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "ai_stars_margin",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "label": "Margin top",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "ai_stars_margin_mobile",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "label": "Margin top - mobile",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Controls"
+    },
+    {
+      "type": "checkbox",
+      "id": "ai_show_play",
+      "label": "Use play/pause button",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "ai_show_sound",
+      "label": "Use sound on/off button",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "ai_control_size",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Size",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "ai_control_size_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Size - mobile",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "ai_control_border_width",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Border thickness",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Arrows"
+    },
+    {
+      "type": "checkbox",
+      "id": "ai_show_arrows_desktop",
+      "label": "Show on desktop",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "ai_show_arrows_mobile",
+      "label": "Show on mobile",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "ai_arrow_size",
+      "min": 10,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Size",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "ai_arrow_size_mobile",
+      "min": 10,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Size - mobile",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "ai_arrow_icon",
+      "min": 5,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Icon size",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "ai_arrow_icon_mobile",
+      "min": 5,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Icon size - mobile",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "ai_arrow_radius",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Roundness",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "ai_arrow_border_width",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Border thickness",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Slide colors"
+    },
+    {
+      "type": "color",
+      "id": "ai_title_color",
+      "label": "Title",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "ai_stars_color",
+      "label": "Default stars",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "ai_card_border_color",
+      "label": "Border",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "ai_shadow_color",
+      "label": "Shadow",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "ai_overlay_color",
+      "label": "Overlay",
+      "default": "#121212"
+    },
+    {
+      "type": "header",
+      "content": "Controls colors"
+    },
+    {
+      "type": "color",
+      "id": "ai_control_icon_color",
+      "label": "Icon",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "ai_control_icon_hover",
+      "label": "Icon hover",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "ai_control_bg",
+      "label": "Background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "ai_control_bg_hover",
+      "label": "Background hover",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "ai_control_border_color",
+      "label": "Border",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "ai_control_border_hover",
+      "label": "Border hover",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Arrow colors"
+    },
+    {
+      "type": "color",
+      "id": "ai_arrow_color",
+      "label": "Icon",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "ai_arrow_color_hover",
+      "label": "Icon hover",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "ai_arrow_bg",
+      "label": "Background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "ai_arrow_bg_hover",
+      "label": "Background hover",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "ai_arrow_border_color",
+      "label": "Border",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "ai_arrow_border_hover",
+      "label": "Border hover",
+      "default": "#121212"
+    },
+    {
+      "type": "header",
+      "content": "Section colors"
+    },
+    {
+      "type": "select",
+      "id": "ai_background_mode",
+      "label": "Background style",
+      "default": "solid",
+      "options": [
+        { "label": "Solid", "value": "solid" },
+        { "label": "Gradient", "value": "gradient" }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "ai_background_color",
+      "label": "Background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color_background",
+      "id": "ai_background_gradient",
+      "label": "Gradient",
+      "default": "linear-gradient(180deg, #FFFFFF 0%, #F2F2F2 100%)"
+    },
+    {
+      "type": "color",
+      "id": "ai_border_color",
+      "label": "Border",
+      "default": "#121212"
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "ai_margin_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Margin top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "ai_margin_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Margin bottom",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "ai_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "ai_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "ai_padding_sides",
+      "min": 0,
+      "max": 30,
+      "step": 0.5,
+      "unit": "rem",
+      "label": "Padding sides",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "ai_padding_sides_mobile",
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "unit": "rem",
+      "label": "Padding sides - mobile",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Section settings"
+    },
+    {
+      "type": "select",
+      "id": "ai_width_mode",
+      "label": "Width",
+      "default": "page",
+      "options": [
+        { "label": "Page", "value": "page" },
+        { "label": "Full", "value": "full" },
+        { "label": "Custom", "value": "custom" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "ai_custom_width",
+      "min": 800,
+      "max": 2000,
+      "step": 100,
+      "unit": "px",
+      "label": "Content width",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "ai_border_width",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "label": "Border thickness",
+      "default": 0
+    },
+    {
+      "type": "checkbox",
+      "id": "ai_lazy_load",
+      "label": "Lazy load embeds",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "ai_video_slide",
+      "name": "Video",
+      "settings": [
+        {
+          "type": "video",
+          "id": "ai_video",
+          "label": "Video from Shopify"
+        },
+        {
+          "type": "video_url",
+          "id": "ai_video_url",
+          "label": "Video embed from URL",
+          "accept": ["youtube", "vimeo"]
+        },
+        {
+          "type": "text",
+          "id": "ai_title",
+          "label": "Title",
+          "default": "Title"
+        },
+        {
+          "type": "range",
+          "id": "ai_rating",
+          "min": 0,
+          "max": 5,
+          "step": 0.5,
+          "label": "Stars count",
+          "default": 5
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AI Video Slider",
+      "blocks": [
+        { "type": "ai_video_slide" },
+        { "type": "ai_video_slide" },
+        { "type": "ai_video_slide" },
+        { "type": "ai_video_slide" },
+        { "type": "ai_video_slide" }
+      ]
+    }
+  ]
+}
+{% endschema %}
