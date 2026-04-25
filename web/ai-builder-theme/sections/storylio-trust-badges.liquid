@@ -70,6 +70,7 @@
 
   .feature-{{ section.id }} .box__image img,
   .feature-{{ section.id }} .box__image svg {
+    width: 100%;
     height: 100%;
     display: block;
     object-fit: cover;
@@ -77,6 +78,20 @@
 
   .feature-{{ section.id }} .box__image svg path {
     fill: {{ section.settings.feature_icon_color }};
+  }
+
+  .feature-{{ section.id }} .box__image--library {
+    color: {{ section.settings.feature_icon_color }};
+  }
+
+  .feature-{{ section.id }} .box__image--library svg path,
+  .feature-{{ section.id }} .box__image--library svg circle,
+  .feature-{{ section.id }} .box__image--library svg rect,
+  .feature-{{ section.id }} .box__image--library svg line,
+  .feature-{{ section.id }} .box__image--library svg polyline,
+  .feature-{{ section.id }} .box__image--library svg polygon {
+    fill: none;
+    stroke: currentColor;
   }
 
   @media(min-width: 768px) {
@@ -162,6 +177,10 @@
                   <div class="box__image">
                       {%- if block.settings.feature_image != blank -%}
                         <img src="{{ block.settings.feature_image | image_url }}" alt="feature-item-{{ forloop.index }}" {% if lazy %}loading="lazy"{% endif %}>
+                      {%- elsif block.settings.feature_icon_library != blank and block.settings.feature_icon_library != 'none' -%}
+                        <div class="box__image--library">
+                          {% render 'ai-product-info-icon', icon: block.settings.feature_icon_library %}
+                        </div>
                       {%- else -%}
                        {% case forloop.index %}
                         {% when 1 %}
@@ -585,12 +604,88 @@
                 "label":"Item text (richtext)",
                 "default":"<p>Item text</p>"
              },
-             {
+            {
                 "type":"image_picker",
                 "id":"feature_image",
                 "label":"Icon"
-             },
-             {
+            },
+            {
+                "type":"select",
+                "id":"feature_icon_library",
+                "label":"Icon library",
+                "default":"none",
+                "options":[
+                    { "value": "none", "label": "None" },
+                    { "value": "adjustments-horizontal", "label": "Adjustments Horizontal" },
+                    { "value": "alarm-clock", "label": "Alarm Clock" },
+                    { "value": "alert-circle", "label": "Alert Circle" },
+                    { "value": "alert-triangle", "label": "Alert Triangle" },
+                    { "value": "annotation-dots", "label": "Annotation Dots" },
+                    { "value": "announcement", "label": "Announcement" },
+                    { "value": "arrow-up", "label": "Arrow Up" },
+                    { "value": "award", "label": "Award" },
+                    { "value": "banknotes", "label": "Banknotes" },
+                    { "value": "battery-0", "label": "Battery 0" },
+                    { "value": "battery-100", "label": "Battery 100" },
+                    { "value": "bell", "label": "Bell" },
+                    { "value": "bell-slash", "label": "Bell Slash" },
+                    { "value": "book", "label": "Book" },
+                    { "value": "book-open", "label": "Book Open" },
+                    { "value": "box", "label": "Box" },
+                    { "value": "brush", "label": "Brush" },
+                    { "value": "calendar", "label": "Calendar" },
+                    { "value": "camera", "label": "Camera" },
+                    { "value": "chat-bubble", "label": "Chat Bubble" },
+                    { "value": "check", "label": "Check" },
+                    { "value": "check-badge", "label": "Check Badge" },
+                    { "value": "check-circle", "label": "Check Circle" },
+                    { "value": "check-verified", "label": "Check Verified" },
+                    { "value": "clock", "label": "Clock" },
+                    { "value": "clock-snooze", "label": "Clock Snooze" },
+                    { "value": "clipboard", "label": "Clipboard" },
+                    { "value": "credit-card", "label": "Credit Card" },
+                    { "value": "credit-card-lock", "label": "Credit Card Lock" },
+                    { "value": "discount-tag", "label": "Discount Tag" },
+                    { "value": "drop", "label": "Drop" },
+                    { "value": "earth", "label": "Earth" },
+                    { "value": "eye", "label": "Eye" },
+                    { "value": "face-happy", "label": "Face Happy" },
+                    { "value": "face-sad", "label": "Face Sad" },
+                    { "value": "face-smile", "label": "Face Smile" },
+                    { "value": "gift", "label": "Gift" },
+                    { "value": "hand-heart", "label": "Hand Heart" },
+                    { "value": "heart", "label": "Heart" },
+                    { "value": "info-circle", "label": "Info Circle" },
+                    { "value": "klarna", "label": "Klarna" },
+                    { "value": "leaf", "label": "Leaf" },
+                    { "value": "lock", "label": "Lock" },
+                    { "value": "lock-closed", "label": "Lock Closed" },
+                    { "value": "mail", "label": "Mail" },
+                    { "value": "map", "label": "Map" },
+                    { "value": "marker-pin", "label": "Marker Pin" },
+                    { "value": "medaille", "label": "Medaille" },
+                    { "value": "moon", "label": "Moon" },
+                    { "value": "plane", "label": "Plane" },
+                    { "value": "rueckgabe", "label": "Rueckgabe" },
+                    { "value": "sale", "label": "Sale" },
+                    { "value": "scoop", "label": "Scoop" },
+                    { "value": "screen-off", "label": "Screen Off" },
+                    { "value": "screen_off", "label": "Screen Off Alt" },
+                    { "value": "setting", "label": "Setting" },
+                    { "value": "shield", "label": "Shield" },
+                    { "value": "shopping-cart", "label": "Shopping Cart" },
+                    { "value": "shopping.-cart", "label": "Shopping Cart Alt" },
+                    { "value": "spark", "label": "Spark" },
+                    { "value": "star", "label": "Star" },
+                    { "value": "thumbs-down", "label": "Thumbs Down" },
+                    { "value": "thumbs-up", "label": "Thumbs Up" },
+                    { "value": "trash", "label": "Trash" },
+                    { "value": "truck", "label": "Truck" },
+                    { "value": "volume-max", "label": "Volume Max" },
+                    { "value": "wifi", "label": "Wifi" }
+                ]
+            },
+            {
                 "type":"url",
                 "id":"feature_url",
                 "label":"Item URL"
