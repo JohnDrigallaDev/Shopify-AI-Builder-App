@@ -43,7 +43,7 @@
           "type": "ai_product_teaser_text",
           "settings": {
             "margin_top": 14,
-            "text": "<p>Für Haarentfernung zuhause, die sich anfühlt wie Salon-Feeling – ohne laufende Behandlungskosten.</p>"
+            "text": "<p>Entferne lose Tierhaare direkt beim Streicheln — bevor sie sich in Sofa, Kleidung und Teppich festsetzen.</p>"
           }
         },
         "ai_product_divider": {
@@ -79,17 +79,17 @@
         "ai_product_benefits": {
           "type": "ai_product_benefits",
           "settings": {
-            "benefit_1_icon": "heart",
-            "benefit_1_text": "<p>Einfach zuhause anwendbar</p>",
-            "benefit_2_icon": "adjustments-horizontal",
-            "benefit_2_text": "<p>Für langfristig weniger Körperhaar gedacht</p>",
-            "benefit_3_icon": "battery-100",
-            "benefit_3_text": "<p>Salon-Gefühl ohne Termin- und Zusatzkosten</p>",
+            "benefit_1_icon": "hand-heart",
+            "benefit_1_text": "<p>Lose Haare direkt beim Kontakt aufnehmen</p>",
+            "benefit_2_icon": "check-circle",
+            "benefit_2_text": "<p>Sauberer Haushalt mit weniger Nacharbeit</p>",
+            "benefit_3_icon": "check-badge",
+            "benefit_3_text": "<p>Einfach anzuwenden im Alltag</p>",
             "benefit_4_icon": "earth",
             "benefit_4_text": "",
-            "benefit_5_icon": "check-badge",
+            "benefit_5_icon": "shield",
             "benefit_5_text": "",
-            "benefit_6_icon": "gift",
+            "benefit_6_icon": "star",
             "benefit_6_text": "",
             "show_benefit_4": false,
             "show_benefit_5": false,
@@ -211,7 +211,7 @@
             "ai_acc_item_3_show": true,
             "ai_acc_item_3_icon": "book-open",
             "ai_acc_item_3_title": "Produktdetails",
-            "ai_acc_item_3_content": "<ul><li>4-in-1 IPL-Photoepilator für Haarentfernung zu Hause für Gesicht und Körper.</li><li>Für regelmäßige Anwendung mit Fokus auf langfristig weniger Körperhaar und einfache Heimnutzung.</li></ul>",
+            "ai_acc_item_3_content": "<ul><li>Pflegehandschuh zur Haarentfernung für Katze und Hund; nimmt lose Haare direkt beim Streicheln auf.</li><li>Für Sofa, Teppich und Kleidung geeignet; einfach anzuwenden im Alltag ohne komplizierte Montage.</li></ul>",
             "ai_acc_item_4_show": true,
             "ai_acc_item_4_icon": "chat-bubble",
             "ai_acc_item_4_title": "Support",
@@ -222,9 +222,21 @@
         "ai_product_reviews": {
           "type": "ai_product_reviews",
           "settings": {
-            "show_review_1": false,
-            "show_review_2": false,
-            "show_review_3": false
+            "show_review_1": true,
+            "hide_avatar_1": true,
+            "customer_name_1": "Laura K.",
+            "star_count_1": 5,
+            "review_text_1": "Ich nutze den Handschuh jeden Tag bei meinem Labrador. Die losen Haare landen direkt am Handschuh statt auf dem Sofa.",
+            "show_review_2": true,
+            "hide_avatar_2": true,
+            "customer_name_2": "Thomas B.",
+            "star_count_2": 5,
+            "review_text_2": "Vor allem auf dunkler Kleidung ist das Teil praktisch. Ein paar Streicheleinheiten und deutlich weniger Haare überall.",
+            "show_review_3": true,
+            "hide_avatar_3": true,
+            "customer_name_3": "Nina S.",
+            "star_count_3": 5,
+            "review_text_3": "Mein Hund lässt sich damit total entspannt bürsten. Danach muss ich den Teppich nicht mehr so oft nachreinigen."
           }
         }
       },
@@ -266,31 +278,30 @@
     },
     "ai_section_2": {
       "type": "ai-feature-split",
-      "settings": {
-      },
+      "settings": {},
       "blocks": {
         "feature_1": {
           "type": "feature",
           "settings": {
             "media_position": "left",
-            "title": "Schon wieder Rasur?",
-            "text": "<p>Stoppeln, Termine und ständiges Nacharbeiten kosten jeden Tag Zeit.</p>"
+            "title": "Jedes Streicheln wird zur Haarquelle.",
+            "text": "<p>Die losen Haare sitzen nicht nur im Fell, sondern landen direkt auf allem, was du berührst. Genau deshalb fühlt sich der Haushalt trotz Putzen nie wirklich sauber an.</p>"
           }
         },
         "feature_2": {
           "type": "feature",
           "settings": {
             "media_position": "right",
-            "title": "IPL für zuhause",
-            "text": "<p>KODO 2026 bringt die Haarentfernung in deine Routine – einfach, bequem und auf langfristig weniger Körperhaar ausgelegt.</p>"
+            "title": "Direkt beim Kontakt Haare aufnehmen.",
+            "text": "<p>Der Pflegehandschuh nimmt lose Haare beim Streicheln auf, statt sie erst später vom Boden oder Möbeln zu holen. So kombinierst du Fellpflege und Haarentfernung in einem Schritt.</p>"
           }
         },
         "feature_3": {
           "type": "feature",
           "settings": {
             "media_position": "left",
-            "title": "Über 2.000 Menschen",
-            "text": "<p>Über 2.000 Menschen haben KODO 2026 bereits ausprobiert und schwören darauf.</p>"
+            "title": "23.000 Haustierhalter nutzen genau das.",
+            "text": "<p>Viele Käufer berichten von weniger Haaren auf Sofa, Kleidung und im Auto nach der täglichen Anwendung. Das Ergebnis: weniger Nacharbeit und ein sichtbarer Unterschied schon nach den ersten Einsätzen.</p>"
           }
         }
       },
@@ -301,45 +312,9 @@
       ]
     },
     "ai_section_3": {
-      "type": "ai-feature-split",
-      "settings": {
-      },
-      "blocks": {
-        "feature_1": {
-          "type": "feature",
-          "settings": {
-            "media_position": "left",
-            "title": "4-in-1 für mehr Flexibilität",
-            "text": "<p>Ein Gerät für verschiedene Bereiche statt mehrere Tools im Bad.</p>"
-          }
-        },
-        "feature_2": {
-          "type": "feature",
-          "settings": {
-            "media_position": "right",
-            "title": "Für Gesicht und Körper",
-            "text": "<p>Praktisch für die wichtigsten Zonen in deiner persönlichen Routine.</p>"
-          }
-        },
-        "feature_3": {
-          "type": "feature",
-          "settings": {
-            "media_position": "left",
-            "title": "Langfristig gedacht",
-            "text": "<p>Ausgelegt für Frauen, die weniger Körperhaar mit Heimbehandlung möchten.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "feature_1",
-        "feature_2",
-        "feature_3"
-      ]
-    },
-    "ai_section_4": {
       "type": "ai-comparison-table",
       "settings": {
-        "pai_heading": "Warum zuhause die bessere Lösung sein kann",
+        "pai_heading": "Warum dieser Handschuh besser funktioniert.",
         "pai_heading_size": "h1",
         "pai_text": "",
         "pai_content_alignment": "center",
@@ -348,9 +323,10 @@
         "pai_button_secondary": false,
         "pai_layout": "table_second",
         "pai_desktop_gap": 60,
+        "pai_mobile_gap": 12,
         "pai_logo_width": 90,
         "pai_logo_width_mobile": 70,
-        "pai_brand_label": "Stattdessen",
+        "pai_brand_label": "Ohne Handschuh",
         "pai_competitor_label": "",
         "pai_table_max_width": 800,
         "pai_table_radius": 12,
@@ -380,14 +356,13 @@
         "pai_active_check_color": "#53AF01",
         "pai_active_cross_color": "#ffffff",
         "pai_padding_top": 36,
-        "pai_padding_bottom": 36,
-        "pai_mobile_gap": 12
+        "pai_padding_bottom": 36
       },
       "blocks": {
         "row_1": {
           "type": "pai_row",
           "settings": {
-            "pai_feature": "Anwendung",
+            "pai_feature": "Haare beim Streicheln",
             "pai_brand_has": true,
             "pai_other_has": false
           }
@@ -395,7 +370,7 @@
         "row_2": {
           "type": "pai_row",
           "settings": {
-            "pai_feature": "Kosten",
+            "pai_feature": "Sofa & Kleidung",
             "pai_brand_has": true,
             "pai_other_has": false
           }
@@ -403,7 +378,7 @@
         "row_3": {
           "type": "pai_row",
           "settings": {
-            "pai_feature": "Routine",
+            "pai_feature": "Anwendung",
             "pai_brand_has": true,
             "pai_other_has": false
           }
@@ -411,7 +386,7 @@
         "row_4": {
           "type": "pai_row",
           "settings": {
-            "pai_feature": "Gefühl",
+            "pai_feature": "Alltag",
             "pai_brand_has": true,
             "pai_other_has": false
           }
@@ -424,93 +399,20 @@
         "row_4"
       ]
     },
-    "ai_section_5": {
+    "ai_section_4": {
       "type": "ai-cta-banner",
       "settings": {
-        "eyebrow": "Jetzt starten",
-        "title": "Hol dir Salon-Feeling nach Hause.",
-        "body": "<p>Weniger Aufwand. Weniger Folgekosten. Mehr Kontrolle über deine Haarentfernung im Alltag.</p>",
-        "button_label": "Jetzt entdecken"
+        "eyebrow": "Weniger Haare",
+        "title": "Jetzt Haare stoppen, bevor sie sich festsetzen.",
+        "body": "<p>Streichle deinen Hund wie gewohnt — und nimm die losen Haare direkt mit. Für weniger Aufwand, weniger Fussel und einen saubereren Alltag.</p>",
+        "button_label": "Jetzt Haare stoppen"
       }
-    },
-    "ai_section_6": {
-      "type": "ai-brand-slider",
-      "settings": {
-        "scroll_duration": 24,
-        "pause_on_hover": true,
-        "edge_fade": true,
-        "logo_height_desktop": 52,
-        "logo_height_mobile": 38,
-        "icon_size_desktop": 18,
-        "icon_size_mobile": 16,
-        "icon_color": "#111111",
-        "item_gap_desktop": 36,
-        "item_gap_mobile": 24,
-        "bar_padding_desktop": 14,
-        "bar_padding_mobile": 10,
-        "padding_top": 0,
-        "padding_bottom": 0
-      },
-      "blocks": {
-        "text_1": {
-          "type": "text",
-          "settings": {
-            "text": "Für zuhause gemacht",
-            "icon": "check",
-            "text_color": "#111111",
-            "text_size_desktop": 16,
-            "text_size_mobile": 14,
-            "text_weight": "600"
-          }
-        },
-        "text_2": {
-          "type": "text",
-          "settings": {
-            "text": "Flexible Routine",
-            "icon": "lock",
-            "text_color": "#111111",
-            "text_size_desktop": 16,
-            "text_size_mobile": 14,
-            "text_weight": "600"
-          }
-        },
-        "text_3": {
-          "type": "text",
-          "settings": {
-            "text": "Ohne Studio-Termine",
-            "icon": "star",
-            "text_color": "#111111",
-            "text_size_desktop": 16,
-            "text_size_mobile": 14,
-            "text_weight": "600"
-          }
-        },
-        "text_4": {
-          "type": "text",
-          "settings": {
-            "text": "Einfach in den Alltag",
-            "icon": "truck",
-            "text_color": "#111111",
-            "text_size_desktop": 16,
-            "text_size_mobile": 14,
-            "text_weight": "600"
-          }
-        }
-      },
-      "block_order": [
-        "text_1",
-        "text_2",
-        "text_3",
-        "text_4"
-      ]
     }
   },
   "order": [
     "main",
     "ai_section_2",
     "ai_section_3",
-    "ai_section_4",
-    "ai_section_6",
-    "ai_section_5"
+    "ai_section_4"
   ]
 }

@@ -408,12 +408,84 @@
         "body": "<p>Einmal investieren, flexibel anwenden, glatte Haut bequemer organisieren.</p>",
         "button_label": "Jetzt zuhause starten"
       }
+    },
+    "ai_section_5": {
+      "type": "ai-brand-slider",
+      "settings": {
+        "scroll_duration": 24,
+        "pause_on_hover": true,
+        "edge_fade": true,
+        "logo_height_desktop": 52,
+        "logo_height_mobile": 38,
+        "icon_size_desktop": 18,
+        "icon_size_mobile": 16,
+        "icon_color": "#111111",
+        "item_gap_desktop": 36,
+        "item_gap_mobile": 24,
+        "bar_padding_desktop": 14,
+        "bar_padding_mobile": 10,
+        "padding_top": 0,
+        "padding_bottom": 0
+      },
+      "blocks": {
+        "text_1": {
+          "type": "text",
+          "settings": {
+            "text": "Kostenkontrolle",
+            "icon": "check",
+            "text_color": "#111111",
+            "text_size_desktop": 16,
+            "text_size_mobile": 14,
+            "text_weight": "600"
+          }
+        },
+        "text_2": {
+          "type": "text",
+          "settings": {
+            "text": "Anwendung zuhause",
+            "icon": "lock",
+            "text_color": "#111111",
+            "text_size_desktop": 16,
+            "text_size_mobile": 14,
+            "text_weight": "600"
+          }
+        },
+        "text_3": {
+          "type": "text",
+          "settings": {
+            "text": "Ohne Studio-Termin",
+            "icon": "star",
+            "text_color": "#111111",
+            "text_size_desktop": 16,
+            "text_size_mobile": 14,
+            "text_weight": "600"
+          }
+        },
+        "text_4": {
+          "type": "text",
+          "settings": {
+            "text": "Für Gesicht & Körper",
+            "icon": "truck",
+            "text_color": "#111111",
+            "text_size_desktop": 16,
+            "text_size_mobile": 14,
+            "text_weight": "600"
+          }
+        }
+      },
+      "block_order": [
+        "text_1",
+        "text_2",
+        "text_3",
+        "text_4"
+      ]
     }
   },
   "order": [
     "main",
     "ai_section_2",
     "ai_section_3",
+    "ai_section_5",
     "ai_section_4"
   ]
 }
