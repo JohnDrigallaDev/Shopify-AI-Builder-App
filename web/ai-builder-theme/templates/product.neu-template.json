@@ -1,0 +1,793 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "ai_social_proof_bar_1": {
+          "type": "ai_social_proof_bar",
+          "settings": {
+            "card_padding_y": 6,
+            "card_radius": 16,
+            "avatar_size": 34,
+            "avatar_size_mobile": 28,
+            "text_size": 12,
+            "text_size_mobile": 10,
+            "content": "<p><strong>Beliebt bei Käufern</strong> und aktuell stark nachgefragt</p>"
+          }
+        },
+        "ai_social_proof_bar_2": {
+          "type": "ai_social_proof_bar",
+          "settings": {
+            "card_padding_y": 6,
+            "card_radius": 16,
+            "avatar_size": 34,
+            "avatar_size_mobile": 28,
+            "text_size": 12,
+            "text_size_mobile": 10,
+            "content": "<p><strong>Viele positive Erfahrungen</strong> von zufriedenen Kunden</p>"
+          }
+        },
+        "ai_product_rating_inline_1": {
+          "type": "ai_product_rating_inline",
+          "settings": {
+            "font_mode": "custom",
+            "custom_font": "asap_n4",
+            "stars_size": 14,
+            "stars_size_mobile": 13,
+            "stars_gap": 1,
+            "text_size": 15,
+            "text_size_mobile": 14,
+            "text_gap": 8,
+            "rating_value": 4.5
+          }
+        },
+        "ai_product_rating_inline_2": {
+          "type": "ai_product_rating_inline",
+          "settings": {
+            "font_mode": "custom",
+            "custom_font": "asap_n4",
+            "stars_size": 14,
+            "stars_size_mobile": 13,
+            "stars_gap": 1,
+            "text_size": 15,
+            "text_size_mobile": 14,
+            "text_gap": 8,
+            "rating_value": 4.5
+          }
+        },
+        "ai_product_title": {
+          "type": "ai_product_title",
+          "settings": {
+            "margin_top": 4,
+            "margin_bottom": 0,
+            "title_size": 29,
+            "title_size_mobile": 23,
+            "text_transform": "uppercase"
+          }
+        },
+        "ai_product_teaser_text": {
+          "type": "ai_product_teaser_text",
+          "settings": {
+            "margin_top": 14,
+            "text": "<p>Für Hartböden, die im Alltag schnell sauber werden sollen – ohne zwei Geräte, ohne doppelten Aufwand.</p>"
+          }
+        },
+        "ai_product_divider": {
+          "type": "ai_product_divider",
+          "settings": {
+            "line_opacity": 0.4
+          }
+        },
+        "ai_price_highlight": {
+          "type": "ai_price_highlight",
+          "settings": {
+            "font_weight_sale": "500",
+            "font_weight_compare": "500"
+          }
+        },
+        "ai_price_badge": {
+          "type": "ai_price_badge",
+          "settings": {
+            "badge_text": "Aktuelles Angebot",
+            "text_size": 12,
+            "text_size_mobile": 11
+          }
+        },
+        "ai_product_pills": {
+          "type": "ai_product_pills",
+          "settings": {
+            "gap_mobile": 4,
+            "gap_desktop": 6,
+            "pill_padding_y": 4,
+            "pill_padding_x": 8,
+            "pill_radius": 16,
+            "pill_border_width": 0,
+            "min_height": 18,
+            "text_size_mobile": 11,
+            "text_size": 12,
+            "font_weight": "400",
+            "icon_gap": 4,
+            "section_bg": "transparent"
+          }
+        },
+        "ai_product_benefits_1": {
+          "type": "ai_product_benefits",
+          "settings": {
+            "benefit_1_icon": "clock",
+            "benefit_1_text": "<p>Entfernt trockenen und nassen Schmutz in einem...</p>",
+            "benefit_2_icon": "drop",
+            "benefit_2_text": "<p>Spart Zeit beim täglichen Putzen</p>",
+            "benefit_3_icon": "leaf",
+            "benefit_3_text": "<p>Ideal für Laminat, Fliesen und Vinyl</p>",
+            "benefit_4_icon": "earth",
+            "benefit_4_text": "",
+            "benefit_5_icon": "shield",
+            "benefit_5_text": "",
+            "benefit_6_icon": "star",
+            "benefit_6_text": "",
+            "show_benefit_4": false,
+            "show_benefit_5": false,
+            "show_benefit_6": false,
+            "padding_top": 18,
+            "padding_bottom": 18,
+            "row_gap": 2,
+            "row_gap_mobile": 2,
+            "icon_gap": 8,
+            "icon_gap_mobile": 8,
+            "icon_size": 16,
+            "icon_size_mobile": 16,
+            "icon_stroke": 1.5,
+            "text_size": 13,
+            "text_size_mobile": 11,
+            "line_height": 1.3,
+            "bold_weight": "700",
+            "icon_color": "#222222",
+            "text_color": "#2b2b2b"
+          }
+        },
+        "ai_product_benefits_2": {
+          "type": "ai_product_benefits",
+          "settings": {
+            "benefit_1_icon": "truck",
+            "benefit_1_text": "<p>Schnell einsatzbereit</p>",
+            "benefit_2_icon": "shield",
+            "benefit_2_text": "<p>Sicher im Alltag</p>",
+            "benefit_3_icon": "star",
+            "benefit_3_text": "<p>Überzeugende Qualität</p>",
+            "show_benefit_4": false,
+            "show_benefit_5": false,
+            "show_benefit_6": false,
+            "padding_top": 0,
+            "padding_bottom": 18,
+            "row_gap": 2,
+            "row_gap_mobile": 2,
+            "icon_gap": 8,
+            "icon_gap_mobile": 8,
+            "icon_size": 16,
+            "icon_size_mobile": 16,
+            "icon_stroke": 1.5,
+            "text_size": 13,
+            "text_size_mobile": 11,
+            "line_height": 1.3,
+            "bold_weight": "700",
+            "icon_color": "#222222",
+            "text_color": "#2b2b2b"
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button"
+          }
+        },
+        "ai_buy_button": {
+          "type": "ai_buy_button",
+          "settings": {
+            "button_text": "In den Warenkorb",
+            "show_dynamic_checkout": false
+          }
+        },
+        "ai_stock_status": {
+          "type": "ai_stock_status",
+          "settings": {
+            "status_mode": "auto",
+            "low_stock_threshold": 5,
+            "continue_selling_behavior": "in",
+            "manual_status": "in",
+            "in_stock_text": "In stock. Delivered in 3-5 days.",
+            "low_stock_text": "Low stock. Delivered in 3-5 days.",
+            "out_of_stock_text": "Out of stock.",
+            "text_size": 13,
+            "icon_size": 22,
+            "content_gap": 10,
+            "padding_y": 8,
+            "padding_x": 0,
+            "border_radius": 0,
+            "border_width": 0,
+            "border_color": "#e5e5e5",
+            "in_stock_bg": "transparent",
+            "low_stock_bg": "transparent",
+            "out_of_stock_bg": "transparent"
+          }
+        },
+        "ai_payment_icons": {
+          "type": "ai_payment_icons",
+          "settings": {
+            "section_bg": "transparent",
+            "padding_top": 0,
+            "icon_height": 19,
+            "icon_height_mobile": 19
+          }
+        },
+        "ai_trust_badges": {
+          "type": "ai_trust_badges",
+          "settings": {
+            "badge_1_icon_style": "box",
+            "badge_1_title": "Free Shipping",
+            "badge_1_text": "over €99 in DE",
+            "badge_2_icon_style": "credit-card",
+            "badge_2_title": "Pay Later",
+            "badge_2_text": "up to 30 days",
+            "badge_3_icon_style": "hand-heart",
+            "badge_3_title": "Handmade",
+            "badge_3_text": "in Venice, Italy",
+            "badge_4_icon_style": "leaf",
+            "badge_4_title": "100% Vegan",
+            "badge_4_text": "just pure Cotton",
+            "padding_top": 0,
+            "padding_bottom": 4,
+            "columns_mobile": "2",
+            "grid_gap_desktop": 4,
+            "grid_gap_mobile": 4,
+            "card_padding_y": 0,
+            "card_padding_x": 14,
+            "card_radius": 12,
+            "card_border_width": 0,
+            "card_shadow_strength": 0,
+            "icon_size": 28,
+            "icon_size_mobile": 24,
+            "heading_size": 13,
+            "heading_size_mobile": 11,
+            "text_size": 11,
+            "text_size_mobile": 10,
+            "outer_bg": "transparent",
+            "card_bg": "#f3f3f3",
+            "card_border_color": "#f3f3f3",
+            "heading_color": "#111111",
+            "text_color": "#2b2b2b",
+            "icon_color": "#111111"
+          }
+        },
+        "product_ai_accordion": {
+          "type": "product_ai_accordion",
+          "settings": {
+            "ai_acc_single_open": true,
+            "ai_acc_first_open": false,
+            "ai_acc_item_1_show": true,
+            "ai_acc_item_1_icon": "truck",
+            "ai_acc_item_1_title": "Versand",
+            "ai_acc_item_1_content": "<p>Die Lieferzeit beträgt in der Regel ca. 5 Werktage. Du erhältst eine Versandbestätigung, sobald deine Bestellung unterwegs ist.</p>",
+            "ai_acc_item_2_show": true,
+            "ai_acc_item_2_icon": "rueckgabe",
+            "ai_acc_item_2_title": "Rückgabe",
+            "ai_acc_item_2_content": "<p>Du kannst deine Bestellung innerhalb von 30 Tagen zurückgeben, sofern sie unbenutzt und vollständig ist. Kontaktiere dafür einfach unseren Support.</p>",
+            "ai_acc_item_3_show": true,
+            "ai_acc_item_3_icon": "book-open",
+            "ai_acc_item_3_title": "Produktdetails",
+            "ai_acc_item_3_content": "<ul><li>Nass-Trockensauger mit Wischfunktion für Hartböden im Haushalt.</li><li>Selbstreinigend, selbstfahrend und für Laminat, Fliesen, Vinyl sowie Tierhaare ausgelegt.</li></ul>",
+            "ai_acc_item_4_show": true,
+            "ai_acc_item_4_icon": "chat-bubble",
+            "ai_acc_item_4_title": "Support",
+            "ai_acc_item_4_content": "<p>Unser Support hilft dir bei Fragen zur Bestellung, Lieferung oder Anwendung des Produkts schnell und unkompliziert weiter.</p>",
+            "ai_acc_item_5_show": false
+          }
+        },
+        "ai_product_reviews": {
+          "type": "ai_product_reviews",
+          "settings": {
+            "show_review_1": true,
+            "hide_avatar_1": true,
+            "customer_name_1": "Anna M.",
+            "star_count_1": 5,
+            "review_text_1": "Ich habe Laminat und Fliesen in der Wohnung, und genau dafür ist das Gerät super praktisch. Saugen und Wischen in einem Schritt spart mir im Alltag wirklich Zeit.",
+            "show_review_2": true,
+            "hide_avatar_2": true,
+            "customer_name_2": "Daniel K.",
+            "star_count_2": 5,
+            "review_text_2": "Mit Hund im Haushalt war ich skeptisch, aber Tierhaare und Krümel werden ordentlich aufgenommen. Die Selbstreinigung macht die Nutzung deutlich angenehmer als bei meinem alten Wischsystem.",
+            "show_review_3": true,
+            "hide_avatar_3": true,
+            "customer_name_3": "Sophie T.",
+            "star_count_3": 5,
+            "review_text_3": "Für die schnelle Reinigung zwischendurch ist das Gerät ideal. Es fühlt sich leicht an und man muss nicht mehr zwei verschiedene Geräte holen."
+          }
+        }
+      },
+      "block_order": [
+        "ai_social_proof_bar_1",
+        "ai_social_proof_bar_2",
+        "ai_product_rating_inline_1",
+        "ai_product_rating_inline_2",
+        "ai_product_teaser_text",
+        "ai_product_divider",
+        "ai_price_highlight",
+        "ai_product_pills",
+        "ai_product_benefits_1",
+        "ai_product_benefits_2",
+        "ai_buy_button",
+        "ai_payment_icons",
+        "ai_trust_badges",
+        "product_ai_accordion",
+        "ai_product_reviews"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "media_size": "small",
+        "gallery_layout": "thumbnail_slider",
+        "media_fit": "contain",
+        "image_zoom": "none",
+        "mobile_thumbnails": "show",
+        "hide_variants": true,
+        "thumbnail_gap_desktop": 0,
+        "thumbnail_gap_mobile": 0,
+        "thumbnail_size_desktop": 92,
+        "thumbnail_size_mobile": 64,
+        "thumbnail_radius": 14,
+        "thumbnail_active_border_color": "#111111",
+        "thumbnail_padding_desktop": 0,
+        "thumbnail_padding_mobile": 0,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "ai_section_1": {
+      "type": "ai-feature-split",
+      "settings": {
+        "bg_color": "#F4F4F5",
+        "title_color": "#111111",
+        "text_color": "#333333",
+        "underline_color": "#2B2B2F"
+      },
+      "blocks": {
+        "feature_1": {
+          "type": "feature",
+          "settings": {
+            "media_position": "left",
+            "title": "Jedes Putzen kostet doppelt Zeit.",
+            "text": "<p>Ein Gerät nur zum Saugen, eines nur zum Wischen, dazu ständig wechseln und nachfüllen. So wird aus einem kurzen Reinigungsjob schnell eine halbe Stunde Aufwand. Im Alltag bremst genau das, was eigentlich helfen soll.</p>"
+          }
+        },
+        "feature_2": {
+          "type": "feature",
+          "settings": {
+            "media_position": "right",
+            "title": "Ein Gerät für trockenen und nassen Schmutz.",
+            "text": "<p>Der Hearten Nass Trockensauger kombiniert Saugen und Wischen in einem Arbeitsgang. So werden Laminat, Fliesen und Vinyl schneller sauber, ohne dass du mehrere Schritte planen musst.</p>"
+          }
+        },
+        "feature_3": {
+          "type": "feature",
+          "settings": {
+            "media_position": "left",
+            "title": "10.000+ Haushalte setzen auf diese Lösung.",
+            "text": "<p>Immer mehr Käufer suchen genau nach dieser Art von Bodenreinigung: schnell, praktisch und ohne doppelten Aufwand. Das Ergebnis ist ein sauberer Boden mit weniger Stress im Alltag.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "feature_1",
+        "feature_2",
+        "feature_3"
+      ]
+    },
+    "ai_section_2": {
+      "type": "storylio-trust-badges",
+      "settings": {
+        "feature_row": 4,
+        "feature_row_mobile": 2,
+        "feature_icon_size": 36,
+        "feature_icon_size_mobile": 28,
+        "padding_top": 28,
+        "padding_bottom": 28,
+        "background_color": "#E6E6E6",
+        "feature_bg": "#FFFFFF",
+        "feature_border_color": "#C4C4C5",
+        "feature_heading_color": "#111111",
+        "feature_text_color": "#333333",
+        "feature_icon_color": "#2B2B2F"
+      },
+      "blocks": {
+        "feature_1": {
+          "type": "image",
+          "settings": {
+            "feature_title": "Entfernt trockenen und nassen Schmutz in einem Durchgang",
+            "feature_text": "",
+            "feature_icon_library": "spark",
+            "hide_image": false
+          }
+        },
+        "feature_2": {
+          "type": "image",
+          "settings": {
+            "feature_title": "Spart Zeit beim täglichen Putzen",
+            "feature_text": "",
+            "feature_icon_library": "check-badge",
+            "hide_image": false
+          }
+        },
+        "feature_3": {
+          "type": "image",
+          "settings": {
+            "feature_title": "Ideal für Laminat, Fliesen und Vinyl",
+            "feature_text": "",
+            "feature_icon_library": "shield",
+            "hide_image": false
+          }
+        }
+      },
+      "block_order": [
+        "feature_1",
+        "feature_2",
+        "feature_3"
+      ]
+    },
+    "ai_section_3": {
+      "type": "ai-brand-slider",
+      "settings": {
+        "icon_color": "#2B2B2F"
+      },
+      "blocks": {
+        "text_1": {
+          "type": "text",
+          "settings": {
+            "text": "Beliebt bei Kunden",
+            "icon": "heart"
+          }
+        },
+        "text_2": {
+          "type": "text",
+          "settings": {
+            "text": "Schneller Versand",
+            "icon": "truck"
+          }
+        },
+        "text_3": {
+          "type": "text",
+          "settings": {
+            "text": "Sichere Zahlung",
+            "icon": "lock-closed"
+          }
+        },
+        "text_4": {
+          "type": "text",
+          "settings": {
+            "text": "Einfach bestellen",
+            "icon": "shopping-cart"
+          }
+        }
+      },
+      "block_order": [
+        "text_1",
+        "text_2",
+        "text_3",
+        "text_4"
+      ]
+    },
+    "ai_section_4": {
+      "type": "ai-image-slider",
+      "settings": {
+        "pae_bg_color": "#F4F4F5",
+        "pae_title_color": "#FFFFFF",
+        "pae_overlay_color": "#2B2B2F",
+        "pae_arrow_color": "#111111",
+        "pae_arrow_bg": "#FFFFFF"
+      },
+      "blocks": {
+        "slide_1": {
+          "type": "pae_slide",
+          "settings": {
+            "pae_title": "Vorher",
+            "pae_button_text": ""
+          }
+        },
+        "slide_2": {
+          "type": "pae_slide",
+          "settings": {
+            "pae_title": "Anwendung",
+            "pae_button_text": ""
+          }
+        },
+        "slide_3": {
+          "type": "pae_slide",
+          "settings": {
+            "pae_title": "Ergebnis",
+            "pae_button_text": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_1",
+        "slide_2",
+        "slide_3"
+      ]
+    },
+    "ai_section_5": {
+      "type": "ai-testimonials",
+      "settings": {
+        "ai_heading": "<h2>Erfahrungen aus der Community</h2>",
+        "ai_section_bg": "#F4F4F5",
+        "ai_card_bg": "#FFFFFF",
+        "ai_card_border_color": "#C4C4C5",
+        "ai_heading_color": "#111111",
+        "ai_text_color": "#333333",
+        "ai_author_color": "#2B2B2F",
+        "ai_stars_color": "#2B2B2F"
+      }
+    },
+    "ai_section_6": {
+      "type": "ai-comparison-table",
+      "settings": {
+        "pai_heading": "Warum ein Gerät den Alltag leichter macht",
+        "pai_heading_size": "h1",
+        "pai_text": "",
+        "pai_content_alignment": "center",
+        "pai_button_label": "",
+        "pai_button_link": "",
+        "pai_button_secondary": false,
+        "pai_layout": "table_second",
+        "pai_desktop_gap": 60,
+        "pai_mobile_gap": 12,
+        "pai_logo_width": 90,
+        "pai_logo_width_mobile": 70,
+        "pai_brand_label": "Ohne",
+        "pai_competitor_label": "",
+        "pai_table_max_width": 800,
+        "pai_table_radius": 12,
+        "pai_border_width": 1,
+        "pai_border_color": "#e7e7e7",
+        "pai_shadow_opacity": 10,
+        "pai_shadow_y": 8,
+        "pai_shadow_blur": 20,
+        "pai_cell_padding_y": 18,
+        "pai_cell_padding_x": 24,
+        "pai_cell_padding_y_mobile": 14,
+        "pai_cell_padding_x_mobile": 12,
+        "pai_header_font_size": 18,
+        "pai_header_font_size_mobile": 14,
+        "pai_feature_font_size": 16,
+        "pai_feature_font_size_mobile": 13,
+        "pai_feature_weight": "600",
+        "pai_feature_alignment": "left",
+        "pai_icon_size": 24,
+        "pai_text_color": "#111111",
+        "pai_feature_bg": "#FFFFFF",
+        "pai_cell_bg": "#FFFFFF",
+        "pai_active_bg": "#2B2B2F",
+        "pai_active_text": "#FFFFFF",
+        "pai_check_color": "#26a641",
+        "pai_cross_color": "#111111",
+        "pai_active_check_color": "#53AF01",
+        "pai_active_cross_color": "#ffffff",
+        "pai_padding_top": 36,
+        "pai_padding_bottom": 36
+      },
+      "blocks": {
+        "row_1": {
+          "type": "pai_row",
+          "settings": {
+            "pai_feature": "Saugen + Wischen",
+            "pai_brand_has": true,
+            "pai_other_has": false
+          }
+        },
+        "row_2": {
+          "type": "pai_row",
+          "settings": {
+            "pai_feature": "Tägliche Reinigung",
+            "pai_brand_has": true,
+            "pai_other_has": false
+          }
+        },
+        "row_3": {
+          "type": "pai_row",
+          "settings": {
+            "pai_feature": "Hartböden",
+            "pai_brand_has": true,
+            "pai_other_has": false
+          }
+        },
+        "row_4": {
+          "type": "pai_row",
+          "settings": {
+            "pai_feature": "Reinigung des Geräts",
+            "pai_brand_has": true,
+            "pai_other_has": false
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4"
+      ]
+    },
+    "ai_section_7": {
+      "type": "ai-vs-comparison",
+      "settings": {
+        "pai_vs_heading": "Der direkte Vergleich",
+        "pai_vs_left_label": "",
+        "pai_vs_right_label": "",
+        "pai_vs_background": "#F4F4F5",
+        "pai_vs_heading_color": "#111111",
+        "pai_vs_badge_background": "#2B2B2F",
+        "pai_vs_badge_color": "#FFFFFF",
+        "pai_vs_line_color": "#C4C4C5",
+        "pai_vs_text_color": "#111111",
+        "pai_vs_check_color": "#2B2B2F"
+      },
+      "blocks": {
+        "row_1": {
+          "type": "pai_vs_row",
+          "settings": {
+            "pai_vs_left_text": "Saugen + Wischen",
+            "pai_vs_right_text": "Weniger praktisch"
+          }
+        },
+        "row_2": {
+          "type": "pai_vs_row",
+          "settings": {
+            "pai_vs_left_text": "Tägliche Reinigung",
+            "pai_vs_right_text": "Weniger praktisch"
+          }
+        },
+        "row_3": {
+          "type": "pai_vs_row",
+          "settings": {
+            "pai_vs_left_text": "Hartböden",
+            "pai_vs_right_text": "Weniger praktisch"
+          }
+        },
+        "row_4": {
+          "type": "pai_vs_row",
+          "settings": {
+            "pai_vs_left_text": "Reinigung des Geräts",
+            "pai_vs_right_text": "Weniger praktisch"
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4"
+      ]
+    },
+    "ai_section_8": {
+      "type": "ai-hero-benefits",
+      "settings": {
+        "bg_color": "#F4F4F5",
+        "heading_color": "#111111",
+        "subheading_color": "#333333",
+        "item_title_color": "#111111",
+        "item_text_color": "#333333",
+        "item_icon_color": "#2B2B2F",
+        "media_border_color": "#C4C4C5"
+      },
+      "blocks": {
+        "hero_1": {
+          "type": "hero",
+          "settings": {
+            "title_1": "Entfernt trockenen und nassen Schmutz in einem Durchgang",
+            "text_1": "",
+            "icon_1": "spark",
+            "title_2": "Spart Zeit beim täglichen Putzen",
+            "text_2": "",
+            "icon_2": "check-badge",
+            "title_3": "Ideal für Laminat, Fliesen und Vinyl",
+            "text_3": "",
+            "icon_3": "heart"
+          }
+        }
+      },
+      "block_order": [
+        "hero_1"
+      ]
+    },
+    "ai_section_9": {
+      "type": "ai-testimonial-slider",
+      "settings": {
+        "heading": "Das sagen unsere Kunden",
+        "subheading": "",
+        "slides_desktop": 3,
+        "slides_mobile": 1.1,
+        "card_gap_desktop": 18,
+        "card_gap_mobile": 12,
+        "bg_color": "#F4F4F5",
+        "heading_color": "#111111",
+        "subheading_color": "#333333",
+        "card_bg": "#FFFFFF",
+        "card_border_color": "#C4C4C5",
+        "title_color": "#111111",
+        "text_color": "#333333",
+        "author_color": "#2B2B2F",
+        "stars_color": "#2B2B2F",
+        "nav_bg": "#2B2B2F",
+        "nav_color": "#FFFFFF",
+        "dot_color": "#C4C4C5",
+        "dot_active_color": "#2B2B2F"
+      },
+      "blocks": {
+        "testimonial_1": {
+          "type": "testimonial",
+          "settings": {
+            "show_stars": true,
+            "stars": 5,
+            "title": "Verifizierte Erfahrung",
+            "text": "<p>Ich habe Laminat und Fliesen in der Wohnung, und genau dafür ist das Gerät super praktisch. Saugen und Wischen in einem Schritt spart mir im Alltag wirklich Zeit.</p>",
+            "author": "- Anna M."
+          }
+        },
+        "testimonial_2": {
+          "type": "testimonial",
+          "settings": {
+            "show_stars": true,
+            "stars": 5,
+            "title": "Verifizierte Erfahrung",
+            "text": "<p>Mit Hund im Haushalt war ich skeptisch, aber Tierhaare und Krümel werden ordentlich aufgenommen. Die Selbstreinigung macht die Nutzung deutlich angenehmer als bei meinem alten Wischsystem.</p>",
+            "author": "- Daniel K."
+          }
+        },
+        "testimonial_3": {
+          "type": "testimonial",
+          "settings": {
+            "show_stars": true,
+            "stars": 5,
+            "title": "Verifizierte Erfahrung",
+            "text": "<p>Für die schnelle Reinigung zwischendurch ist das Gerät ideal. Es fühlt sich leicht an und man muss nicht mehr zwei verschiedene Geräte holen.</p>",
+            "author": "- Sophie T."
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_1",
+        "testimonial_2",
+        "testimonial_3"
+      ]
+    },
+    "ai_section_10": {
+      "type": "ai-cta-banner",
+      "settings": {
+        "eyebrow": "Jetzt vereinfachen",
+        "title": "Mach Putzen wieder schnell.",
+        "body": "<p>Saugen und Wischen in einem Schritt spart Zeit, Wege und doppelte Arbeit. Ideal für Hartböden im Alltag.</p>",
+        "button_label": "Jetzt einfacher reinigen",
+        "section_background": "#F4F4F5",
+        "panel_background": "#E6E6E6",
+        "panel_border_color": "#C4C4C5",
+        "eyebrow_color": "#2B2B2F",
+        "title_color": "#111111",
+        "body_color": "#333333",
+        "button_background": "#2B2B2F",
+        "button_text_color": "#FFFFFF",
+        "button_border_color": "#2B2B2F",
+        "button_background_hover": "#111111",
+        "button_text_color_hover": "#FFFFFF",
+        "button_border_color_hover": "#111111"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "ai_section_1",
+    "ai_section_2",
+    "ai_section_3",
+    "ai_section_4",
+    "ai_section_5",
+    "ai_section_6",
+    "ai_section_7",
+    "ai_section_8",
+    "ai_section_9",
+    "ai_section_10"
+  ]
+}
