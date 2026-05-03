@@ -372,7 +372,9 @@
                           {% if block.settings.layout_mode == 'single' %}
                             <div class="ai-social-proof-bar__avatar-wrap">
                               <div class="ai-social-proof-bar__avatar">
-                                {% if block.settings.avatar_1 != blank %}
+                                {% if block.settings.static_avatar_1_asset != blank %}
+                                  <img src="{{ block.settings.static_avatar_1_asset | asset_url }}" alt="{{ block.settings.name_1 | escape }}" loading="lazy">
+                                {% elsif block.settings.avatar_1 != blank %}
                                   <img src="{{ block.settings.avatar_1 | image_url: width: 120 }}" alt="{{ block.settings.name_1 | escape }}" loading="lazy">
                                 {% else %}
                                   <div class="ai-social-proof-bar__avatar-placeholder"></div>
@@ -389,14 +391,18 @@
                           {% else %}
                             <div class="ai-social-proof-bar__avatar-group">
                               <div class="ai-social-proof-bar__avatar">
-                                {% if block.settings.avatar_1 != blank %}
+                                {% if block.settings.static_avatar_1_asset != blank %}
+                                  <img src="{{ block.settings.static_avatar_1_asset | asset_url }}" alt="{{ block.settings.name_1 | escape }}" loading="lazy">
+                                {% elsif block.settings.avatar_1 != blank %}
                                   <img src="{{ block.settings.avatar_1 | image_url: width: 120 }}" alt="{{ block.settings.name_1 | escape }}" loading="lazy">
                                 {% else %}
                                   <div class="ai-social-proof-bar__avatar-placeholder"></div>
                                 {% endif %}
                               </div>
                               <div class="ai-social-proof-bar__avatar">
-                                {% if block.settings.avatar_2 != blank %}
+                                {% if block.settings.static_avatar_2_asset != blank %}
+                                  <img src="{{ block.settings.static_avatar_2_asset | asset_url }}" alt="{{ block.settings.name_2 | escape }}" loading="lazy">
+                                {% elsif block.settings.avatar_2 != blank %}
                                   <img src="{{ block.settings.avatar_2 | image_url: width: 120 }}" alt="{{ block.settings.name_2 | escape }}" loading="lazy">
                                 {% else %}
                                   <div class="ai-social-proof-bar__avatar-placeholder"></div>
@@ -829,6 +835,7 @@
                     {%- liquid
                       assign show_key = 'show_review_' | append: i
                       assign avatar_key = 'avatar_' | append: i
+                      assign static_avatar_key = 'static_avatar_' | append: i | append: '_asset'
                       assign hide_avatar_key = 'hide_avatar_' | append: i
                       assign name_key = 'customer_name_' | append: i
                       assign star_key = 'star_count_' | append: i
@@ -836,6 +843,7 @@
 
                       assign show_review = block.settings[show_key]
                       assign avatar = block.settings[avatar_key]
+                      assign static_avatar = block.settings[static_avatar_key]
                       assign hide_avatar = block.settings[hide_avatar_key]
                       assign customer_name = block.settings[name_key]
                       assign star_count = block.settings[star_key]
@@ -845,7 +853,9 @@
                       <article class="ai-product-reviews__card">
                         {%- unless hide_avatar -%}
                           <div class="ai-product-reviews__avatar ai-product-reviews__avatar--{{ block.settings.avatar_ratio }}">
-                            {%- if avatar != blank -%}
+                            {%- if static_avatar != blank -%}
+                              <img src="{{ static_avatar | asset_url }}" alt="{{ customer_name | escape }}" loading="lazy">
+                            {%- elsif avatar != blank -%}
                               {{
                                 avatar
                                 | image_url: width: 240
@@ -2903,6 +2913,11 @@
         },
         {
           "type": "text",
+          "id": "static_avatar_1_asset",
+          "label": "Static Avatar 1 Asset"
+        },
+        {
+          "type": "text",
           "id": "name_1",
           "label": "Name 1",
           "default": "Leon"
@@ -2911,6 +2926,11 @@
           "type": "image_picker",
           "id": "avatar_2",
           "label": "Avatar 2"
+        },
+        {
+          "type": "text",
+          "id": "static_avatar_2_asset",
+          "label": "Static Avatar 2 Asset"
         },
         {
           "type": "text",
@@ -5960,6 +5980,11 @@
           "label": "Avatar 1"
         },
         {
+          "type": "text",
+          "id": "static_avatar_1_asset",
+          "label": "Static Avatar 1 Asset"
+        },
+        {
           "type": "checkbox",
           "id": "hide_avatar_1",
           "label": "Avatar 1 ausblenden",
@@ -6002,6 +6027,11 @@
           "label": "Avatar 2"
         },
         {
+          "type": "text",
+          "id": "static_avatar_2_asset",
+          "label": "Static Avatar 2 Asset"
+        },
+        {
           "type": "checkbox",
           "id": "hide_avatar_2",
           "label": "Avatar 2 ausblenden",
@@ -6042,6 +6072,11 @@
           "type": "image_picker",
           "id": "avatar_3",
           "label": "Avatar 3"
+        },
+        {
+          "type": "text",
+          "id": "static_avatar_3_asset",
+          "label": "Static Avatar 3 Asset"
         },
         {
           "type": "checkbox",
