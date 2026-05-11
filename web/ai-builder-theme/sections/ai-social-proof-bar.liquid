@@ -115,7 +115,13 @@
               {% if layout_mode == 'single' %}
                 <div class="ai-social-proof-bar__avatar-wrap">
                   <div class="ai-social-proof-bar__avatar">
-                    {% if block.settings.avatar_1 != blank %}
+                    {% if block.settings.static_avatar_1_asset != blank %}
+                      <img
+                        src="{{ block.settings.static_avatar_1_asset | asset_url }}"
+                        alt="{{ block.settings.name_1 | escape }}"
+                        loading="lazy"
+                      >
+                    {% elsif block.settings.avatar_1 != blank %}
                       <img
                         src="{{ block.settings.avatar_1 | image_url: width: 180 }}"
                         alt="{{ block.settings.name_1 | escape }}"
@@ -137,7 +143,13 @@
               {% else %}
                 <div class="ai-social-proof-bar__avatar-group">
                   <div class="ai-social-proof-bar__avatar">
-                    {% if block.settings.avatar_1 != blank %}
+                    {% if block.settings.static_avatar_1_asset != blank %}
+                      <img
+                        src="{{ block.settings.static_avatar_1_asset | asset_url }}"
+                        alt="{{ block.settings.name_1 | escape }}"
+                        loading="lazy"
+                      >
+                    {% elsif block.settings.avatar_1 != blank %}
                       <img
                         src="{{ block.settings.avatar_1 | image_url: width: 180 }}"
                         alt="{{ block.settings.name_1 | escape }}"
@@ -149,7 +161,13 @@
                   </div>
 
                   <div class="ai-social-proof-bar__avatar">
-                    {% if block.settings.avatar_2 != blank %}
+                    {% if block.settings.static_avatar_2_asset != blank %}
+                      <img
+                        src="{{ block.settings.static_avatar_2_asset | asset_url }}"
+                        alt="{{ block.settings.name_2 | escape }}"
+                        loading="lazy"
+                      >
+                    {% elsif block.settings.avatar_2 != blank %}
                       <img
                         src="{{ block.settings.avatar_2 | image_url: width: 180 }}"
                         alt="{{ block.settings.name_2 | escape }}"
@@ -743,6 +761,11 @@
         },
         {
           "type": "text",
+          "id": "static_avatar_1_asset",
+          "label": "Static avatar 1 asset"
+        },
+        {
+          "type": "text",
           "id": "name_1",
           "label": "Name 1",
           "default": "Leon"
@@ -751,6 +774,11 @@
           "type": "image_picker",
           "id": "avatar_2",
           "label": "Avatar 2"
+        },
+        {
+          "type": "text",
+          "id": "static_avatar_2_asset",
+          "label": "Static avatar 2 asset"
         },
         {
           "type": "text",
